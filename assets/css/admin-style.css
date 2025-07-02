@@ -1,0 +1,60 @@
+/* Estilos para los Meta Boxes personalizados en el panel de administración */
+.slider-metabox-section {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+.slider-metabox-section:last-child {
+  border-bottom: none;
+}
+.slider-metabox-section h4 {
+  margin-top: 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+.slider-field {
+  margin-bottom: 15px;
+}
+.slider-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.slider-field input[type="text"],
+.slider-field input[type="url"],
+.slider-field textarea,
+.slider-field select {
+  width: 100%;
+  max-width: 900px;
+}
+.campo-condicional {
+  display: none;
+  margin-top: 10px;
+  padding-left: 20px;
+  border-left: 3px solid #007cba;
+}
+#search_results_container {
+  position: relative;
+}
+#search_results_container ul {
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#search_results_container ul li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+#search_results_container ul li:hover {
+  background: #f0f0f0;
+}
+#search_results_container ul li small {
+  color: #555;
+  display: block;
+}
