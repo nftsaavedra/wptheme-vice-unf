@@ -5,5 +5,5 @@
         "active": true, "smartSpeed": 1000, "autoplay": true, "autoplayTimeout": 30000, "autoplayHoverPause": false,
         "responsive": { "0": {"nav": false, "items": 1}, "600": {"nav": false, "items": 1}, "992": {"items": 1} }
     }'>
-        </div>
+    </div>
 </section>
