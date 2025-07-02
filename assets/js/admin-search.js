@@ -1,99 +1,71 @@
-(function($) {
-    // Se asegura de que el código se ejecute solo cuando el documento esté listo.
-    $(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function () {
+  const linkTypeSelect = document.getElementById("slider_link_type");
+  if (linkTypeSelect) {
+    const urlField = document.getElementById("campo_url");
+    const contentField = document.getElementById("campo_contenido");
+    const toggleFields = () => {
+      urlField.style.display =
+        linkTypeSelect.value === "url" ? "block" : "none";
+      contentField.style.display =
+        linkTypeSelect.value === "content" ? "block" : "none";
+    };
+    toggleFields();
+    linkTypeSelect.addEventListener("change", toggleFields);
+  }
 
-        // --- Lógica para mostrar/ocultar campos condicionales ---
-        const linkTypeSelect = $('#slider_link_type');
-        
-        // Solo ejecuta esta parte si el selector existe en la página
-        if (linkTypeSelect.length) {
-            const urlField = $('#campo_url');
-            const contentField = $('#campo_contenido');
-
-            function toggleFields() {
-                const selectedType = linkTypeSelect.val();
-                urlField.toggle(selectedType === 'url');
-                contentField.toggle(selectedType === 'content');
+  let searchTimer;
+  const searchInput = document.getElementById("content_search_input");
+  if (searchInput) {
+    const searchResultsContainer = document.getElementById(
+      "search_results_container"
+    );
+    const contentIdInput = document.getElementById("slider_link_content_id");
+    searchInput.addEventListener("keyup", function () {
+      clearTimeout(searchTimer);
+      if (this.value.length < 3) {
+        searchResultsContainer.style.display = "none";
+        return;
+      }
+      searchResultsContainer.innerHTML =
+        '<p style="padding: 8px 12px;">Buscando...</p>';
+      searchResultsContainer.style.display = "block";
+      searchTimer = setTimeout(() => {
+        const formData = new FormData();
+        formData.append("action", "viceunf_search_content");
+        formData.append("nonce", viceunf_ajax_obj.nonce);
+        formData.append("search", this.value);
+        fetch(viceunf_ajax_obj.ajax_url, { method: "POST", body: formData })
+          .then((response) => response.json())
+          .then((response) => {
+            searchResultsContainer.innerHTML = "";
+            if (response.success && response.data.length > 0) {
+              const ul = document.createElement("ul");
+              response.data.forEach((item) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>${item.title}</strong><br><small>Tipo: ${item.type}</small>`;
+                li.dataset.id = item.id;
+                li.dataset.title = item.title;
+                li.addEventListener("click", () => {
+                  contentIdInput.value = item.id;
+                  searchInput.value = item.title;
+                  searchResultsContainer.style.display = "none";
+                });
+                ul.appendChild(li);
+              });
+              searchResultsContainer.appendChild(ul);
+            } else {
+              searchResultsContainer.innerHTML =
+                '<p style="padding: 8px 12px;">No se encontraron resultados.</p>';
             }
-
-            // Muestra/oculta los campos al cargar la página y cuando se cambia la selección
-            toggleFields();
-            linkTypeSelect.on('change', toggleFields);
-        }
-
-        // --- Lógica para la búsqueda AJAX de contenido ---
-        let searchTimer;
-        const searchInput = $('#content_search_input');
-
-        // Solo ejecuta si el campo de búsqueda existe
-        if (searchInput.length) {
-            const searchResultsContainer = $('#search_results_container');
-            const contentIdInput = $('#slider_link_content_id');
-
-            searchInput.on('keyup', function() {
-                // Limpia el temporizador anterior para evitar múltiples peticiones
-                clearTimeout(searchTimer);
-                const searchTerm = $(this).val();
-
-                // Si el término de búsqueda es muy corto, oculta los resultados y no busca
-                if (searchTerm.length < 3) {
-                    searchResultsContainer.hide();
-                    return;
-                }
-                
-                // Muestra un mensaje de "Buscando..."
-                searchResultsContainer.html('<p style="padding: 8px 12px;">Buscando...</p>').show();
-
-                // Inicia un temporizador para buscar solo cuando el usuario deja de teclear
-                searchTimer = setTimeout(function() {
-                    $.ajax({
-                        url: viceunf_ajax_obj.ajax_url, // URL del AJAX de WordPress (pasada desde PHP)
-                        type: 'POST',
-                        data: {
-                            action: 'viceunf_search_content', // Nuestra acción AJAX
-                            nonce: viceunf_ajax_obj.nonce,     // Nonce de seguridad
-                            search: searchTerm
-                        },
-                        success: function(response) {
-                            searchResultsContainer.empty(); // Limpia resultados anteriores
-                            if (response.success && response.data.length > 0) {
-                                const ul = $('<ul></ul>');
-                                $.each(response.data, function(index, item) {
-                                    // Crea cada elemento de la lista de resultados
-                                    const li = $('<li></li>')
-                                        .html(`<strong>${item.title}</strong><br><small>Tipo: ${item.type}</small>`)
-                                        .attr('data-id', item.id)
-                                        .attr('data-title', item.title);
-                                    ul.append(li);
-                                });
-                                searchResultsContainer.append(ul);
-                            } else {
-                                searchResultsContainer.html('<p style="padding: 8px 12px;">No se encontraron resultados.</p>');
-                            }
-                        }
-                    });
-                }, 500); // Espera de 500ms antes de enviar la petición
-            });
-
-            // Maneja el clic en un resultado de la búsqueda
-            searchResultsContainer.on('click', 'li', function() {
-                const postId = $(this).data('id');
-                const postTitle = $(this).data('title');
-
-                // Rellena el campo oculto con el ID y el campo visible con el título
-                contentIdInput.val(postId);
-                searchInput.val(postTitle);
-
-                // Oculta la lista de resultados
-                searchResultsContainer.hide();
-            });
-
-            // Oculta la lista de resultados si se hace clic en cualquier otra parte de la página
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('#campo_contenido').length) {
-                    searchResultsContainer.hide();
-                }
-            });
-        }
+          })
+          .catch((error) => console.error("Error AJAX:", error));
+      }, 500);
     });
-})(jQuery);
+    document.addEventListener("click", (e) => {
+      const container = document.getElementById("campo_contenido");
+      if (container && !container.contains(e.target)) {
+        searchResultsContainer.style.display = "none";
+      }
+    });
+  }
+});
