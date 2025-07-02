@@ -10,14 +10,13 @@
 $functions_path = get_stylesheet_directory() . '/theme-functions/';
 
 // --- Cargas Críticas ---
-// Carga clases o archivos necesarios para el resto de funciones ANTES que nada.
 $customizer_class_path = $functions_path . 'controls/class-customize.php';
 if (file_exists($customizer_class_path)) {
     require_once $customizer_class_path;
 }
 
 /**
- * Define el orden de carga explícito del resto de los archivos de funciones.
+ * Define el orden de carga explícito.
  */
 $files_to_load = array(
     'setup.php',

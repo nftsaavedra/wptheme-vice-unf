@@ -1,0 +1,25 @@
+{
+  "name": "viceunf",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/nftsaavedra/wptheme-vice-unf#readme",
+  "bugs": {
+    "url": "https://github.com/nftsaavedra/wptheme-vice-unf/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nftsaavedra/wptheme-vice-unf.git"
+  },
+  "license": "ISC",
+  "author": "@nftsaavedra",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "postcss src/main.css -o style.css"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
+  }
+}

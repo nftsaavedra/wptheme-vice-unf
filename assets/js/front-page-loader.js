@@ -50,7 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
           slide._slider_video_link_key || ""
         );
 
-        // Construcción del HTML para un solo slide, que va dentro del .owl-stage
+        const createButtonSpans = (text) =>
+          text
+            .split("")
+            .map((char) => `<span>${char}</span>`)
+            .join("");
+
         slidesHtml += `
                     <div class="dt_slider-item">
                         ${
@@ -67,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                         : ""
                                     }
                                     <h2 class="title">${title.replace(
-                                      /<br>/g,
+                                      /<br\s*\/?>/gi,
                                       "<br>"
                                     )}</h2>
                                     ${
@@ -81,24 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
                                     <div class="dt_btn-group">
                                         ${
                                           btn1Text && btn1Href
-                                            ? `<a href="${btn1Href}" class="dt-btn dt-btn-primary"><span class="dt-btn-text" data-text="${btn1Text}">${btn1Text
-                                                .split("")
-                                                .map(
-                                                  (char) =>
-                                                    `<span>${char}</span>`
-                                                )
-                                                .join("")}</span></a>`
+                                            ? `<a href="${btn1Href}" class="dt-btn dt-btn-primary"><span class="dt-btn-text" data-text="${btn1Text}">${createButtonSpans(
+                                                btn1Text
+                                              )}</span></a>`
                                             : ""
                                         }
                                         ${
                                           btn2Text && btn2Href
-                                            ? `<a href="${btn2Href}" class="dt-btn dt-btn-white"><span class="dt-btn-text" data-text="${btn2Text}">${btn2Text
-                                                .split("")
-                                                .map(
-                                                  (char) =>
-                                                    `<span>${char}</span>`
-                                                )
-                                                .join("")}</span></a>`
+                                            ? `<a href="${btn2Href}" class="dt-btn dt-btn-white"><span class="dt-btn-text" data-text="${btn2Text}">${createButtonSpans(
+                                                btn2Text
+                                              )}</span></a>`
                                             : ""
                                         }
                                         ${
@@ -113,21 +110,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>`;
       });
 
-      // Inyectamos el HTML en el carrusel.
+      // Inyectamos el HTML de los slides.
       sliderContainer.innerHTML = slidesHtml;
 
-      // Reactivamos los plugins AHORA que el HTML está completo.
+      // Ahora que el contenido está en su sitio, procedemos a inicializar los plugins.
       if (window.jQuery) {
         const $sliderElement = window.jQuery(sliderContainer);
 
-        if (
-          $sliderElement.length &&
-          typeof $sliderElement.owlCarousel === "function"
-        ) {
+        // 1. Añadimos las clases de Owl Carousel y lo inicializamos
+        if (typeof $sliderElement.owlCarousel === "function") {
+          $sliderElement.addClass("dt_owl_carousel owl-theme owl-carousel"); // Añadimos las clases
           const options = JSON.parse($sliderElement.attr("data-owl-options"));
           options.loop = slides.length > 1;
-          $sliderElement.trigger("destroy.owl.carousel").owlCarousel(options);
+          $sliderElement.owlCarousel(options);
         }
+
+        // 2. Inicializamos Magnific Popup en los nuevos botones de video
         const $lightboxButtons = $sliderElement.find(".dt_lightbox_img");
         if (
           $lightboxButtons.length &&
