@@ -1963,148 +1963,123 @@ table.wc-block-cart-items
   padding: 1.25em 2.375em;
 }
 
-/* Events */
+/* ===================================================================
+ * Componente: Eventos
+ * =================================================================== */
 
 .dt_event_box {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-bottom: 3.5rem;
-  margin-bottom: 3.5rem;
-  border-bottom: 0.1rem solid rgba(189, 189, 189, 0.35);
+    display: flex;
+    align-items: center;
+    padding-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 0.1rem solid rgba(189, 189, 189, 0.35);
 }
 
 .dt_event_box > div {
-  flex: auto;
+    flex: auto;
 }
 
 .dt_event_box .dt_event_img {
-  position: relative;
-  flex-shrink: 0;
-  max-width: 32rem;
-  z-index: 0;
+    position: relative;
+    flex-shrink: 0;
+    max-width: 32rem;
+    z-index: 0;
 }
 
+/* Contenedor de la fecha */
 .dt_event_box .dt_event_img .date {
-  width: 12rem;
-  height: 12rem;
-  float: left;
-  text-align: center;
-  line-height: 1.1;
-  padding-top: 1.7rem;
-  position: absolute;
-  background: var(--dt-whi-color);
-  top: 50%;
-  right: -6rem;
-  margin-top: -6rem;
-  box-shadow: 0 0.4rem 2.6rem 0.3rem rgba(0, 0, 0, 0.1);
+    width: 12rem;
+    height: 12rem;
+    position: absolute;
+    top: 50%;
+    right: -6rem;
+    margin-top: -6rem;
+    padding-top: 1.7rem;
+    background: var(--dt-whi-color);
+    box-shadow: 0 0.4rem 2.6rem 0.3rem rgba(0,0,0,0.1);
+    text-align: center;
+    line-height: 1.1;
 }
 
+/* Estilos base para el día y el mes (serán sobreescritos) */
 .dt_event_box .dt_event_img .date .d {
-  font-size: 5.5rem;
-  font-weight: 900;
-  color: var(--dt-pri-color);
-  display: block;
-  font-family: var(--dt-title-font);
+    font-size: 5.5rem;
+    font-weight: 900;
+    display: block;
+    font-family: var(--dt-title-font);
+    color: var(--dt-sec-color); /* Color por defecto */
 }
 
 .dt_event_box .dt_event_img .date .m {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  font-weight: 800;
-  color: var(--dt-sec-color);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--dt-sec-color); /* Color por defecto */
 }
 
+/* --- CORRECCIÓN DE ESPECIFICIDAD --- */
+/* Ahora apuntamos directamente a .d y .m dentro de las clases de estado */
+
+/* Color para eventos FUTUROS (Verde) */
+.dt_event_box .date.future-event .d,
+.dt_event_box .date.future-event .m {
+    color: #28a745; 
+}
+
+/* Color para eventos PASADOS (Rojo) */
+.dt_event_box .date.past-event .d,
+.dt_event_box .date.past-event .m {
+    color: #dc3545;
+}
+
+/* Estilos del contenido del evento */
 .dt_event_box .dt_event_img + .dt_event_content {
-  padding-left: 8.5rem;
+    padding-left: 8.5rem;
 }
 
 .dt_event_box .dt_event_content .title {
-  margin-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .dt_event_box .dt_event_content .meta {
-  font-size: 1.5rem;
-  line-height: 2.2rem;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
 }
 
 .dt_event_box .dt_event_content .line {
-  width: 5rem;
-  height: 0.2rem;
-  background: var(--dt-pri-color);
-  margin: 1.5rem 0 1.5rem;
+    width: 5rem;
+    height: 0.2rem;
+    background: var(--dt-pri-color);
+    margin: 1.5rem 0;
 }
 
-@media (max-width: 47.95em) {
-  .dt_event_box {
-    flex-wrap: wrap;
-  }
-  .dt_event_box .dt_event_img {
-    max-width: 100%;
-  }
-  .dt_event_box .dt_event_img + .dt_event_content {
-    padding-left: 0;
-    padding-top: 2.5rem;
-  }
-}
-
-.dt_event_single .dt_event_img .image img {
-  width: 100%;
-}
-
-.dt_event_single .dt_event_img .info {
-  background: var(--dt-gray-color);
-  padding: 2rem;
-  font-size: 1.6rem;
-}
-
-.dt_event_single .dt_event_img .info .datetime > div {
-  display: inline-block;
-}
-
-.dt_event_single .dt_event_img .info .datetime > div:not(:last-child) {
-  margin-right: 1rem;
-}
-
-.dt_event_single .dt_event_img .info i {
-  margin-right: 1rem;
-  margin-top: 0.6rem;
-}
-
-.dt_event_single .dt_event_content {
-  padding: 3rem;
-  box-shadow: 0 1rem 2.5rem 0 rgba(0, 0, 0, 0.05);
-}
-
-.dt_event_single .dt_event_content .description {
-  margin-top: 1.2rem;
-}
-
-/* Limita la altura de la imagen del evento y la ajusta sin deformarla */
+/* Imagen del evento */
 .dt_event_box .dt_event_img .image {
-  display: block;
-  max-height: 256px; /* Altura máxima del contenedor */
-  overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
-  background-color: #f0f0f0; /* Color de fondo mientras carga o si no hay imagen */
+    display: block;
+    max-height: 256px;
+    overflow: hidden;
+    background-color: #f0f0f0;
 }
 
 .dt_event_box .dt_event_img .image img {
-  width: 100%;
-  height: 256px; /* Hace que la imagen intente llenar la altura del contenedor */
-  object-fit: cover; /* MÁGIA: Escala la imagen para cubrir el contenedor, recortando los excesos sin perder la proporción */
-  object-position: center; /* Centra la imagen antes de recortar */
-}
-/* * Colorea el TEXTO de la fecha de eventos PRÓXIMOS en verde.
- * El selector ahora apunta a los <span> dentro del div.
- */
-.dt_event_box .date.future-event span {
-  color: #28a745; /* Verde */
+    width: 100%;
+    height: 256px;
+    object-fit: cover;
+    object-position: center;
 }
 
-/* * Colorea el TEXTO de la fecha de eventos PASADOS en rojo.
- */
-.dt_event_box .date.past-event span {
-  color: #dc3545; /* Rojo */
+/* Estilos para móviles */
+@media (max-width: 47.95em) {
+    .dt_event_box {
+        flex-wrap: wrap;
+    }
+    .dt_event_box .dt_event_img {
+        max-width: 100%;
+    }
+    .dt_event_box .dt_event_img + .dt_event_content {
+        padding-left: 0;
+        padding-top: 2.5rem;
+    }
 }
 
 /* Clients */

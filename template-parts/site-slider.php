@@ -36,13 +36,13 @@ if ($slider_query->have_posts()) :
             // El bucle de WordPress para generar cada slide.
             while ($slider_query->have_posts()) : $slider_query->the_post();
 
-                // --- Lógica de Datos ---
+                // Lógica de Datos
                 $subtitle = get_post_meta(get_the_ID(), '_slider_subtitle_key', true);
                 $description = get_post_meta(get_the_ID(), '_slider_description_key', true);
                 $text_align = get_post_meta(get_the_ID(), '_slider_text_alignment_key', true) ?: 'dt-text-left';
                 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
 
-                // Botón 1 (Avanzado)
+                // Lógica para el Botón 1 (Avanzado)
                 $btn1_text = get_post_meta(get_the_ID(), '_slider_btn1_text_key', true);
                 $link_type = get_post_meta(get_the_ID(), '_slider_link_type_key', true);
                 $link_url = get_post_meta(get_the_ID(), '_slider_link_url_key', true);
@@ -54,19 +54,20 @@ if ($slider_query->have_posts()) :
                     $btn1_href = get_permalink($link_content_id);
                 }
 
-                // Botón 2 (Simple)
+                // Lógica para el Botón 2 (Simple)
                 $btn2_text = get_post_meta(get_the_ID(), '_slider_btn2_text_key', true);
                 $btn2_link = get_post_meta(get_the_ID(), '_slider_btn2_link_key', true);
 
-                // Botón de Video
+                // Lógica para el Botón de Video
                 $original_video_link = get_post_meta(get_the_ID(), '_slider_video_link_key', true);
                 $autoplay_video_link = function_exists('get_autoplay_embed_url') ? get_autoplay_embed_url($original_video_link) : $original_video_link;
 
-                // Función para generar los spans de la animación del botón.
+                // CORRECCIÓN PARA CARACTERES ESPECIALES (UTF-8)
                 $createButtonSpans = function ($text) {
+                    // Usamos mb_str_split para manejar correctamente caracteres multi-byte como las tildes.
                     return implode('', array_map(function ($char) {
-                        return "<span>" . htmlspecialchars($char) . "</span>";
-                    }, str_split($text)));
+                        return "<span>" . esc_html($char) . "</span>";
+                    }, mb_str_split($text)));
                 };
             ?>
 
