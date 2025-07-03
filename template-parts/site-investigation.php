@@ -1,54 +1,61 @@
 <?php
-// Primero, comprobamos si la sección está habilitada en el Personalizador.
-$section_enabled = get_theme_mod('investigacion_section_enabled', true);
 
-if (!$section_enabled) {
-    return; // Si está deshabilitada, no mostramos nada.
+/**
+ * Template part para mostrar la sección de Investigación en la página de inicio.
+ * Esta sección se controla desde el panel "Opciones ViceUnf" en el administrador de WordPress.
+ */
+
+// 1. Obtenemos el array completo de nuestras opciones del tema.
+//    El segundo parámetro '[]' asegura que si no hay nada guardado, obtengamos un array vacío y no un error.
+$options = get_option('viceunf_theme_options', []);
+
+// 2. Verificamos si la sección está habilitada. Por defecto, estará habilitada.
+$section_enabled = isset($options['investigacion_section_enabled']) ? $options['investigacion_section_enabled'] : true;
+
+// Si la sección no está habilitada en las opciones, no mostramos nada y detenemos la ejecución.
+if (! $section_enabled) {
+    return;
 }
 
-// Array para almacenar los datos de los ítems que vamos a mostrar.
+// 3. Preparamos un array para almacenar los ítems válidos que vamos a mostrar.
 $items_to_render = [];
-$used_page_ids = []; // Array para asegurar que las páginas sean únicas.
 
-// Recorremos las 4 posibles configuraciones de ítems.
+// 4. Recorremos las 4 posibles configuraciones de ítems para procesar los datos.
 for ($i = 1; $i <= 4; $i++) {
-    $page_id = get_theme_mod("investigacion_item_{$i}_page_id", 0);
+    $page_id = ! empty($options["item_{$i}_page_id"]) ? $options["item_{$i}_page_id"] : 0;
 
-    // Si no hay página seleccionada o si ya fue usada, saltamos este ítem.
-    if (empty($page_id) || in_array($page_id, $used_page_ids)) {
+    // Si no se seleccionó ninguna página para este ítem, lo saltamos y continuamos con el siguiente.
+    if (empty($page_id)) {
         continue;
     }
 
+    // Obtenemos el objeto de la página para acceder a sus datos.
     $page_post = get_post($page_id);
-    if (!$page_post) {
-        continue; // Saltamos si la página no existe (p.ej. fue borrada).
+
+    // Si por alguna razón la página ya no existe, la saltamos.
+    if (! $page_post) {
+        continue;
     }
 
-    // Añadimos el ID a la lista de usados.
-    $used_page_ids[] = $page_id;
+    // Lógica para determinar el título: usa el personalizado si existe, si no, el de la página.
+    $custom_title = ! empty($options["item_{$i}_custom_title"]) ? $options["item_{$i}_custom_title"] : '';
+    $title = ! empty($custom_title) ? $custom_title : get_the_title($page_post);
 
-    // Obtenemos los datos personalizados.
-    $custom_title = get_theme_mod("investigacion_item_{$i}_custom_title", '');
-    $custom_desc  = get_theme_mod("investigacion_item_{$i}_custom_desc", '');
-    $icon_class   = get_theme_mod("investigacion_item_{$i}_icon", 'fas fa-info-circle');
-
-    // Lógica condicional para el título y la descripción.
-    $title = !empty($custom_title) ? $custom_title : get_the_title($page_post);
-    $link  = get_permalink($page_post);
-    
-    if (!empty($custom_desc)) {
+    // Lógica para determinar la descripción: usa la personalizada si existe, si no, crea un extracto.
+    $custom_desc = ! empty($options["item_{$i}_custom_desc"]) ? $options["item_{$i}_custom_desc"] : '';
+    if (! empty($custom_desc)) {
         $description = $custom_desc;
     } else {
-        // Generamos un extracto de 10 palabras del contenido de la página.
+        // Generamos un extracto limpio de 10 palabras del contenido de la página.
         $description = wp_trim_words(strip_tags($page_post->post_content), 10, '...');
     }
 
-    // Guardamos los datos procesados en nuestro array.
+    // Guardamos los datos procesados y listos para usar en nuestro array.
     $items_to_render[] = [
         'title'       => $title,
         'description' => $description,
-        'link'        => $link,
-        'icon'        => $icon_class,
+        'link'        => get_permalink($page_post),
+        'icon'        => ! empty($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-info-circle', // Icono por defecto.
     ];
 }
 ?>
@@ -56,9 +63,11 @@ for ($i = 1; $i <= 4; $i++) {
 <section id="dt_service_one" class="dt_service dt_service--eight dt-py-default front-info">
     <div class="dt-container">
         <div class="dt-row dt-g-4 info-wrp">
-            <?php if (!empty($items_to_render)) : ?>
+
+            <?php if (! empty($items_to_render)) : ?>
                 <?php
-                $delay = 0;
+                $delay = 0; // Para la animación escalonada.
+                // 5. Ahora recorremos el array con los datos listos y renderizamos el HTML.
                 foreach ($items_to_render as $item) :
                 ?>
                     <div class="dt-col-lg-3 dt-col-md-6 dt-col-12">
@@ -80,17 +89,20 @@ for ($i = 1; $i <= 4; $i++) {
                         </div>
                     </div>
                 <?php
-                    $delay += 100;
+                    $delay += 100; // Incrementamos el delay para el siguiente ítem.
                 endforeach;
                 ?>
             <?php else : ?>
+                <?php // 6. Mensaje para el administrador si la sección está activa pero vacía. 
+                ?>
                 <div class="dt-col-12">
-                    <div class="notice-empty-section" style="text-align: center; padding: 40px; background-color: #f1f1f1; border: 1px dashed #ccc;">
-                        <p>Esta sección está activa pero no se han configurado ítems.</p>
-                        <p>Por favor, ve a <strong>Apariencia > Personalizar > Página de Inicio > Sección: Investigación</strong> para añadir contenido.</p>
+                    <div class="notice-empty-section" style="text-align: center; padding: 40px; background-color: #f1f1f1; border: 1px dashed #ccc; border-radius: 4px;">
+                        <p><?php _e('La sección de Investigación está activa pero no se ha configurado ningún ítem.', 'viceunf'); ?></p>
+                        <p><?php _e('Por favor, ve a <strong>Apariencia > Opciones ViceUnf</strong> para añadir contenido.', 'viceunf'); ?></p>
                     </div>
                 </div>
             <?php endif; ?>
+
         </div>
     </div>
 </section>

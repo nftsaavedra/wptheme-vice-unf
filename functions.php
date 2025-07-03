@@ -9,7 +9,6 @@
 // Define la ruta a la carpeta de funciones para no repetirla.
 $functions_path = get_stylesheet_directory() . '/theme-functions/';
 
-
 /**
  * Define el orden de carga explícito.
  */
@@ -19,6 +18,7 @@ $files_to_load = array(
     'cpt.php',
     'meta-boxes.php',
     'customizer.php',
+    'admin-options.php',
     'admin-tweaks.php',
     'helpers.php',
 );
@@ -32,4 +32,4 @@ foreach ($files_to_load as $file) {
 }
 
 // Limpia las variables del ámbito global.
-unset($functions_path, $customizer_class_path, $files_to_load, $file, $file_path);
+unset($functions_path, $files_to_load, $file, $file_path);
