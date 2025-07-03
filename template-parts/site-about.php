@@ -13,7 +13,7 @@
           </div>
           <div class="dt_image_box image-2">
             <figure class="image">
-              <img src="https://preview.desertthemes.com/pro/easytech/wp-content/themes/softme-pro/assets/images/resource/protect-2.jpg" alt="">
+              <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/investigacion_play.png' ); ?>" alt="Ícono de Play para Investigación">
             </figure>
             <div class="dt_image_video">
               <a href="https://www.youtube.com/watch?v=qvL_7gRGLV0&t=6s" class="dt_lightbox_img dt-btn-play dt-btn-primary" data-caption="">
