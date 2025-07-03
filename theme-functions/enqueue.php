@@ -10,16 +10,6 @@ if (! defined('ABSPATH')) {
 function viceunf_enqueue_assets()
 {
     wp_enqueue_style('viceunf-parent-theme-style', get_template_directory_uri() . '/style.css');
-
-    // Carga condicional de scripts SOLO para la página principal.
-    if (is_front_page()) {
-        wp_enqueue_script('viceunf-front-page-loader', get_stylesheet_directory_uri() . '/assets/js/front-page-loader.js', array(), '1.1.0', true);
-        wp_localize_script(
-            'viceunf-front-page-loader',
-            'viceunf_front_obj',
-            array('rest_url_slider' => esc_url_raw(get_rest_url(null, 'wp/v2/slider?per_page=5&orderby=date&order=desc')))
-        );
-    }
 }
 add_action('wp_enqueue_scripts', 'viceunf_enqueue_assets', 99);
 
