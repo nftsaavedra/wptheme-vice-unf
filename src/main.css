@@ -666,7 +666,7 @@ con otros.
 /* Slider */
 
 .dt_slider--five .dt_slider-content .subtitle {
-  width: max-content;
+  /* width: max-content; */
   font-size: 1.7rem;
   font-weight: 400;
   padding: 1.2rem 2rem;
