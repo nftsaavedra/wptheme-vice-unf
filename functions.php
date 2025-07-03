@@ -9,11 +9,6 @@
 // Define la ruta a la carpeta de funciones para no repetirla.
 $functions_path = get_stylesheet_directory() . '/theme-functions/';
 
-// --- Cargas Críticas ---
-$customizer_class_path = $functions_path . 'controls/class-customize.php';
-if (file_exists($customizer_class_path)) {
-    require_once $customizer_class_path;
-}
 
 /**
  * Define el orden de carga explícito.
