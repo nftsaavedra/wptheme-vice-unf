@@ -1,0 +1,86 @@
+/* =================================================================
+   Estilos para la Página de Opciones del Tema ViceUnf
+   ================================================================= */
+
+/* Variables de color del tema para usar en el admin */
+:root {
+  --viceunf-pri-color: #00794e;
+  --viceunf-sec-color: #0b2346;
+  --viceunf-priTwo-color: #2d4260;
+  --viceunf-admin-bg: #f6f7f7;
+  --viceunf-admin-border: #ccd0d4;
+  --viceunf-admin-text: #2c3338;
+}
+
+.viceunf-options-wrap .nav-tab-wrapper {
+  border-bottom-color: var(--viceunf-admin-border);
+}
+
+/* Estilo de las Pestañas (Tabs) */
+.viceunf-options-wrap .nav-tab {
+  background: #e9ecef;
+  border-color: var(--viceunf-admin-border);
+  font-weight: 600;
+}
+
+.viceunf-options-wrap .nav-tab-active,
+.viceunf-options-wrap .nav-tab-active:hover {
+  background: var(--viceunf-admin-bg);
+  border-bottom-color: var(--viceunf-admin-bg);
+  color: var(--viceunf-sec-color);
+  border-top: 3px solid var(--viceunf-pri-color);
+}
+
+/* Estilo del formulario y las secciones */
+.viceunf-options-wrap .form-table {
+  margin-top: 1em;
+}
+
+.viceunf-options-wrap .form-table > h2 {
+  padding: 15px 0;
+  font-size: 1.5em;
+  border-bottom: 2px solid var(--viceunf-pri-color);
+  color: var(--viceunf-sec-color);
+}
+
+.viceunf-options-wrap .form-table th {
+  padding: 20px 10px 20px 0;
+  width: 200px; /* Ancho fijo para las etiquetas */
+}
+
+/* Tarjeta para agrupar campos de un ítem */
+.viceunf-options-card {
+  padding: 1.25rem;
+  border: 1px solid var(--viceunf-admin-border);
+  background: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  max-width: 650px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.viceunf-options-card .viceunf-label {
+  display: block;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.viceunf-options-card .viceunf-label:first-child {
+  margin-top: 0;
+}
+.viceunf-options-card input[type="text"],
+.viceunf-options-card textarea,
+.viceunf-options-card select {
+  width: 100%;
+}
+
+/* Botón de guardado */
+.viceunf-options-wrap .submit .button-primary {
+  background: var(--viceunf-sec-color);
+  border-color: var(--viceunf-sec-color);
+  transition: background 0.1s ease-in-out;
+}
+.viceunf-options-wrap .submit .button-primary:hover {
+  background: var(--viceunf-priTwo-color);
+  border-color: var(--viceunf-priTwo-color);
+}

@@ -1,0 +1,29 @@
+/* Estilos para la Página de Opciones ViceUnf */
+.viceunf-options-wrap .nav-tab-wrapper {
+  margin-bottom: 20px;
+}
+.viceunf-options-wrap .form-table {
+  display: none;
+}
+.viceunf-options-wrap .form-table.active {
+  display: block;
+}
+.form-table > h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.4em;
+}
+.viceunf-options-card {
+  padding: 15px;
+  border: 1px solid #ccd0d4;
+  background: #f6f7f7;
+  border-radius: 4px;
+  margin-top: 10px;
+  max-width: 650px;
+}
+.viceunf-options-card .viceunf-label {
+  display: block;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
