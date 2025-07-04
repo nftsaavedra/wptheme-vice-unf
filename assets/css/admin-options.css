@@ -35,3 +35,103 @@
   margin-top: 15px;
   margin-bottom: 5px;
 }
+
+/* =================================================================
+   Estilos para el Selector con Búsqueda Avanzada
+   ================================================================= */
+
+.ajax-search-wrapper {
+  position: relative;
+  max-width: 650px;
+}
+
+/* Oculta las vistas que no están activas */
+.ajax-search-wrapper .search-input-view,
+.ajax-search-wrapper .selected-item-view {
+  display: none;
+}
+.ajax-search-wrapper .search-input-view.active,
+.ajax-search-wrapper .selected-item-view.active {
+  display: block;
+}
+
+/* Estilo de la vista "Seleccionado" (bloqueado) */
+.selected-item-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e9ecef;
+  border: 1px solid var(--viceunf-admin-border, #ccd0d4);
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-weight: 600;
+  color: var(--viceunf-priTwo-color, #2d4260);
+}
+
+.selected-item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clear-selection-btn {
+  cursor: pointer;
+  color: #d63638;
+  font-size: 20px;
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  background: none;
+  padding: 0 5px;
+}
+.clear-selection-btn:hover {
+  color: #a02426;
+}
+
+/* Contenedor de resultados de búsqueda */
+.ajax-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--viceunf-admin-border, #ccd0d4);
+  border-top: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-height: 250px;
+  overflow-y: auto;
+  display: none; /* Oculto por defecto */
+}
+
+.ajax-search-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ajax-search-results li {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f1;
+}
+
+.ajax-search-results li:last-child {
+  border-bottom: none;
+}
+
+.ajax-search-results li:hover {
+  background-color: var(--viceunf-pri-color, #00794e);
+  color: #fff;
+}
+
+.ajax-search-results li small {
+  opacity: 0.8;
+}
+
+.ajax-search-results .no-results,
+.ajax-search-results .spinner {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+}

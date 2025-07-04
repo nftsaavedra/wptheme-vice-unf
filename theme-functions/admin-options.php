@@ -83,36 +83,51 @@ function viceunf_render_checkbox_field($args)
   echo '<label><input type="checkbox" name="viceunf_theme_options[' . esc_attr($id) . ']" value="1" ' . checked(1, $value, false) . '> ' . esc_html($args['label']) . '</label>';
 }
 
-function viceunf_render_investigacion_item_field($args)
-{
-  $options = get_option('viceunf_theme_options', []);
-  $i = $args['item_number'];
+function viceunf_render_investigacion_item_field($args) {
+    $options = get_option('viceunf_theme_options', []);
+    $i = $args['item_number'];
 
-  $page_id = isset($options["item_{$i}_page_id"]) ? $options["item_{$i}_page_id"] : 0;
-  $page_title = $page_id ? get_the_title($page_id) : '';
-  $icon = isset($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-flask';
-  $title = isset($options["item_{$i}_custom_title"]) ? $options["item_{$i}_custom_title"] : '';
-  $desc = isset($options["item_{$i}_custom_desc"]) ? $options["item_{$i}_custom_desc"] : '';
+    // Obtenemos el ID y el título de la página guardada
+    $page_id = isset($options["item_{$i}_page_id"]) ? $options["item_{$i}_page_id"] : 0;
+    $page_title = $page_id ? get_the_title($page_id) : '';
 
-  // El contenedor principal para nuestro componente de búsqueda reutilizable.
-  // Usamos data-action para decirle al JS qué endpoint AJAX usar.
-  echo '<div class="viceunf-options-card">';
-  echo '  <label class="viceunf-label">Página Relacionada</label>';
-  echo '  <div class="ajax-search-container" data-action="viceunf_search_pages_only">';
-  echo '      <input type="text" class="large-text ajax-search-input" placeholder="Escribe para buscar una página..." value="' . esc_attr($page_title) . '">';
-  echo '      <input type="hidden" class="ajax-search-hidden-id" name="viceunf_theme_options[item_' . $i . '_page_id]" value="' . esc_attr($page_id) . '">';
-  echo '      <div class="ajax-search-results"></div>';
-  echo '  </div>';
+    // Obtenemos el resto de los campos
+    $icon = isset($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-flask';
+    $title = isset($options["item_{$i}_custom_title"]) ? $options["item_{$i}_custom_title"] : '';
+    $desc = isset($options["item_{$i}_custom_desc"]) ? $options["item_{$i}_custom_desc"] : '';
 
-  echo '  <label class="viceunf-label">Icono (Font Awesome)</label>';
-  echo '  <input type="text" name="viceunf_theme_options[item_' . $i . '_icon]" value="' . esc_attr($icon) . '" class="regular-text">';
+    // Nueva estructura HTML para el selector con búsqueda
+    echo '<div class="viceunf-options-card">';
+    echo '  <label class="viceunf-label">Página Relacionada</label>';
+    echo '  <div class="ajax-search-wrapper" data-action="viceunf_search_pages_only">';
+    
+    // Contenedor para el estado "seleccionado"
+    echo '      <div class="selected-item-view ' . ($page_id ? 'active' : '') . '">';
+    echo '          <span class="selected-item-title">' . esc_html($page_title) . '</span>';
+    echo '          <button type="button" class="button-link-delete clear-selection-btn">&times;</button>';
+    echo '      </div>';
 
-  echo '  <label class="viceunf-label">Título Personalizado (Opcional)</label>';
-  echo '  <input type="text" name="viceunf_theme_options[item_' . $i . '_custom_title]" value="' . esc_attr($title) . '" class="large-text" placeholder="Usar el título de la página por defecto">';
+    // Contenedor para el estado "búsqueda"
+    echo '      <div class="search-input-view ' . ($page_id ? '' : 'active') . '">';
+    echo '          <input type="text" class="large-text ajax-search-input" placeholder="Escribe 3+ letras para buscar una página...">';
+    echo '          <div class="ajax-search-results"></div>';
+    echo '      </div>';
 
-  echo '  <label class="viceunf-label">Descripción Corta (Opcional)</label>';
-  echo '  <textarea name="viceunf_theme_options[item_' . $i . '_custom_desc]" rows="3" class="large-text" placeholder="Usar el extracto de la página por defecto">' . esc_textarea($desc) . '</textarea>';
-  echo '</div>';
+    // Campo oculto que guarda el ID de la página
+    echo '      <input type="hidden" class="ajax-search-hidden-id" name="viceunf_theme_options[item_' . $i . '_page_id]" value="' . esc_attr($page_id) . '">';
+    
+    echo '  </div>'; // Cierre de ajax-search-wrapper
+
+    // El resto de los campos no cambian
+    echo '  <label class="viceunf-label">Icono (Font Awesome)</label>';
+    echo '  <input type="text" name="viceunf_theme_options[item_' . $i . '_icon]" value="' . esc_attr($icon) . '" class="regular-text">';
+    
+    echo '  <label class="viceunf-label">Título Personalizado (Opcional)</label>';
+    echo '  <input type="text" name="viceunf_theme_options[item_' . $i . '_custom_title]" value="' . esc_attr($title) . '" class="large-text" placeholder="Usar el título de la página por defecto">';
+    
+    echo '  <label class="viceunf-label">Descripción Corta (Opcional)</label>';
+    echo '  <textarea name="viceunf_theme_options[item_' . $i . '_custom_desc]" rows="3" class="large-text" placeholder="Usar el extracto de la página por defecto">' . esc_textarea($desc) . '</textarea>';
+    echo '</div>';
 }
 
 // 4. Función principal que renderiza la página de opciones.
@@ -168,21 +183,20 @@ function viceunf_sanitize_all_options($input)
 }
 
 
-function viceunf_enqueue_admin_options_assets($hook)
-{
-  // Solo carga en nuestra página de opciones.
-  if ('toplevel_page_viceunf_theme_options' != $hook) {
-    return;
-  }
-
-  // Carga el CSS de la página de opciones
-  wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css', [], '1.0.4');
-
-  // Carga el SCRIPT de búsqueda y le pasa los datos necesarios (URL de AJAX y nonce).
-  wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', [], '1.1.0', true);
-  wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', array(
-    'ajax_url' => admin_url('admin-ajax.php'),
-    'nonce'    => wp_create_nonce('slider_metabox_nonce_action') // Reutilizamos el mismo nonce.
-  ));
+function viceunf_enqueue_admin_options_assets($hook) {
+    // Solo carga en nuestra página de opciones.
+    if ('toplevel_page_viceunf_theme_options' != $hook) {
+        return;
+    }
+    
+    // Carga el CSS de la página de opciones
+    wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css', [], '1.0.4');
+    
+    // Carga el SCRIPT de búsqueda y le pasa los datos necesarios (URL de AJAX y nonce).
+    wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', [], '1.1.0', true);
+    wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('slider_metabox_nonce_action') // Reutilizamos el mismo nonce.
+    ));
 }
 add_action('admin_enqueue_scripts', 'viceunf_enqueue_admin_options_assets');
