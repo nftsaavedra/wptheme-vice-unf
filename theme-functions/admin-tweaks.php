@@ -77,3 +77,43 @@ function viceunf_ajax_search_content_handler() {
 
     wp_send_json_success( $results );
 }
+
+/**
+ * =================================================================
+ * ENDPOINT AJAX PARA BÚSQUEDA DE PÁGINAS SOLAMENTE
+ * =================================================================
+ */
+add_action( 'wp_ajax_viceunf_search_pages_only', 'viceunf_ajax_search_pages_handler' );
+
+function viceunf_ajax_search_pages_handler() {
+    // Seguridad: verificar el nonce (usamos el mismo nonce por simplicidad)
+    check_ajax_referer( 'slider_metabox_nonce_action', 'nonce' );
+
+    $search_term = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
+
+    if ( empty( $search_term ) ) {
+        wp_send_json_error( 'Término de búsqueda vacío.' );
+    }
+
+    $query_args = array(
+        'post_type'      => 'page', // <-- La única diferencia: buscamos solo 'page'
+        'posts_per_page' => 10,
+        's'              => $search_term,
+    );
+
+    $results_query = new WP_Query( $query_args );
+    $results = array();
+
+    if ( $results_query->have_posts() ) {
+        while ( $results_query->have_posts() ) {
+            $results_query->the_post();
+            $results[] = array(
+                'id'    => get_the_ID(),
+                'title' => get_the_title(),
+                'type'  => get_post_type_object( get_post_type() )->labels->singular_name,
+            );
+        }
+    }
+
+    wp_send_json_success( $results );
+}
