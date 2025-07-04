@@ -1,25 +1,33 @@
-/* Estilos para la Página de Opciones ViceUnf */
-.viceunf-options-wrap .nav-tab-wrapper {
-  margin-bottom: 20px;
-}
+/* Estilos para la Página de Opciones del Tema ViceUnf */
 .viceunf-options-wrap .form-table {
-  display: none;
+  margin-top: 1.5em;
+  border-collapse: collapse;
 }
-.viceunf-options-wrap .form-table.active {
-  display: block;
+.viceunf-options-wrap .form-table h2 {
+  padding: 15px 0;
+  font-size: 1.3em;
 }
-.form-table > h2 {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  font-size: 1.4em;
+.viceunf-options-wrap .form-table th,
+.viceunf-options-wrap .form-table td {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f1;
+}
+.viceunf-options-wrap .form-table tr:last-child th,
+.viceunf-options-wrap .form-table tr:last-child td {
+  border-bottom: none;
+}
+.viceunf-options-wrap .form-table th {
+  width: 220px;
+  padding-right: 20px;
 }
 .viceunf-options-card {
-  padding: 15px;
+  padding: 1.25rem;
   border: 1px solid #ccd0d4;
-  background: #f6f7f7;
+  background: #fff;
   border-radius: 4px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   max-width: 650px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 .viceunf-options-card .viceunf-label {
   display: block;

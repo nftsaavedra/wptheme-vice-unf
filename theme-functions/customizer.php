@@ -11,13 +11,8 @@ if (! defined('ABSPATH')) exit;
 function viceunf_modify_parent_theme_customizer($wp_customize)
 {
 
-    // =================================================================
-    // ELIMINAR SECCIÓN "UPGRADE" DEL TEMA PADRE
-    // =================================================================
-    // Esta es la funcionalidad crítica que no debe perderse.
+    // Elimina la sección de promoción "Upgrade to Softme Pro" del tema padre.
     // Se ejecuta con prioridad 20 para asegurar que se cargue DESPUÉS del tema padre.
     $wp_customize->remove_section('softme');
-
-    // Aquí podrías añadir en el futuro otras modificaciones al personalizador del tema padre.
 }
 add_action('customize_register', 'viceunf_modify_parent_theme_customizer', 20);
