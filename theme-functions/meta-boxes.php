@@ -13,19 +13,15 @@ function viceunf_slider_metabox_html($post)
 {
     wp_nonce_field('slider_metabox_nonce_action', 'slider_metabox_nonce_name');
 
-    // --- Obtener todos los valores guardados ---
+    // Obtener datos guardados
     $subtitle = get_post_meta($post->ID, '_slider_subtitle_key', true);
     $description = get_post_meta($post->ID, '_slider_description_key', true);
     $text_align = get_post_meta($post->ID, '_slider_text_alignment_key', true);
-
-    // Datos del Botón 1
     $btn1_text = get_post_meta($post->ID, '_slider_btn1_text_key', true);
     $link_type = get_post_meta($post->ID, '_slider_link_type_key', true);
     $link_url = get_post_meta($post->ID, '_slider_link_url_key', true);
     $link_content_id = get_post_meta($post->ID, '_slider_link_content_id_key', true);
     $link_content_title = $link_content_id ? get_the_title($link_content_id) : '';
-
-    // Datos del Botón 2 y Video
     $btn2_text = get_post_meta($post->ID, '_slider_btn2_text_key', true);
     $btn2_link = get_post_meta($post->ID, '_slider_btn2_link_key', true);
     $video_link = get_post_meta($post->ID, '_slider_video_link_key', true);
@@ -44,9 +40,8 @@ function viceunf_slider_metabox_html($post)
     <div class="slider-metabox-section">
         <h4>Botón 1 (Principal)</h4>
         <div class="slider-field"><label for="slider_btn1_text">Texto Botón 1</label><input type="text" id="slider_btn1_text" name="slider_btn1_text" value="<?php echo esc_attr($btn1_text); ?>"></div>
-
         <div class="slider-field">
-            <label for="slider_link_type">Tipo de Enlace para Botón 1</label>
+            <label for="slider_link_type">Tipo de Enlace</label>
             <select id="slider_link_type" name="slider_link_type">
                 <option value="none" <?php selected($link_type, 'none'); ?>>Ninguno</option>
                 <option value="url" <?php selected($link_type, 'url'); ?>>URL Personalizada</option>
@@ -77,12 +72,12 @@ function viceunf_slider_metabox_html($post)
 
     <div class="slider-metabox-section">
         <h4>Botón 2 (Secundario)</h4>
-        <div class="slider-field"><label for="slider_btn2_text">Texto Botón 2 (Opcional)</label><input type="text" id="slider_btn2_text" name="slider_btn2_text" value="<?php echo esc_attr($btn2_text); ?>"></div>
-        <div class="slider-field"><label for="slider_btn2_link">Enlace Botón 2 (Opcional)</label><input type="url" id="slider_btn2_link" name="slider_btn2_link" value="<?php echo esc_url($btn2_link); ?>"></div>
+        <div class="slider-field"><label for="slider_btn2_text">Texto (Opcional)</label><input type="text" id="slider_btn2_text" name="slider_btn2_text" value="<?php echo esc_attr($btn2_text); ?>"></div>
+        <div class="slider-field"><label for="slider_btn2_link">Enlace (Opcional)</label><input type="url" id="slider_btn2_link" name="slider_btn2_link" value="<?php echo esc_url($btn2_link); ?>"></div>
     </div>
     <div class="slider-metabox-section">
         <h4>Botón de Video</h4>
-        <div class="slider-field"><label for="slider_video_link">Enlace Video Lightbox (Opcional)</label><input type="url" id="slider_video_link" name="slider_video_link" value="<?php echo esc_url($video_link); ?>"></div>
+        <div class="slider-field"><label for="slider_video_link">Enlace Video (Opcional)</label><input type="url" id="slider_video_link" name="slider_video_link" value="<?php echo esc_url($video_link); ?>"></div>
     </div>
 <?php
 }

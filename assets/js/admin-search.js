@@ -1,3 +1,8 @@
+/**
+ * Script Unificado para Componentes de Búsqueda AJAX en el Panel de Administración de ViceUnf.
+ * Gestiona tanto la búsqueda de páginas/posts como la de iconos.
+ * @version 1.3.0
+ */
 document.addEventListener("DOMContentLoaded", function () {
   /**
    * LÓGICA #1: Mostrar/Ocultar campos en el Meta Box del Slider.
@@ -16,12 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
         contentField.style.display =
           linkTypeSelect.value === "content" ? "block" : "none";
     };
-    toggleSliderFields();
+
+    toggleSliderFields(); // Ejecutar al cargar la página
     linkTypeSelect.addEventListener("change", toggleSliderFields);
   }
 
   /**
-   * LÓGICA #2: Funcionalidad de Búsqueda AJAX Reutilizable y Robusta.
+   * LÓGICA #2: Funcionalidad de Búsqueda AJAX Reutilizable.
+   * Se aplica a cualquier elemento con la clase '.ajax-search-wrapper'.
    */
   function initializeAjaxSearch(wrapper) {
     const searchInput = wrapper.querySelector(".ajax-search-input");
@@ -30,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedView = wrapper.querySelector(".selected-item-view");
     const selectedTitle = wrapper.querySelector(".selected-item-title");
     const searchView = wrapper.querySelector(".search-input-view");
-    const ajaxAction = wrapper.dataset.action || "viceunf_search_content";
+    const ajaxAction = wrapper.dataset.action;
     let searchTimer;
 
     if (
@@ -42,15 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
     )
       return;
 
-    // --- EVENTO: Escribir en el campo de búsqueda ---
+    // EVENTO: Escribir en el campo de búsqueda
     searchInput.addEventListener("keyup", function () {
       clearTimeout(searchTimer);
-      if (this.value.length < 3) {
+      if (this.value.length < 2 && ajaxAction !== "viceunf_search_icons") {
         resultsContainer.style.display = "none";
         return;
       }
       resultsContainer.innerHTML =
-        '<div class="spinner is-active" style="margin:auto; float:none;"></div>';
+        '<div class="spinner is-active" style="margin: auto; float: none;"></div>';
       resultsContainer.style.display = "block";
 
       searchTimer = setTimeout(() => {
@@ -70,7 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 const li = document.createElement("li");
                 li.dataset.id = item.id;
                 li.dataset.title = item.title;
-                li.innerHTML = `<strong>${item.title}</strong><small> (${item.type})</small>`;
+                let iconHTML =
+                  ajaxAction === "viceunf_search_icons"
+                    ? `<i class="result-icon ${item.id}"></i>`
+                    : "";
+                let typeHTML = item.type ? `<small>(${item.type})</small>` : "";
+                li.innerHTML = `${iconHTML}<strong>${item.title}</strong> ${typeHTML}`;
                 ul.appendChild(li);
               });
               resultsContainer.appendChild(ul);
@@ -82,38 +94,42 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 500);
     });
 
-    // --- EVENTO: Clics dentro del componente (Delegación de Eventos) ---
+    // EVENTO: Clics dentro del componente (para seleccionar o limpiar)
     wrapper.addEventListener("click", function (e) {
-      // Caso 1: Clic en un resultado de la búsqueda
       const selectedItem = e.target.closest(".ajax-results-list li");
+      const clearButton = e.target.closest(".clear-selection-btn");
+
       if (selectedItem) {
         hiddenIdInput.value = selectedItem.dataset.id;
         selectedTitle.textContent = selectedItem.dataset.title;
+
+        // Manejo especial para la vista previa del icono
+        if (wrapper.classList.contains("icon-search-wrapper")) {
+          const previewIcon = wrapper.querySelector(".icon-preview i");
+          if (previewIcon) previewIcon.className = selectedItem.dataset.id;
+        }
+
         searchView.classList.remove("active");
         selectedView.classList.add("active");
         resultsContainer.style.display = "none";
         searchInput.value = "";
-        return;
       }
 
-      // Caso 2: Clic en el botón de limpiar (X)
-      const clearButton = e.target.closest(".clear-selection-btn");
       if (clearButton) {
-        e.preventDefault(); // Previene cualquier comportamiento por defecto del botón
-        hiddenIdInput.value = "0";
+        e.preventDefault();
+        hiddenIdInput.value = wrapper.classList.contains("icon-search-wrapper")
+          ? ""
+          : "0";
         selectedTitle.textContent = "";
         searchInput.value = "";
         selectedView.classList.remove("active");
         searchView.classList.add("active");
-        return;
       }
     });
 
     // Ocultar resultados si se hace clic fuera del componente
-    document.addEventListener("click", function (e) {
-      if (!wrapper.contains(e.target)) {
-        resultsContainer.style.display = "none";
-      }
+    document.addEventListener("click", (e) => {
+      if (!wrapper.contains(e.target)) resultsContainer.style.display = "none";
     });
   }
 

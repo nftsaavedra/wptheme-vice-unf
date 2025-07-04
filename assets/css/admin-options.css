@@ -135,3 +135,81 @@
   text-align: center;
   color: #666;
 }
+
+/* =================================================================
+   Estilos para el Selector de Iconos con Búsqueda
+   ================================================================= */
+.icon-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+}
+.icon-preview {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #2c3338;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.icon-search-container {
+  position: relative;
+  flex-grow: 1;
+}
+.icon-picker-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccd0d4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.icon-picker-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.icon-picker-results li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f1;
+}
+.icon-picker-results li:hover {
+  background-color: #007cba;
+  color: #fff;
+}
+.icon-picker-results li i {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+/* Estilos para el componente de búsqueda de iconos */
+.icon-search-wrapper .selected-item-view {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.icon-search-wrapper .icon-preview {
+  flex-shrink: 0;
+  font-size: 18px;
+  width: 30px;
+  text-align: center;
+}
+.ajax-search-results .result-icon {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}

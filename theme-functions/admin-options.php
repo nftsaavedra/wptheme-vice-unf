@@ -3,14 +3,21 @@
 if (! defined('ABSPATH')) exit;
 
 /**
- * Devuelve una lista de clases de iconos de Font Awesome 6.
+ * =================================================================
+ * Archivo de Opciones del Tema ViceUnf
+ * =================================================================
+ * Gestiona la página "Opciones del Tema" en el panel de administración,
+ * utilizando la Settings API de WordPress para una solución robusta y escalable.
+ */
+
+
+/**
+ * Devuelve una lista curada de iconos de Font Awesome 6 para el selector.
  * Centralizar esta lista aquí facilita su actualización en el futuro.
  * @return array La lista de clases de iconos.
  */
 function viceunf_get_fontawesome_icon_list()
 {
-  // Esta es una lista curada. Puedes añadir más iconos de Font Awesome 6 aquí.
-  // Formato: 'fas fa-nombre-del-icono'
   return array(
     'fas fa-flask',
     'fas fa-project-diagram',
@@ -43,11 +50,6 @@ function viceunf_get_fontawesome_icon_list()
   );
 }
 
-/**
- * Crea y gestiona la página de opciones del tema en el panel de administración.
- * Esta versión incluye una interfaz con pestañas estilizada, funcional y escalable.
- */
-
 // 1. Añade el menú al panel de administración de WordPress.
 add_action('admin_menu', function () {
   add_menu_page(
@@ -61,13 +63,12 @@ add_action('admin_menu', function () {
   );
 });
 
-
 // 2. Registra todas las opciones, secciones y campos usando la Settings API.
 add_action('admin_init', function () {
   register_setting('viceunf_options_group', 'viceunf_theme_options', 'viceunf_sanitize_all_options');
 
+  // === PESTAÑA: PÁGINA DE INICIO ===
   // Todas las secciones se registran en la misma "página" de la API: 'viceunf_theme_options'
-  // La lógica de pestañas en la función de renderizado se encargará de mostrarlas.
 
   // SECCIÓN 1: INVESTIGACIÓN
   add_settings_section('viceunf_investigacion_section', '1. Sección: Investigación', null, 'viceunf_theme_options');
@@ -96,7 +97,7 @@ add_action('admin_init', function () {
   add_settings_field('socios_titulo', 'Título de la Sección', 'viceunf_render_text_field', 'viceunf_theme_options', 'viceunf_socios_section', ['id' => 'socios_titulo']);
 });
 
-// 3. Funciones que renderizan el HTML de cada campo (Callbacks).
+// 3. Funciones reutilizables que renderizan los campos HTML (Callbacks).
 function viceunf_render_text_field($args)
 {
   $options = get_option('viceunf_theme_options', []);
@@ -124,55 +125,84 @@ function viceunf_render_checkbox_field($args)
   echo '<label><input type="checkbox" name="viceunf_theme_options[' . esc_attr($id) . ']" value="1" ' . checked(1, $value, false) . '> ' . esc_html($args['label']) . '</label>';
 }
 
+function viceunf_render_icon_picker_field($args)
+{
+  $name = $args['name'];
+  $value = $args['value'];
+  $icons = viceunf_get_fontawesome_icon_list();
+?>
+  <div class="icon-picker-wrapper">
+    <span class="icon-preview"><i class="<?php echo esc_attr($value); ?>"></i></span>
+    <div class="icon-search-container">
+      <input type="text" name="<?php echo esc_attr($name); ?>" value="<?php echo esc_attr($value); ?>" class="icon-picker-input regular-text" placeholder="Escribe para buscar..." autocomplete="off">
+      <div class="icon-picker-results">
+        <ul>
+          <?php foreach ($icons as $icon_class) : ?>
+            <li data-value="<?php echo esc_attr($icon_class); ?>">
+              <i class="<?php echo esc_attr($icon_class); ?>"></i>
+              <span><?php echo esc_html($icon_class); ?></span>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+  </div>
+<?php
+}
+
 function viceunf_render_investigacion_item_field($args)
 {
   $options = get_option('viceunf_theme_options', []);
   $i = $args['item_number'];
 
-  // Obtenemos el ID y el título de la página guardada
   $page_id = isset($options["item_{$i}_page_id"]) ? $options["item_{$i}_page_id"] : 0;
-  $page_title = $page_id ? get_the_title($page_id) : '';
-
-  // Obtenemos el resto de los campos
-  $icon = isset($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-flask';
+  $icon_class = isset($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-flask';
   $title = isset($options["item_{$i}_custom_title"]) ? $options["item_{$i}_custom_title"] : '';
   $desc = isset($options["item_{$i}_custom_desc"]) ? $options["item_{$i}_custom_desc"] : '';
 
-  // Nueva estructura HTML para el selector con búsqueda
   echo '<div class="viceunf-options-card">';
-  echo '  <label class="viceunf-label">Página Relacionada</label>';
-  echo '  <div class="ajax-search-wrapper" data-action="viceunf_search_pages_only">';
 
-  // Contenedor para el estado "seleccionado"
-  echo '      <div class="selected-item-view ' . ($page_id ? 'active' : '') . '">';
-  echo '          <span class="selected-item-title">' . esc_html($page_title) . '</span>';
-  echo '          <button type="button" class="button-link-delete clear-selection-btn">&times;</button>';
-  echo '      </div>';
+  // --- Selector de Página Relacionada (Funcionalidad que ya existe y funciona) ---
+  echo '<label class="viceunf-label">Página Relacionada</label>';
+  // (Aquí va tu componente de búsqueda de páginas que ya funciona)
+  $page_title = $page_id ? get_the_title($page_id) : '';
+  echo '<div class="ajax-search-wrapper" data-action="viceunf_search_pages_only">';
+  echo '  <div class="selected-item-view ' . ($page_id ? 'active' : '') . '">';
+  echo '      <span class="selected-item-title">' . esc_html($page_title) . '</span>';
+  echo '      <button type="button" class="button-link-delete clear-selection-btn">&times;</button>';
+  echo '  </div>';
+  echo '  <div class="search-input-view ' . ($page_id ? '' : 'active') . '">';
+  echo '      <input type="text" class="large-text ajax-search-input" placeholder="Escribe para buscar una página...">';
+  echo '      <div class="ajax-search-results"></div>';
+  echo '  </div>';
+  echo '  <input type="hidden" class="ajax-search-hidden-id" name="viceunf_theme_options[item_' . $i . '_page_id]" value="' . esc_attr($page_id) . '">';
+  echo '</div>';
 
-  // Contenedor para el estado "búsqueda"
-  echo '      <div class="search-input-view ' . ($page_id ? '' : 'active') . '">';
-  echo '          <input type="text" class="large-text ajax-search-input" placeholder="Escribe 3+ letras para buscar una página...">';
-  echo '          <div class="ajax-search-results"></div>';
-  echo '      </div>';
+  // --- NUEVO: Componente de Búsqueda de Iconos ---
+  echo '<label class="viceunf-label">Icono (Font Awesome)</label>';
+  echo '<div class="ajax-search-wrapper icon-search-wrapper" data-action="viceunf_search_icons">';
+  echo '  <div class="selected-item-view ' . ($icon_class ? 'active' : '') . '">';
+  echo '      <span class="icon-preview"><i class="' . esc_attr($icon_class) . '"></i></span>';
+  echo '      <span class="selected-item-title">' . esc_html($icon_class) . '</span>';
+  echo '      <button type="button" class="button-link-delete clear-selection-btn">&times;</button>';
+  echo '  </div>';
+  echo '  <div class="search-input-view ' . ($icon_class ? '' : 'active') . '">';
+  echo '      <input type="text" class="large-text ajax-search-input icon-picker-input" placeholder="Escribe para buscar un icono...">';
+  echo '      <div class="ajax-search-results"></div>';
+  echo '  </div>';
+  echo '  <input type="hidden" class="ajax-search-hidden-id" name="viceunf_theme_options[item_' . $i . '_icon]" value="' . esc_attr($icon_class) . '">';
+  echo '</div>';
 
-  // Campo oculto que guarda el ID de la página
-  echo '      <input type="hidden" class="ajax-search-hidden-id" name="viceunf_theme_options[item_' . $i . '_page_id]" value="' . esc_attr($page_id) . '">';
+  // --- Campos de Título y Descripción (Funcionalidad intacta) ---
+  echo '<label class="viceunf-label">Título Personalizado (Opcional)</label>';
+  echo '<input type="text" name="viceunf_theme_options[item_' . $i . '_custom_title]" value="' . esc_attr($title) . '" class="large-text" placeholder="Usar el título de la página por defecto">';
+  echo '<label class="viceunf-label">Descripción Corta (Opcional)</label>';
+  echo '<textarea name="viceunf_theme_options[item_' . $i . '_custom_desc]" rows="3" class="large-text" placeholder="Usar el extracto de la página por defecto">' . esc_textarea($desc) . '</textarea>';
 
-  echo '  </div>'; // Cierre de ajax-search-wrapper
-
-  // El resto de los campos no cambian
-  echo '  <label class="viceunf-label">Icono (Font Awesome)</label>';
-  echo '  <input type="text" name="viceunf_theme_options[item_' . $i . '_icon]" value="' . esc_attr($icon) . '" class="regular-text">';
-
-  echo '  <label class="viceunf-label">Título Personalizado (Opcional)</label>';
-  echo '  <input type="text" name="viceunf_theme_options[item_' . $i . '_custom_title]" value="' . esc_attr($title) . '" class="large-text" placeholder="Usar el título de la página por defecto">';
-
-  echo '  <label class="viceunf-label">Descripción Corta (Opcional)</label>';
-  echo '  <textarea name="viceunf_theme_options[item_' . $i . '_custom_desc]" rows="3" class="large-text" placeholder="Usar el extracto de la página por defecto">' . esc_textarea($desc) . '</textarea>';
   echo '</div>';
 }
 
-// 4. Función principal que renderiza la página de opciones.
+// 4. Función principal que renderiza el HTML de la página de opciones.
 function viceunf_render_options_page_html()
 {
   if (!current_user_can('manage_options')) return;
@@ -180,7 +210,7 @@ function viceunf_render_options_page_html()
   <div class="wrap viceunf-options-wrap">
     <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
     <h2 class="nav-tab-wrapper">
-      <a href="?page=viceunf_theme_options" class="nav-tab nav-tab-active">Página de Inicio</a>
+      <a href="?page=viceunf_theme_options&tab=homepage" class="nav-tab nav-tab-active">Página de Inicio</a>
     </h2>
     <form action="options.php" method="post">
       <?php
@@ -193,7 +223,7 @@ function viceunf_render_options_page_html()
 <?php
 }
 
-// 5. Función de sanitización centralizada.
+// 5. Función de sanitización centralizada y robusta.
 function viceunf_sanitize_all_options($input)
 {
   $current_options = get_option('viceunf_theme_options', []);
@@ -208,6 +238,7 @@ function viceunf_sanitize_all_options($input)
     if (isset($input["item_{$i}_custom_title"])) $sanitized_input["item_{$i}_custom_title"] = sanitize_text_field($input["item_{$i}_custom_title"]);
     if (isset($input["item_{$i}_custom_desc"])) $sanitized_input["item_{$i}_custom_desc"] = sanitize_textarea_field($input["item_{$i}_custom_desc"]);
   }
+
   $sanitized_input['eventos_section_enabled'] = isset($input['eventos_section_enabled']) ? 1 : 0;
   if (isset($input['eventos_subtitulo'])) $sanitized_input['eventos_subtitulo'] = sanitize_text_field($input['eventos_subtitulo']);
   if (isset($input['eventos_titulo'])) $sanitized_input['eventos_titulo'] = wp_kses_post($input['eventos_titulo']);
@@ -223,23 +254,3 @@ function viceunf_sanitize_all_options($input)
 
   return $sanitized_input;
 }
-
-
-function viceunf_enqueue_admin_options_assets($hook)
-{
-  // Solo carga en nuestra página de opciones.
-  if ('toplevel_page_viceunf_theme_options' != $hook) {
-    return;
-  }
-
-  // Carga el CSS de la página de opciones
-  wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css', [], '1.0.4');
-
-  // Carga el SCRIPT de búsqueda y le pasa los datos necesarios (URL de AJAX y nonce).
-  wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', [], '1.1.0', true);
-  wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', array(
-    'ajax_url' => admin_url('admin-ajax.php'),
-    'nonce'    => wp_create_nonce('slider_metabox_nonce_action') // Reutilizamos el mismo nonce.
-  ));
-}
-add_action('admin_enqueue_scripts', 'viceunf_enqueue_admin_options_assets');

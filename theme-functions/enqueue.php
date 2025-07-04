@@ -6,14 +6,12 @@ if (! defined('ABSPATH')) {
 
 /**
  * =================================================================
- * 1. Carga de Estilos y Scripts para el Frontend
+ * 1. Carga de Estilos para el Frontend
  * =================================================================
  */
 function viceunf_enqueue_frontend_assets()
 {
-    // --- GESTIÓN DE FONT AWESOME (CONTROL TOTAL) ---
-    // Con prioridad 100, nos aseguramos de que esto se ejecute después del tema padre.
-    // Primero, removemos la versión de Font Awesome del tema padre para evitar duplicados.
+    // Primero, con prioridad alta (100), nos aseguramos de que el estilo del tema padre sea eliminado.
     wp_dequeue_style('font-awesome');
     wp_deregister_style('font-awesome');
 
@@ -22,14 +20,14 @@ function viceunf_enqueue_frontend_assets()
         'viceunf-fontawesome',
         get_stylesheet_directory_uri() . '/assets/css/all.min.css',
         array(),
-        '6.7.2' // Actualiza esto si cambias la versión.
+        '6.7.2' // Usamos la versión que especificaste.
     );
 
     // Carga la hoja de estilos principal del tema padre.
     wp_enqueue_style(
         'viceunf-parent-theme-style',
         get_template_directory_uri() . '/style.css',
-        array('viceunf-fontawesome') // Hacemos que dependa de nuestra versión para el orden correcto.
+        array('viceunf-fontawesome')
     );
 }
 add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets', 100);
@@ -39,7 +37,7 @@ add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets', 100);
  * =================================================================
  * 2. Carga Centralizada de Estilos y Scripts para el Panel de Administración
  * =================================================================
- * Esta es la ÚNICA función que gestiona los assets del admin.
+ * Esta es la ÚNICA función que gestiona los assets del admin, evitando duplicados.
  *
  * @param string $hook El identificador de la página de administración actual.
  */
@@ -55,39 +53,29 @@ function viceunf_enqueue_admin_assets($hook)
         '6.7.2'
     );
 
-    // --- Carga Condicional para la Página de Opciones del Tema ---
-    if ('toplevel_page_viceunf_theme_options' == $hook) {
+    // --- Carga Condicional para las páginas que usan nuestros componentes ---
+    // Verificamos si estamos en la página de opciones O en la página de edición de un slider.
+    $is_options_page = ('toplevel_page_viceunf_theme_options' == $hook);
+    $is_slider_page = (('post.php' == $hook || 'post-new.php' == $hook) && 'slider' === get_post_type());
 
-        // Estilos para la página de opciones y sus componentes.
+    if ($is_options_page || $is_slider_page) {
+
+        // Estilos para el componente de búsqueda y la página de opciones.
         wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
 
-        // Script para la búsqueda AJAX de páginas.
+        // Script de búsqueda AJAX (se carga en ambas páginas).
         wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', ['jquery'], true);
 
-        // Pasamos los datos necesarios a nuestro script de búsqueda.
+        // Pasamos los datos necesarios al script (solo se necesita una vez).
         wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', [
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('slider_metabox_nonce_action')
         ]);
     }
 
-    // --- Carga Condicional para la Página de Edición de un Slider ---
-    if (('post.php' == $hook || 'post-new.php' == $hook) && 'slider' === get_post_type()) {
-
-        // Estilos específicos para el meta box del slider.
+    // Si estamos en la página de sliders, cargamos sus estilos adicionales.
+    if ($is_slider_page) {
         wp_enqueue_style('viceunf-admin-styles', get_stylesheet_directory_uri() . '/assets/css/admin-style.css');
-
-        // Estilos reutilizables para el componente de búsqueda.
-        wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
-
-        // Script de búsqueda AJAX reutilizable.
-        wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', ['jquery'], true);
-
-        // Pasamos los datos necesarios al script.
-        wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('slider_metabox_nonce_action')
-        ]);
     }
 }
 add_action('admin_enqueue_scripts', 'viceunf_enqueue_admin_assets');
