@@ -8,8 +8,7 @@ if (! defined('ABSPATH')) exit;
  */
 
 // 1. Añade el menú al panel de administración de WordPress.
-function viceunf_add_theme_options_menu()
-{
+add_action('admin_menu', function () {
   add_menu_page(
     'Opciones del Tema ViceUnf',
     'Opciones del Tema',
@@ -19,20 +18,21 @@ function viceunf_add_theme_options_menu()
     'dashicons-admin-generic',
     58
   );
-}
-add_action('admin_menu', 'viceunf_add_theme_options_menu');
+});
 
 
-// 2. Registra todas las opciones, secciones y campos para nuestra página.
-function viceunf_register_all_theme_settings()
-{
+// 2. Registra todas las opciones, secciones y campos usando la Settings API.
+add_action('admin_init', function () {
   register_setting('viceunf_options_group', 'viceunf_theme_options', 'viceunf_sanitize_all_options');
+
+  // Todas las secciones se registran en la misma "página" de la API: 'viceunf_theme_options'
+  // La lógica de pestañas en la función de renderizado se encargará de mostrarlas.
 
   // SECCIÓN 1: INVESTIGACIÓN
   add_settings_section('viceunf_investigacion_section', '1. Sección: Investigación', null, 'viceunf_theme_options');
   add_settings_field('investigacion_section_enabled', 'Habilitar Sección', 'viceunf_render_checkbox_field', 'viceunf_theme_options', 'viceunf_investigacion_section', ['id' => 'investigacion_section_enabled', 'label' => 'Mostrar esta sección en la página de inicio.']);
   for ($i = 1; $i <= 4; $i++) {
-    add_settings_field("investigacion_item_{$i}", sprintf('Ítem de Investigación %d', $i), 'viceunf_render_investigacion_item_field', 'viceunf_theme_options', 'viceunf_investigacion_section', ['item_number' => $i]);
+    add_settings_field("investigacion_item_{$i}", sprintf('Ítem %d', $i), 'viceunf_render_investigacion_item_field', 'viceunf_theme_options', 'viceunf_investigacion_section', ['item_number' => $i]);
   }
 
   // SECCIÓN 2: EVENTOS
@@ -49,46 +49,77 @@ function viceunf_register_all_theme_settings()
   add_settings_field('noticias_titulo', 'Título', 'viceunf_render_text_field', 'viceunf_theme_options', 'viceunf_noticias_section', ['id' => 'noticias_titulo']);
   add_settings_field('noticias_descripcion', 'Descripción', 'viceunf_render_textarea_field', 'viceunf_theme_options', 'viceunf_noticias_section', ['id' => 'noticias_descripcion']);
 
-  // SECCIÓN 4: SOCIOS ACADÉMICOS
+  // SECCIÓN 4: SOCIOS
   add_settings_section('viceunf_socios_section', '4. Sección: Socios Académicos', null, 'viceunf_theme_options');
   add_settings_field('socios_section_enabled', 'Habilitar Sección', 'viceunf_render_checkbox_field', 'viceunf_theme_options', 'viceunf_socios_section', ['id' => 'socios_section_enabled', 'label' => 'Mostrar esta sección en la página de inicio.']);
   add_settings_field('socios_titulo', 'Título de la Sección', 'viceunf_render_text_field', 'viceunf_theme_options', 'viceunf_socios_section', ['id' => 'socios_titulo']);
-}
-add_action('admin_init', 'viceunf_register_all_theme_settings');
+});
 
-
-// 3. Funciones reutilizables que dibujan los campos HTML (Callbacks).
+// 3. Funciones que renderizan el HTML de cada campo (Callbacks).
 function viceunf_render_text_field($args)
-{ /* ... (código de la respuesta anterior) ... */
+{
+  $options = get_option('viceunf_theme_options', []);
+  $id = $args['id'];
+  $value = isset($options[$id]) ? $options[$id] : '';
+  echo '<input type="text" name="viceunf_theme_options[' . esc_attr($id) . ']" value="' . esc_attr($value) . '" class="regular-text">';
+  if (isset($args['description'])) {
+    echo '<p class="description">' . wp_kses_post($args['description']) . '</p>';
+  }
 }
+
 function viceunf_render_textarea_field($args)
-{ /* ... (código de la respuesta anterior) ... */
+{
+  $options = get_option('viceunf_theme_options', []);
+  $id = $args['id'];
+  $value = isset($options[$id]) ? $options[$id] : '';
+  echo '<textarea name="viceunf_theme_options[' . esc_attr($id) . ']" rows="4" class="large-text">' . esc_textarea($value) . '</textarea>';
 }
+
 function viceunf_render_checkbox_field($args)
-{ /* ... (código de la respuesta anterior) ... */
+{
+  $options = get_option('viceunf_theme_options', []);
+  $id = $args['id'];
+  $value = isset($options[$id]) ? $options[$id] : 0;
+  echo '<label><input type="checkbox" name="viceunf_theme_options[' . esc_attr($id) . ']" value="1" ' . checked(1, $value, false) . '> ' . esc_html($args['label']) . '</label>';
 }
+
 function viceunf_render_investigacion_item_field($args)
-{ /* ... (código de la respuesta anterior) ... */
+{
+  $options = get_option('viceunf_theme_options', []);
+  $i = $args['item_number'];
+  $page_id = isset($options["item_{$i}_page_id"]) ? $options["item_{$i}_page_id"] : 0;
+  $icon = isset($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-flask';
+  $title = isset($options["item_{$i}_custom_title"]) ? $options["item_{$i}_custom_title"] : '';
+  $desc = isset($options["item_{$i}_custom_desc"]) ? $options["item_{$i}_custom_desc"] : '';
+  $used_page_ids = [];
+  for ($j = 1; $j <= 4; $j++) {
+    if ($i != $j && !empty($options["item_{$j}_page_id"])) {
+      $used_page_ids[] = $options["item_{$j}_page_id"];
+    }
+  }
+  echo '<div class="viceunf-options-card"><label class="viceunf-label">Página Relacionada</label>';
+  wp_dropdown_pages(['name' => "viceunf_theme_options[item_{$i}_page_id]", 'selected' => $page_id, 'show_option_none' => '-- Ninguna --', 'exclude' => $used_page_ids]);
+  echo '<p class="description">Las páginas ya usadas en otros ítems son excluidas de esta lista.</p>';
+  echo '<label class="viceunf-label">Icono (Font Awesome)</label><input type="text" name="viceunf_theme_options[item_' . $i . '_icon]" value="' . esc_attr($icon) . '" class="regular-text">';
+  echo '<label class="viceunf-label">Título Personalizado (Opcional)</label><input type="text" name="viceunf_theme_options[item_' . $i . '_custom_title]" value="' . esc_attr($title) . '" class="large-text" placeholder="Usar el título de la página por defecto">';
+  echo '<label class="viceunf-label">Descripción Corta (Opcional)</label><textarea name="viceunf_theme_options[item_' . $i . '_custom_desc]" rows="3" class="large-text" placeholder="Usar el extracto de la página por defecto">' . esc_textarea($desc) . '</textarea>';
+  echo '</div>';
 }
 
-
-// 4. Función principal que renderiza el HTML de la página de opciones con pestañas.
+// 4. Función principal que renderiza la página de opciones.
 function viceunf_render_options_page_html()
 {
   if (!current_user_can('manage_options')) return;
-  $active_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'homepage';
 ?>
   <div class="wrap viceunf-options-wrap">
     <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
     <h2 class="nav-tab-wrapper">
-      <a href="?page=viceunf_theme_options&tab=homepage" class="nav-tab <?php echo $active_tab == 'homepage' ? 'nav-tab-active' : ''; ?>">Página de Inicio</a>
+      <a href="?page=viceunf_theme_options" class="nav-tab nav-tab-active">Página de Inicio</a>
     </h2>
     <form action="options.php" method="post">
       <?php
-      if ($active_tab == 'homepage') {
-        settings_fields('viceunf_options_group');
-        do_settings_sections('viceunf_theme_options');
-      }
+      settings_fields('viceunf_options_group');
+      do_settings_sections('viceunf_theme_options');
       submit_button('Guardar Cambios');
       ?>
     </form>
@@ -98,16 +129,39 @@ function viceunf_render_options_page_html()
 
 // 5. Función de sanitización centralizada.
 function viceunf_sanitize_all_options($input)
-{ /* ... (código de la respuesta anterior) ... */
+{
+  $current_options = get_option('viceunf_theme_options', []);
+  $sanitized_input = [];
+  $input = array_merge($current_options, $input);
+
+  // Sanitiza todos los campos esperados
+  $sanitized_input['investigacion_section_enabled'] = isset($input['investigacion_section_enabled']) ? 1 : 0;
+  for ($i = 1; $i <= 4; $i++) {
+    if (isset($input["item_{$i}_page_id"])) $sanitized_input["item_{$i}_page_id"] = absint($input["item_{$i}_page_id"]);
+    if (isset($input["item_{$i}_icon"])) $sanitized_input["item_{$i}_icon"] = sanitize_text_field($input["item_{$i}_icon"]);
+    if (isset($input["item_{$i}_custom_title"])) $sanitized_input["item_{$i}_custom_title"] = sanitize_text_field($input["item_{$i}_custom_title"]);
+    if (isset($input["item_{$i}_custom_desc"])) $sanitized_input["item_{$i}_custom_desc"] = sanitize_textarea_field($input["item_{$i}_custom_desc"]);
+  }
+  $sanitized_input['eventos_section_enabled'] = isset($input['eventos_section_enabled']) ? 1 : 0;
+  if (isset($input['eventos_subtitulo'])) $sanitized_input['eventos_subtitulo'] = sanitize_text_field($input['eventos_subtitulo']);
+  if (isset($input['eventos_titulo'])) $sanitized_input['eventos_titulo'] = wp_kses_post($input['eventos_titulo']);
+  if (isset($input['eventos_descripcion'])) $sanitized_input['eventos_descripcion'] = sanitize_textarea_field($input['eventos_descripcion']);
+
+  $sanitized_input['noticias_section_enabled'] = isset($input['noticias_section_enabled']) ? 1 : 0;
+  if (isset($input['noticias_subtitulo'])) $sanitized_input['noticias_subtitulo'] = sanitize_text_field($input['noticias_subtitulo']);
+  if (isset($input['noticias_titulo'])) $sanitized_input['noticias_titulo'] = wp_kses_post($input['noticias_titulo']);
+  if (isset($input['noticias_descripcion'])) $sanitized_input['noticias_descripcion'] = sanitize_textarea_field($input['noticias_descripcion']);
+
+  $sanitized_input['socios_section_enabled'] = isset($input['socios_section_enabled']) ? 1 : 0;
+  if (isset($input['socios_titulo'])) $sanitized_input['socios_titulo'] = sanitize_text_field($input['socios_titulo']);
+
+  return $sanitized_input;
 }
 
-// 6. Carga los estilos y scripts para la página de opciones.
+// 6. Carga los estilos para la página de opciones.
 function viceunf_enqueue_admin_options_assets($hook)
 {
-  if ('toplevel_page_viceunf_theme_options' != $hook) {
-    return;
-  }
-  wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css', [], '1.0.1');
-  wp_enqueue_script('viceunf-admin-options-script', get_stylesheet_directory_uri() . '/assets/js/admin-options.js', [], '1.0.1', true);
+  if ('toplevel_page_viceunf_theme_options' != $hook) return;
+  wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css', [], '1.0.3');
 }
 add_action('admin_enqueue_scripts', 'viceunf_enqueue_admin_options_assets');
