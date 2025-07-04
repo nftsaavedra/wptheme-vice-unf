@@ -46,7 +46,7 @@ function viceunf_slider_metabox_html($post)
         <div class="slider-field"><label for="slider_btn1_text">Texto Botón 1</label><input type="text" id="slider_btn1_text" name="slider_btn1_text" value="<?php echo esc_attr($btn1_text); ?>"></div>
 
         <div class="slider-field">
-            <label>Tipo de Enlace para Botón 1</label>
+            <label for="slider_link_type">Tipo de Enlace para Botón 1</label>
             <select id="slider_link_type" name="slider_link_type">
                 <option value="none" <?php selected($link_type, 'none'); ?>>Ninguno</option>
                 <option value="url" <?php selected($link_type, 'url'); ?>>URL Personalizada</option>
@@ -61,10 +61,16 @@ function viceunf_slider_metabox_html($post)
 
         <div id="campo_contenido" class="slider-field" style="<?php echo ($link_type === 'content') ? 'display:block;' : 'display:none;'; ?>">
             <label>Buscar Entrada o Página</label>
-            <div class="ajax-search-container" data-action="viceunf_search_content">
-                <input type="text" class="large-text ajax-search-input" placeholder="Escribe para buscar..." value="<?php echo esc_attr($link_content_title); ?>">
+            <div class="ajax-search-wrapper" data-action="viceunf_search_content">
+                <div class="selected-item-view <?php echo ($link_content_id ? 'active' : ''); ?>">
+                    <span class="selected-item-title"><?php echo esc_html($link_content_title); ?></span>
+                    <button type="button" class="button-link-delete clear-selection-btn">&times;</button>
+                </div>
+                <div class="search-input-view <?php echo ($link_content_id ? '' : 'active'); ?>">
+                    <input type="text" class="large-text ajax-search-input" placeholder="Escribe para buscar...">
+                    <div class="ajax-search-results"></div>
+                </div>
                 <input type="hidden" class="ajax-search-hidden-id" id="slider_link_content_id" name="slider_link_content_id" value="<?php echo esc_attr($link_content_id); ?>">
-                <div class="ajax-search-results"></div>
             </div>
         </div>
     </div>
