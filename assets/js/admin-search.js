@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchView = wrapper.querySelector(".search-input-view");
     const ajaxAction = wrapper.dataset.action;
     let searchTimer;
+    let abortController;
 
     if (
       !searchInput ||
@@ -52,21 +53,34 @@ document.addEventListener("DOMContentLoaded", function () {
     // EVENTO: Escribir en el campo de búsqueda
     searchInput.addEventListener("keyup", function () {
       clearTimeout(searchTimer);
+      // Si hay una petición en curso, la cancelamos
+      if (abortController) {
+        abortController.abort();
+      }
       if (this.value.length < 2 && ajaxAction !== "viceunf_search_icons") {
         resultsContainer.style.display = "none";
         return;
       }
+
       resultsContainer.innerHTML =
         '<div class="spinner is-active" style="margin: auto; float: none;"></div>';
       resultsContainer.style.display = "block";
 
       searchTimer = setTimeout(() => {
+        // Creamos un nuevo controlador para esta petición
+        abortController = new AbortController();
+        const signal = abortController.signal;
+
         const formData = new FormData();
         formData.append("action", ajaxAction);
         formData.append("nonce", viceunf_ajax_obj.nonce);
         formData.append("search", this.value);
 
-        fetch(viceunf_ajax_obj.ajax_url, { method: "POST", body: formData })
+        fetch(viceunf_ajax_obj.ajax_url, {
+          method: "POST",
+          body: formData,
+          signal,
+        })
           .then((response) => response.json())
           .then((response) => {
             resultsContainer.innerHTML = "";
@@ -89,6 +103,14 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
               resultsContainer.innerHTML =
                 '<p class="no-results">No se encontraron resultados.</p>';
+            }
+          })
+          .catch((error) => {
+            // Si el error es por abortar, lo ignoramos.
+            if (error.name === "AbortError") {
+              console.log("Búsqueda anterior cancelada.");
+            } else {
+              console.error("Error en la búsqueda:", error);
             }
           });
       }, 500);
