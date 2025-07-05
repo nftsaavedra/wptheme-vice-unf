@@ -62,12 +62,17 @@ if ($slider_query->have_posts()) :
                 $original_video_link = get_post_meta(get_the_ID(), '_slider_video_link_key', true);
                 $autoplay_video_link = function_exists('get_autoplay_embed_url') ? get_autoplay_embed_url($original_video_link) : $original_video_link;
 
-                // CORRECCIÓN PARA CARACTERES ESPECIALES (UTF-8)
+                // CORRECCIÓN
                 $createButtonSpans = function ($text) {
-                    // Usamos mb_str_split para manejar correctamente caracteres multi-byte como las tildes.
-                    return implode('', array_map(function ($char) {
-                        return "<span>" . esc_html($char) . "</span>";
-                    }, mb_str_split($text)));
+                    $output = '';
+                    $delay_increment = 0.01;
+                    $chars = mb_str_split($text);
+                    foreach ($chars as $index => $char) {
+                        $delay = $index * $delay_increment;
+                        // Se añade el delay directamente en el estilo del span
+                        $output .= "<span style='--delay: {$delay}s;'>" . esc_html($char) . "</span>";
+                    }
+                    return $output;
                 };
             ?>
 

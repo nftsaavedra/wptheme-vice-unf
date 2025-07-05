@@ -2438,3 +2438,16 @@ table.wc-block-cart-items
 /* Feature */
 
 /* Feature Two */
+.dt-btn-text span {
+    display: inline-block; /* Asegurarse de que los spans sean bloques en línea */
+    transition: transform 0.3s cubic-bezier(0.75, 0, 0.125, 1);
+    transition-delay: var(--delay);
+}
+
+.dt-btn:hover .dt-btn-text span {
+    transform: translateY(-100%);
+}
+
+.dt-btn:hover .dt-btn-text span:nth-child(2n) {
+    transform: translateY(100%);
+}
