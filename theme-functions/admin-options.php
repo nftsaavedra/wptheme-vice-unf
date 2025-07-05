@@ -228,10 +228,31 @@ function viceunf_sanitize_all_options($input)
 {
   $current_options = get_option('viceunf_theme_options', []);
   $sanitized_input = [];
-  $input = array_merge($current_options, $input);
 
-  // Sanitiza todos los campos esperados
-  $sanitized_input['investigacion_section_enabled'] = isset($input['investigacion_section_enabled']) ? 1 : 0;
+  // Definimos qué función de sanitización usar para cada tipo de campo
+  $sanitization_rules = [
+    'investigacion_section_enabled' => 'absint',
+    'eventos_section_enabled'       => 'absint',
+    'noticias_section_enabled'      => 'absint',
+    'socios_section_enabled'        => 'absint',
+    'eventos_subtitulo'             => 'sanitize_text_field',
+    'eventos_titulo'                => 'wp_kses_post', // Permite HTML básico
+    'eventos_descripcion'           => 'sanitize_textarea_field',
+    'noticias_subtitulo'            => 'sanitize_text_field',
+    'noticias_titulo'               => 'wp_kses_post',
+    'noticias_descripcion'          => 'sanitize_textarea_field',
+    'socios_titulo'                 => 'sanitize_text_field',
+  ];
+
+  // Iteramos sobre todas las opciones que llegan del formulario
+  foreach ($input as $key => $value) {
+    if (isset($sanitization_rules[$key])) {
+      // Aplicamos la función de sanitización correspondiente
+      $sanitized_input[$key] = call_user_func($sanitization_rules[$key], $value);
+    }
+  }
+
+  // Sanitización especial para los items de investigación (que son un array)
   for ($i = 1; $i <= 4; $i++) {
     if (isset($input["item_{$i}_page_id"])) $sanitized_input["item_{$i}_page_id"] = absint($input["item_{$i}_page_id"]);
     if (isset($input["item_{$i}_icon"])) $sanitized_input["item_{$i}_icon"] = sanitize_text_field($input["item_{$i}_icon"]);
@@ -239,18 +260,6 @@ function viceunf_sanitize_all_options($input)
     if (isset($input["item_{$i}_custom_desc"])) $sanitized_input["item_{$i}_custom_desc"] = sanitize_textarea_field($input["item_{$i}_custom_desc"]);
   }
 
-  $sanitized_input['eventos_section_enabled'] = isset($input['eventos_section_enabled']) ? 1 : 0;
-  if (isset($input['eventos_subtitulo'])) $sanitized_input['eventos_subtitulo'] = sanitize_text_field($input['eventos_subtitulo']);
-  if (isset($input['eventos_titulo'])) $sanitized_input['eventos_titulo'] = wp_kses_post($input['eventos_titulo']);
-  if (isset($input['eventos_descripcion'])) $sanitized_input['eventos_descripcion'] = sanitize_textarea_field($input['eventos_descripcion']);
-
-  $sanitized_input['noticias_section_enabled'] = isset($input['noticias_section_enabled']) ? 1 : 0;
-  if (isset($input['noticias_subtitulo'])) $sanitized_input['noticias_subtitulo'] = sanitize_text_field($input['noticias_subtitulo']);
-  if (isset($input['noticias_titulo'])) $sanitized_input['noticias_titulo'] = wp_kses_post($input['noticias_titulo']);
-  if (isset($input['noticias_descripcion'])) $sanitized_input['noticias_descripcion'] = sanitize_textarea_field($input['noticias_descripcion']);
-
-  $sanitized_input['socios_section_enabled'] = isset($input['socios_section_enabled']) ? 1 : 0;
-  if (isset($input['socios_titulo'])) $sanitized_input['socios_titulo'] = sanitize_text_field($input['socios_titulo']);
-
-  return $sanitized_input;
+  // Fusionamos con las opciones existentes para no perder datos
+  return array_merge($current_options, $sanitized_input);
 }
