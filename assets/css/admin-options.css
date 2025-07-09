@@ -213,3 +213,44 @@
   width: 20px;
   text-align: center;
 }
+/* --- Estilos para la rejilla adaptable de items en Opciones del Tema --- */
+
+.viceunf-items-grid-container {
+  display: grid;
+  gap: 20px; /* Espacio entre las tarjetas */
+  /* Por defecto, 4 columnas en pantallas grandes */
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 1rem; /* Un poco de espacio superior */
+}
+
+/* Estilos para las tarjetas individuales */
+.viceunf-item-card {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  padding: 15px 15px 20px 15px; /* Un poco más de padding inferior */
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.viceunf-item-card h4 {
+  margin-top: 0;
+  font-size: 1.2em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* --- Media Queries para la adaptabilidad --- */
+
+/* Ajuste para pantallas medianas (ej. tablets y escritorios pequeños) */
+@media (max-width: 1400px) {
+  .viceunf-items-grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  }
+}
+
+/* Ajuste para pantallas de WordPress más pequeñas y móviles */
+@media (max-width: 782px) {
+  .viceunf-items-grid-container {
+    grid-template-columns: 1fr; /* 1 columna */
+  }
+}
