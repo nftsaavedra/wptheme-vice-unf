@@ -163,5 +163,5 @@ function viceunf_ajax_search_icons_handler()
         }
     }
 
-    wp_send_json_success(array_slice($results, 0, 5)); // Devolvemos máximo 20 resultados
+    wp_send_json_success(array_slice($results, 0, 5)); // Devolvemos máximo n resultados
 }
