@@ -31,7 +31,7 @@
         <div class="dt_item_inner wow slideInUp  animated" data-wow-delay="0ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: slideInUp;">
           <div class="dt_item_image">
             <a href="#">
-              <img src="http://vice.unf.edu.pe/wp-content/uploads/2025/06/s7q68ss7q68ss7q6.png" alt="" title="">
+              <img src="http://vice.unf.edu.pe/wp-content/uploads/2025/07/REVISTAS_UNF-scaled.jpg" alt="" title="">
             </a>
           </div>
           <div class="dt_item_holder">
@@ -46,7 +46,7 @@
         <div class="dt_item_inner wow slideInUp  animated" data-wow-delay="100ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 100ms; animation-name: slideInUp;">
           <div class="dt_item_image">
             <a href="#">
-              <img src="http://vice.unf.edu.pe/wp-content/uploads/2025/06/o6325o6325o6325o.png" alt="" title="">
+              <img src="http://vice.unf.edu.pe/wp-content/uploads/2025/07/LIBROS_UNF-scaled.jpg" alt="" title="">
             </a>
           </div>
           <div class="dt_item_holder">
@@ -66,7 +66,7 @@
           </div>
           <div class="dt_item_holder">
             <div class="dt_item_icon"><i class="fas fa-newspaper"></i></div>
-            <h5 class="dt_item_title"><a href="#">Boletines e Informes Técnicos</a></h5>
+            <h5 class="dt_item_title"><a href="#">Boletines Institucionales</a></h5>
             <p class="dt_item_text text">Publicaciones periódicas y reportes técnicos por unidad o tema.</p>
             <a href="#" class="readmore">Ver más<i class="fas fa-long-arrow-right"></i></a>
           </div>
