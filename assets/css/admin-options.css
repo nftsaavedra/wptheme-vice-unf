@@ -254,3 +254,87 @@
     grid-template-columns: 1fr; /* 1 columna */
   }
 }
+
+/* ================================================================ */
+/* Estilos para Componentes de la Página de Opciones
+/* ================================================================ */
+
+/* --- Estilos para el Selector de Imágenes --- */
+.viceunf-image-uploader .image-preview {
+  max-width: 200px;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+/* --- Estilos para el Repetidor Dinámico --- */
+.viceunf-repeater-container .repeater-items-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.repeater-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.repeater-item-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding-top: 5px;
+}
+
+.repeater-item-controls .button-link {
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #50575e;
+  border: none;
+  background: none;
+  padding: 0;
+  font-weight: bold;
+}
+
+.repeater-item-controls .button-link:hover {
+  color: #007cba;
+}
+
+.repeater-item-controls .remove-repeater-item {
+  font-size: 22px;
+  color: #a00;
+}
+
+.repeater-item-controls .remove-repeater-item:hover {
+  color: #f00;
+}
+
+.repeater-item-fields {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.repeater-item-fields .field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#add-about-item .dashicons {
+  vertical-align: middle;
+  margin-top: -2px;
+}

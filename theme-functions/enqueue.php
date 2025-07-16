@@ -1,6 +1,6 @@
 <?php
 // Salir si se accede directamente.
-if (! defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
@@ -45,7 +45,6 @@ function viceunf_enqueue_admin_assets($hook)
 {
 
     // --- Carga Global en el Admin: Font Awesome ---
-    // Cargamos nuestra versión local en TODAS las páginas del admin para asegurar la consistencia.
     wp_enqueue_style(
         'viceunf-fontawesome-admin',
         get_stylesheet_directory_uri() . '/assets/css/all.min.css',
@@ -54,7 +53,6 @@ function viceunf_enqueue_admin_assets($hook)
     );
 
     // --- Carga Condicional para las páginas que usan nuestros componentes ---
-    // Verificamos si estamos en la página de opciones O en la página de edición de un slider.
     $is_options_page = ('toplevel_page_viceunf_theme_options' == $hook);
     $is_slider_page = (('post.php' == $hook || 'post-new.php' == $hook) && 'slider' === get_post_type());
 
@@ -64,7 +62,7 @@ function viceunf_enqueue_admin_assets($hook)
         wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
 
         // Script de búsqueda AJAX (se carga en ambas páginas).
-        wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', ['jquery'], true);
+        wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', [], true);
 
         // Pasamos los datos necesarios al script (solo se necesita una vez).
         wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', [
@@ -72,6 +70,25 @@ function viceunf_enqueue_admin_assets($hook)
             'nonce'    => wp_create_nonce('slider_metabox_nonce_action')
         ]);
     }
+
+    // --- NUEVO: Carga específica para la PÁGINA DE OPCIONES ---
+    // Estos scripts solo son necesarios para el repetidor y el selector de imágenes.
+    if ($is_options_page) {
+
+        // 1. Encolamos los scripts de medios de WordPress, necesarios para el selector de imágenes.
+        wp_enqueue_media();
+
+        // 2. Encolamos nuestro nuevo gestor de opciones (sin jQuery).
+        //    Depende de 'viceunf-admin-search' porque necesita que la función initializeAjaxSearch() exista.
+        wp_enqueue_script(
+            'viceunf-admin-options-manager',
+            get_stylesheet_directory_uri() . '/assets/js/admin-options-manager.js',
+            ['viceunf-admin-search'], // Dependencia
+            '1.0.1', // Incrementamos la versión
+            true // Cargar en el footer
+        );
+    }
+
 
     // Si estamos en la página de sliders, cargamos sus estilos adicionales.
     if ($is_slider_page) {
