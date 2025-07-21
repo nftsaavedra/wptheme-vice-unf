@@ -21,6 +21,7 @@ $files_to_load = array(
     'admin-options.php',
     'admin-tweaks.php',
     'helpers.php',
+    'custom-widgets.php',
 );
 
 // Itera sobre el array y carga cada archivo.

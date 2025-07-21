@@ -2448,3 +2448,46 @@ table.wc-block-cart-items
 .dt-btn:hover .dt-btn-text span:nth-child(2n) {
   transform: translateY(100%);
 }
+
+/*
+ * ===================================================================
+ * Estilos para el Widget de Entradas Recientes (Reutilizando Clases)
+ * ===================================================================
+ */
+
+/* Usamos la clase modificadora para no afectar a otras tarjetas */
+.widget .dt_post_item--widget {
+  display: flex; /* <-- La clave: pone la imagen y el contenido en horizontal */
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem !important; /* Menos margen en el sidebar */
+  padding: 0; /* Quitamos padding si lo hubiera */
+}
+
+/* Ajustamos el tamaño de la imagen para el sidebar */
+.widget .dt_post_item--widget .image {
+  flex-shrink: 0;
+  width: 70px;
+  height: 70px; /* Hacemos la imagen cuadrada */
+}
+
+/* Ajustamos los estilos del contenido para el espacio reducido */
+.widget .dt_post_item--widget .inner {
+  padding: 0;
+}
+
+.widget .dt_post_item--widget .title {
+  font-size: 1.6rem; /* Título un poco más pequeño */
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.widget .dt_post_item--widget .meta {
+  font-size: 1.3rem; /* Metadatos más pequeños */
+}
+
+/* Ocultamos la categoría en el sidebar para un look más limpio */
+.widget .dt_post_item--widget .catetag,
+.widget .dt_post_item--widget .content {
+  display: none;
+}
