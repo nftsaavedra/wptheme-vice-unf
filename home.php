@@ -2,11 +2,11 @@
 
 /**
  * =================================================================
- * The template for displaying archive pages for the ViceUnf theme.
+ * The template for displaying the blog posts index (home.php) for the ViceUnf theme.
  * =================================================================
  *
- * This template displays posts in a vertical list format. Each post
- * is styled as a card, respecting the sidebar layout.
+ * This template is used for the page set as the "Posts page" in WordPress's reading settings.
+ * It displays posts in a vertical list format, with each post styled as a card.
  *
  * @package ViceUnf
  */
@@ -14,7 +14,7 @@
 get_header();
 ?>
 
-<section class="dt_posts dt-py-default">
+<section id="dt_posts" class="dt_posts dt-py-default">
   <div class="dt-container">
     <div class="dt-row dt-g-5">
 
@@ -29,31 +29,29 @@ get_header();
         <?php if (have_posts()) : ?>
 
           <div class="page-header dt-mb-4">
-            <?php
-            // Muestra el título y la descripción del archivo (ej. "Categoría: Noticias")
-            the_archive_title('<h1 class="page-title">', '</h1>');
-            the_archive_description('<div class="archive-description">', '</div>');
+            <?php // En home.php, usamos un título estático o dinámico en lugar de un título de archivo. 
             ?>
+            <div class="archive-description">
+              <p>Explora nuestras últimas noticias, artículos y comunicados.</p>
+            </div>
           </div><?php
-                // Inicia el bucle de WordPress para mostrar cada post en una lista.
+                // Inicia el bucle de WordPress para mostrar cada post.
                 while (have_posts()) :
                   the_post();
-                  // Definimos las clases de diseño para cada tarjeta de post, basadas en tu ejemplo.
+
+                  // Reutilizamos las mismas clases de diseño para mantener la coherencia visual.
                   $post_classes = ['dt_post_item', 'dt_posts--one', 'dt-mb-4'];
                 ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class($post_classes); ?>>
 
               <?php if (has_post_thumbnail()) : ?>
 
-                <a class="image">
-
-                  <?php
-                    // Usamos 'large' para una buena calidad de imagen.
-                    // Esta función genera srcset para imágenes adaptables, mejorando el rendimiento.
-                    the_post_thumbnail('large', ['alt' => the_title_attribute('echo=0')]);
-                  ?>
+                <a class="image" href="<?php the_permalink(); ?>">
+                  <?php the_post_thumbnail('large', ['alt' => the_title_attribute('echo=0')]); ?>
                 </a>
+
               <?php endif; ?>
+
               <div class="inner">
                 <div class="meta">
                   <ul>
@@ -78,7 +76,7 @@ get_header();
 
                 <div class="content">
                   <?php
-                  // Extracto controlado a 35 palabras. Puedes ajustar este número.
+                  // Extracto controlado a 35 palabras.
                   echo '<p>' . wp_kses_post(wp_trim_words(get_the_content(), 35, '...')) . '</p>';
                   ?>
                   <a href="<?php the_permalink(); ?>" class="more-link">Leer más</a>
@@ -89,11 +87,11 @@ get_header();
         <?php
                 endwhile; // Fin del bucle.
 
-                // Muestra la paginación.
+                // Paginación.
                 the_posts_pagination(array(
                   'prev_text' => '<i class="fa fa-angle-double-left"></i>',
                   'next_text' => '<i class="fa fa-angle-double-right"></i>',
-                  'screen_reader_text' => ' ', // Oculta el texto "Navegación de entradas" si no lo deseas.
+                  'screen_reader_text' => ' ',
                 ));
 
               else :
