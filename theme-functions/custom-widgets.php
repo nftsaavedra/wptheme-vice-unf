@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) exit;
 
 /**
  * Clase ViceUnf_Recent_Posts_Widget
- * Crea un widget que reutiliza la estructura de tarjeta del tema.
+ * Crea un widget minimalista que muestra título y miniatura de entradas recientes.
  */
 class ViceUnf_Recent_Posts_Widget extends WP_Widget
 {
@@ -21,7 +21,7 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     parent::__construct(
       'viceunf_recent_posts',
       __('ViceUnf - Entradas Recientes con Miniaturas', 'viceunf'),
-      ['description' => __('Muestra las entradas recientes con miniaturas, reutilizando el diseño de tarjeta del tema.', 'viceunf')]
+      ['description' => __('Muestra una lista simple de entradas recientes con su título y miniatura.', 'viceunf')]
     );
   }
 
@@ -35,6 +35,8 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     }
 
     $number_of_posts = !empty($instance['number_of_posts']) ? absint($instance['number_of_posts']) : 5;
+    // --- NUEVO: Obtenemos el límite de caracteres del widget ---
+    $char_limit = !empty($instance['char_limit']) ? absint($instance['char_limit']) : 55;
 
     $recent_posts = new WP_Query([
       'posts_per_page'      => $number_of_posts,
@@ -44,41 +46,40 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     ]);
 
     if ($recent_posts->have_posts()) :
-      // No necesitamos un div wrapper extra, ya que el widget en sí ya actúa como uno.
+      echo '<div class="viceunf-recent-posts-list">';
+      $counter = 0;
+
       while ($recent_posts->have_posts()) : $recent_posts->the_post();
+        $counter++;
 
-        // Añadimos una clase 'modificadora' para los estilos específicos del sidebar.
-        $post_classes = ['dt_post_item', 'dt_posts--one', 'dt-mb-4', 'dt_post_item--widget'];
+        $item_class = 'viceunf-recent-post-item';
+        if ($counter % 2 == 0) {
+          $item_class .= ' item-par';
+        }
+
+        // --- NUEVO: Lógica para truncar el título ---
+        $post_title = get_the_title(); // Obtenemos el título completo
+        if (mb_strlen($post_title) > $char_limit) {
+          // Si es más largo que el límite, lo cortamos y añadimos "..."
+          $post_title = mb_substr($post_title, 0, $char_limit) . '...';
+        }
 ?>
-        <article id="post-<?php the_ID(); ?>" <?php post_class($post_classes); ?>>
-
+        <div class="<?php echo esc_attr($item_class); ?>">
           <?php if (has_post_thumbnail()) : ?>
-            <div class="image">
-              <a href="<?php the_permalink(); ?>">
-                <?php the_post_thumbnail('thumbnail'); // Usamos 'thumbnail' para un tamaño optimizado. 
-                ?>
-              </a>
-            </div>
+            <a href="<?php the_permalink(); ?>" class="viceunf-recent-post-thumbnail">
+              <?php the_post_thumbnail('thumbnail'); ?>
+            </a>
           <?php endif; ?>
 
-          <div class="inner">
-            <div class="meta">
-              <ul>
-                <li>
-                  <div class="date">
-                    <i class="far fa-calendar-alt dt-mr-2" aria-hidden="true"></i>
-                    <?php echo get_the_date(); ?>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <h4 class="title">
-              <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-            </h4>
+          <div class="viceunf-recent-post-content">
+            <h5 class="viceunf-recent-post-title">
+              <a href="<?php the_permalink(); ?>"><?php echo esc_html($post_title); ?></a>
+            </h5>
           </div>
-        </article>
+        </div>
     <?php
       endwhile;
+      echo '</div>';
       wp_reset_postdata();
     endif;
 
@@ -89,6 +90,8 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
   {
     $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Entradas Recientes', 'viceunf');
     $number_of_posts = isset($instance['number_of_posts']) ? absint($instance['number_of_posts']) : 5;
+    // --- NUEVO: Campo para el límite de caracteres ---
+    $char_limit = isset($instance['char_limit']) ? absint($instance['char_limit']) : 55;
     ?>
     <p>
       <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Título:', 'viceunf'); ?></label>
@@ -98,6 +101,10 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
       <label for="<?php echo esc_attr($this->get_field_id('number_of_posts')); ?>"><?php _e('Número de entradas a mostrar:', 'viceunf'); ?></label>
       <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('number_of_posts')); ?>" name="<?php echo esc_attr($this->get_field_name('number_of_posts')); ?>" type="number" step="1" min="1" value="<?php echo esc_attr($number_of_posts); ?>" size="3" />
     </p>
+    <p>
+      <label for="<?php echo esc_attr($this->get_field_id('char_limit')); ?>"><?php _e('Límite de caracteres para el título:', 'viceunf'); ?></label>
+      <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('char_limit')); ?>" name="<?php echo esc_attr($this->get_field_name('char_limit')); ?>" type="number" step="1" min="10" value="<?php echo esc_attr($char_limit); ?>" size="3" />
+    </p>
 <?php
   }
 
@@ -106,6 +113,8 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     $instance = [];
     $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
     $instance['number_of_posts'] = (!empty($new_instance['number_of_posts'])) ? absint($new_instance['number_of_posts']) : 5;
+    // --- NUEVO: Guardar el nuevo campo ---
+    $instance['char_limit'] = (!empty($new_instance['char_limit'])) ? absint($new_instance['char_limit']) : 55;
     return $instance;
   }
 }

@@ -2451,43 +2451,69 @@ table.wc-block-cart-items
 
 /*
  * ===================================================================
- * Estilos para el Widget de Entradas Recientes (Reutilizando Clases)
+ * Estilos para el Widget Minimalista de Entradas Recientes
  * ===================================================================
  */
 
-/* Usamos la clase modificadora para no afectar a otras tarjetas */
-.widget .dt_post_item--widget {
-  display: flex; /* <-- La clave: pone la imagen y el contenido en horizontal */
+.viceunf-recent-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Aumentamos un poco el espacio entre items */
+}
+
+.viceunf-recent-post-item {
+  display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem !important; /* Menos margen en el sidebar */
-  padding: 0; /* Quitamos padding si lo hubiera */
+  gap: 1.5rem; /* Espacio entre imagen y título */
 }
 
-/* Ajustamos el tamaño de la imagen para el sidebar */
-.widget .dt_post_item--widget .image {
+/* --- NUEVO: Estilos para los items pares (alternados) --- */
+.viceunf-recent-post-item.item-par {
+  flex-direction: row-reverse; /* <-- La magia sucede aquí */
+}
+
+.viceunf-recent-post-thumbnail {
   flex-shrink: 0;
-  width: 70px;
-  height: 70px; /* Hacemos la imagen cuadrada */
+  width: 65px;
+  height: 65px;
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para la imagen */
 }
 
-/* Ajustamos los estilos del contenido para el espacio reducido */
-.widget .dt_post_item--widget .inner {
-  padding: 0;
+.viceunf-recent-post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.widget .dt_post_item--widget .title {
-  font-size: 1.6rem; /* Título un poco más pequeño */
-  line-height: 1.3;
-  margin-bottom: 0.5rem;
+.viceunf-recent-post-thumbnail:hover img {
+  transform: scale(1.1);
 }
 
-.widget .dt_post_item--widget .meta {
-  font-size: 1.3rem; /* Metadatos más pequeños */
+.viceunf-recent-post-content {
+  flex-grow: 1;
 }
 
-/* Ocultamos la categoría en el sidebar para un look más limpio */
-.widget .dt_post_item--widget .catetag,
-.widget .dt_post_item--widget .content {
-  display: none;
+/* --- NUEVO: Alineación de texto para los items pares --- */
+.viceunf-recent-post-item.item-par .viceunf-recent-post-content {
+  text-align: right; /* Alineamos el texto a la derecha */
+}
+
+.viceunf-recent-post-title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.viceunf-recent-post-title a {
+  text-decoration: none;
+  color: var(--dt-sec-color);
+}
+
+.viceunf-recent-post-title a:hover {
+  color: var(--dt-pri-color);
 }
