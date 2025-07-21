@@ -5,8 +5,9 @@
  * The template for displaying archive pages for the ViceUnf theme.
  * =================================================================
  *
- * This template displays posts in a vertical list format. Each post
- * is styled as a card, respecting the sidebar layout.
+ * This template displays posts in a responsive grid format.
+ * - 3 columns if no sidebar is active.
+ * - 2 columns if a sidebar is active.
  *
  * @package ViceUnf
  */
@@ -19,9 +20,14 @@ get_header();
     <div class="dt-row dt-g-5">
 
       <?php
-      // Se define la clase de la columna principal. Si el sidebar está activo,
-      // el contenido principal ocupa 8 de 12 columnas. Si no, ocupa las 12.
-      $main_column_class = !is_active_sidebar('softme-sidebar-primary') ? 'dt-col-lg-12' : 'dt-col-lg-8';
+      // Lógica para determinar el ancho de las columnas.
+      $is_sidebar_active = is_active_sidebar('softme-sidebar-primary');
+      $main_column_class = !$is_sidebar_active ? 'dt-col-lg-12' : 'dt-col-lg-8';
+
+      // --- NUEVA LÓGICA PARA LA CUADRÍCULA ---
+      // Si hay sidebar (2 columnas), cada post ocupa 6/12.
+      // Si no hay sidebar (3 columnas), cada post ocupa 4/12.
+      $post_column_class = !$is_sidebar_active ? 'dt-col-lg-4 dt-col-sm-6 dt-col-12' : 'dt-col-lg-6 dt-col-md-6 dt-col-12';
       ?>
 
       <div id="dt-main-content" class="<?php echo esc_attr($main_column_class); ?> dt-col-md-12 dt-col-12 wow fadeInUp">
@@ -30,83 +36,44 @@ get_header();
 
           <div class="page-header dt-mb-4">
             <?php
-            // Muestra el título y la descripción del archivo (ej. "Categoría: Noticias")
             the_archive_title('<h1 class="page-title">', '</h1>');
             the_archive_description('<div class="archive-description">', '</div>');
             ?>
-          </div><?php
-                // Inicia el bucle de WordPress para mostrar cada post en una lista.
-                while (have_posts()) :
-                  the_post();
-                  // Definimos las clases de diseño para cada tarjeta de post, basadas en tu ejemplo.
-                  $post_classes = ['dt_post_item', 'dt_posts--one', 'dt-mb-4'];
+          </div>
+
+          <?php // --- NUEVO: Contenedor de la cuadrícula --- 
+          ?>
+          <div class="dt-row dt-g-4">
+            <?php
+            // Inicia el bucle.
+            while (have_posts()) :
+              the_post();
+            ?>
+              <?php // --- NUEVO: Envolvemos cada post en su propia columna --- 
+              ?>
+              <div class="<?php echo esc_attr($post_column_class); ?>">
+                <?php
+                // Llamamos a la plantilla de parte, que no necesita cambios.
+                get_template_part('template-parts/content', 'summary');
                 ?>
-            <article id="post-<?php the_ID(); ?>" <?php post_class($post_classes); ?>>
-
-              <?php if (has_post_thumbnail()) : ?>
-
-                <a class="image">
-
-                  <?php
-                    // Usamos 'large' para una buena calidad de imagen.
-                    // Esta función genera srcset para imágenes adaptables, mejorando el rendimiento.
-                    the_post_thumbnail('large', ['alt' => the_title_attribute('echo=0')]);
-                  ?>
-                </a>
-              <?php endif; ?>
-              <div class="inner">
-                <div class="meta">
-                  <ul>
-                    <li>
-                      <div class="date">
-                        <i class="far fa-calendar-alt dt-mr-2" aria-hidden="true"></i>
-                        <?php echo get_the_date(); ?>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="catetag">
-                  <i class="fas fa-folder dt-mr-1" aria-hidden="true"></i>
-                  <?php the_category(', '); ?>
-                </div>
-
-                <h4 class="title">
-                  <a href="<?php the_permalink(); ?>" rel="bookmark">
-                    <?php the_title(); ?>
-                  </a>
-                </h4>
-
-                <div class="content">
-                  <?php
-                  // Extracto controlado a 35 palabras. Puedes ajustar este número.
-                  echo '<p>' . wp_kses_post(wp_trim_words(get_the_content(), 35, '...')) . '</p>';
-                  ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link">Leer más</a>
-                </div>
               </div>
-            </article>
-
-        <?php
-                endwhile; // Fin del bucle.
-
-                // Muestra la paginación.
+            <?php
+            endwhile; // Fin del bucle.
+            ?>
+          </div><?php
+                // La paginación va fuera de la fila de la cuadrícula.
                 the_posts_pagination(array(
                   'prev_text' => '<i class="fa fa-angle-double-left"></i>',
                   'next_text' => '<i class="fa fa-angle-double-right"></i>',
-                  'screen_reader_text' => ' ', // Oculta el texto "Navegación de entradas" si no lo deseas.
+                  'screen_reader_text' => ' ',
                 ));
 
               else :
-                // Si no hay posts, muestra la plantilla 'content-none.php'
                 get_template_part('template-parts/content', 'none');
-
               endif;
-        ?>
+                ?>
 
-      </div><?php
-            // Llama al archivo sidebar.php para mostrar la barra lateral.
-            get_sidebar();
-            ?>
+      </div><?php get_sidebar(); ?>
 
     </div>
   </div>
