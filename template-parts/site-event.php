@@ -7,6 +7,7 @@
  * - Dinamizada para usar la página de Opciones del Tema.
  * - Muestra los eventos más recientes (pasados y futuros).
  * - Mantiene la lógica de coloreado para fechas de eventos pasados.
+ * - CORREGIDO: Todas las fechas y horas respetan la zona horaria de WordPress.
  *
  * @package ViceUnf
  */
@@ -42,13 +43,12 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                         </div>
 
                         <?php
-                        // Mantenemos la consulta original que ordena del más reciente al más antiguo.
                         $args = array(
                             'post_type'      => 'evento',
-                            'posts_per_page' => 3,
+                            'posts_per_page' => 4,
                             'meta_key'       => '_evento_date_key',
                             'orderby'        => 'meta_value_date',
-                            'order'          => 'DESC', // <-- Correcto: del más nuevo al más viejo.
+                            'order'          => 'DESC',
                         );
                         $eventos_query = new WP_Query($args);
 
@@ -61,11 +61,11 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                                 $event_end      = get_post_meta(get_the_ID(), '_evento_end_time_key', true);
                                 $event_address  = get_post_meta(get_the_ID(), '_evento_address_key', true);
 
-                                // Mantenemos la lógica para colorear eventos pasados.
+                                // Lógica para colorear eventos pasados
                                 $event_timestamp = strtotime($event_date_raw);
                                 $date_color_class = ($event_timestamp < $today_timestamp) ? 'past-event' : 'future-event';
 
-                                // Mantenemos la excelente lógica de zona horaria.
+                                // Lógica de zona horaria para el DÍA y MES
                                 $datetime_object = new DateTime($event_date_raw, wp_timezone());
                                 $corrected_timestamp = $datetime_object->getTimestamp();
                                 $event_day = wp_date('d', $corrected_timestamp);
@@ -77,7 +77,6 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                                             <a href="<?php the_permalink(); ?>">
                                                 <?php
                                                 if (has_post_thumbnail()) {
-                                                    // MEJORA DE RENDIMIENTO: Usamos wp_get_attachment_image para srcset.
                                                     echo wp_get_attachment_image(get_post_thumbnail_id(), 'large');
                                                 }
                                                 ?>
@@ -93,8 +92,19 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                                     <div class="dt_event_content">
                                         <h4 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                         <div class="meta">
-                                            <?php if ($event_start && $event_end) : ?>
-                                                <span class="time"><?php echo esc_html(wp_date('g:i a', strtotime($event_start))); ?> - <?php echo esc_html(wp_date('g:i a', strtotime($event_end))); ?></span>
+                                            <?php if ($event_start && $event_end) :
+                                                // --- CORRECCIÓN DE ZONA HORARIA PARA LA HORA ---
+                                                // Combinamos la fecha y la hora para darle a PHP el contexto completo.
+                                                $start_datetime_str = $event_date_raw . ' ' . $event_start;
+                                                $end_datetime_str   = $event_date_raw . ' ' . $event_end;
+
+                                                // Creamos los objetos DateTime, especificando la zona horaria de WordPress.
+                                                $start_datetime_obj = new DateTime($start_datetime_str, wp_timezone());
+                                                $end_datetime_obj   = new DateTime($end_datetime_str, wp_timezone());
+
+                                                // Usamos wp_date con los timestamps correctos.
+                                            ?>
+                                                <span class="time"><?php echo esc_html(wp_date('g:i a', $start_datetime_obj->getTimestamp())); ?> - <?php echo esc_html(wp_date('g:i a', $end_datetime_obj->getTimestamp())); ?></span>
                                                 &nbsp;&nbsp;-&nbsp;&nbsp;
                                             <?php endif; ?>
                                             <?php if ($event_address) : ?>
@@ -120,7 +130,6 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                                 <span class="dt-btn-text">Ver todos los eventos</span>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>
