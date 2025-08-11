@@ -71,7 +71,7 @@ function viceunf_enqueue_admin_assets($hook)
         ]);
     }
 
-    // --- NUEVO: Carga específica para la PÁGINA DE OPCIONES ---
+    // Carga específica para la PÁGINA DE OPCIONES ---
     // Estos scripts solo son necesarios para el repetidor y el selector de imágenes.
     if ($is_options_page) {
 

@@ -23,9 +23,6 @@ add_action('admin_menu', function () {
 });
 
 // Carga los archivos con responsabilidades separadas.
-// --- CORRECCIÓN ---
-// Usamos get_stylesheet_directory() para asegurar que la ruta sea la del tema hijo (viceunf),
-// que es donde hemos creado los nuevos archivos.
 $theme_functions_path = get_stylesheet_directory() . '/theme-functions/';
 
 // Registra todas las secciones y campos.

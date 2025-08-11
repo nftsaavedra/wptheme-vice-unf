@@ -3,8 +3,6 @@
  * Gestor de la Página de Opciones del Tema ViceUnf (Vanilla JS)
  * =================================================================
  * Gestiona la funcionalidad del selector de imágenes y del campo
- * repetidor para la sección "Sobre Nosotros".
- * Cero dependencias de jQuery.
  * @version 1.1.0
  */
 document.addEventListener("DOMContentLoaded", () => {

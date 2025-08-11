@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Registra los Custom Post Types: Slider y Evento.
+ * Custom Post Types: Slider y Evento.
  */
 function viceunf_register_post_types() {
     // --- CPT: Slider ---

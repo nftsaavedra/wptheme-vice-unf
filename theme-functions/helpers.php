@@ -17,8 +17,6 @@ function get_autoplay_embed_url($url)
     return $embed_url;
 }
 
-
-
 /**
  * Expone los campos personalizados del Slider a la API REST de WordPress.
  */
@@ -82,7 +80,7 @@ function viceunf_get_slider_btn1_final_href($object, $field_name, $request)
 
 /**
  * =================================================================
- * SOBREESCRIBIR LA FUNCIÓN DE BREADCRUMBS DEL TEMA PADRE
+ * SOBRE ESCRIBIR LA FUNCIÓN DE BREADCRUMBS DEL TEMA PADRE
  * =================================================================
  * 
  */

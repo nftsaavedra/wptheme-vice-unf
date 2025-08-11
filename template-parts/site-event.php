@@ -6,8 +6,8 @@
  * =================================================================
  * - Dinamizada para usar la página de Opciones del Tema.
  * - Muestra los eventos más recientes (pasados y futuros).
- * - Mantiene la lógica de coloreado para fechas de eventos pasados.
- * - CORREGIDO: Todas las fechas y horas respetan la zona horaria de WordPress.
+ * - Lógica de coloreado para fechas de eventos pasados.
+ * - Todas las fechas y horas respetan la zona horaria de WordPress.
  *
  * @package ViceUnf
  */
