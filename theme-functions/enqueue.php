@@ -20,7 +20,7 @@ function viceunf_enqueue_frontend_assets()
         'viceunf-fontawesome',
         get_stylesheet_directory_uri() . '/assets/css/all.min.css',
         array(),
-        '6.7.2' // Usamos la versión que especificaste.
+        '6.7.2'
     );
 
     // Carga la hoja de estilos principal del tema padre.
@@ -37,13 +37,9 @@ add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets', 100);
  * =================================================================
  * 2. Carga Centralizada de Estilos y Scripts para el Panel de Administración
  * =================================================================
- * Esta es la ÚNICA función que gestiona los assets del admin, evitando duplicados.
- *
- * @param string $hook El identificador de la página de administración actual.
  */
 function viceunf_enqueue_admin_assets($hook)
 {
-
     // --- Carga Global en el Admin: Font Awesome ---
     wp_enqueue_style(
         'viceunf-fontawesome-admin',
@@ -52,47 +48,65 @@ function viceunf_enqueue_admin_assets($hook)
         '6.7.2'
     );
 
-    // --- Carga Condicional para las páginas que usan nuestros componentes ---
+    // --- Definición de Páginas Relevantes ---
+    $screen = get_current_screen();
     $is_options_page = ('toplevel_page_viceunf_theme_options' == $hook);
-    $is_slider_page = (('post.php' == $hook || 'post-new.php' == $hook) && 'slider' === get_post_type());
+    $is_slider_page = ($screen && 'slider' === $screen->post_type);
+    $is_reglamento_page = ($screen && 'reglamento' === $screen->post_type);
+    $is_reglamento_category_page = ($screen && 'edit-categoria_reglamento' === $screen->id && 'term' === $screen->base);
 
+    // --- Carga para Sliders y Página de Opciones ---
     if ($is_options_page || $is_slider_page) {
-
-        // Estilos para el componente de búsqueda y la página de opciones.
         wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
-
-        // Script de búsqueda AJAX (se carga en ambas páginas).
         wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', [], true);
-
-        // Pasamos los datos necesarios al script (solo se necesita una vez).
         wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', [
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('slider_metabox_nonce_action')
         ]);
     }
 
-    // Carga específica para la PÁGINA DE OPCIONES ---
-    // Estos scripts solo son necesarios para el repetidor y el selector de imágenes.
+    // --- Carga específica para la Página de Opciones ---
     if ($is_options_page) {
-
-        // 1. Encolamos los scripts de medios de WordPress, necesarios para el selector de imágenes.
         wp_enqueue_media();
-
-        // 2. Encolamos nuestro nuevo gestor de opciones (sin jQuery).
-        //    Depende de 'viceunf-admin-search' porque necesita que la función initializeAjaxSearch() exista.
         wp_enqueue_script(
             'viceunf-admin-options-manager',
             get_stylesheet_directory_uri() . '/assets/js/admin-options-manager.js',
-            ['viceunf-admin-search'], // Dependencia
-            '1.0.1', // Incrementamos la versión
-            true // Cargar en el footer
+            ['viceunf-admin-search'],
+            '1.0.1',
+            true
         );
     }
 
-
-    // Si estamos en la página de sliders, cargamos sus estilos adicionales.
-    if ($is_slider_page) {
+    // --- Carga de Estilos Generales para nuestros Meta-Boxes ---
+    if ($is_slider_page || $is_reglamento_page) {
         wp_enqueue_style('viceunf-admin-styles', get_stylesheet_directory_uri() . '/assets/css/admin-style.css');
     }
+
+    // --- INICIO: LÓGICA DE CARGA PARA REGLAMENTOS Y CATEGORÍAS ---
+
+    // Si estamos en la página de Reglamentos O en la de sus categorías...
+    if ($is_reglamento_page || $is_reglamento_category_page) {
+
+        // Preparamos las dependencias para nuestro script principal.
+        $main_script_dependencies = [];
+
+        // Si estamos específicamente en la página de categorías...
+        if ($is_reglamento_category_page) {
+            // ...cargamos los estilos del selector de color.
+            wp_enqueue_style('wp-color-picker');
+            // ...y añadimos el script de 'wp-color-picker' como una dependencia.
+            $main_script_dependencies[] = 'wp-color-picker';
+        }
+
+        // Cargamos nuestro script principal del admin con sus dependencias correspondientes.
+        wp_enqueue_script(
+            'viceunf-admin-main',
+            get_stylesheet_directory_uri() . '/assets/js/admin-main.js',
+            $main_script_dependencies,
+            '1.0.1', // Versión incrementada
+            true
+        );
+    }
+    // --- FIN: LÓGICA DE CARGA PARA REGLAMENTOS ---
 }
 add_action('admin_enqueue_scripts', 'viceunf_enqueue_admin_assets');

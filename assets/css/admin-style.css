@@ -26,7 +26,7 @@
   width: 100%;
   max-width: 900px;
 }
-.campo-condicional {
+.conditional-field {
   display: none;
   margin-top: 10px;
   padding-left: 20px;
@@ -58,3 +58,86 @@
   color: #555;
   display: block;
 }
+
+/* --- INICIO: Estilos para Meta-Boxes de ViceUnf --- */
+
+.evento-metabox-field,
+.reglamento-field,
+.socio-field p {
+  /* Target the P tag for Socio for consistency */
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.evento-metabox-field:last-child,
+.reglamento-field:last-child,
+.socio-field:last-child {
+  border-bottom: none;
+}
+
+.evento-metabox-field label,
+.reglamento-field > label, /* Target direct child label */
+.socio-field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.evento-metabox-field input,
+.socio-field input[type="url"] {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Estilos específicos para el Meta-Box de Reglamentos */
+.reglamento-section-wrapper {
+  border-left: 3px solid #cae8ff;
+  padding: 1px 15px;
+  margin-top: 15px;
+}
+
+.reglamento-section-wrapper .file-info {
+  margin-top: 15px;
+  font-style: italic;
+  color: #555;
+}
+
+.reglamento-section-wrapper input[type="url"] {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Estilos para convertir Radio Buttons en Pestañas/Botones */
+.radio-buttons-as-tabs {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0 !important; /* Override general field style */
+  margin-bottom: 20px !important;
+}
+.radio-buttons-as-tabs input[type="radio"] {
+  display: none; /* Oculta el radio button real */
+}
+.radio-buttons-as-tabs label {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin-bottom: -1px;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  background: #f0f0f0;
+  color: #555;
+}
+.radio-buttons-as-tabs input[type="radio"]:checked + label {
+  background: #fff;
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Estilos para el Selector de Color en Taxonomías */
+.form-field.term-color-wrap .wp-picker-container {
+  margin-top: 5px;
+}
+
+/* --- FIN: Estilos para Meta-Boxes de ViceUnf --- */

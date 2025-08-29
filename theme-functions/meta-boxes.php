@@ -13,7 +13,6 @@ function viceunf_slider_metabox_html($post)
 {
     wp_nonce_field('slider_metabox_nonce_action', 'slider_metabox_nonce_name');
 
-    // Obtener datos guardados
     $subtitle = get_post_meta($post->ID, '_slider_subtitle_key', true);
     $description = get_post_meta($post->ID, '_slider_description_key', true);
     $text_align = get_post_meta($post->ID, '_slider_text_alignment_key', true);
@@ -49,12 +48,12 @@ function viceunf_slider_metabox_html($post)
             </select>
         </div>
 
-        <div id="campo_url" class="slider-field" style="<?php echo ($link_type === 'url') ? 'display:block;' : 'display:none;'; ?>">
+        <div id="campo_url" class="slider-field conditional-field" style="display:none;">
             <label for="slider_link_url">URL Personalizada</label>
             <input type="url" id="slider_link_url" name="slider_link_url" placeholder="https://ejemplo.com" value="<?php echo esc_url($link_url); ?>">
         </div>
 
-        <div id="campo_contenido" class="slider-field" style="<?php echo ($link_type === 'content') ? 'display:block;' : 'display:none;'; ?>">
+        <div id="campo_contenido" class="slider-field conditional-field" style="display:none;">
             <label>Buscar Entrada o Página</label>
             <div class="ajax-search-wrapper" data-action="viceunf_search_content">
                 <div class="selected-item-view <?php echo ($link_content_id ? 'active' : ''); ?>">
@@ -96,7 +95,6 @@ function viceunf_save_slider_data($post_id)
 }
 
 // --- META BOX PARA EVENTOS ---
-
 add_action('add_meta_boxes', 'viceunf_add_evento_meta_box');
 function viceunf_add_evento_meta_box()
 {
@@ -111,26 +109,10 @@ function viceunf_evento_metabox_html($post)
     $event_end = get_post_meta($post->ID, '_evento_end_time_key', true);
     $event_address = get_post_meta($post->ID, '_evento_address_key', true);
 ?>
-    <style>
-        .evento-metabox-field {
-            margin-bottom: 15px;
-        }
-
-        .evento-metabox-field label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .evento-metabox-field input {
-            width: 100%;
-            max-width: 300px;
-        }
-    </style>
     <div class="evento-metabox-field"><label for="evento_date">Fecha del Evento (Requerido)</label><input type="date" id="evento_date" name="evento_date" value="<?php echo esc_attr($event_date); ?>" required></div>
     <div class="evento-metabox-field"><label for="evento_start_time">Hora de Inicio (ej. 7:00)</label><input type="time" id="evento_start_time" name="evento_start_time" value="<?php echo esc_attr($event_start); ?>"></div>
     <div class="evento-metabox-field"><label for="evento_end_time">Hora de Fin (ej. 13:00)</label><input type="time" id="evento_end_time" name="evento_end_time" value="<?php echo esc_attr($event_end); ?>"></div>
-    <div class="evento-metabox-field"><label for="evento_address">Lugar / Dirección del Evento</label><input type="text" id="evento_address" name="evento_address" value="<?php echo esc_attr($event_address); ?>" style="max-width:100%"></div>
+    <div class="evento-metabox-field"><label for="evento_address">Lugar / Dirección del Evento</label><input type="text" id="evento_address" name="evento_address" value="<?php echo esc_attr($event_address); ?>"></div>
 <?php
 }
 
@@ -146,20 +128,11 @@ function viceunf_save_evento_data($post_id)
     }
 }
 
-
 // --- META BOX PARA SOCIOS ---
-
 add_action('add_meta_boxes', 'viceunf_add_socio_meta_box');
 function viceunf_add_socio_meta_box()
 {
-    add_meta_box(
-        'socio_details_metabox',
-        'Detalles del Socio',
-        'viceunf_socio_metabox_html',
-        'socio', // Aplicar al CPT 'socio'
-        'normal',
-        'high'
-    );
+    add_meta_box('socio_details_metabox', 'Detalles del Socio', 'viceunf_socio_metabox_html', 'socio', 'normal', 'high');
 }
 
 function viceunf_socio_metabox_html($post)
@@ -167,9 +140,9 @@ function viceunf_socio_metabox_html($post)
     wp_nonce_field('socio_metabox_nonce_action', 'socio_metabox_nonce_name');
     $socio_url = get_post_meta($post->ID, '_socio_url_key', true);
 ?>
-    <p>
-        <label for="socio_url" style="font-weight:bold; display:block; margin-bottom:5px;">Enlace Web del Socio (Opcional)</label>
-        <input type="url" id="socio_url" name="socio_url" value="<?php echo esc_url($socio_url); ?>" style="width:100%;">
+    <p class="socio-field">
+        <label for="socio_url">Enlace Web del Socio (Opcional)</label>
+        <input type="url" id="socio_url" name="socio_url" value="<?php echo esc_url($socio_url); ?>">
     </p>
 <?php
 }
@@ -178,8 +151,115 @@ add_action('save_post', 'viceunf_save_socio_data');
 function viceunf_save_socio_data($post_id)
 {
     if (!isset($_POST['socio_metabox_nonce_name']) || !wp_verify_nonce($_POST['socio_metabox_nonce_name'], 'socio_metabox_nonce_action') || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $post_id) || (isset($_POST['post_type']) && 'socio' !== $_POST['post_type'])) return;
-
     if (isset($_POST['socio_url'])) {
         update_post_meta($post_id, '_socio_url_key', esc_url_raw($_POST['socio_url']));
     }
 }
+
+// --- INICIO: REGLAMENTOS Y CATEGORÍAS ---
+// 1. Meta Box para el CPT 'reglamento'
+add_action('add_meta_boxes', 'viceunf_add_reglamento_meta_box');
+function viceunf_add_reglamento_meta_box()
+{
+    add_meta_box('reglamento_file_metabox', 'Archivo del Reglamento (Obligatorio)', 'viceunf_reglamento_metabox_html', 'reglamento', 'normal', 'high');
+}
+
+function viceunf_reglamento_metabox_html($post)
+{
+    wp_nonce_field('reglamento_metabox_nonce_action', 'reglamento_metabox_nonce_name');
+    $source_type  = get_post_meta($post->ID, '_reglamento_source_type_key', true) ?: 'upload'; // 'upload' por defecto
+    $file_id      = get_post_meta($post->ID, '_reglamento_file_id_key', true);
+    $external_url = get_post_meta($post->ID, '_reglamento_external_url_key', true);
+    $file_url     = wp_get_attachment_url($file_id);
+    $file_name    = $file_url ? basename($file_url) : '';
+?>
+    <div id="reglamento-source-selector" class="viceunf-metabox-container">
+        <div class="reglamento-field radio-buttons-as-tabs">
+            <input type="radio" id="source_upload" name="reglamento_source_type" value="upload" <?php checked($source_type, 'upload'); ?>>
+            <label for="source_upload">Subir Archivo</label>
+            <input type="radio" id="source_external" name="reglamento_source_type" value="external" <?php checked($source_type, 'external'); ?>>
+            <label for="source_external">Enlace Externo</label>
+        </div>
+        <div id="reglamento-upload-section" class="reglamento-section-wrapper conditional-field">
+            <p>Seleccione el archivo (PDF, Word, etc.) correspondiente a este reglamento.</p>
+            <input type="hidden" id="reglamento_file_id" name="reglamento_file_id" value="<?php echo esc_attr($file_id); ?>" required>
+            <button type="button" class="button" id="upload_reglamento_button">Seleccionar o Subir Archivo</button>
+            <button type="button" class="button button-secondary" id="remove_reglamento_button">Quitar Archivo</button>
+            <div class="file-info">
+                <?php if ($file_id && $file_url) : ?>
+                    Archivo actual: <a href="<?php echo esc_url($file_url); ?>" target="_blank"><?php echo esc_html($file_name); ?></a>
+                <?php else : ?>
+                    No se ha seleccionado ningún archivo.
+                <?php endif; ?>
+            </div>
+        </div>
+        <div id="reglamento-external-section" class="reglamento-section-wrapper conditional-field">
+            <p>Pegue la URL completa del documento externo (ej. un PDF en otro sitio web o en Google Drive).</p>
+            <label for="reglamento_external_url"><strong>URL del Archivo:</strong></label><br>
+            <input type="url" id="reglamento_external_url" name="reglamento_external_url" value="<?php echo esc_url($external_url); ?>" placeholder="https://ejemplo.com/documento.pdf" required>
+        </div>
+    </div>
+<?php
+}
+
+add_action('save_post_reglamento', 'viceunf_save_reglamento_data');
+function viceunf_save_reglamento_data($post_id)
+{
+    if (!isset($_POST['reglamento_metabox_nonce_name']) || !wp_verify_nonce($_POST['reglamento_metabox_nonce_name'], 'reglamento_metabox_nonce_action')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+    if (isset($_POST['reglamento_source_type'])) {
+        $source_type = sanitize_text_field($_POST['reglamento_source_type']);
+        update_post_meta($post_id, '_reglamento_source_type_key', $source_type);
+        if ($source_type === 'upload') {
+            update_post_meta($post_id, '_reglamento_file_id_key', sanitize_text_field($_POST['reglamento_file_id'] ?? ''));
+            delete_post_meta($post_id, '_reglamento_external_url_key');
+        } elseif ($source_type === 'external') {
+            update_post_meta($post_id, '_reglamento_external_url_key', esc_url_raw($_POST['reglamento_external_url'] ?? ''));
+            delete_post_meta($post_id, '_reglamento_file_id_key');
+        }
+    }
+}
+
+// 2. Campos para la Taxonomía 'categoria_reglamento'
+$taxonomy_slug = 'categoria_reglamento';
+
+add_action("{$taxonomy_slug}_add_form_fields", 'viceunf_add_category_meta_fields');
+function viceunf_add_category_meta_fields()
+{
+?>
+    <div class="form-field term-color-wrap">
+        <label for="term_meta_color">Color de la Categoría</label>
+        <input type="text" name="term_meta[color]" id="term_meta_color" class="viceunf-color-picker" value="#CCCCCC">
+        <p class="description">Selecciona un color para representar esta categoría.</p>
+    </div>
+<?php
+}
+
+add_action("{$taxonomy_slug}_edit_form_fields", 'viceunf_edit_category_meta_fields');
+function viceunf_edit_category_meta_fields($term)
+{
+    $color = get_term_meta($term->term_id, 'color', true) ?: '#CCCCCC';
+?>
+    <tr class="form-field term-color-wrap">
+        <th scope="row" valign="top"><label for="term_meta_color">Color de la Categoría</label></th>
+        <td>
+            <input type="text" name="term_meta[color]" id="term_meta_color" class="viceunf-color-picker" value="<?php echo esc_attr($color); ?>">
+            <p class="description">Selecciona un color para representar esta categoría.</p>
+        </td>
+    </tr>
+<?php
+}
+
+add_action("edited_{$taxonomy_slug}", 'viceunf_save_category_meta');
+add_action("create_{$taxonomy_slug}", 'viceunf_save_category_meta');
+function viceunf_save_category_meta($term_id)
+{
+    if (isset($_POST['term_meta']) && isset($_POST['term_meta']['color'])) {
+        $color = sanitize_hex_color($_POST['term_meta']['color']);
+        if ($color) {
+            update_term_meta($term_id, 'color', $color);
+        }
+    }
+}
+// --- FIN: REGLAMENTOS Y CATEGORÍAS ---
