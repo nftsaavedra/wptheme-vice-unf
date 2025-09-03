@@ -41,3 +41,39 @@ function viceunf_register_sidebars()
     ));
 }
 add_action('widgets_init', 'viceunf_register_sidebars');
+
+// --- INICIO: REGISTRO DE BLOQUES PERSONALIZADOS ---
+/**
+ * Crea una categoría personalizada para los bloques del tema.
+ */
+function viceunf_register_block_category($categories)
+{
+    $categories[] = array(
+        'slug'  => 'viceunf-blocks',
+        'title' => __('ViceUnf Blocks', 'viceunf')
+    );
+    return $categories;
+}
+add_filter('block_categories_all', 'viceunf_register_block_category');
+
+/**
+ * Registra los bloques personalizados del tema.
+ */
+function viceunf_register_blocks()
+{
+    $blocks_dir = get_stylesheet_directory() . '/blocks/';
+    if (is_dir($blocks_dir)) {
+        $block_folders = scandir($blocks_dir);
+        foreach ($block_folders as $folder) {
+            if ($folder === '.' || $folder === '..') {
+                continue;
+            }
+            $block_path = $blocks_dir . $folder;
+            if (is_dir($block_path)) {
+                register_block_type($block_path);
+            }
+        }
+    }
+}
+add_action('init', 'viceunf_register_blocks');
+// --- FIN: REGISTRO DE BLOQUES PERSONALIZADOS ---
