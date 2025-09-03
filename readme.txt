@@ -20,5 +20,5 @@ ViceUnf es un tema de WordPress ligero, profesional y flexible, personalizado y 
 
 == Derechos de autor ==
 
-Tema WordPress ViceUnf, Copyright 2023, Vice Unf
+Tema WordPress ViceUnf, Copyright 2025, Vice Unf
 ViceUnf se distribuye bajo los términos de la GNU GPL
