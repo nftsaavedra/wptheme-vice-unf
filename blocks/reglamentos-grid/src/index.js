@@ -3,7 +3,7 @@ import { useSelect } from '@wordpress/data';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, CheckboxControl, Spinner } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import metadata from './block.json';
+import metadata from '../block.json';
 
 /**
  * The edit function describes the structure of your block in the context of the

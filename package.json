@@ -15,10 +15,13 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
     "build:css": "postcss src/main.css -o style.css"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@wordpress/scripts": "^30.23.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0"
   }
