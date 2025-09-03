@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/reglamentos-grid",
+  "title": "Grid de Reglamentos",
+  "category": "viceunf-blocks",
+  "icon": "media-document",
+  "description": "Muestra un grid interactivo de categorías de reglamentos con un modal para ver los documentos.",
+  "attributes": {
+    "selectedCategories": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

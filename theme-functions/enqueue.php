@@ -11,11 +11,9 @@ if (!defined('ABSPATH')) {
  */
 function viceunf_enqueue_frontend_assets()
 {
-    // Primero, con prioridad alta (100), nos aseguramos de que el estilo del tema padre sea eliminado.
     wp_dequeue_style('font-awesome');
     wp_deregister_style('font-awesome');
 
-    // Ahora, cargamos NUESTRA versión local desde el tema hijo.
     wp_enqueue_style(
         'viceunf-fontawesome',
         get_stylesheet_directory_uri() . '/assets/css/all.min.css',
@@ -23,7 +21,6 @@ function viceunf_enqueue_frontend_assets()
         '6.7.2'
     );
 
-    // Carga la hoja de estilos principal del tema padre.
     wp_enqueue_style(
         'viceunf-parent-theme-style',
         get_template_directory_uri() . '/style.css',
@@ -40,7 +37,7 @@ add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets', 100);
  */
 function viceunf_enqueue_admin_assets($hook)
 {
-    // --- Carga Global en el Admin: Font Awesome ---
+    // --- Carga Global ---
     wp_enqueue_style(
         'viceunf-fontawesome-admin',
         get_stylesheet_directory_uri() . '/assets/css/all.min.css',
@@ -53,7 +50,9 @@ function viceunf_enqueue_admin_assets($hook)
     $is_options_page = ('toplevel_page_viceunf_theme_options' == $hook);
     $is_slider_page = ($screen && 'slider' === $screen->post_type);
     $is_reglamento_page = ($screen && 'reglamento' === $screen->post_type);
-    $is_reglamento_category_page = ($screen && 'edit-categoria_reglamento' === $screen->id && 'term' === $screen->base);
+    // --- CORRECCIÓN ---
+    // Esta es la forma más robusta de detectar tanto la página de "Añadir" como la de "Editar" categoría.
+    $is_reglamento_category_page = ($screen && 'categoria_reglamento' === $screen->taxonomy);
 
     // --- Carga para Sliders y Página de Opciones ---
     if ($is_options_page || $is_slider_page) {
@@ -65,7 +64,7 @@ function viceunf_enqueue_admin_assets($hook)
         ]);
     }
 
-    // --- Carga específica para la Página de Opciones ---
+    // --- Carga específica para Página de Opciones ---
     if ($is_options_page) {
         wp_enqueue_media();
         wp_enqueue_script(
@@ -78,32 +77,25 @@ function viceunf_enqueue_admin_assets($hook)
     }
 
     // --- Carga de Estilos Generales para nuestros Meta-Boxes ---
-    if ($is_slider_page || $is_reglamento_page) {
+    if ($is_slider_page || $is_reglamento_page || $is_reglamento_category_page) {
         wp_enqueue_style('viceunf-admin-styles', get_stylesheet_directory_uri() . '/assets/css/admin-style.css');
     }
 
     // --- INICIO: LÓGICA DE CARGA PARA REGLAMENTOS Y CATEGORÍAS ---
-
-    // Si estamos en la página de Reglamentos O en la de sus categorías...
     if ($is_reglamento_page || $is_reglamento_category_page) {
 
-        // Preparamos las dependencias para nuestro script principal.
         $main_script_dependencies = [];
 
-        // Si estamos específicamente en la página de categorías...
         if ($is_reglamento_category_page) {
-            // ...cargamos los estilos del selector de color.
             wp_enqueue_style('wp-color-picker');
-            // ...y añadimos el script de 'wp-color-picker' como una dependencia.
             $main_script_dependencies[] = 'wp-color-picker';
         }
 
-        // Cargamos nuestro script principal del admin con sus dependencias correspondientes.
         wp_enqueue_script(
             'viceunf-admin-main',
             get_stylesheet_directory_uri() . '/assets/js/admin-main.js',
             $main_script_dependencies,
-            '1.0.1', // Versión incrementada
+            '1.0.2',
             true
         );
     }
