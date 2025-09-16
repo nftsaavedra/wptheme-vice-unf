@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
-    "@wordpress/scripts": "^30.23.0",
+    "@wordpress/scripts": "^19.2.4",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0"
   }
