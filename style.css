@@ -2583,3 +2583,71 @@ table.wc-block-cart-items
   flex-grow: 1;
   font-weight: 500;
 }
+/* ==========================================================================
+   Estilos Combinados para la Plantilla Single de Reglamentos
+   ========================================================================== */
+
+/* 1. Estilo para el Visor de PDF */
+.pdf-preview-wrapper {
+    margin-top: 2em;
+    margin-bottom: 2.5em;
+    text-align: center;
+}
+
+.pdf-preview-iframe {
+  width: 100%;
+  height: 75vh;
+  border: 1px solid var(--color-border, #ddd);
+  background-color: var(--color-light, #f0f0f0);
+  border-radius: var(--border-radius, 5px);
+  margin-bottom: 1.5em;
+}
+
+/* 2. Estilo para la Tarjeta de Descarga (el que te gustó) */
+.download-box-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5em;
+  background-color: var(--color-light-gray, #f8f9fa);
+  border: 1px solid var(--color-border, #e9ecef);
+  border-left: 5px solid var(--color-primary, #007bff);
+  padding: 1.5em;
+  border-radius: var(--border-radius, 5px);
+}
+
+.download-icon .fas {
+  font-size: 2.5rem;
+  color: var(--color-primary, #007bff);
+}
+
+.download-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.download-info h4 {
+  margin: 0 0 0.25em 0;
+}
+
+.download-info p {
+  margin: 0;
+  color: var(--color-text-muted, #6c757d);
+  font-size: 0.9em;
+}
+
+.button-download {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  background-color: var(--color-primary, #007bff);
+  color: var(--color-white, #fff) !important;
+  text-decoration: none;
+  border-radius: var(--border-radius, 5px);
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.button-download:hover {
+  background-color: var(--color-primary-dark, #0056b3);
+}
