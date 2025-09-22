@@ -22,6 +22,7 @@ $files_to_load = array(
     'admin-tweaks.php',
     'helpers.php',
     'custom-widgets.php',
+    'shortcodes.php',
 );
 
 // Itera sobre el array y carga cada archivo.

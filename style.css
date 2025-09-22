@@ -893,8 +893,8 @@ con otros.
 }
 
 .dt_protect--one {
-  background: url("assets/images/background/featurelist_bg.jpg") no-repeat
-      center top,
+  background:
+    url("assets/images/background/featurelist_bg.jpg") no-repeat center top,
     #f7f7f9;
 }
 
@@ -2516,4 +2516,70 @@ table.wc-block-cart-items
 
 .viceunf-recent-post-title a:hover {
   color: var(--dt-pri-color);
+}
+/* ==========================================================================
+   Estilos para el Shortcode de Reglamentos (Versión con Color de Categoría)
+   ========================================================================== */
+
+.reglamentos-container {
+  font-family: sans-serif;
+  margin: 2em 0;
+}
+
+.reglamento-category-group {
+  margin-bottom: 2.5em;
+  /* La variable --category-color es definida aquí por el PHP */
+}
+
+.category-title {
+  font-size: 1.5rem;
+  color: #333;
+  /* USA LA VARIABLE para el color del borde, con un color por defecto */
+  border-bottom: 2px solid var(--category-color, #cccccc);
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+.reglamentos-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.reglamentos-list li {
+  margin-bottom: 0.75em;
+}
+
+.reglamentos-list li a {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 1em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #212529;
+  transition: all 0.3s ease;
+  border-left: 5px solid transparent;
+}
+
+.reglamentos-list li a:hover {
+  background-color: #e9ecef;
+  /* USA LA VARIABLE para el color del borde en hover, con un color por defecto */
+  border-left-color: var(--category-color, #cccccc);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.reglamentos-list li a .fas {
+  font-size: 1.2em;
+  /* USA LA VARIABLE para el color del icono, con un color por defecto */
+  color: var(--category-color, #007bff);
+  margin-right: 1em;
+  width: 20px;
+  text-align: center;
+}
+
+.reglamentos-list li a span {
+  flex-grow: 1;
+  font-weight: 500;
 }
