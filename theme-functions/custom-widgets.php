@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) exit;
 
 /**
  * Clase ViceUnf_Recent_Posts_Widget
- * Crea un widget minimalista que muestra título y miniatura de entradas recientes.
+ * Muestra título y miniatura de entradas, AHORA CON FILTRO DE CATEGORÍA.
  */
 class ViceUnf_Recent_Posts_Widget extends WP_Widget
 {
@@ -21,7 +21,7 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     parent::__construct(
       'viceunf_recent_posts',
       __('ViceUnf - Entradas Recientes con Miniaturas', 'viceunf'),
-      ['description' => __('Muestra una lista simple de entradas recientes con su título y miniatura.', 'viceunf')]
+      ['description' => __('Muestra una lista de entradas recientes, con opción de filtrar por categoría.', 'viceunf')]
     );
   }
 
@@ -35,15 +35,24 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     }
 
     $number_of_posts = !empty($instance['number_of_posts']) ? absint($instance['number_of_posts']) : 5;
-    // --- NUEVO: Obtenemos el límite de caracteres del widget ---
     $char_limit = !empty($instance['char_limit']) ? absint($instance['char_limit']) : 55;
+    // --- NUEVO: Obtenemos las categorías seleccionadas ---
+    $selected_categories = !empty($instance['categories']) ? $instance['categories'] : [];
 
-    $recent_posts = new WP_Query([
+    // --- NUEVO: Modificamos los argumentos de la consulta ---
+    $query_args = [
       'posts_per_page'      => $number_of_posts,
       'no_found_rows'       => true,
       'post_status'         => 'publish',
       'ignore_sticky_posts' => true,
-    ]);
+    ];
+
+    // Si hay categorías seleccionadas, las añadimos a la consulta
+    if (!empty($selected_categories)) {
+      $query_args['category__in'] = $selected_categories;
+    }
+
+    $recent_posts = new WP_Query($query_args);
 
     if ($recent_posts->have_posts()) :
       echo '<div class="viceunf-recent-posts-list">';
@@ -51,16 +60,13 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
 
       while ($recent_posts->have_posts()) : $recent_posts->the_post();
         $counter++;
-
         $item_class = 'viceunf-recent-post-item';
         if ($counter % 2 == 0) {
           $item_class .= ' item-par';
         }
 
-        // --- NUEVO: Lógica para truncar el título ---
-        $post_title = get_the_title(); // Obtenemos el título completo
+        $post_title = get_the_title();
         if (mb_strlen($post_title) > $char_limit) {
-          // Si es más largo que el límite, lo cortamos y añadimos "..."
           $post_title = mb_substr($post_title, 0, $char_limit) . '...';
         }
 ?>
@@ -90,8 +96,10 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
   {
     $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Entradas Recientes', 'viceunf');
     $number_of_posts = isset($instance['number_of_posts']) ? absint($instance['number_of_posts']) : 5;
-    // --- NUEVO: Campo para el límite de caracteres ---
     $char_limit = isset($instance['char_limit']) ? absint($instance['char_limit']) : 55;
+    // --- NUEVO: Obtenemos las categorías seleccionadas y todas las categorías disponibles ---
+    $selected_categories = isset($instance['categories']) && is_array($instance['categories']) ? $instance['categories'] : [];
+    $all_categories = get_categories(['hide_empty' => 0]);
     ?>
     <p>
       <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Título:', 'viceunf'); ?></label>
@@ -105,6 +113,18 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
       <label for="<?php echo esc_attr($this->get_field_id('char_limit')); ?>"><?php _e('Límite de caracteres para el título:', 'viceunf'); ?></label>
       <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('char_limit')); ?>" name="<?php echo esc_attr($this->get_field_name('char_limit')); ?>" type="number" step="1" min="10" value="<?php echo esc_attr($char_limit); ?>" size="3" />
     </p>
+
+    <p><strong><?php _e('Filtrar por categoría(s):', 'viceunf'); ?></strong></p>
+    <div style="max-height: 150px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: #fff;">
+      <?php foreach ($all_categories as $category) : ?>
+        <p>
+          <input type="checkbox" id="<?php echo esc_attr($this->get_field_id('categories') . '-' . $category->term_id); ?>" name="<?php echo esc_attr($this->get_field_name('categories')); ?>[]" value="<?php echo esc_attr($category->term_id); ?>" <?php checked(in_array($category->term_id, $selected_categories)); ?>>
+          <label for="<?php echo esc_attr($this->get_field_id('categories') . '-' . $category->term_id); ?>"><?php echo esc_html($category->name); ?></label>
+        </p>
+      <?php endforeach; ?>
+    </div>
+    <p class="description"><?php _e('Si no seleccionas ninguna, se mostrarán las entradas de todas las categorías.', 'viceunf'); ?></p>
+
 <?php
   }
 
@@ -113,8 +133,11 @@ class ViceUnf_Recent_Posts_Widget extends WP_Widget
     $instance = [];
     $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
     $instance['number_of_posts'] = (!empty($new_instance['number_of_posts'])) ? absint($new_instance['number_of_posts']) : 5;
-    // --- NUEVO: Guardar el nuevo campo ---
     $instance['char_limit'] = (!empty($new_instance['char_limit'])) ? absint($new_instance['char_limit']) : 55;
+
+    // --- NUEVO: Guardar las categorías seleccionadas ---
+    $instance['categories'] = (!empty($new_instance['categories']) && is_array($new_instance['categories'])) ? array_map('absint', $new_instance['categories']) : [];
+
     return $instance;
   }
 }
