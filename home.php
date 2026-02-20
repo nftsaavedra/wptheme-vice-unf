@@ -37,7 +37,7 @@ get_header();
           <div class="page-header dt-mb-4">
             <h1 class="page-title"><?php single_post_title(); ?></h1>
             <div class="archive-description">
-              <p>Explora nuestras últimas noticias, artículos y comunicados.</p>
+              <p><?php echo esc_html__( 'Explora nuestras últimas noticias, artículos y comunicados.', 'viceunf' ); ?></p>
             </div>
           </div>
 

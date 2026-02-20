@@ -1,6 +1,31 @@
 <?php
 // Salir si se accede directamente.
-if (! defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Helper DRY: Valida si es seguro guardar meta data.
+ *
+ * @param int    $post_id      ID del post.
+ * @param string $nonce_name   Nombre del campo nonce en $_POST.
+ * @param string $nonce_action Acción del nonce.
+ * @param string $post_type    Tipo de post esperado.
+ * @return bool True si se puede guardar, false si no.
+ */
+function viceunf_can_save_meta( $post_id, $nonce_name, $nonce_action, $post_type = '' ) {
+    if ( ! isset( $_POST[ $nonce_name ] ) || ! wp_verify_nonce( $_POST[ $nonce_name ], $nonce_action ) ) {
+        return false;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return false;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return false;
+    }
+    if ( ! empty( $post_type ) && isset( $_POST['post_type'] ) && $post_type !== $_POST['post_type'] ) {
+        return false;
+    }
+    return true;
+}
 
 // --- META BOX PARA SLIDERS (VERSIÓN FINAL) ---
 add_action('add_meta_boxes', 'viceunf_add_slider_meta_box');
@@ -81,15 +106,31 @@ function viceunf_slider_metabox_html($post)
 <?php
 }
 
-add_action('save_post', 'viceunf_save_slider_data');
-function viceunf_save_slider_data($post_id)
-{
-    if (!isset($_POST['slider_metabox_nonce_name']) || !wp_verify_nonce($_POST['slider_metabox_nonce_name'], 'slider_metabox_nonce_action') || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $post_id) || !isset($_POST['post_type']) || 'slider' !== $_POST['post_type']) return;
-    $campos_a_guardar = ['slider_subtitle' => '_slider_subtitle_key', 'slider_description' => '_slider_description_key', 'slider_text_alignment' => '_slider_text_alignment_key', 'slider_btn1_text' => '_slider_btn1_text_key', 'slider_link_type' => '_slider_link_type_key', 'slider_link_url' => '_slider_link_url_key', 'slider_link_content_id' => '_slider_link_content_id_key', 'slider_btn2_text' => '_slider_btn2_text_key', 'slider_btn2_link' => '_slider_btn2_link_key', 'slider_video_link' => '_slider_video_link_key'];
-    foreach ($campos_a_guardar as $name_attribute => $meta_key) {
-        if (isset($_POST[$name_attribute])) {
-            $valor_sanitizado = in_array($name_attribute, ['slider_link_url', 'slider_btn2_link', 'slider_video_link']) ? esc_url_raw($_POST[$name_attribute]) : ($name_attribute === 'slider_description' ? sanitize_textarea_field($_POST[$name_attribute]) : sanitize_text_field($_POST[$name_attribute]));
-            update_post_meta($post_id, $meta_key, $valor_sanitizado);
+add_action( 'save_post', 'viceunf_save_slider_data' );
+function viceunf_save_slider_data( $post_id ) {
+    if ( ! viceunf_can_save_meta( $post_id, 'slider_metabox_nonce_name', 'slider_metabox_nonce_action', 'slider' ) ) {
+        return;
+    }
+    $campos_a_guardar = [
+        'slider_subtitle'       => '_slider_subtitle_key',
+        'slider_description'    => '_slider_description_key',
+        'slider_text_alignment' => '_slider_text_alignment_key',
+        'slider_btn1_text'      => '_slider_btn1_text_key',
+        'slider_link_type'      => '_slider_link_type_key',
+        'slider_link_url'       => '_slider_link_url_key',
+        'slider_link_content_id'=> '_slider_link_content_id_key',
+        'slider_btn2_text'      => '_slider_btn2_text_key',
+        'slider_btn2_link'      => '_slider_btn2_link_key',
+        'slider_video_link'     => '_slider_video_link_key',
+    ];
+    foreach ( $campos_a_guardar as $name_attribute => $meta_key ) {
+        if ( isset( $_POST[ $name_attribute ] ) ) {
+            $valor_sanitizado = in_array( $name_attribute, [ 'slider_link_url', 'slider_btn2_link', 'slider_video_link' ], true )
+                ? esc_url_raw( $_POST[ $name_attribute ] )
+                : ( 'slider_description' === $name_attribute
+                    ? sanitize_textarea_field( $_POST[ $name_attribute ] )
+                    : sanitize_text_field( $_POST[ $name_attribute ] ) );
+            update_post_meta( $post_id, $meta_key, $valor_sanitizado );
         }
     }
 }
@@ -116,14 +157,20 @@ function viceunf_evento_metabox_html($post)
 <?php
 }
 
-add_action('save_post', 'viceunf_save_evento_data');
-function viceunf_save_evento_data($post_id)
-{
-    if (!isset($_POST['evento_metabox_nonce_name']) || !wp_verify_nonce($_POST['evento_metabox_nonce_name'], 'evento_metabox_nonce_action') || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $post_id) || (isset($_POST['post_type']) && 'evento' !== $_POST['post_type'])) return;
-    $campos = ['evento_date' => '_evento_date_key', 'evento_start_time' => '_evento_start_time_key', 'evento_end_time' => '_evento_end_time_key', 'evento_address' => '_evento_address_key'];
-    foreach ($campos as $post_key => $meta_key) {
-        if (isset($_POST[$post_key])) {
-            update_post_meta($post_id, $meta_key, sanitize_text_field($_POST[$post_key]));
+add_action( 'save_post', 'viceunf_save_evento_data' );
+function viceunf_save_evento_data( $post_id ) {
+    if ( ! viceunf_can_save_meta( $post_id, 'evento_metabox_nonce_name', 'evento_metabox_nonce_action', 'evento' ) ) {
+        return;
+    }
+    $campos = [
+        'evento_date'       => '_evento_date_key',
+        'evento_start_time' => '_evento_start_time_key',
+        'evento_end_time'   => '_evento_end_time_key',
+        'evento_address'    => '_evento_address_key',
+    ];
+    foreach ( $campos as $post_key => $meta_key ) {
+        if ( isset( $_POST[ $post_key ] ) ) {
+            update_post_meta( $post_id, $meta_key, sanitize_text_field( $_POST[ $post_key ] ) );
         }
     }
 }
@@ -147,12 +194,13 @@ function viceunf_socio_metabox_html($post)
 <?php
 }
 
-add_action('save_post', 'viceunf_save_socio_data');
-function viceunf_save_socio_data($post_id)
-{
-    if (!isset($_POST['socio_metabox_nonce_name']) || !wp_verify_nonce($_POST['socio_metabox_nonce_name'], 'socio_metabox_nonce_action') || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $post_id) || (isset($_POST['post_type']) && 'socio' !== $_POST['post_type'])) return;
-    if (isset($_POST['socio_url'])) {
-        update_post_meta($post_id, '_socio_url_key', esc_url_raw($_POST['socio_url']));
+add_action( 'save_post', 'viceunf_save_socio_data' );
+function viceunf_save_socio_data( $post_id ) {
+    if ( ! viceunf_can_save_meta( $post_id, 'socio_metabox_nonce_name', 'socio_metabox_nonce_action', 'socio' ) ) {
+        return;
+    }
+    if ( isset( $_POST['socio_url'] ) ) {
+        update_post_meta( $post_id, '_socio_url_key', esc_url_raw( $_POST['socio_url'] ) );
     }
 }
 
@@ -202,21 +250,20 @@ function viceunf_reglamento_metabox_html($post)
 <?php
 }
 
-add_action('save_post_reglamento', 'viceunf_save_reglamento_data');
-function viceunf_save_reglamento_data($post_id)
-{
-    if (!isset($_POST['reglamento_metabox_nonce_name']) || !wp_verify_nonce($_POST['reglamento_metabox_nonce_name'], 'reglamento_metabox_nonce_action')) return;
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!current_user_can('edit_post', $post_id)) return;
-    if (isset($_POST['reglamento_source_type'])) {
-        $source_type = sanitize_text_field($_POST['reglamento_source_type']);
-        update_post_meta($post_id, '_reglamento_source_type_key', $source_type);
-        if ($source_type === 'upload') {
-            update_post_meta($post_id, '_reglamento_file_id_key', sanitize_text_field($_POST['reglamento_file_id'] ?? ''));
-            delete_post_meta($post_id, '_reglamento_external_url_key');
-        } elseif ($source_type === 'external') {
-            update_post_meta($post_id, '_reglamento_external_url_key', esc_url_raw($_POST['reglamento_external_url'] ?? ''));
-            delete_post_meta($post_id, '_reglamento_file_id_key');
+add_action( 'save_post_reglamento', 'viceunf_save_reglamento_data' );
+function viceunf_save_reglamento_data( $post_id ) {
+    if ( ! viceunf_can_save_meta( $post_id, 'reglamento_metabox_nonce_name', 'reglamento_metabox_nonce_action' ) ) {
+        return;
+    }
+    if ( isset( $_POST['reglamento_source_type'] ) ) {
+        $source_type = sanitize_text_field( $_POST['reglamento_source_type'] );
+        update_post_meta( $post_id, '_reglamento_source_type_key', $source_type );
+        if ( 'upload' === $source_type ) {
+            update_post_meta( $post_id, '_reglamento_file_id_key', sanitize_text_field( $_POST['reglamento_file_id'] ?? '' ) );
+            delete_post_meta( $post_id, '_reglamento_external_url_key' );
+        } elseif ( 'external' === $source_type ) {
+            update_post_meta( $post_id, '_reglamento_external_url_key', esc_url_raw( $_POST['reglamento_external_url'] ?? '' ) );
+            delete_post_meta( $post_id, '_reglamento_file_id_key' );
         }
     }
 }

@@ -1,9 +1,11 @@
 // postcss.config.js
 
 const purgecss = require('@fullhuman/postcss-purgecss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   plugins: [
+    autoprefixer,
     purgecss({
       // Rutas a tus archivos
       content: [

@@ -131,7 +131,7 @@ if (! function_exists('softme_page_header_breadcrumbs')) :
                 $parent_id  = $post->post_parent;
                 $breadcrumbs = array();
                 while ($parent_id) {
-                    $page = get_page($parent_id);
+                    $page = get_post($parent_id);
                     $breadcrumbs[] = '<li class="breadcrumb-item"><a href="' . esc_url(get_permalink($page->ID)) . '">' . get_the_title($page->ID) . '</a></li>';
                     $parent_id  = $page->post_parent;
                 }

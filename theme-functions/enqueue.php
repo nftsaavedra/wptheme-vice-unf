@@ -24,7 +24,8 @@ function viceunf_enqueue_frontend_assets()
     wp_enqueue_style(
         'viceunf-parent-theme-style',
         get_template_directory_uri() . '/style.css',
-        array('viceunf-fontawesome')
+        array('viceunf-fontawesome'),
+        wp_get_theme( 'softme' )->get( 'Version' )
     );
 }
 add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets', 100);

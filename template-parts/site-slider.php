@@ -93,11 +93,11 @@ if ($slider_query->have_posts()) :
 
                                                 <div class="dt_btn-group">
                                                     <?php if ($btn1_href && $btn1_text) : ?>
-                                                        <a href="<?php echo $btn1_href; ?>" class="dt-btn dt-btn-primary"><span class="dt-btn-text" data-text="<?php echo esc_attr($btn1_text); ?>"><?php echo $createButtonSpans($btn1_text); ?></span></a>
+                                                        <a href="<?php echo esc_url($btn1_href); ?>" class="dt-btn dt-btn-primary"><span class="dt-btn-text" data-text="<?php echo esc_attr($btn1_text); ?>"><?php echo $createButtonSpans($btn1_text); ?></span></a>
                                                     <?php endif; ?>
 
                                                     <?php if ($btn2_link && $btn2_text) : ?>
-                                                        <a href="<?php echo esc_url($btn2_link); ?>" class="dt-btn dt-btn-white"><span class="dt-btn-text" data-text="<?php echo esc_attr($btn2_text); ?>"><?php echo $createButtonSpans($btn2_text); ?></span></span></a>
+                                                        <a href="<?php echo esc_url($btn2_link); ?>" class="dt-btn dt-btn-white"><span class="dt-btn-text" data-text="<?php echo esc_attr($btn2_text); ?>"><?php echo $createButtonSpans($btn2_text); ?></span></a>
                                                     <?php endif; ?>
 
                                                     <?php if ($autoplay_video_link) : ?>

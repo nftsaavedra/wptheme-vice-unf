@@ -17,12 +17,13 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "build:css": "postcss src/main.css -o style.css"
+    "build:css": "postcss src/main.css -o style.css --no-map"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
-    "@wordpress/scripts": "^19.2.4",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0"
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "@wordpress/scripts": "^31.5.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
   }
 }
