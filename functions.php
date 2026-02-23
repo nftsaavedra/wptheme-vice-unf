@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Theme functions and definitions
+ * Theme functions and definitions (Standalone)
  *
  * @package ViceUnf
  */
@@ -10,12 +10,17 @@
 $functions_path = get_stylesheet_directory() . '/theme-functions/';
 
 /**
+ * Carga de archivos de infraestructura (NavWalker primero).
+ */
+require_once get_stylesheet_directory() . '/inc/class-wp-bootstrap-navwalker.php';
+
+/**
  * Define el orden de carga explícito.
  */
 $files_to_load = array(
     'setup.php',
+    'template-tags.php',
     'enqueue.php',
-    'cpt.php',
     'meta-boxes.php',
     'customizer.php',
     'admin-options.php',
@@ -26,12 +31,12 @@ $files_to_load = array(
 );
 
 // Itera sobre el array y carga cada archivo.
-foreach ($files_to_load as $file) {
+foreach ( $files_to_load as $file ) {
     $file_path = $functions_path . $file;
-    if (file_exists($file_path)) {
+    if ( file_exists( $file_path ) ) {
         require_once $file_path;
     }
 }
 
 // Limpia las variables del ámbito global.
-unset($functions_path, $files_to_load, $file, $file_path);
+unset( $functions_path, $files_to_load, $file, $file_path );

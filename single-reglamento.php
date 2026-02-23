@@ -16,7 +16,7 @@ get_header();
 
       <?php
       // Lógica para determinar el ancho de las columnas.
-      $is_sidebar_active = is_active_sidebar('softme-sidebar-primary');
+      $is_sidebar_active = is_active_sidebar('viceunf-sidebar-primary');
       $main_column_class = !$is_sidebar_active ? 'dt-col-lg-12' : 'dt-col-lg-8';
       ?>
 

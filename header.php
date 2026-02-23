@@ -18,11 +18,11 @@
 	<?php wp_body_open(); ?>
 
 	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'viceunf'); ?></a>
+		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Ir al contenido', 'viceunf'); ?></a>
 
 		<?php
 		// Theme Header
-		do_action('softme_site_main_header');
+		do_action('viceunf_site_main_header');
 
 		// Theme Breadcrumb
 		if (!is_page_template('page-templates/frontpage.php')) {

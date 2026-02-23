@@ -2,7 +2,7 @@
     <div class="dt-container">
         <?php // Título dinámico desde el personalizador 
         ?>
-        <h5 class="title"><?php echo esc_html(get_theme_mod('socios_titulo', 'Socios Académicos')); ?></h5>
+        <h5 class="title"><?php echo esc_html(get_theme_mod('viceunf_socios_titulo', 'Socios Académicos')); ?></h5>
 
         <?php
         // WP_Query para obtener todos los posts del tipo 'Socio'

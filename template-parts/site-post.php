@@ -5,9 +5,9 @@
                 <div class="dt_siteheading dt-text-center">
                     <?php
                     // Obtenemos los datos del Personalizador
-                    $subtitulo = get_theme_mod('noticias_subtitulo', "Actualidad Académica");
-                    $titulo = get_theme_mod('noticias_titulo', "Últimas Noticias y Artículos");
-                    $descripcion = get_theme_mod('noticias_descripcion', "Conoce las novedades, logros y actividades académicas de la Vicepresidencia Académica.");
+                    $subtitulo = get_theme_mod('viceunf_noticias_subtitulo', "Actualidad Académica");
+                    $titulo = get_theme_mod('viceunf_noticias_titulo', "Últimas Noticias y Artículos");
+                    $descripcion = get_theme_mod('viceunf_noticias_descripcion', "Conoce las novedades, logros y actividades académicas de la Vicepresidencia Académica.");
                     ?>
 
                     <?php if ( !empty($subtitulo) ) : ?>

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "color": {
+      "palette": [
+        {
+          "slug": "viceunf-primary",
+          "color": "#122a61",
+          "name": "Azul Institucional"
+        },
+        {
+          "slug": "viceunf-secondary",
+          "color": "#ea5a0b",
+          "name": "Naranja Institucional"
+        },
+        {
+          "slug": "viceunf-light",
+          "color": "#fefbfa",
+          "name": "Fondo Claro"
+        },
+        {
+          "slug": "black",
+          "color": "#000000",
+          "name": "Negro"
+        },
+        {
+          "slug": "white",
+          "color": "#ffffff",
+          "name": "Blanco"
+        }
+      ],
+      "custom": false
+    },
+    "typography": {
+      "customFontSize": true,
+      "dropCap": false
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1670px"
+    }
+  }
+}

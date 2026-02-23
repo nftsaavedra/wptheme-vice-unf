@@ -20,7 +20,7 @@ function viceunf_sanitize_all_options($input)
     'investigacion_section_enabled',
     'about_section_enabled',
     'eventos_section_enabled',
-    'noticias_section_enabled',
+    'viceunf_noticias_section_enabled',
     'socios_section_enabled',
   ];
 
@@ -41,10 +41,10 @@ function viceunf_sanitize_all_options($input)
     'eventos_subtitulo'     => 'sanitize_text_field',
     'eventos_titulo'        => 'wp_kses_post',
     'eventos_descripcion'   => 'sanitize_textarea_field',
-    'noticias_subtitulo'    => 'sanitize_text_field',
-    'noticias_titulo'       => 'wp_kses_post',
-    'noticias_descripcion'  => 'sanitize_textarea_field',
-    'socios_titulo'         => 'sanitize_text_field',
+    'viceunf_noticias_subtitulo'    => 'sanitize_text_field',
+    'viceunf_noticias_titulo'       => 'wp_kses_post',
+    'viceunf_noticias_descripcion'  => 'sanitize_textarea_field',
+    'viceunf_socios_titulo'         => 'sanitize_text_field',
   ];
 
   foreach ($other_fields_rules as $key => $sanitize_callback) {

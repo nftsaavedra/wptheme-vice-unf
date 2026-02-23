@@ -43,85 +43,53 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                         </div>
 
                         <?php
-                        $args = array(
-                            'post_type'      => 'evento',
-                            'posts_per_page' => 4,
-                            'meta_key'       => '_evento_date_key',
-                            'orderby'        => 'meta_value_date',
-                            'order'          => 'DESC',
-                        );
-                        $eventos_query = new WP_Query($args);
+                        // Obtenemos la data purgada desde la capa de servicio (Validando que el plugin exista)
+                        $eventos = array();
+                        if ( class_exists( 'ViceUnf_Eventos_Service' ) ) {
+                            $eventos = ViceUnf_Eventos_Service::get_eventos_home( 4 );
+                        } else {
+                            echo '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar los eventos.</div>';
+                        }
 
-                        if ($eventos_query->have_posts()) :
-                            $today_timestamp = strtotime(date('Y-m-d', current_time('timestamp')));
-
-                            while ($eventos_query->have_posts()) : $eventos_query->the_post();
-                                $event_date_raw = get_post_meta(get_the_ID(), '_evento_date_key', true);
-                                $event_start    = get_post_meta(get_the_ID(), '_evento_start_time_key', true);
-                                $event_end      = get_post_meta(get_the_ID(), '_evento_end_time_key', true);
-                                $event_address  = get_post_meta(get_the_ID(), '_evento_address_key', true);
-
-                                // Lógica para colorear eventos pasados
-                                $event_timestamp = strtotime($event_date_raw);
-                                $date_color_class = ($event_timestamp < $today_timestamp) ? 'past-event' : 'future-event';
-
-                                // Lógica de zona horaria para el DÍA y MES
-                                $datetime_object = new DateTime($event_date_raw, wp_timezone());
-                                $corrected_timestamp = $datetime_object->getTimestamp();
-                                $event_day = wp_date('d', $corrected_timestamp);
-                                $event_month = wp_date('M', $corrected_timestamp);
+                        if ( ! empty( $eventos ) ) :
+                            foreach ( $eventos as $evento ) :
+                                $date_color_class = $evento['is_past'] ? 'past-event' : 'future-event';
                         ?>
                                 <aside class="dt_event_box wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
                                     <div class="dt_event_img">
                                         <div class="image">
-                                            <a href="<?php the_permalink(); ?>">
-                                                <?php
-                                                if (has_post_thumbnail()) {
-                                                    echo wp_get_attachment_image(get_post_thumbnail_id(), 'large');
-                                                }
-                                                ?>
+                                            <a href="<?php echo esc_url( $evento['permalink'] ); ?>">
+                                                <?php echo $evento['thumbnail_html']; ?>
                                             </a>
                                         </div>
-                                        <?php if ($event_date_raw) : ?>
+                                        <?php if ( $evento['has_date'] ) : ?>
                                             <div class="date <?php echo $date_color_class; ?>">
-                                                <span class="d"><?php echo esc_html($event_day); ?></span>
-                                                <span class="m"><?php echo esc_html($event_month); ?></span>
+                                                <span class="d"><?php echo esc_html( $evento['day'] ); ?></span>
+                                                <span class="m"><?php echo esc_html( $evento['month'] ); ?></span>
                                             </div>
                                         <?php endif; ?>
                                     </div>
                                     <div class="dt_event_content">
-                                        <h4 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                                        <h4 class="title"><a href="<?php echo esc_url( $evento['permalink'] ); ?>"><?php echo esc_html( $evento['title'] ); ?></a></h4>
                                         <div class="meta">
-                                            <?php if ($event_start && $event_end) :
-                                                // --- CORRECCIÓN DE ZONA HORARIA PARA LA HORA ---
-                                                // Combinamos la fecha y la hora para darle a PHP el contexto completo.
-                                                $start_datetime_str = $event_date_raw . ' ' . $event_start;
-                                                $end_datetime_str   = $event_date_raw . ' ' . $event_end;
-
-                                                // Creamos los objetos DateTime, especificando la zona horaria de WordPress.
-                                                $start_datetime_obj = new DateTime($start_datetime_str, wp_timezone());
-                                                $end_datetime_obj   = new DateTime($end_datetime_str, wp_timezone());
-
-                                                // Usamos wp_date con los timestamps correctos.
-                                            ?>
-                                                <span class="time"><?php echo esc_html(wp_date('g:i a', $start_datetime_obj->getTimestamp())); ?> - <?php echo esc_html(wp_date('g:i a', $end_datetime_obj->getTimestamp())); ?></span>
+                                            <?php if ( $evento['has_time'] ) : ?>
+                                                <span class="time"><?php echo esc_html( $evento['start_time'] ); ?> - <?php echo esc_html( $evento['end_time'] ); ?></span>
                                                 &nbsp;&nbsp;-&nbsp;&nbsp;
                                             <?php endif; ?>
-                                            <?php if ($event_address) : ?>
-                                                <span class="address"><?php echo esc_html($event_address); ?></span>
+                                            <?php if ( $evento['address'] ) : ?>
+                                                <span class="address"><?php echo esc_html( $evento['address'] ); ?></span>
                                             <?php endif; ?>
                                         </div>
                                         <div class="line"></div>
                                         <div class="description">
-                                            <?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
+                                            <?php echo wp_kses_post( $evento['excerpt'] ); ?>
                                         </div>
                                     </div>
                                 </aside>
                         <?php
-                            endwhile;
-                            wp_reset_postdata();
+                            endforeach;
                         else :
-                            echo '<p>No hay eventos para mostrar en este momento.</p>';
+                            echo '<p>' . esc_html__( 'No hay eventos para mostrar en este momento.', 'viceunf' ) . '</p>';
                         endif;
                         ?>
 

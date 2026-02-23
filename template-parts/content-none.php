@@ -5,7 +5,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package SoftMe
+ * @package ViceUnf
  */
 
 ?>
@@ -17,7 +17,7 @@
       printf(
         '<p>' . wp_kses(
           /* translators: 1: link to WP admin new post page. */
-          __('¿Listo para publicar tu primera entrada? <a href="%1$s">Comienza aquí</a>.', 'softme'),
+          __('¿Listo para publicar tu primera entrada? <a href="%1$s">Comienza aquí</a>.', 'viceunf'),
           array(
             'a' => array(
               'href' => array(),
@@ -30,14 +30,14 @@
     elseif (is_search()) :
     ?>
 
-      <p><?php esc_html_e('Lo sentimos, no se encontraron resultados para tu búsqueda. Por favor intenta con otras palabras clave.', 'softme'); ?></p>
+      <p><?php esc_html_e('Lo sentimos, no se encontraron resultados para tu búsqueda. Por favor intenta con otras palabras clave.', 'viceunf'); ?></p>
     <?php
       get_search_form();
 
     else :
     ?>
 
-      <p><?php esc_html_e('Parece que no encontramos lo que buscas. Quizás una búsqueda pueda ayudarte.', 'softme'); ?></p>
+      <p><?php esc_html_e('Parece que no encontramos lo que buscas. Quizás una búsqueda pueda ayudarte.', 'viceunf'); ?></p>
     <?php
       get_search_form();
 

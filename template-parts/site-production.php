@@ -1,10 +1,10 @@
 <section id="dt_service_two" class="dt_service dt_service--five front-service dt-py-default">
   <div class="shape-slide">
     <div class="sliders scroll">
-      <img src="https://preview.desertthemes.com/pro/easytech/wp-content/themes/softme-pro/assets/images/service/services_1.png">
+      <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/images/shape/shape_line.svg">
     </div>
     <div class="sliders scroll">
-      <img src="https://preview.desertthemes.com/pro/easytech/wp-content/themes/softme-pro/assets/images/service/services_1.png">
+      <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/images/shape/shape_line.svg">
     </div>
   </div>
   <div class="dt-container">

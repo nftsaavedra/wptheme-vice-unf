@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package SoftMe
+ * @package ViceUnf
  */
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('dt_post_item dt_posts--one dt-mb-4'); ?>>
@@ -37,7 +37,7 @@
 			<?php 
 				the_content( 
 						sprintf( 
-							__( 'Read More', 'softme' ), 
+							__( 'Leer Más', 'viceunf' ), 
 							'<span class="screen-reader-text">  '.esc_html(get_the_title()).'</span>' 
 						) 
 					);
@@ -48,7 +48,7 @@
 				<div class="tags">
 					<?php the_tags('', ' ', ''); ?>
 				</div>
-				<div class="comments_count"><a href="#respond" rel="bookmark" class="count"><?php esc_html_e('Comments','softme'); ?> <?php echo esc_html(get_comments_number($post->ID)); ?></a></div>
+				<div class="comments_count"><a href="#respond" rel="bookmark" class="count"><?php esc_html_e('Comentarios','viceunf'); ?> <?php echo esc_html(get_comments_number($post->ID)); ?></a></div>
 			</div>
 		<?php endif;  ?>
 	</div>

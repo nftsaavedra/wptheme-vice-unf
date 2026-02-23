@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 /**
  * =================================================================
- * Archivo Principal de Opciones del Tema ViceUnf (Orquestador)
+ * Archivo Principal de Opciones del Tema VPIN (Orquestador)
  * =================================================================
  * Carga todos los componentes necesarios para la página de opciones.
  */
@@ -12,12 +12,12 @@ if (!defined('ABSPATH')) exit;
 // 1. Añade el menú al panel de administración de WordPress.
 add_action('admin_menu', function () {
   add_menu_page(
-    'Opciones del Tema ViceUnf',
-    'Opciones del Tema',
+    'VPIN — Opciones del Tema',
+    'VPIN Opciones',
     'manage_options',
     'viceunf_theme_options',
-    'viceunf_render_options_page_html', // Esta función está en admin-options-callbacks.php
-    'dashicons-admin-generic',
+    'viceunf_render_options_page_html',
+    'dashicons-welcome-learn-more',
     58
   );
 });

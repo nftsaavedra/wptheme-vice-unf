@@ -1,0 +1,17 @@
+/* 
+ * ViceUnf: Editor Styles (Gutenberg)
+ * Estilos base en el backend para mejorar la experiencia WYSYWIG. 
+ * Las variables CSS (.has-viceunf-primary-color) las maneja WP core automáticamente vía theme.json.
+ */
+
+.editor-styles-wrapper {
+	font-family: var(--wp--preset--font-family--base, sans-serif);
+	background-color: var(--wp--preset--color--viceunf-light, #fefbfa);
+}
+
+.viceunf-editor-recent-posts-preview {
+	background: #fff;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+	border-radius: 8px;
+	padding: 20px;
+}
