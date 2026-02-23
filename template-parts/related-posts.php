@@ -41,9 +41,9 @@ if ( ! $related_query->have_posts() ) {
 ?>
 
 <section class="dt_related-posts dt-mt-5 dt-mb-5">
-    <h3 class="dt-mb-4" style="padding-bottom: 1.2rem; border-bottom: 0.1rem solid rgba(189,189,189,0.35); position: relative;">
+    <h3 class="dt-mb-4 viceunf-section-heading">
         <?php esc_html_e( 'Entradas Relacionadas', 'viceunf' ); ?>
-        <span style="position: absolute; bottom: -0.1rem; left: 0; width: 4.5rem; height: 0.2rem; background-color: var(--dt-pri-color);"></span>
+        <span class="viceunf-section-heading__accent"></span>
     </h3>
 
     <div class="dt-row dt-g-4">

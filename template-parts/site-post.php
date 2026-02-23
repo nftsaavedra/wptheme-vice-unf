@@ -97,7 +97,7 @@
         // Si hay una página de entradas configurada, mostramos el botón
         if ( $page_for_posts_id ) :
         ?>
-        <div class="dt_btn-group" style="text-align: center; margin-top: 40px;">
+        <div class="dt_btn-group viceunf-btn-group--center">
             <a href="<?php echo esc_url( get_permalink( $page_for_posts_id ) ); ?>" class="dt-btn dt-btn-primary">
                 <span class="dt-btn-text">Ver todas las noticias</span>
             </a>

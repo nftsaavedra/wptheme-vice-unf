@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Shortcode configurable para listar los Reglamentos.
  * Actúa solo como Controlador.
  *
+ * - Sin atributo `categoria`: renderiza árbol jerárquico completo con acordeones.
+ * - Con atributo `categoria`: renderiza lista plana filtrada por slugs.
+ *
  * @param array $atts Atributos del shortcode.
  * @return string HTML renderizado.
  */
@@ -25,8 +28,12 @@ function viceunf_listar_reglamentos_shortcode( $atts ) {
         return '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar este componente.</div>';
     }
 
-    // Obtener la data desde el servicio de dominio
-    $reglamentos_data = ViceUnf_Reglamentos_Service::get_reglamentos( $categoria_slugs );
+    // Vista jerárquica (árbol) o filtrada (plana)
+    if ( empty( $categoria_slugs ) ) {
+        $reglamentos_data = ViceUnf_Reglamentos_Service::get_reglamentos_tree();
+    } else {
+        $reglamentos_data = ViceUnf_Reglamentos_Service::get_reglamentos( $categoria_slugs );
+    }
 
     ob_start();
 

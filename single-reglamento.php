@@ -61,7 +61,7 @@ get_header();
 
                 // --- PASO 3: MOSTRAR SIEMPRE LA TARJETA DE DESCARGA ---
                 if (!empty($file_url)) {
-                  echo '<div class="download-box-wrapper" style="margin-top: 2em;">';
+                  echo '<div class="download-box-wrapper dt-mt-4">';
                   echo '<div class="download-icon"><i class="fas fa-file-alt"></i></div>';
                   echo '<div class="download-info">';
                   echo '<h4>' . esc_html(get_the_title()) . '</h4>';
@@ -70,7 +70,7 @@ get_header();
                   echo '<a href="' . esc_url($file_url) . '" target="_blank" class="button-download">Ver Documento</a>';
                   echo '</div>';
                 } else {
-                  echo '<p style="margin-top: 2em;">No hay ningún archivo asociado a este reglamento.</p>';
+                  echo '<p class="dt-mt-4">No hay ningún archivo asociado a este reglamento.</p>';
                 }
                 ?>
               </div>

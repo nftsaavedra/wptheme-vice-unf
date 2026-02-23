@@ -5,7 +5,7 @@ Version:            1.0.0
 Tested up to:       6.8
 Requires at least:  4.7
 Requires PHP:       7.4
-Author:             Vicepresidencia de Investigación — UNF
+Author:             @nftsaavedra
 Author URI:         https://viceinvestigacion.unf.edu.pe/
 Theme URI:          https://viceinvestigacion.unf.edu.pe/
 Description:        Tema institucional de la Vicepresidencia de Investigación (VPIN) — Universidad Nacional de Frontera (UNF). Diseñado para fortalecer la presencia digital de la investigación universitaria, la producción científica y la difusión del conocimiento.
@@ -25,6 +25,14 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   --dt-pri-color: #00794e; /* Color principal */
   --dt-priTwo-color: #2d4260; /* Variante más clara del principal */
   --dt-sec-color: #0b2346; /* Color secundario */
+
+  /* Escala Tipográfica (alineada con framework.css) */
+  --viceunf-fs-xs: 1.2rem;    /* Badges, counters, meta secundaria */
+  --viceunf-fs-sm: 1.4rem;    /* Texto secundario, links de lista */
+  --viceunf-fs-base: 1.6rem;  /* Body, inputs, botones (= body) */
+  --viceunf-fs-md: 1.8rem;    /* Subtítulos secundarios */
+  --viceunf-fs-lg: 2rem;      /* Subtítulos principales (= h5) */
+  --viceunf-fs-xl: 2.4rem;    /* Títulos de sección (= h4) */
 }
 
 /* Button 2 */
@@ -2433,7 +2441,7 @@ table.wc-block-cart-items
 
 .viceunf-recent-post-title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: var(--viceunf-fs-sm);
   line-height: 1.4;
   font-weight: 600;
 }
@@ -2461,7 +2469,7 @@ table.wc-block-cart-items
 }
 
 .category-title {
-  font-size: 1.5rem;
+  font-size: var(--viceunf-fs-sm);
   color: #333;
   /* USA LA VARIABLE para el color del borde, con un color por defecto */
   border-bottom: 2px solid var(--category-color, #cccccc);
@@ -2573,7 +2581,7 @@ table.wc-block-cart-items
 }
 
 .download-icon .fas {
-  font-size: 2.5rem;
+  font-size: var(--viceunf-fs-xl);
   color: var(--color-primary, #007bff);
 }
 
@@ -2662,7 +2670,7 @@ table.wc-block-cart-items
 
 .viceunf-post-nav__label {
   display: block;
-  font-size: 1.3rem;
+  font-size: var(--viceunf-fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
@@ -2672,7 +2680,7 @@ table.wc-block-cart-items
 
 .viceunf-post-nav__title {
   display: block;
-  font-size: 1.7rem;
+  font-size: var(--viceunf-fs-base);
   font-weight: 600;
   line-height: 1.4;
   color: #ffffff;
@@ -2691,5 +2699,370 @@ table.wc-block-cart-items
   .viceunf-post-nav__card {
     min-height: 14rem;
   }
+}
+
+/* =============================================
+   Utilidades Reutilizables (ex inline styles)
+   ============================================= */
+
+.viceunf-section-heading {
+  padding-bottom: 1.2rem;
+  border-bottom: 0.1rem solid rgba(189,189,189,0.35);
+  position: relative;
+}
+
+.viceunf-section-heading__accent {
+  position: absolute;
+  bottom: -0.1rem;
+  left: 0;
+  width: 4.5rem;
+  height: 0.2rem;
+  background-color: var(--dt-pri-color);
+}
+
+.viceunf-btn-group--center {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* =============================================
+   Reglamentos Tree / Accordion
+   ============================================= */
+
+.viceunf-reglamentos-tree {
+  max-width: 100%;
+}
+
+.viceunf-accordion {
+  margin-bottom: 0.8rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #ffffff;
+}
+
+.viceunf-accordion--child {
+  margin: 0.5rem 0 0.5rem 1.5rem;
+  border-left: 3px solid var(--acc-color, var(--dt-pri-color));
+}
+
+.viceunf-accordion__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.3rem 1.8rem;
+  border: none;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--viceunf-fs-base);
+  font-weight: 600;
+  color: #1a2332;
+  transition: background-color 0.2s ease;
+  border-left: 4px solid var(--acc-color, var(--dt-pri-color));
+}
+
+.viceunf-accordion--child .viceunf-accordion__header {
+  padding: 1rem 1.5rem;
+  font-size: var(--viceunf-fs-sm);
+  font-weight: 500;
+  background: #f8f9fa;
+  border-left: none;
+}
+
+.viceunf-accordion__header:hover {
+  background: #eef2f5;
+}
+
+.viceunf-accordion__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 0.5rem;
+  background-color: var(--acc-color, var(--dt-pri-color));
+  color: #ffffff;
+  font-size: var(--viceunf-fs-xs);
+}
+
+.viceunf-accordion--child .viceunf-accordion__icon {
+  min-width: 2.2rem;
+  height: 2.2rem;
+  font-size: var(--viceunf-fs-xs);
+}
+
+.viceunf-accordion__title {
+  flex: 1;
+}
+
+.viceunf-accordion__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0.8rem;
+  border-radius: 5rem;
+  background-color: rgba(0,0,0,0.06);
+  font-size: var(--viceunf-fs-xs);
+  font-weight: 700;
+  color: #64748b;
+}
+
+.viceunf-accordion__chevron {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+  color: #94a3b8;
+  font-size: var(--viceunf-fs-xs);
+}
+
+.viceunf-accordion.is-open > .viceunf-accordion__header .viceunf-accordion__chevron {
+  transform: rotate(180deg);
+  color: var(--acc-color, var(--dt-pri-color));
+}
+
+.viceunf-accordion__body {
+  padding: 0 1.8rem 1.5rem;
+}
+
+.viceunf-accordion--child .viceunf-accordion__body {
+  padding: 0 1.2rem 1rem;
+}
+
+/* Lista de documentos */
+.viceunf-accordion__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.viceunf-accordion__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background-color 0.15s ease;
+}
+
+.viceunf-accordion__item:last-child {
+  border-bottom: none;
+}
+
+.viceunf-accordion__item:hover {
+  background-color: #f1f5f9;
+  border-radius: 0.4rem;
+}
+
+.viceunf-accordion__link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  text-decoration: none;
+  color: #334155;
+  font-size: var(--viceunf-fs-sm);
+  font-weight: 400;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.viceunf-accordion__link i {
+  color: var(--acc-color, var(--dt-pri-color));
+  font-size: var(--viceunf-fs-sm);
+  flex-shrink: 0;
+}
+
+.viceunf-accordion__link:hover {
+  color: var(--dt-pri-color);
+}
+
+.viceunf-accordion__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.5rem 1.4rem;
+  border-radius: 0.4rem;
+  font-size: var(--viceunf-fs-xs);
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: var(--dt-pri-color, #1b8a4e);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.viceunf-accordion__download:hover {
+  background-color: var(--dt-sec-color, #0e1422);
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+/* Responsivo */
+@media (max-width: 48em) {
+  .viceunf-accordion--child {
+    margin-left: 0.8rem;
+  }
+
+  .viceunf-accordion__header {
+    padding: 1rem 1.2rem;
+    font-size: var(--viceunf-fs-sm);
+    gap: 0.7rem;
+  }
+
+  .viceunf-accordion__item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .viceunf-accordion__download {
+    align-self: flex-end;
+  }
+}
+
+/* Toolbar: Buscador + Filtros */
+.viceunf-reglamentos-toolbar {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.viceunf-reglamentos-search {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.viceunf-reglamentos-search > i {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: var(--viceunf-fs-sm);
+  pointer-events: none;
+}
+
+.viceunf-reglamentos-search input {
+  width: 100%;
+  padding: 1.2rem 4rem 1.2rem 4.2rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.6rem;
+  font-size: var(--viceunf-fs-sm);
+  color: #1a2332;
+  background: #f8fafc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.viceunf-reglamentos-search input:focus {
+  border-color: var(--dt-pri-color, #1b8a4e);
+  box-shadow: 0 0 0 3px rgba(27,138,78,0.12);
+  background: #ffffff;
+}
+
+.viceunf-reglamentos-search input::placeholder {
+  color: #94a3b8;
+}
+
+.viceunf-reglamentos-search__clear {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #94a3b8;
+  font-size: var(--viceunf-fs-sm);
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.viceunf-reglamentos-search__clear:hover {
+  color: #ef4444;
+}
+
+/* Filtros */
+.viceunf-reglamentos-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.viceunf-filter-btn {
+  padding: 0.5rem 1.3rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 5rem;
+  background: #ffffff;
+  color: #475569;
+  font-size: var(--viceunf-fs-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.viceunf-filter-btn:hover {
+  border-color: var(--dt-pri-color, #1b8a4e);
+  color: var(--dt-pri-color, #1b8a4e);
+}
+
+.viceunf-filter-btn.is-active {
+  background: var(--dt-pri-color, #1b8a4e);
+  border-color: var(--dt-pri-color, #1b8a4e);
+  color: #ffffff;
+}
+
+.viceunf-filter-btn--sub {
+  font-size: var(--viceunf-fs-xs);
+  padding: 0.4rem 1.1rem;
+}
+
+/* Sin resultados */
+.viceunf-reglamentos-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #94a3b8;
+}
+
+.viceunf-reglamentos-empty i {
+  font-size: var(--viceunf-fs-xl);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.viceunf-reglamentos-empty p {
+  font-size: var(--viceunf-fs-base);
+  margin: 0;
+}
+
+/* Compactado de ítems */
+.viceunf-accordion__item {
+  padding: 0.8rem 1rem;
+}
+
+.viceunf-accordion__header {
+  padding: 1.1rem 1.5rem;
+}
+
+.viceunf-accordion--child .viceunf-accordion__header {
+  padding: 0.9rem 1.3rem;
+}
+
+.viceunf-accordion__body {
+  padding: 0 1.5rem 1rem;
+}
+
+.viceunf-accordion--child .viceunf-accordion__body {
+  padding: 0 1rem 0.8rem;
 }
 
