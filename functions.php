@@ -26,7 +26,6 @@ $files_to_load = array(
     'admin-options.php',
     'admin-tweaks.php',
     'helpers.php',
-    'custom-widgets.php',
     'shortcodes.php',
 );
 

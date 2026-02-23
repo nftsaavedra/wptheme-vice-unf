@@ -75,6 +75,31 @@ function viceunf_enqueue_frontend_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets' );
 
+/**
+ * =================================================================
+ * 1.5. Optimización de Performance: Defer a Scripts no Críticos
+ * =================================================================
+ */
+function viceunf_defer_scripts( $tag, $handle, $src ) {
+    // Array de scripts que no son esenciales para la pintura inicial (First Paint)
+    $defer_scripts = array(
+        'viceunf-owl-carousel',
+        'viceunf-appear',
+        'viceunf-wow',
+        'viceunf-fancybox',
+        'viceunf-parallax',
+        'viceunf-paroller',
+        'viceunf-theme',
+        'viceunf-custom'
+    );
+
+    if ( in_array( $handle, $defer_scripts, true ) ) {
+        return '<script src="' . esc_url( $src ) . '" defer></script>' . "\n";
+    }
+
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'viceunf_defer_scripts', 10, 3 );
 
 /**
  * =================================================================

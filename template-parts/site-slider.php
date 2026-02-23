@@ -1,12 +1,23 @@
 <?php
-// WP_Query para obtener los 5 sliders más recientes.
-$args = array(
-    'post_type'      => 'slider',
-    'posts_per_page' => 5,
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-);
-$slider_query = new WP_Query($args);
+// Buscar los sliders en cache temporal, previene múltiples lecturas a base de datos.
+$slider_query = get_transient('viceunf_slider_query_cache');
+
+if (false === $slider_query) {
+    // WP_Query para obtener los 5 sliders más recientes.
+    $args = array(
+        'post_type'      => 'slider',
+        'posts_per_page' => 5,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'  => true,
+        'update_post_meta_cache' => true,
+        'update_post_term_cache' => false,
+    );
+    $slider_query = new WP_Query($args);
+
+    // Guardar en la chaché temporal por 12 horas.
+    set_transient('viceunf_slider_query_cache', $slider_query, 12 * HOUR_IN_SECONDS);
+}
 
 // Solo muestra la sección si hay sliders que mostrar.
 if ($slider_query->have_posts()) :
@@ -40,7 +51,7 @@ if ($slider_query->have_posts()) :
                 $subtitle = get_post_meta(get_the_ID(), '_slider_subtitle_key', true);
                 $description = get_post_meta(get_the_ID(), '_slider_description_key', true);
                 $text_align = get_post_meta(get_the_ID(), '_slider_text_alignment_key', true) ?: 'dt-text-left';
-                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $image_id = get_post_thumbnail_id(get_the_ID());
 
                 // Lógica para el Botón 1 (Avanzado)
                 $btn1_text = get_post_meta(get_the_ID(), '_slider_btn1_text_key', true);
@@ -77,9 +88,9 @@ if ($slider_query->have_posts()) :
             ?>
 
                 <div class="dt_slider-item">
-                    <?php if ($image_url) : ?>
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title_attribute(); ?>">
-                    <?php endif; ?>
+                    <?php if ($image_id) : 
+                        echo wp_get_attachment_image($image_id, 'full', false, array('class' => 'dt-slider-bg', 'loading' => 'lazy'));
+                    endif; ?>
                     <div class="dt_slider-wrapper">
                         <div class="dt_slider-inner">
                             <div class="dt_slider-innercell">

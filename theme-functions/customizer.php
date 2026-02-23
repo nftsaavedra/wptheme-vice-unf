@@ -289,6 +289,58 @@ function viceunf_customize_register( $wp_customize ) {
             'step' => 1,
         ),
     ) );
+
+    // --- Sección: Blog / Single Post ---
+    $wp_customize->add_section( 'viceunf_blog_section', array(
+        'title'    => __( 'Configuración del Blog', 'viceunf' ),
+        'panel'    => 'viceunf_panel',
+        'priority' => 25,
+    ) );
+
+    // Controles de visibilidad de metadatos del post
+    $blog_controls = array(
+        'viceunf_blog_show_featured_image' => __( 'Mostrar Imagen Destacada', 'viceunf' ),
+        'viceunf_blog_show_date'           => __( 'Mostrar Fecha', 'viceunf' ),
+        'viceunf_blog_show_author'         => __( 'Mostrar Autor', 'viceunf' ),
+        'viceunf_blog_show_categories'     => __( 'Mostrar Categorías', 'viceunf' ),
+        'viceunf_blog_show_tags'           => __( 'Mostrar Etiquetas', 'viceunf' ),
+        'viceunf_blog_show_comments_count' => __( 'Mostrar Contador de Comentarios', 'viceunf' ),
+        'viceunf_blog_show_post_navigation' => __( 'Mostrar Navegación Anterior/Siguiente', 'viceunf' ),
+        'viceunf_blog_show_related_posts'  => __( 'Mostrar Entradas Relacionadas', 'viceunf' ),
+    );
+
+    foreach ( $blog_controls as $setting_id => $label ) {
+        $wp_customize->add_setting( $setting_id, array(
+            'default'           => '1',
+            'sanitize_callback' => 'sanitize_text_field',
+            'transport'         => 'refresh',
+        ) );
+        $wp_customize->add_control( $setting_id, array(
+            'label'   => $label,
+            'section' => 'viceunf_blog_section',
+            'type'    => 'select',
+            'choices' => array(
+                '1' => __( 'Sí', 'viceunf' ),
+                '0' => __( 'No', 'viceunf' ),
+            ),
+        ) );
+    }
+
+    // Número de entradas relacionadas
+    $wp_customize->add_setting( 'viceunf_blog_related_posts_count', array(
+        'default'           => 3,
+        'sanitize_callback' => 'absint',
+    ) );
+    $wp_customize->add_control( 'viceunf_blog_related_posts_count', array(
+        'label'       => __( 'Número de Entradas Relacionadas', 'viceunf' ),
+        'section'     => 'viceunf_blog_section',
+        'type'        => 'number',
+        'input_attrs' => array(
+            'min'  => 1,
+            'max'  => 12,
+            'step' => 1,
+        ),
+    ) );
 }
 add_action( 'customize_register', 'viceunf_customize_register' );
 
