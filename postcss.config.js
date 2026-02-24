@@ -1,9 +1,8 @@
-// postcss.config.js
+import purgecssPkg from '@fullhuman/postcss-purgecss';
+const purgecss = purgecssPkg.default || purgecssPkg.purgeCSSPlugin || purgecssPkg;
+import autoprefixer from 'autoprefixer';
 
-const purgecss = require('@fullhuman/postcss-purgecss');
-const autoprefixer = require('autoprefixer');
-
-module.exports = {
+export default {
   plugins: [
     autoprefixer,
     purgecss({

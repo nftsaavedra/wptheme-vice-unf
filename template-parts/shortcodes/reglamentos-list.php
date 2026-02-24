@@ -12,7 +12,7 @@ if ( empty( $reglamentos_data['data'] ) ) {
 // Función recursiva para renderizar nodos del árbol como acordeones.
 if ( ! function_exists( 'viceunf_render_tree_node' ) ) :
 function viceunf_render_tree_node( $node, $depth = 0, $index = 0 ) {
-    $total = ViceUnf_Reglamentos_Service::count_all_reglamentos( $node );
+    $total = ViceUnf_Document_Service::count_all_documents( $node );
     $is_open = ( $depth === 0 && $index === 0 ); // Primer nodo raíz abierto por defecto.
     $open_class = $is_open ? ' is-open' : '';
     $color = esc_attr( $node['color'] );

@@ -1,23 +1,6 @@
 <?php
-// Buscar los sliders en cache temporal, previene múltiples lecturas a base de datos.
-$slider_query = get_transient('viceunf_slider_query_cache');
-
-if (false === $slider_query) {
-    // WP_Query para obtener los 5 sliders más recientes.
-    $args = array(
-        'post_type'      => 'slider',
-        'posts_per_page' => 5,
-        'orderby'        => 'date',
-        'order'          => 'DESC',
-        'no_found_rows'  => true,
-        'update_post_meta_cache' => true,
-        'update_post_term_cache' => false,
-    );
-    $slider_query = new WP_Query($args);
-
-    // Guardar en la chaché temporal por 12 horas.
-    set_transient('viceunf_slider_query_cache', $slider_query, 12 * HOUR_IN_SECONDS);
-}
+// Buscar los sliders delegando al Servicio (que internamente maneja la caché)
+$slider_query = class_exists( 'ViceUnf_Slider_Service' ) ? ViceUnf_Slider_Service::get_front_sliders( 5 ) : new WP_Query();
 
 // Solo muestra la sección si hay sliders que mostrar.
 if ($slider_query->have_posts()) :

@@ -5,14 +5,8 @@
         <h5 class="title"><?php echo esc_html(get_theme_mod('viceunf_socios_titulo', 'Socios Académicos')); ?></h5>
 
         <?php
-        // WP_Query para obtener todos los posts del tipo 'Socio'
-        $args = array(
-            'post_type'      => 'socio',
-            'posts_per_page' => -1, // Mostrar todos los socios
-            'orderby'        => 'menu_order', // Permite ordenar manualmente
-            'order'          => 'ASC',
-        );
-        $socios_query = new WP_Query($args);
+        // Obtener todos los posts del tipo 'Socio' mediante el repositorio/servicio
+        $socios_query = class_exists( 'ViceUnf_Socio_Service' ) ? ViceUnf_Socio_Service::get_all_socios() : new WP_Query();
 
         if ($socios_query->have_posts()) :
         ?>

@@ -10,115 +10,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /*=========================================
- Título del Encabezado de Página
+ Título del Encabezado de Página (Delegado)
 =========================================*/
+require_once __DIR__ . '/classes/class-page-title-builder.php';
 function viceunf_page_header_title() {
-    if ( is_archive() ) {
-        echo '<h1>';
-        if ( is_day() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Archivos', 'viceunf' ), get_the_date() );
-        elseif ( is_month() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Archivos', 'viceunf' ), get_the_date( 'F Y' ) );
-        elseif ( is_year() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Archivos', 'viceunf' ), get_the_date( 'Y' ) );
-        elseif ( is_author() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Publicaciones de', 'viceunf' ), get_the_author() );
-        elseif ( is_category() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Categoría', 'viceunf' ), single_cat_title( '', false ) );
-        elseif ( is_tag() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Etiqueta', 'viceunf' ), single_tag_title( '', false ) );
-        elseif ( class_exists( 'WooCommerce' ) && is_shop() ) :
-            printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Tienda', 'viceunf' ), single_tag_title( '', false ) );
-        elseif ( is_archive() ) :
-            the_archive_title( '<h1>', '</h1>' );
-        endif;
-        echo '</h1>';
-    } elseif ( is_404() ) {
-        echo '<h1>';
-        printf( esc_html__( '%1$s ', 'viceunf' ), esc_html__( '404', 'viceunf' ) );
-        echo '</h1>';
-    } elseif ( is_search() ) {
-        echo '<h1>';
-        printf( esc_html__( '%1$s %2$s', 'viceunf' ), esc_html__( 'Resultados de búsqueda para', 'viceunf' ), get_search_query() );
-        echo '</h1>';
-    } else {
-        echo '<h1>' . esc_html( get_the_title() ) . '</h1>';
-    }
+    ViceUnf_Page_Title_Builder::render();
 }
 
 /*=========================================
- URL de Breadcrumbs
+ URL de Breadcrumbs (Deprecado - Integrado en Builder)
 =========================================*/
-function viceunf_page_url() {
-    $page_url = 'http';
-    if ( key_exists( 'HTTPS', $_SERVER ) && 'on' === $_SERVER['HTTPS'] ) {
-        $page_url .= 's';
-    }
-    $page_url .= '://';
-    if ( '80' !== $_SERVER['SERVER_PORT'] ) {
-        $page_url .= $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];
-    } else {
-        $page_url .= $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-    }
-    return $page_url;
-}
+// viceunf_page_url() ya no es necesaria con el uso de ViceUnf_Breadcrumbs_Builder::get_current_url()
 
 /*=========================================
- Breadcrumbs
+ Breadcrumbs (Delegado)
 =========================================*/
+require_once __DIR__ . '/classes/class-breadcrumbs-builder.php';
 if ( ! function_exists( 'viceunf_page_header_breadcrumbs' ) ) :
     function viceunf_page_header_breadcrumbs() {
-        global $post;
-        $home_link = home_url();
-
-        if ( is_home() || is_front_page() ) :
-            echo '<li class="breadcrumb-item"><a href="' . esc_url( $home_link ) . '">' . esc_html__( 'Inicio', 'viceunf' ) . '</a></li>';
-            echo '<li class="breadcrumb-item active">';
-            echo single_post_title();
-            echo '</li>';
-        else :
-            echo '<li class="breadcrumb-item"><a href="' . esc_url( $home_link ) . '">' . esc_html__( 'Inicio', 'viceunf' ) . '</a></li>';
-            if ( is_category() ) {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . esc_html__( 'Archivo por categoría', 'viceunf' ) . ' "' . single_cat_title( '', false ) . '"</a></li>';
-            } elseif ( is_day() ) {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( get_year_link( get_the_time( 'Y' ) ) ) . '">' . get_the_time( 'Y' ) . '</a>';
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) ) . '">' . get_the_time( 'F' ) . '</a>';
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_the_time( 'd' ) . '</a></li>';
-            } elseif ( is_month() ) {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( get_year_link( get_the_time( 'Y' ) ) ) . '">' . get_the_time( 'Y' ) . '</a>';
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_the_time( 'F' ) . '</a></li>';
-            } elseif ( is_year() ) {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_the_time( 'Y' ) . '</a></li>';
-            } elseif ( is_single() && ! is_attachment() && is_page( 'single-product' ) ) {
-                if ( 'post' !== get_post_type() ) {
-                    $cat = get_the_category();
-                    $cat = $cat[0];
-                    echo '<li class="breadcrumb-item">';
-                    echo get_category_parents( $cat, true, '' );
-                    echo '</li>';
-                    echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_the_title() . '</a></li>';
-                }
-            } elseif ( is_page() && $post->post_parent ) {
-                $parent_id   = $post->post_parent;
-                $breadcrumbs = array();
-                while ( $parent_id ) {
-                    $page          = get_post( $parent_id );
-                    $breadcrumbs[] = '<li class="breadcrumb-item active"><a href="' . esc_url( get_permalink( $page->ID ) ) . '">' . get_the_title( $page->ID ) . '</a>';
-                    $parent_id     = $page->post_parent;
-                }
-                $breadcrumbs = array_reverse( $breadcrumbs );
-                foreach ( $breadcrumbs as $crumb ) {
-                    echo $crumb;
-                }
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_the_title() . '</a></li>';
-            } elseif ( is_search() ) {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_search_query() . '</a></li>';
-            } elseif ( is_404() ) {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . esc_html__( 'Error 404', 'viceunf' ) . '</a></li>';
-            } else {
-                echo '<li class="breadcrumb-item active"><a href="' . esc_url( viceunf_page_url() ) . '">' . get_the_title() . '</a></li>';
-            }
-        endif;
+        ViceUnf_Breadcrumbs_Builder::render();
     }
 endif;
 

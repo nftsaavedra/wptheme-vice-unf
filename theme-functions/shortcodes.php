@@ -24,15 +24,15 @@ function viceunf_listar_reglamentos_shortcode( $atts ) {
     $atts = shortcode_atts( array( 'categoria' => '' ), $atts, 'listar_reglamentos' );
     $categoria_slugs = ! empty( $atts['categoria'] ) ? array_map( 'sanitize_title', explode( ',', $atts['categoria'] ) ) : array();
 
-    if ( ! class_exists( 'ViceUnf_Reglamentos_Service' ) ) {
+    if ( ! class_exists( 'ViceUnf_Document_Service' ) ) {
         return '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar este componente.</div>';
     }
 
     // Vista jerárquica (árbol) o filtrada (plana)
     if ( empty( $categoria_slugs ) ) {
-        $reglamentos_data = ViceUnf_Reglamentos_Service::get_reglamentos_tree();
+        $reglamentos_data = ViceUnf_Document_Service::get_documents_tree( 'reglamento', 'categoria_reglamento' );
     } else {
-        $reglamentos_data = ViceUnf_Reglamentos_Service::get_reglamentos( $categoria_slugs );
+        $reglamentos_data = ViceUnf_Document_Service::get_documents( 'reglamento', 'categoria_reglamento', $categoria_slugs );
     }
 
     ob_start();

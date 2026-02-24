@@ -21,18 +21,7 @@ if ( empty( $categories ) ) {
 $category_ids = wp_list_pluck( $categories, 'term_id' );
 $related_count = absint( get_theme_mod( 'viceunf_blog_related_posts_count', 3 ) );
 
-$related_query = new WP_Query( array(
-    'post_type'           => 'post',
-    'posts_per_page'      => $related_count,
-    'post_status'         => 'publish',
-    'post__not_in'        => array( get_the_ID() ),
-    'category__in'        => $category_ids,
-    'ignore_sticky_posts' => true,
-    'no_found_rows'       => true,
-    'update_post_term_cache' => false,
-    'orderby'             => 'date',
-    'order'               => 'DESC',
-) );
+$related_query = class_exists( 'ViceUnf_Post_Service' ) ? ViceUnf_Post_Service::get_related_posts( get_the_ID(), $related_count ) : new WP_Query();
 
 if ( ! $related_query->have_posts() ) {
     wp_reset_postdata();

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/document-list",
+  "version": "1.0.0",
+  "title": "ViceUnf - Lista de Documentos",
+  "category": "viceunf-blocks",
+  "icon": "media-document",
+  "description": "Muestra un listado jerárquico de documentos con acordeones, búsqueda y filtros. Configurable por tipo de contenido.",
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "reglamento"
+    },
+    "taxonomy": {
+      "type": "string",
+      "default": "categoria_reglamento"
+    },
+    "selectedCategories": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

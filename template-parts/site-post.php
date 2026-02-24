@@ -28,13 +28,8 @@
         </div>
         <div class="dt-row dt-g-4">
             <?php
-            // WP_Query para obtener las últimas 3 entradas del blog
-            $args = array(
-                'post_type'           => 'post',
-                'posts_per_page'      => 3,
-                'ignore_sticky_posts' => 1,
-            );
-            $blog_query = new WP_Query( $args );
+            // Obtener entradas delegando la consulta a la capa de Servicio
+            $blog_query = class_exists( 'ViceUnf_Post_Service' ) ? ViceUnf_Post_Service::get_recent_posts( 3 ) : new WP_Query();
 
             if ( $blog_query->have_posts() ) :
                 while ( $blog_query->have_posts() ) : $blog_query->the_post();

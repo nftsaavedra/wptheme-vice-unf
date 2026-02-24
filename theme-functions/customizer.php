@@ -385,4 +385,4 @@ function viceunf_migrate_theme_mods() {
 
     update_option( 'viceunf_mods_migrated', true );
 }
-add_action( 'after_setup_theme', 'viceunf_migrate_theme_mods' );
+add_action( 'admin_init', 'viceunf_migrate_theme_mods' );
