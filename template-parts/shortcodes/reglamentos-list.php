@@ -35,9 +35,9 @@ function viceunf_render_tree_node( $node, $depth = 0, $index = 0 ) {
             // ===========================================
             // 1. Renderizar REGLAMENTOS DIRECTOS primero.
             // ===========================================
-            if ( ! empty( $node['reglamentos'] ) ) : ?>
+            if ( ! empty( $node['documents'] ) ) : ?>
                 <ul class="viceunf-accordion__list">
-                    <?php foreach ( $node['reglamentos'] as $reg ) : ?>
+                    <?php foreach ( $node['documents'] as $reg ) : ?>
                         <li class="viceunf-accordion__item" data-title="<?php echo esc_attr( mb_strtolower( $reg['title'] ) ); ?>">
                             <a href="<?php echo esc_url( $reg['permalink'] ); ?>" class="viceunf-accordion__link">
                                 <i class="fas fa-file-alt" aria-hidden="true"></i>

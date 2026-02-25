@@ -54,9 +54,9 @@ $render_tree_node = function( $node, $depth, $index ) use ( &$render_tree_node )
 
         <div class="viceunf-accordion__body">
             <div class="viceunf-accordion__body-inner">
-                <?php if ( ! empty( $node['reglamentos'] ) ) : ?>
+                <?php if ( ! empty( $node['documents'] ) ) : ?>
                     <ul class="viceunf-accordion__list">
-                        <?php foreach ( $node['reglamentos'] as $doc ) : ?>
+                        <?php foreach ( $node['documents'] as $doc ) : ?>
                             <li class="viceunf-accordion__item" data-title="<?php echo esc_attr( mb_strtolower( $doc['title'] ) ); ?>">
                                 <a href="<?php echo esc_url( $doc['permalink'] ); ?>" class="viceunf-accordion__link">
                                     <div class="viceunf-accordion__link-icon-wrap">
