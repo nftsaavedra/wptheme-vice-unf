@@ -33,6 +33,7 @@
     ]
   },
   "textdomain": "viceunf",
+  "style": "file:./style-index.css",
   "editorScript": "file:./index.js",
   "render": "file:./render.php"
 }

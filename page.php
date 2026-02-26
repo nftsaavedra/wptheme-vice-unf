@@ -14,7 +14,11 @@ get_header();
 
 <div class="dt-container">
     <div class="dt-row dt-g-5">
-        <div id="dt-main" class="dt-col-lg-12">
+        <?php 
+        $has_sidebar = is_active_sidebar( 'viceunf-sidebar-primary' );
+        $main_class  = $has_sidebar ? 'dt-col-lg-8' : 'dt-col-lg-12';
+        ?>
+        <div id="dt-main" class="<?php echo esc_attr( $main_class ); ?>">
             <?php while ( have_posts() ) : the_post(); ?>
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                     <div class="dt_page_content entry-content">
@@ -35,6 +39,11 @@ get_header();
                 ?>
             <?php endwhile; ?>
         </div>
+        <?php 
+        if ( $has_sidebar ) {
+            get_sidebar();
+        }
+        ?>
     </div>
 </div>
 

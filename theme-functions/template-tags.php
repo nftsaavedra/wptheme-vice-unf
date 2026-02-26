@@ -299,26 +299,26 @@ if ( ! function_exists( 'viceunf_footer_widget' ) ) :
             </div>
             <div class="dt-container">
                 <div class="dt-row dt-g-lg-4 dt-g-5">
-                    <?php if ( is_active_sidebar( 'viceunf-footer-widget-1' ) ) : ?>
-                        <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <?php if ( is_active_sidebar( 'viceunf-footer-widget-1' ) ) : ?>
                             <?php dynamic_sidebar( 'viceunf-footer-widget-1' ); ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ( is_active_sidebar( 'viceunf-footer-widget-2' ) ) : ?>
-                        <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="100ms" data-wow-duration="1500ms">
+                        <?php endif; ?>
+                    </div>
+                    <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="100ms" data-wow-duration="1500ms">
+                        <?php if ( is_active_sidebar( 'viceunf-footer-widget-2' ) ) : ?>
                             <?php dynamic_sidebar( 'viceunf-footer-widget-2' ); ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ( is_active_sidebar( 'viceunf-footer-widget-3' ) ) : ?>
-                        <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
+                        <?php endif; ?>
+                    </div>
+                    <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
+                        <?php if ( is_active_sidebar( 'viceunf-footer-widget-3' ) ) : ?>
                             <?php dynamic_sidebar( 'viceunf-footer-widget-3' ); ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ( is_active_sidebar( 'viceunf-footer-widget-4' ) ) : ?>
-                        <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <?php endif; ?>
+                    </div>
+                    <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12 wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <?php if ( is_active_sidebar( 'viceunf-footer-widget-4' ) ) : ?>
                             <?php dynamic_sidebar( 'viceunf-footer-widget-4' ); ?>
-                        </div>
-                    <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
