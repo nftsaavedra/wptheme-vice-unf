@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/benefit-card",
+  "version": "1.0.0",
+  "title": "ViceUnf - Tarjeta de Beneficio",
+  "category": "viceunf-blocks",
+  "icon": "tag",
+  "description": "Tarjeta individual con ícono FontAwesome, título, descripción y degradado configurable. Solo para usar dentro del bloque Benefits Grid.",
+  "parent": [
+    "viceunf/benefits-grid"
+  ],
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "default": "fa-solid fa-star"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "gradientStart": {
+      "type": "string",
+      "default": "#1e2a4a"
+    },
+    "gradientEnd": {
+      "type": "string",
+      "default": "#0e1422"
+    }
+  },
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

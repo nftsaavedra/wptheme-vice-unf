@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/schedule-card",
+  "version": "1.0.0",
+  "title": "ViceUnf - Tarjeta de Sesión",
+  "category": "viceunf-blocks",
+  "icon": "clock",
+  "description": "Tarjeta individual de sesión o evento con fecha, nombre, horario y location. Solo para usar dentro de Event Schedule.",
+  "parent": [
+    "viceunf/event-schedule"
+  ],
+  "attributes": {
+    "date": {
+      "type": "string",
+      "default": ""
+    },
+    "sessionLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "time": {
+      "type": "string",
+      "default": ""
+    },
+    "location": {
+      "type": "string",
+      "default": ""
+    },
+    "headerColor": {
+      "type": "string",
+      "default": "#ff4700"
+    }
+  },
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

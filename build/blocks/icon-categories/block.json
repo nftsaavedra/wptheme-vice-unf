@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/icon-categories",
+  "version": "1.0.0",
+  "title": "ViceUnf - Categorías con Íconos",
+  "category": "viceunf-blocks",
+  "icon": "category",
+  "description": "Listado visual de sectores, categorías o tecnologías con ícono circular FontAwesome y etiqueta. Scroll horizontal en móvil.",
+  "attributes": {
+    "items": {
+      "type": "array",
+      "default": []
+    },
+    "iconBgColor": {
+      "type": "string",
+      "default": "#ff4700"
+    },
+    "layout": {
+      "type": "string",
+      "default": "row"
+    },
+    "columns": {
+      "type": "number",
+      "default": 6
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

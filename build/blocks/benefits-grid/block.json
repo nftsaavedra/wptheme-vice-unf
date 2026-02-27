@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/benefits-grid",
+  "version": "1.0.0",
+  "title": "ViceUnf - Grid de Beneficios",
+  "category": "viceunf-blocks",
+  "icon": "grid-view",
+  "description": "Grid configurable de tarjetas con efecto glassmorphism para mostrar ventajas, características o beneficios de un programa.",
+  "attributes": {
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "sectionTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "sectionSubtitle": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
