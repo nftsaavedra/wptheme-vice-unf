@@ -1,6 +1,6 @@
 <?php
 // Buscar los sliders delegando al Servicio (que internamente maneja la caché)
-$slider_query = class_exists( 'ViceUnf_Slider_Service' ) ? ViceUnf_Slider_Service::get_front_sliders( 5 ) : new WP_Query();
+$slider_query = class_exists('\ViceUnf\Core\Service\SliderService') ? (new \ViceUnf\Core\Service\SliderService())->get_front_sliders(5) : new WP_Query();
 
 // Solo muestra la sección si hay sliders que mostrar.
 if ($slider_query->have_posts()) :
@@ -71,7 +71,7 @@ if ($slider_query->have_posts()) :
             ?>
 
                 <div class="dt_slider-item">
-                    <?php if ($image_id) : 
+                    <?php if ($image_id) :
                         echo wp_get_attachment_image($image_id, 'full', false, array('class' => 'dt-slider-bg', 'loading' => 'lazy'));
                     endif; ?>
                     <div class="dt_slider-wrapper">

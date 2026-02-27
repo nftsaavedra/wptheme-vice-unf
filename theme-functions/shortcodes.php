@@ -6,8 +6,8 @@
  * @package ViceUnf
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-  exit;
+if (! defined('ABSPATH')) {
+    exit;
 }
 
 /**
@@ -20,26 +20,29 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $atts Atributos del shortcode.
  * @return string HTML renderizado.
  */
-function viceunf_listar_reglamentos_shortcode( $atts ) {
-    $atts = shortcode_atts( array( 'categoria' => '' ), $atts, 'listar_reglamentos' );
-    $categoria_slugs = ! empty( $atts['categoria'] ) ? array_map( 'sanitize_title', explode( ',', $atts['categoria'] ) ) : array();
+function viceunf_listar_reglamentos_shortcode($atts)
+{
+    $atts = shortcode_atts(array('categoria' => ''), $atts, 'listar_reglamentos');
+    $categoria_slugs = ! empty($atts['categoria']) ? array_map('sanitize_title', explode(',', $atts['categoria'])) : array();
 
-    if ( ! class_exists( 'ViceUnf_Document_Service' ) ) {
+    if (! class_exists('\ViceUnf\Core\Service\DocumentService')) {
         return '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar este componente.</div>';
     }
 
+    $documentService = new \ViceUnf\Core\Service\DocumentService();
+
     // Vista jerárquica (árbol) o filtrada (plana)
-    if ( empty( $categoria_slugs ) ) {
-        $reglamentos_data = ViceUnf_Document_Service::get_documents_tree( 'reglamento', 'categoria_reglamento' );
+    if (empty($categoria_slugs)) {
+        $reglamentos_data = $documentService->get_documents_tree('reglamento', 'categoria_reglamento');
     } else {
-        $reglamentos_data = ViceUnf_Document_Service::get_documents( 'reglamento', 'categoria_reglamento', $categoria_slugs );
+        $reglamentos_data = $documentService->get_documents('reglamento', 'categoria_reglamento', $categoria_slugs);
     }
 
     ob_start();
 
     // Pasar la data a la vista
-    get_template_part( 'template-parts/shortcodes/reglamentos', 'list', array( 'reglamentos_data' => $reglamentos_data ) );
+    get_template_part('template-parts/shortcodes/reglamentos', 'list', array('reglamentos_data' => $reglamentos_data));
 
     return ob_get_clean();
 }
-add_shortcode( 'listar_reglamentos', 'viceunf_listar_reglamentos_shortcode' );
+add_shortcode('listar_reglamentos', 'viceunf_listar_reglamentos_shortcode');

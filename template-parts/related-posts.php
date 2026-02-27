@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Part: Entradas Relacionadas (Tarjetas)
  *
@@ -8,22 +9,22 @@
  * @package ViceUnf
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
 // Obtener las categorías del post actual.
 $categories = get_the_category();
-if ( empty( $categories ) ) {
+if (empty($categories)) {
     return;
 }
 
-$category_ids = wp_list_pluck( $categories, 'term_id' );
-$related_count = absint( get_theme_mod( 'viceunf_blog_related_posts_count', 3 ) );
+$category_ids = wp_list_pluck($categories, 'term_id');
+$related_count = absint(get_theme_mod('viceunf_blog_related_posts_count', 3));
 
-$related_query = class_exists( 'ViceUnf_Post_Service' ) ? ViceUnf_Post_Service::get_related_posts( get_the_ID(), $related_count ) : new WP_Query();
+$related_query = class_exists('\ViceUnf\Core\Service\PostService') ? (new \ViceUnf\Core\Service\PostService())->get_related_posts(get_the_ID(), $related_count) : new WP_Query();
 
-if ( ! $related_query->have_posts() ) {
+if (! $related_query->have_posts()) {
     wp_reset_postdata();
     return;
 }
@@ -31,19 +32,19 @@ if ( ! $related_query->have_posts() ) {
 
 <section class="dt_related-posts dt-mt-5 dt-mb-5">
     <h3 class="dt-mb-4 viceunf-section-heading">
-        <?php esc_html_e( 'Entradas Relacionadas', 'viceunf' ); ?>
+        <?php esc_html_e('Entradas Relacionadas', 'viceunf'); ?>
         <span class="viceunf-section-heading__accent"></span>
     </h3>
 
     <div class="dt-row dt-g-4">
-        <?php while ( $related_query->have_posts() ) : $related_query->the_post(); ?>
+        <?php while ($related_query->have_posts()) : $related_query->the_post(); ?>
             <div class="dt-col-lg-4 dt-col-sm-6 dt-col-12">
-                <article <?php post_class( array( 'dt_post_item', 'dt_posts--one', 'dt-mb-4' ) ); ?>>
+                <article <?php post_class(array('dt_post_item', 'dt_posts--one', 'dt-mb-4')); ?>>
 
-                    <?php if ( has_post_thumbnail() ) : ?>
+                    <?php if (has_post_thumbnail()) : ?>
                         <a href="<?php the_permalink(); ?>">
                             <div class="image">
-                                <?php the_post_thumbnail( 'large', array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
+                                <?php the_post_thumbnail('large', array('alt' => the_title_attribute('echo=0'))); ?>
                             </div>
                         </a>
                     <?php endif; ?>
@@ -60,10 +61,10 @@ if ( ! $related_query->have_posts() ) {
                             </ul>
                         </div>
 
-                        <?php if ( has_category() ) : ?>
+                        <?php if (has_category()) : ?>
                             <div class="catetag">
                                 <i class="fas fa-folder dt-mr-1" aria-hidden="true"></i>
-                                <?php the_category( ', ' ); ?>
+                                <?php the_category(', '); ?>
                             </div>
                         <?php endif; ?>
 
@@ -74,8 +75,8 @@ if ( ! $related_query->have_posts() ) {
                         </h4>
 
                         <div class="content">
-                            <p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 20, '...' ) ); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="more-link"><?php esc_html_e( 'Leer más', 'viceunf' ); ?></a>
+                            <p><?php echo wp_kses_post(wp_trim_words(get_the_content(), 20, '...')); ?></p>
+                            <a href="<?php the_permalink(); ?>" class="more-link"><?php esc_html_e('Leer más', 'viceunf'); ?></a>
                         </div>
                     </div>
 

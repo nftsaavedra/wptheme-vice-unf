@@ -45,51 +45,52 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                         <?php
                         // Obtenemos la data purgada desde la capa de servicio (Validando que el plugin exista)
                         $eventos = array();
-                        if ( class_exists( 'ViceUnf_Eventos_Service' ) ) {
-                            $eventos = ViceUnf_Eventos_Service::get_eventos_home( 4 );
+                        if (class_exists('\ViceUnf\Core\Service\EventosService')) {
+                            $eventosService = new \ViceUnf\Core\Service\EventosService();
+                            $eventos = $eventosService->get_eventos_home(4);
                         } else {
                             echo '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar los eventos.</div>';
                         }
 
-                        if ( ! empty( $eventos ) ) :
-                            foreach ( $eventos as $evento ) :
+                        if (! empty($eventos)) :
+                            foreach ($eventos as $evento) :
                                 $date_color_class = $evento['is_past'] ? 'past-event' : 'future-event';
                         ?>
                                 <aside class="dt_event_box wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
                                     <div class="dt_event_img">
                                         <div class="image">
-                                            <a href="<?php echo esc_url( $evento['permalink'] ); ?>">
+                                            <a href="<?php echo esc_url($evento['permalink']); ?>">
                                                 <?php echo $evento['thumbnail_html']; ?>
                                             </a>
                                         </div>
-                                        <?php if ( $evento['has_date'] ) : ?>
+                                        <?php if ($evento['has_date']) : ?>
                                             <div class="date <?php echo $date_color_class; ?>">
-                                                <span class="d"><?php echo esc_html( $evento['day'] ); ?></span>
-                                                <span class="m"><?php echo esc_html( $evento['month'] ); ?></span>
+                                                <span class="d"><?php echo esc_html($evento['day']); ?></span>
+                                                <span class="m"><?php echo esc_html($evento['month']); ?></span>
                                             </div>
                                         <?php endif; ?>
                                     </div>
                                     <div class="dt_event_content">
-                                        <h4 class="title"><a href="<?php echo esc_url( $evento['permalink'] ); ?>"><?php echo esc_html( $evento['title'] ); ?></a></h4>
+                                        <h4 class="title"><a href="<?php echo esc_url($evento['permalink']); ?>"><?php echo esc_html($evento['title']); ?></a></h4>
                                         <div class="meta">
-                                            <?php if ( $evento['has_time'] ) : ?>
-                                                <span class="time"><?php echo esc_html( $evento['start_time'] ); ?> - <?php echo esc_html( $evento['end_time'] ); ?></span>
+                                            <?php if ($evento['has_time']) : ?>
+                                                <span class="time"><?php echo esc_html($evento['start_time']); ?> - <?php echo esc_html($evento['end_time']); ?></span>
                                                 &nbsp;&nbsp;-&nbsp;&nbsp;
                                             <?php endif; ?>
-                                            <?php if ( $evento['address'] ) : ?>
-                                                <span class="address"><?php echo esc_html( $evento['address'] ); ?></span>
+                                            <?php if ($evento['address']) : ?>
+                                                <span class="address"><?php echo esc_html($evento['address']); ?></span>
                                             <?php endif; ?>
                                         </div>
                                         <div class="line"></div>
                                         <div class="description">
-                                            <?php echo wp_kses_post( $evento['excerpt'] ); ?>
+                                            <?php echo wp_kses_post($evento['excerpt']); ?>
                                         </div>
                                     </div>
                                 </aside>
                         <?php
                             endforeach;
                         else :
-                            echo '<p>' . esc_html__( 'No hay eventos para mostrar en este momento.', 'viceunf' ) . '</p>';
+                            echo '<p>' . esc_html__('No hay eventos para mostrar en este momento.', 'viceunf') . '</p>';
                         endif;
                         ?>
 

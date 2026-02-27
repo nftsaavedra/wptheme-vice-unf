@@ -6,7 +6,7 @@
 
         <?php
         // Obtener todos los posts del tipo 'Socio' mediante el repositorio/servicio
-        $socios_query = class_exists( 'ViceUnf_Socio_Service' ) ? ViceUnf_Socio_Service::get_all_socios() : new WP_Query();
+        $socios_query = class_exists('\ViceUnf\Core\Service\SocioService') ? (new \ViceUnf\Core\Service\SocioService())->get_all_socios() : new WP_Query();
 
         if ($socios_query->have_posts()) :
         ?>
