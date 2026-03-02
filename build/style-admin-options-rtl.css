@@ -416,3 +416,65 @@
     font-size: 14px;
 }
 
+/* ─── Tab Panel ──────────────────────────────────────────── */
+.vu-tab-panel { margin-top: 0; }
+
+/* Override WP tab nav */
+.vu-tab-panel .components-tab-panel__tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--vu-border);
+    margin-bottom: 16px;
+    background: var(--vu-surface);
+    border-radius: var(--vu-radius) var(--vu-radius) 0 0;
+    padding: 0 4px;
+}
+
+.vu-tab-panel .components-tab-panel__tabs .components-button {
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--vu-text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 18px !important;
+    margin-bottom: -2px;
+    transition: color .15s, border-color .15s;
+    box-shadow: none !important;
+}
+
+.vu-tab-panel .components-tab-panel__tabs .components-button:hover {
+    color: var(--vu-primary);
+    border-bottom-color: var(--vu-border) !important;
+}
+
+.vu-tab-panel .components-tab-panel__tabs .vu-tab--active {
+    color: var(--vu-primary) !important;
+    border-bottom-color: var(--vu-primary) !important;
+    background: transparent !important;
+}
+
+.vu-tab-panel .components-tab-panel__tab-content {
+    padding: 0;
+}
+
+/* ─── Empty tab placeholder ──────────────────────────────── */
+.vu-empty-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--vu-text-muted);
+    border: 2px dashed var(--vu-border);
+    border-radius: var(--vu-radius-lg);
+    background: var(--vu-bg);
+}
+.vu-empty-tab .dashicons { font-size: 40px; width: 40px; height: 40px; }
+.vu-empty-tab h3 { margin: 0; font-size: 16px; color: var(--vu-text); }
+.vu-empty-tab p  { margin: 0; font-size: 13px; }
+
+
