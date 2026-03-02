@@ -8,10 +8,12 @@ $post_type           = isset($attributes['postType']) ? $attributes['postType'] 
 $taxonomy            = isset($attributes['taxonomy']) ? $attributes['taxonomy'] : 'categoria_reglamento';
 $selected_categories = isset($attributes['selectedCategories']) ? $attributes['selectedCategories'] : array();
 
-if (! class_exists('ViceUnf_Document_Service')) {
+if (! class_exists('ViceUnf\Core\Service\DocumentService')) {
     echo '<p>Error: ViceUnf Core plugin no está activo.</p>';
     return;
 }
+
+$documentService = new \ViceUnf\Core\Service\DocumentService();
 
 $categoria_slugs = array();
 if (! empty($selected_categories) && is_array($selected_categories)) {

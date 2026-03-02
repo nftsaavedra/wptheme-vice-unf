@@ -65,7 +65,7 @@ $create_animated_subtitle = function ($text) {
           <?php if (!empty($video_url)) : ?>
             <div class="dt_image_box image-2">
               <figure class="image">
-                <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/investigacion_play.png'); ?>" alt="Ícono de Play para Investigación">
+                <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/investigacion_play.webp'); ?>" alt="Ícono de Play para Investigación">
               </figure>
               <div class="dt_image_video">
                 <a href="<?php echo esc_url($video_url); ?>" class="dt_lightbox_img dt-btn-play dt-btn-primary" data-caption="">

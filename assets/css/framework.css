@@ -9222,7 +9222,7 @@ button.dt_uptop {
   transition: all 1000ms ease;
 }
 
-.dt_slider .active .dt_slider-content .title {
+.dt_slider .swiper-slide-active .dt_slider-content .title {
   opacity: 1;
   -webkit-transform: translateX(0);
   transform: translateX(0);
@@ -9275,19 +9275,19 @@ button.dt_uptop {
   transition: all 1000ms ease;
 }
 
-.dt_slider .active .dt_slider-content .subtitle,
-.dt_slider .active .dt_slider-content .text {
+.dt_slider .swiper-slide-active .dt_slider-content .subtitle,
+.dt_slider .swiper-slide-active .dt_slider-content .text {
   -webkit-transform: translateY(0);
   transform: translateY(0);
   -webkit-transition-delay: 1000ms;
   transition-delay: 1000ms;
 }
 
-.dt_slider .active .dt_slider-content .subtitle {
+.dt_slider .swiper-slide-active .dt_slider-content .subtitle {
   opacity: 0.7;
 }
 
-.dt_slider .active .dt_slider-content .text {
+.dt_slider .swiper-slide-active .dt_slider-content .text {
   opacity: 1;
 }
 
@@ -9316,7 +9316,7 @@ button.dt_uptop {
   transition: all 1000ms ease;
 }
 
-.dt_slider .active .dt_slider-content .dt_btn-group {
+.dt_slider .swiper-slide-active .dt_slider-content .dt_btn-group {
   opacity: 1;
   -webkit-transform: translateY(0);
   transform: translateY(0);

@@ -1,6 +1,6 @@
 <?php
 // Salir si se accede directamente.
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
@@ -9,120 +9,121 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @param WP_Customize_Manager $wp_customize Objeto del personalizador.
  */
-function viceunf_customize_register( $wp_customize ) {
+function viceunf_customize_register($wp_customize)
+{
 
     // --- Panel padre: VPIN ---
-    $wp_customize->add_panel( 'viceunf_panel', array(
-        'title'       => __( 'VPIN — Configuración del Tema', 'viceunf' ),
-        'description' => __( 'Opciones de personalización del tema VPIN — Vicepresidencia de Investigación, UNF.', 'viceunf' ),
+    $wp_customize->add_panel('viceunf_panel', array(
+        'title'       => __('VPIN — Configuración del Tema', 'viceunf'),
+        'description' => __('Opciones de personalización del tema VPIN — Vicepresidencia de Investigación, UNF.', 'viceunf'),
         'priority'    => 30,
-    ) );
+    ));
 
     // --- Sección: Header ---
-    $wp_customize->add_section( 'viceunf_header_section', array(
-        'title'    => __( 'Configuración del Header', 'viceunf' ),
+    $wp_customize->add_section('viceunf_header_section', array(
+        'title'    => __('Configuración del Header', 'viceunf'),
         'panel'    => 'viceunf_panel',
         'priority' => 10,
-    ) );
+    ));
 
     // Preloader
-    $wp_customize->add_setting( 'viceunf_hs_preloader', array(
+    $wp_customize->add_setting('viceunf_hs_preloader', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'refresh',
-    ) );
-    $wp_customize->add_control( 'viceunf_hs_preloader', array(
-        'label'   => __( 'Mostrar Preloader', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hs_preloader', array(
+        'label'   => __('Mostrar Preloader', 'viceunf'),
         'section' => 'viceunf_header_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
     // Sticky Header
-    $wp_customize->add_setting( 'viceunf_sticky_header', array(
+    $wp_customize->add_setting('viceunf_sticky_header', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_sticky_header', array(
-        'label'   => __( 'Header Pegajoso (Sticky)', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_sticky_header', array(
+        'label'   => __('Header Pegajoso (Sticky)', 'viceunf'),
         'section' => 'viceunf_header_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
     // Búsqueda
-    $wp_customize->add_setting( 'viceunf_hs_hdr_search', array(
+    $wp_customize->add_setting('viceunf_hs_hdr_search', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_hs_hdr_search', array(
-        'label'   => __( 'Mostrar Búsqueda en Header', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hs_hdr_search', array(
+        'label'   => __('Mostrar Búsqueda en Header', 'viceunf'),
         'section' => 'viceunf_header_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
     // Tipo de Resultado de Búsqueda
-    $wp_customize->add_setting( 'viceunf_search_result', array(
+    $wp_customize->add_setting('viceunf_search_result', array(
         'default'           => 'post',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_search_result', array(
-        'label'   => __( 'Tipo de Resultado de Búsqueda', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_search_result', array(
+        'label'   => __('Tipo de Resultado de Búsqueda', 'viceunf'),
         'section' => 'viceunf_header_section',
         'type'    => 'select',
         'choices' => array(
-            'post'    => __( 'Publicaciones', 'viceunf' ),
-            'product' => __( 'Productos', 'viceunf' ),
+            'post'    => __('Publicaciones', 'viceunf'),
+            'product' => __('Productos', 'viceunf'),
         ),
-    ) );
+    ));
 
     // Carrito
-    $wp_customize->add_setting( 'viceunf_hs_hdr_cart', array(
+    $wp_customize->add_setting('viceunf_hs_hdr_cart', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_hs_hdr_cart', array(
-        'label'   => __( 'Mostrar Carrito en Header', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hs_hdr_cart', array(
+        'label'   => __('Mostrar Carrito en Header', 'viceunf'),
         'section' => 'viceunf_header_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
     // Cuenta
-    $wp_customize->add_setting( 'viceunf_hs_hdr_account', array(
+    $wp_customize->add_setting('viceunf_hs_hdr_account', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_hs_hdr_account', array(
-        'label'   => __( 'Mostrar Cuenta en Header', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hs_hdr_account', array(
+        'label'   => __('Mostrar Cuenta en Header', 'viceunf'),
         'section' => 'viceunf_header_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
     // Tamaño del Logo
-    $wp_customize->add_setting( 'viceunf_hdr_logo_size', array(
+    $wp_customize->add_setting('viceunf_hdr_logo_size', array(
         'default'           => '150',
         'sanitize_callback' => 'absint',
-    ) );
-    $wp_customize->add_control( 'viceunf_hdr_logo_size', array(
-        'label'       => __( 'Tamaño del Logo (px)', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hdr_logo_size', array(
+        'label'       => __('Tamaño del Logo (px)', 'viceunf'),
         'section'     => 'viceunf_header_section',
         'type'        => 'number',
         'input_attrs' => array(
@@ -130,54 +131,54 @@ function viceunf_customize_register( $wp_customize ) {
             'max'  => 500,
             'step' => 5,
         ),
-    ) );
+    ));
 
     // Logo Móvil
-    $wp_customize->add_setting( 'viceunf_mobile_logo', array(
+    $wp_customize->add_setting('viceunf_mobile_logo', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
-    ) );
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'viceunf_mobile_logo', array(
-        'label'   => __( 'Logo para Móvil', 'viceunf' ),
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'viceunf_mobile_logo', array(
+        'label'   => __('Logo para Móvil', 'viceunf'),
         'section' => 'viceunf_header_section',
-    ) ) );
+    )));
 
     // --- Sección: Breadcrumb ---
-    $wp_customize->add_section( 'viceunf_breadcrumb_section', array(
-        'title'    => __( 'Configuración del Breadcrumb', 'viceunf' ),
+    $wp_customize->add_section('viceunf_breadcrumb_section', array(
+        'title'    => __('Configuración del Breadcrumb', 'viceunf'),
         'panel'    => 'viceunf_panel',
         'priority' => 20,
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_hs_breadcrumb', array(
+    $wp_customize->add_setting('viceunf_hs_breadcrumb', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_hs_breadcrumb', array(
-        'label'   => __( 'Mostrar Breadcrumb', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hs_breadcrumb', array(
+        'label'   => __('Mostrar Breadcrumb', 'viceunf'),
         'section' => 'viceunf_breadcrumb_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_breadcrumb_bg_img', array(
-        'default'           => get_stylesheet_directory_uri() . '/assets/images/background/page_title.jpg',
+    $wp_customize->add_setting('viceunf_breadcrumb_bg_img', array(
+        'default'           => get_stylesheet_directory_uri() . '/assets/images/background/page_title.webp',
         'sanitize_callback' => 'esc_url_raw',
-    ) );
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'viceunf_breadcrumb_bg_img', array(
-        'label'   => __( 'Imagen de Fondo del Breadcrumb', 'viceunf' ),
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'viceunf_breadcrumb_bg_img', array(
+        'label'   => __('Imagen de Fondo del Breadcrumb', 'viceunf'),
         'section' => 'viceunf_breadcrumb_section',
-    ) ) );
+    )));
 
-    $wp_customize->add_setting( 'viceunf_breadcrumb_img_opacity', array(
+    $wp_customize->add_setting('viceunf_breadcrumb_img_opacity', array(
         'default'           => '0.5',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_breadcrumb_img_opacity', array(
-        'label'       => __( 'Opacidad de la Imagen de Fondo', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_breadcrumb_img_opacity', array(
+        'label'       => __('Opacidad de la Imagen de Fondo', 'viceunf'),
         'section'     => 'viceunf_breadcrumb_section',
         'type'        => 'number',
         'input_attrs' => array(
@@ -185,87 +186,87 @@ function viceunf_customize_register( $wp_customize ) {
             'max'  => 1,
             'step' => 0.1,
         ),
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_breadcrumb_opacity_color', array(
+    $wp_customize->add_setting('viceunf_breadcrumb_opacity_color', array(
         'default'           => '#000',
         'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'viceunf_breadcrumb_opacity_color', array(
-        'label'   => __( 'Color de la Capa de Opacidad', 'viceunf' ),
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'viceunf_breadcrumb_opacity_color', array(
+        'label'   => __('Color de la Capa de Opacidad', 'viceunf'),
         'section' => 'viceunf_breadcrumb_section',
-    ) ) );
+    )));
 
-    $wp_customize->add_setting( 'viceunf_breadcrumb_type', array(
+    $wp_customize->add_setting('viceunf_breadcrumb_type', array(
         'default'           => 'theme',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_breadcrumb_type', array(
-        'label'   => __( 'Tipo de Breadcrumb', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_breadcrumb_type', array(
+        'label'   => __('Tipo de Breadcrumb', 'viceunf'),
         'section' => 'viceunf_breadcrumb_section',
         'type'    => 'select',
         'choices' => array(
-            'theme'    => __( 'Tema (por defecto)', 'viceunf' ),
-            'yoast'    => __( 'Yoast SEO', 'viceunf' ),
-            'rankmath' => __( 'Rank Math', 'viceunf' ),
-            'navxt'    => __( 'NavXT', 'viceunf' ),
+            'theme'    => __('Tema (por defecto)', 'viceunf'),
+            'yoast'    => __('Yoast SEO', 'viceunf'),
+            'rankmath' => __('Rank Math', 'viceunf'),
+            'navxt'    => __('NavXT', 'viceunf'),
         ),
-    ) );
+    ));
 
     // --- Sección: Footer ---
-    $wp_customize->add_section( 'viceunf_footer_section', array(
-        'title'    => __( 'Configuración del Footer', 'viceunf' ),
+    $wp_customize->add_section('viceunf_footer_section', array(
+        'title'    => __('Configuración del Footer', 'viceunf'),
         'panel'    => 'viceunf_panel',
         'priority' => 30,
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_footer_copyright_text', array(
+    $wp_customize->add_setting('viceunf_footer_copyright_text', array(
         'default'           => '&copy; [current_year] Vicepresidencia de Investigación — [site_title]',
         'sanitize_callback' => 'wp_kses_post',
-    ) );
-    $wp_customize->add_control( 'viceunf_footer_copyright_text', array(
-        'label'       => __( 'Texto de Copyright', 'viceunf' ),
-        'description' => __( 'Variables: [current_year], [site_title], [theme_author]', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_footer_copyright_text', array(
+        'label'       => __('Texto de Copyright', 'viceunf'),
+        'description' => __('Variables: [current_year], [site_title], [theme_author]', 'viceunf'),
         'section'     => 'viceunf_footer_section',
         'type'        => 'textarea',
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_footer_bg_color', array(
+    $wp_customize->add_setting('viceunf_footer_bg_color', array(
         'default'           => '#0e1422',
         'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'viceunf_footer_bg_color', array(
-        'label'   => __( 'Color de Fondo del Footer', 'viceunf' ),
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'viceunf_footer_bg_color', array(
+        'label'   => __('Color de Fondo del Footer', 'viceunf'),
         'section' => 'viceunf_footer_section',
-    ) ) );
+    )));
 
-    $wp_customize->add_setting( 'viceunf_hs_scroller', array(
+    $wp_customize->add_setting('viceunf_hs_scroller', array(
         'default'           => '1',
         'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'viceunf_hs_scroller', array(
-        'label'   => __( 'Mostrar Botón "Ir Arriba"', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_hs_scroller', array(
+        'label'   => __('Mostrar Botón "Ir Arriba"', 'viceunf'),
         'section' => 'viceunf_footer_section',
         'type'    => 'select',
         'choices' => array(
-            '1' => __( 'Sí', 'viceunf' ),
-            '0' => __( 'No', 'viceunf' ),
+            '1' => __('Sí', 'viceunf'),
+            '0' => __('No', 'viceunf'),
         ),
-    ) );
+    ));
 
     // --- Sección: Layout ---
-    $wp_customize->add_section( 'viceunf_layout_section', array(
-        'title'    => __( 'Configuración de Disposición', 'viceunf' ),
+    $wp_customize->add_section('viceunf_layout_section', array(
+        'title'    => __('Configuración de Disposición', 'viceunf'),
         'panel'    => 'viceunf_panel',
         'priority' => 40,
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_site_container_width', array(
+    $wp_customize->add_setting('viceunf_site_container_width', array(
         'default'           => 1252,
         'sanitize_callback' => 'absint',
-    ) );
-    $wp_customize->add_control( 'viceunf_site_container_width', array(
-        'label'       => __( 'Ancho del Contenedor (px)', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_site_container_width', array(
+        'label'       => __('Ancho del Contenedor (px)', 'viceunf'),
         'section'     => 'viceunf_layout_section',
         'type'        => 'number',
         'input_attrs' => array(
@@ -273,14 +274,14 @@ function viceunf_customize_register( $wp_customize ) {
             'max'  => 2000,
             'step' => 10,
         ),
-    ) );
+    ));
 
-    $wp_customize->add_setting( 'viceunf_sidebar_width', array(
+    $wp_customize->add_setting('viceunf_sidebar_width', array(
         'default'           => 33,
         'sanitize_callback' => 'absint',
-    ) );
-    $wp_customize->add_control( 'viceunf_sidebar_width', array(
-        'label'       => __( 'Ancho del Sidebar (%)', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_sidebar_width', array(
+        'label'       => __('Ancho del Sidebar (%)', 'viceunf'),
         'section'     => 'viceunf_layout_section',
         'type'        => 'number',
         'input_attrs' => array(
@@ -288,51 +289,51 @@ function viceunf_customize_register( $wp_customize ) {
             'max'  => 50,
             'step' => 1,
         ),
-    ) );
+    ));
 
     // --- Sección: Blog / Single Post ---
-    $wp_customize->add_section( 'viceunf_blog_section', array(
-        'title'    => __( 'Configuración del Blog', 'viceunf' ),
+    $wp_customize->add_section('viceunf_blog_section', array(
+        'title'    => __('Configuración del Blog', 'viceunf'),
         'panel'    => 'viceunf_panel',
         'priority' => 25,
-    ) );
+    ));
 
     // Controles de visibilidad de metadatos del post
     $blog_controls = array(
-        'viceunf_blog_show_featured_image' => __( 'Mostrar Imagen Destacada', 'viceunf' ),
-        'viceunf_blog_show_date'           => __( 'Mostrar Fecha', 'viceunf' ),
-        'viceunf_blog_show_author'         => __( 'Mostrar Autor', 'viceunf' ),
-        'viceunf_blog_show_categories'     => __( 'Mostrar Categorías', 'viceunf' ),
-        'viceunf_blog_show_tags'           => __( 'Mostrar Etiquetas', 'viceunf' ),
-        'viceunf_blog_show_comments_count' => __( 'Mostrar Contador de Comentarios', 'viceunf' ),
-        'viceunf_blog_show_post_navigation' => __( 'Mostrar Navegación Anterior/Siguiente', 'viceunf' ),
-        'viceunf_blog_show_related_posts'  => __( 'Mostrar Entradas Relacionadas', 'viceunf' ),
+        'viceunf_blog_show_featured_image' => __('Mostrar Imagen Destacada', 'viceunf'),
+        'viceunf_blog_show_date'           => __('Mostrar Fecha', 'viceunf'),
+        'viceunf_blog_show_author'         => __('Mostrar Autor', 'viceunf'),
+        'viceunf_blog_show_categories'     => __('Mostrar Categorías', 'viceunf'),
+        'viceunf_blog_show_tags'           => __('Mostrar Etiquetas', 'viceunf'),
+        'viceunf_blog_show_comments_count' => __('Mostrar Contador de Comentarios', 'viceunf'),
+        'viceunf_blog_show_post_navigation' => __('Mostrar Navegación Anterior/Siguiente', 'viceunf'),
+        'viceunf_blog_show_related_posts'  => __('Mostrar Entradas Relacionadas', 'viceunf'),
     );
 
-    foreach ( $blog_controls as $setting_id => $label ) {
-        $wp_customize->add_setting( $setting_id, array(
+    foreach ($blog_controls as $setting_id => $label) {
+        $wp_customize->add_setting($setting_id, array(
             'default'           => '1',
             'sanitize_callback' => 'sanitize_text_field',
             'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( $setting_id, array(
+        ));
+        $wp_customize->add_control($setting_id, array(
             'label'   => $label,
             'section' => 'viceunf_blog_section',
             'type'    => 'select',
             'choices' => array(
-                '1' => __( 'Sí', 'viceunf' ),
-                '0' => __( 'No', 'viceunf' ),
+                '1' => __('Sí', 'viceunf'),
+                '0' => __('No', 'viceunf'),
             ),
-        ) );
+        ));
     }
 
     // Número de entradas relacionadas
-    $wp_customize->add_setting( 'viceunf_blog_related_posts_count', array(
+    $wp_customize->add_setting('viceunf_blog_related_posts_count', array(
         'default'           => 3,
         'sanitize_callback' => 'absint',
-    ) );
-    $wp_customize->add_control( 'viceunf_blog_related_posts_count', array(
-        'label'       => __( 'Número de Entradas Relacionadas', 'viceunf' ),
+    ));
+    $wp_customize->add_control('viceunf_blog_related_posts_count', array(
+        'label'       => __('Número de Entradas Relacionadas', 'viceunf'),
         'section'     => 'viceunf_blog_section',
         'type'        => 'number',
         'input_attrs' => array(
@@ -340,16 +341,17 @@ function viceunf_customize_register( $wp_customize ) {
             'max'  => 12,
             'step' => 1,
         ),
-    ) );
+    ));
 }
-add_action( 'customize_register', 'viceunf_customize_register' );
+add_action('customize_register', 'viceunf_customize_register');
 
 /**
  * Migra los theme_mods del tema padre (softme_*) a los nuevos (viceunf_*).
  * Se ejecuta solo una vez.
  */
-function viceunf_migrate_theme_mods() {
-    if ( get_option( 'viceunf_mods_migrated' ) ) {
+function viceunf_migrate_theme_mods()
+{
+    if (get_option('viceunf_mods_migrated')) {
         return;
     }
 
@@ -376,13 +378,13 @@ function viceunf_migrate_theme_mods() {
         'softme_sidebar_width'       => 'viceunf_sidebar_width',
     );
 
-    foreach ( $migrations as $old_key => $new_key ) {
-        $old_value = get_theme_mod( $old_key );
-        if ( false !== $old_value && ! get_theme_mod( $new_key ) ) {
-            set_theme_mod( $new_key, $old_value );
+    foreach ($migrations as $old_key => $new_key) {
+        $old_value = get_theme_mod($old_key);
+        if (false !== $old_value && ! get_theme_mod($new_key)) {
+            set_theme_mod($new_key, $old_value);
         }
     }
 
-    update_option( 'viceunf_mods_migrated', true );
+    update_option('viceunf_mods_migrated', true);
 }
-add_action( 'admin_init', 'viceunf_migrate_theme_mods' );
+add_action('admin_init', 'viceunf_migrate_theme_mods');

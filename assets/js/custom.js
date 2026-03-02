@@ -1,371 +1,553 @@
-(function($) {
-    'use strict';
-	
-	// Button Split
-    if ( document.body.classList.contains('btn--effect-two') || document.body.classList.contains('btn--effect-three') ) {
-        document.querySelectorAll('.btn--effect-two .dt-btn .dt-btn-text, .btn--effect-three .dt-btn .dt-btn-text').forEach(button => button.innerHTML = `<span>` + button.textContent.trim().split('').join(`</span><span>`) + '</span>');
-    }
-	
-    //Hide PreLoading
-	function site_preloader() {
-		if($('.dt_preloader').length){
-			$('.dt_preloader').delay(1000).fadeOut(500);
-		}
-	}
+'use strict';
 
-    if ($(".dt_preloader-close").length) {
-        $(".dt_preloader-close").on("click", function(){
-            $('.dt_preloader').delay(200).fadeOut(500);
+/**
+ * @description Módulo de efectos visuales y componentes frontend para wptheme-vice-unf.
+ * Migrado de jQuery a Vanilla JS. Integra Swiper.js, GLightbox, y efectos nativos.
+ */
+
+// ============================================================
+// Button Split Effect
+// ============================================================
+if (document.body.classList.contains('btn--effect-two') || document.body.classList.contains('btn--effect-three')) {
+    document.querySelectorAll('.btn--effect-two .dt-btn .dt-btn-text, .btn--effect-three .dt-btn .dt-btn-text')
+        .forEach((button) => {
+            button.innerHTML = '<span>' + button.textContent.trim().split('').join('</span><span>') + '</span>';
         });
+}
+
+// ============================================================
+// Preloader
+// ============================================================
+function sitePreloader() {
+    const preloader = document.querySelector('.dt_preloader');
+    if (!preloader) return;
+
+    setTimeout(() => {
+        preloader.style.transition = 'opacity 0.5s ease';
+        preloader.style.opacity = '0';
+        preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+    }, 1000);
+}
+
+const preloaderClose = document.querySelector('.dt_preloader-close');
+if (preloaderClose) {
+    preloaderClose.addEventListener('click', () => {
+        const preloader = document.querySelector('.dt_preloader');
+        if (!preloader) return;
+        setTimeout(() => {
+            preloader.style.transition = 'opacity 0.5s ease';
+            preloader.style.opacity = '0';
+            preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+        }, 200);
+    });
+}
+
+// ============================================================
+// Animated Headlines
+// ============================================================
+const animationDelay = 2500;
+const barAnimationDelay = 3800;
+const barWaiting = barAnimationDelay - 3000;
+const lettersDelay = 50;
+const typeLettersDelay = 150;
+const selectionDuration = 500;
+const typeAnimationDelay = selectionDuration + 800;
+const revealDuration = 600;
+const revealAnimationDelay = 1500;
+
+function initHeadline() {
+    const letterClasses = ['.dt_heading.dt_heading_2', '.dt_heading.dt_heading_3', '.dt_heading.dt_heading_8', '.dt_heading.dt_heading_9'];
+    letterClasses.forEach((cls) => {
+        document.querySelectorAll(cls + ' b').forEach((word) => singleLetters(word));
+    });
+
+    document.querySelectorAll('.dt_heading').forEach((headline) => animateHeadline(headline));
+}
+
+function singleLetters(word) {
+    const letters = word.textContent.split('');
+    const selected = word.classList.contains('is_on');
+
+    const isHeading3 = word.closest('.dt_heading_3') !== null;
+
+    let newLetters = '';
+    for (let i = 0; i < letters.length; i++) {
+        let letter = letters[i];
+        if (isHeading3) letter = '<em>' + letter + '</em>';
+        letter = selected ? '<i class="in">' + letter + '</i>' : '<i>' + letter + '</i>';
+        newLetters += letter;
     }
+    word.innerHTML = newLetters;
+    word.style.opacity = '1';
+}
 
-    //set animation timing
-    var animationDelay = 2500,
-        //loading bar effect
-        barAnimationDelay = 3800,
-        barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the scss/css file
-        //letters effect
-        lettersDelay = 50,
-        //type effect
-        typeLettersDelay = 150,
-        selectionDuration = 500,
-        typeAnimationDelay = selectionDuration + 800,
-        //clip effect 
-        revealDuration = 600,
-        revealAnimationDelay = 1500;
+function animateHeadline(headline) {
+    let duration = animationDelay;
 
-    function initHeadline() {
-        //insert <i> element for each letter of a changing word
-        singleLetters($('.dt_heading.dt_heading_2').find('b'));
-        singleLetters($('.dt_heading.dt_heading_3').find('b'));
-        singleLetters($('.dt_heading.dt_heading_8').find('b'));
-        singleLetters($('.dt_heading.dt_heading_9').find('b'));
-        //initialise headline animation
-        animateHeadline($('.dt_heading'));
-    }
-
-    function singleLetters($words) {
-        $words.each(function() {
-            var word = $(this),
-                letters = word.text().split(''),
-                selected = word.hasClass('is_on');
-            for (var i in letters) {
-                if (word.parents('.dt_heading_3').length > 0) letters[i] = '<em>' + letters[i] + '</em>';
-                letters[i] = (selected) ? '<i class="in">' + letters[i] + '</i>' : '<i>' + letters[i] + '</i>';
-            }
-            var newLetters = letters.join('');
-            word.html(newLetters).css('opacity', 1);
+    if (headline.classList.contains('dt_heading_4')) {
+        duration = barAnimationDelay;
+        setTimeout(() => {
+            const inner = headline.querySelector('.dt_heading_inner');
+            if (inner) inner.classList.add('is-loading');
+        }, barWaiting);
+    } else if (headline.classList.contains('dt_heading_6')) {
+        const spanWrapper = headline.querySelector('.dt_heading_inner');
+        if (spanWrapper) {
+            const newWidth = spanWrapper.offsetWidth + 10;
+            spanWrapper.style.width = newWidth + 'px';
+        }
+    } else if (!headline.classList.contains('dt_heading_2')) {
+        const words = headline.querySelectorAll('.dt_heading_inner b');
+        let maxWidth = 0;
+        words.forEach((w) => {
+            const ww = w.offsetWidth;
+            if (ww > maxWidth) maxWidth = ww;
         });
+        const inner = headline.querySelector('.dt_heading_inner');
+        if (inner) inner.style.width = maxWidth + 'px';
     }
 
-    function animateHeadline($headlines) {
-        var duration = animationDelay;
-        $headlines.each(function() {
-            var headline = $(this);
-
-            if (headline.hasClass('dt_heading_4')) {
-                duration = barAnimationDelay;
-                setTimeout(function() {
-                    headline.find('.dt_heading_inner').addClass('is-loading')
-                }, barWaiting);
-            } else if (headline.hasClass('dt_heading_6')) {
-                var spanWrapper = headline.find('.dt_heading_inner'),
-                    newWidth = spanWrapper.width() + 10
-                spanWrapper.css('width', newWidth);
-            } else if (!headline.hasClass('dt_heading_2')) {
-                //assign to .dt_heading_inner the width of its longest word
-                var words = headline.find('.dt_heading_inner b'),
-                    width = 0;
-                words.each(function() {
-                    var wordWidth = $(this).width();
-                    if (wordWidth > width) width = wordWidth;
-                });
-                headline.find('.dt_heading_inner').css('width', width);
-            };
-
-            //trigger animation
-            setTimeout(function() {
-                hideWord(headline.find('.is_on').eq(0))
-            }, duration);
-        });
+    const activeWord = headline.querySelector('.is_on');
+    if (activeWord) {
+        setTimeout(() => hideWord(activeWord), duration);
     }
+}
 
-    function hideWord($word) {
-        var nextWord = takeNext($word);
+function hideWord(word) {
+    const nextWord = takeNext(word);
+    const heading = word.closest('.dt_heading');
+    if (!heading) return;
 
-        if ($word.parents('.dt_heading').hasClass('dt_heading_2')) {
-            var parentSpan = $word.parent('.dt_heading_inner');
-            parentSpan.addClass('selected').removeClass('waiting');
-            setTimeout(function() {
-                parentSpan.removeClass('selected');
-                $word.removeClass('is_on').addClass('is_off').children('i').removeClass('in').addClass('out');
-            }, selectionDuration);
-            setTimeout(function() {
-                showWord(nextWord, typeLettersDelay)
-            }, typeAnimationDelay);
+    if (heading.classList.contains('dt_heading_2')) {
+        const parentSpan = word.closest('.dt_heading_inner');
+        if (parentSpan) {
+            parentSpan.classList.add('selected');
+            parentSpan.classList.remove('waiting');
+        }
+        setTimeout(() => {
+            if (parentSpan) parentSpan.classList.remove('selected');
+            word.classList.remove('is_on');
+            word.classList.add('is_off');
+            word.querySelectorAll('i').forEach((i) => {
+                i.classList.remove('in');
+                i.classList.add('out');
+            });
+        }, selectionDuration);
+        setTimeout(() => showWord(nextWord, typeLettersDelay), typeAnimationDelay);
 
-        } else if ($word.parents('.dt_heading').hasClass('dt_heading_2') || $word.parents('.dt_heading').hasClass('dt_heading_3') || $word.parents('.dt_heading').hasClass('dt_heading_8') || $word.parents('.dt_heading').hasClass('dt_heading_9')) {
-            var bool = ($word.children('i').length >= nextWord.children('i').length) ? true : false;
-            hideLetter($word.find('i').eq(0), $word, bool, lettersDelay);
-            showLetter(nextWord.find('i').eq(0), nextWord, bool, lettersDelay);
+    } else if (heading.classList.contains('dt_heading_3') || heading.classList.contains('dt_heading_8') || heading.classList.contains('dt_heading_9')) {
+        const wordLetters = word.querySelectorAll('i');
+        const nextLetters = nextWord.querySelectorAll('i');
+        const bool = wordLetters.length >= nextLetters.length;
+        hideLetter(wordLetters[0], word, bool, lettersDelay);
+        showLetter(nextLetters[0], nextWord, bool, lettersDelay);
 
-        } else if ($word.parents('.dt_heading').hasClass('dt_heading_6')) {
-            $word.parents('.dt_heading_inner').animate({
-                width: '2px'
-            }, revealDuration, function() {
-                switchWord($word, nextWord);
+    } else if (heading.classList.contains('dt_heading_6')) {
+        const inner = word.closest('.dt_heading_inner');
+        if (inner) {
+            inner.style.transition = 'width ' + (revealDuration / 1000) + 's ease';
+            inner.style.width = '2px';
+            inner.addEventListener('transitionend', function handler() {
+                inner.removeEventListener('transitionend', handler);
+                switchWord(word, nextWord);
                 showWord(nextWord);
             });
-
-        } else if ($word.parents('.dt_heading').hasClass('dt_heading_4')) {
-            $word.parents('.dt_heading_inner').removeClass('is-loading');
-            switchWord($word, nextWord);
-            setTimeout(function() {
-                hideWord(nextWord)
-            }, barAnimationDelay);
-            setTimeout(function() {
-                $word.parents('.dt_heading_inner').addClass('is-loading')
-            }, barWaiting);
-
-        } else {
-            switchWord($word, nextWord);
-            setTimeout(function() {
-                hideWord(nextWord)
-            }, animationDelay);
         }
+
+    } else if (heading.classList.contains('dt_heading_4')) {
+        const inner = word.closest('.dt_heading_inner');
+        if (inner) inner.classList.remove('is-loading');
+        switchWord(word, nextWord);
+        setTimeout(() => hideWord(nextWord), barAnimationDelay);
+        setTimeout(() => {
+            if (inner) inner.classList.add('is-loading');
+        }, barWaiting);
+
+    } else {
+        switchWord(word, nextWord);
+        setTimeout(() => hideWord(nextWord), animationDelay);
     }
+}
 
-    function showWord($word, $duration) {
-        if ($word.parents('.dt_heading').hasClass('dt_heading_2')) {
-            showLetter($word.find('i').eq(0), $word, false, $duration);
-            $word.addClass('is_on').removeClass('is_off');
+function showWord(word, duration) {
+    const heading = word.closest('.dt_heading');
+    if (!heading) return;
 
-        } else if ($word.parents('.dt_heading').hasClass('dt_heading_6')) {
-            $word.parents('.dt_heading_inner').animate({
-                'width': $word.width() + 10
-            }, revealDuration, function() {
-                setTimeout(function() {
-                    hideWord($word)
-                }, revealAnimationDelay);
+    if (heading.classList.contains('dt_heading_2')) {
+        const letters = word.querySelectorAll('i');
+        if (letters.length) showLetter(letters[0], word, false, duration);
+        word.classList.add('is_on');
+        word.classList.remove('is_off');
+
+    } else if (heading.classList.contains('dt_heading_6')) {
+        const inner = word.closest('.dt_heading_inner');
+        if (inner) {
+            inner.style.transition = 'width ' + (revealDuration / 1000) + 's ease';
+            inner.style.width = (word.offsetWidth + 10) + 'px';
+            inner.addEventListener('transitionend', function handler() {
+                inner.removeEventListener('transitionend', handler);
+                setTimeout(() => hideWord(word), revealAnimationDelay);
             });
         }
     }
+}
 
-    function hideLetter($letter, $word, $bool, $duration) {
-        $letter.removeClass('in').addClass('out');
+function hideLetter(letter, word, bool, duration) {
+    if (!letter) return;
+    letter.classList.remove('in');
+    letter.classList.add('out');
 
-        if (!$letter.is(':last-child')) {
-            setTimeout(function() {
-                hideLetter($letter.next(), $word, $bool, $duration);
-            }, $duration);
-        } else if ($bool) {
-            setTimeout(function() {
-                hideWord(takeNext($word))
-            }, animationDelay);
-        }
-
-        if ($letter.is(':last-child') && $('html').hasClass('no-csstransitions')) {
-            var nextWord = takeNext($word);
-            switchWord($word, nextWord);
-        }
+    const next = letter.nextElementSibling;
+    if (next) {
+        setTimeout(() => hideLetter(next, word, bool, duration), duration);
+    } else if (bool) {
+        setTimeout(() => hideWord(takeNext(word)), animationDelay);
     }
 
-    function showLetter($letter, $word, $bool, $duration) {
-        $letter.addClass('in').removeClass('out');
+    if (!next && document.documentElement.classList.contains('no-csstransitions')) {
+        const nextWord = takeNext(word);
+        switchWord(word, nextWord);
+    }
+}
 
-        if (!$letter.is(':last-child')) {
-            setTimeout(function() {
-                showLetter($letter.next(), $word, $bool, $duration);
-            }, $duration);
-        } else {
-            if ($word.parents('.dt_heading').hasClass('dt_heading_2')) {
-                setTimeout(function() {
-                    $word.parents('.dt_heading_inner').addClass('waiting');
-                }, 200);
+function showLetter(letter, word, bool, duration) {
+    if (!letter) return;
+    letter.classList.add('in');
+    letter.classList.remove('out');
+
+    const next = letter.nextElementSibling;
+    if (next) {
+        setTimeout(() => showLetter(next, word, bool, duration), duration);
+    } else {
+        const heading = word.closest('.dt_heading');
+        if (heading && heading.classList.contains('dt_heading_2')) {
+            setTimeout(() => {
+                const inner = word.closest('.dt_heading_inner');
+                if (inner) inner.classList.add('waiting');
+            }, 200);
+        }
+        if (!bool) {
+            setTimeout(() => hideWord(word), animationDelay);
+        }
+    }
+}
+
+function takeNext(word) {
+    return word.nextElementSibling || word.parentElement.children[0];
+}
+
+function switchWord(oldWord, newWord) {
+    oldWord.classList.remove('is_on');
+    oldWord.classList.add('is_off');
+    newWord.classList.remove('is_off');
+    newWord.classList.add('is_on');
+}
+
+// ============================================================
+// Swiper Carousels (reemplaza OwlCarousel)
+// ============================================================
+function initSwiperCarousels() {
+    document.querySelectorAll('.dt_swiper_carousel').forEach((el) => {
+        const optionsAttr = el.getAttribute('data-swiper-options');
+        if (!optionsAttr) return;
+
+        try {
+            const options = JSON.parse(optionsAttr);
+            const swiperInstance = new Swiper(el, options);
+
+            // Thumbnav para slider principal
+            if (el.closest('.dt_slider--thumbnav')) {
+                updateSliderThumbnav(el);
+                swiperInstance.on('slideChange', () => updateSliderThumbnav(el));
             }
-            if (!$bool) {
-                setTimeout(function() {
-                    hideWord($word)
-                }, animationDelay)
-            }
+        } catch (e) {
+            console.error('[ViceUnf] Error al inicializar Swiper:', e);
         }
+    });
+}
+
+/**
+ * @description Actualiza las imágenes de navegación prev/next del slider thumbnav.
+ */
+function updateSliderThumbnav(swiperEl) {
+    const activeSlide = swiperEl.querySelector('.swiper-slide-active');
+    if (!activeSlide) return;
+
+    const nextSlide = swiperEl.querySelector('.swiper-slide-next');
+    const prevSlide = swiperEl.querySelector('.swiper-slide-prev');
+
+    const prevHolder = swiperEl.querySelector('.swiper-button-prev .imgholder');
+    const nextHolder = swiperEl.querySelector('.swiper-button-next .imgholder');
+
+    if (prevSlide && prevHolder) {
+        const prevImg = prevSlide.querySelector('.dt_slider-item > img, .dt_slider-item img.dt-slider-bg');
+        if (prevImg) prevHolder.style.backgroundImage = 'url(' + prevImg.getAttribute('src') + ')';
     }
 
-    function takeNext($word) {
-        return (!$word.is(':last-child')) ? $word.next() : $word.parent().children().eq(0);
+    if (nextSlide && nextHolder) {
+        const nextImg = nextSlide.querySelector('.dt_slider-item > img, .dt_slider-item img.dt-slider-bg');
+        if (nextImg) nextHolder.style.backgroundImage = 'url(' + nextImg.getAttribute('src') + ')';
     }
+}
 
-    function switchWord($oldWord, $newWord) {
-        $oldWord.removeClass('is_on').addClass('is_off');
-        $newWord.removeClass('is_off').addClass('is_on');
-    }
-    
-    let dtOwlCarousels = $(".dt_owl_carousel");
-	if (dtOwlCarousels.length) {
-		dtOwlCarousels.each(function () {
-			let elm = $(this);
-			let options = elm.data("owl-options");
-			dtOwlCarousels = elm.owlCarousel(
-				"object" === typeof options ? options : JSON.parse(options)
-			);
-		});
-	}
+// ============================================================
+// Scroll Animations (reemplaza WOW.js + scrollAnimations plugin)
+// ============================================================
+function initScrollAnimations() {
+    const elements = document.querySelectorAll('[data-animation]:not([data-animation-text]), [data-animation-box]');
+    if (!elements.length) return;
 
-    if ( $(".dt_slider").hasClass("dt_slider--thumbnav") ) {
-        function owlAsSliderMainThumb() {
-            $('.owl-item').removeClass('prev next');
-            var activeSlide = $('.dt_slider .owl-item.active');
-            activeSlide.next('.owl-item').addClass('next');
-            activeSlide.prev('.owl-item').addClass('prev');
-            var nextSlideImg = $('.dt_slider .owl-item.next').find('.dt_slider-item>img').attr('src');
-            var prevSlideImg = $('.dt_slider .owl-item.prev').find('.dt_slider-item>img').attr('src');
-            $('.dt_slider .owl-nav .owl-prev .imgholder').css({
-                backgroundImage: 'url(' + prevSlideImg + ')'
+    // Configurar animation-delay antes de observar
+    elements.forEach((el) => {
+        const textEls = el.querySelectorAll('[data-animation-text]');
+        if (textEls.length) {
+            textEls.forEach((textEl) => {
+                const delay = textEl.getAttribute('data-animation-delay');
+                if (delay) textEl.style.animationDelay = delay;
             });
-            $('.dt_slider .owl-nav .owl-next .imgholder').css({
-                backgroundImage: 'url(' + nextSlideImg + ')'
-            });
+        } else {
+            const delay = el.getAttribute('data-animation-delay');
+            if (delay) el.style.animationDelay = delay;
         }
-        owlAsSliderMainThumb();
-        $('.dt_slider .dt_owl_carousel').on('translated.owl.carousel', function() {
-            owlAsSliderMainThumb();
-        });
-    }
+    });
 
-    /* ScrollAnimations */
-	var scrollAnim = $('[data-animation]:not([data-animation-text]), [data-animation-box]');
-	scrollAnim.scrollAnimations();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting || entry.target.classList.contains('animated')) return;
 
-    // Top Up
-    if ($('.dt_uptop').length) {
-        var progressPath = document.querySelector('.dt_uptop path');
-        var pathLength = progressPath.getTotalLength();
-        progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
-        progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
-        progressPath.style.strokeDashoffset = pathLength;
-        progressPath.getBoundingClientRect();
-        progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';
-        var updateProgress = function() {
-            var scroll = $(window).scrollTop();
-            var height = $(document).height() - $(window).height();
-            var progress = pathLength - (scroll * pathLength / height);
-            progressPath.style.strokeDashoffset = progress;
-        }
-        updateProgress();
-        $(window).scroll(updateProgress);
-        var offset = 50;
-        var duration = 550;
-        $(window).on('scroll', function() {
-            if ($(this).scrollTop() > offset) {
-                $('.dt_uptop').addClass('active');
+            const el = entry.target;
+            const textEls = el.querySelectorAll('[data-animation-text]');
+
+            if (textEls.length) {
+                el.classList.add('animated');
+                textEls.forEach((textEl) => {
+                    textEl.classList.add('animated');
+                    const anim = textEl.getAttribute('data-animation');
+                    if (anim) textEl.classList.add(anim);
+                });
             } else {
-                $('.dt_uptop').removeClass('active');
+                el.classList.add('animated');
+                const anim = el.getAttribute('data-animation');
+                if (anim) el.classList.add(anim);
             }
-        });
-        $('.dt_uptop').on('click', function(event) {
-            event.preventDefault();
 
-            jQuery('html, body').animate({
-                scrollTop: 0
-            }, duration);
-            return false;
+            observer.unobserve(el);
         });
+    }, { threshold: 0, rootMargin: '-30% 0px' });
+
+    elements.forEach((el) => observer.observe(el));
+}
+
+// ============================================================
+// Scroll-to-Top (dt_uptop)
+// ============================================================
+function initScrollToTop() {
+    const uptop = document.querySelector('.dt_uptop');
+    if (!uptop) return;
+
+    const progressPath = uptop.querySelector('path');
+    if (!progressPath) return;
+
+    const pathLength = progressPath.getTotalLength();
+    progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
+    progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
+    progressPath.style.strokeDashoffset = pathLength;
+    progressPath.getBoundingClientRect();
+    progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';
+
+    function updateProgress() {
+        const scroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = pathLength - (scroll * pathLength / height);
+        progressPath.style.strokeDashoffset = progress;
     }
 
-    // Lightbox
-    if($('.dt_lightbox_img').length) {
-		$('.dt_lightbox_img').fancybox({
-			openEffect  : 'fade',
-			closeEffect : 'fade',
-			helpers : {
-				media : {}
-			}
-		});
-	}
+    updateProgress();
 
-    //Fact Counter + Text Count
-	if($('.dt_count_box').length){
-		$('.dt_count_box').appear(function(){
-	
-			var $t = $(this),
-				n = $t.find(".dt_count_text").attr("data-stop"),
-				r = parseInt($t.find(".dt_count_text").attr("data-speed"), 10);
-				
-			if (!$t.hasClass("counted")) {
-				$t.addClass("counted");
-				$({
-					countNum: $t.find(".dt_count_text").text()
-				}).animate({
-					countNum: n
-				}, {
-					duration: r,
-					easing: "linear",
-					step: function() {
-						$t.find(".dt_count_text").text(Math.floor(this.countNum));
-					},
-					complete: function() {
-						$t.find(".dt_count_text").text(this.countNum);
-					}
-				});
-			}
-			
-		},{accY: 0});
-	}
+    window.addEventListener('scroll', () => {
+        updateProgress();
+        if (window.scrollY > 50) {
+            uptop.classList.add('active');
+        } else {
+            uptop.classList.remove('active');
+        }
+    }, { passive: true });
 
-    if($('.paroller').length){
-		$('.dt_image_block:not(.style2, .style3) .paroller .image').paroller({
-			  factor: 0.1,            // multiplier for scrolling speed and offset, +- values for direction control  
-			  factorLg: 0.1,          // multiplier for scrolling speed and offset if window width is less than 1200px, +- values for direction control  
-			  type: 'foreground',     // background, foreground  
-			  direction: 'vertical' // vertical, horizontal  
-		});
-	}
+    uptop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
-	if($('.paroller-2').length){
-		$('.dt_image_block:not(.style2, .style3) .paroller-2 .image').paroller({
-			  factor: -0.1,            // multiplier for scrolling speed and offset, +- values for direction control  
-			  factorLg: -0.1,          // multiplier for scrolling speed and offset if window width is less than 1200px, +- values for direction control  
-			  type: 'foreground',     // background, foreground  
-			  direction: 'vertical' // vertical, horizontal  
-		});
-	}
+// ============================================================
+// GLightbox (reemplaza Fancybox)
+// ============================================================
+function initLightbox() {
+    if (typeof GLightbox === 'undefined') return;
+    if (!document.querySelector('.dt_lightbox_img')) return;
 
-    //Parallax Scene for Icons
-	if($('.parallax-scene-1').length){
-		var scene = $('.parallax-scene-1').get(0);
-		var parallaxInstance = new Parallax(scene);
-    }
+    GLightbox({
+        selector: '.dt_lightbox_img',
+        openEffect: 'fade',
+        closeEffect: 'fade',
+    });
+}
 
-	// Sportlight DOM load event
-    if ( $('.dt_spotlight').length ) {
-        window.addEventListener("DOMContentLoaded", () => {
-            const spotlight = document.querySelector('.dt_spotlight');
-            let spotlightSize = 'transparent 10px, rgba(3, 4, 21, 0.78) 650px)';
-            window.addEventListener('mousemove', e => updateSpotlight(e));
-            window.addEventListener('mousedown', e => {
-                spotlightSize = 'transparent 10px, rgba(3, 4, 21, 0.78) 500px)';
-                updateSpotlight(e);
-            });
-            window.addEventListener('mouseup', e => {
-                spotlightSize = 'transparent 10px, rgba(3, 4, 21, 0.78) 650px)';
-                updateSpotlight(e);
-            });
-            function updateSpotlight(e) {
-                if (spotlight) {
-                    spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 15}%, ${spotlightSize}`;
+// ============================================================
+// Counter Animation (reemplaza jQuery Appear + $.animate)
+// ============================================================
+function initCounters() {
+    const boxes = document.querySelectorAll('.dt_count_box');
+    if (!boxes.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const box = entry.target;
+            if (box.classList.contains('counted')) return;
+
+            box.classList.add('counted');
+            const countEl = box.querySelector('.dt_count_text');
+            if (!countEl) return;
+
+            const targetVal = parseFloat(countEl.getAttribute('data-stop'));
+            const duration = parseInt(countEl.getAttribute('data-speed'), 10) || 1500;
+            const startVal = parseFloat(countEl.textContent) || 0;
+            const startTime = performance.now();
+
+            function animate(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = startVal + (targetVal - startVal) * progress;
+
+                countEl.textContent = progress < 1 ? Math.floor(current) : targetVal;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
                 }
             }
+
+            requestAnimationFrame(animate);
+            observer.unobserve(box);
+        });
+    }, { threshold: 0.5 });
+
+    boxes.forEach((box) => observer.observe(box));
+}
+
+// ============================================================
+// Paroller (reemplaza jQuery Paroller — ~30 líneas Vanilla)
+// ============================================================
+function initParallaxScroll() {
+    const parollerElements = document.querySelectorAll('.paroller .image, .paroller-2 .image');
+    if (!parollerElements.length) return;
+
+    function updateParallax() {
+        const scrollTop = window.scrollY;
+        const windowHeight = window.innerHeight;
+
+        parollerElements.forEach((el) => {
+            const container = el.closest('.paroller, .paroller-2');
+            if (!container) return;
+
+            const rect = container.getBoundingClientRect();
+            const isVisible = rect.top < windowHeight && rect.bottom > 0;
+            if (!isVisible) return;
+
+            const isReverse = container.classList.contains('paroller-2');
+            const factor = isReverse ? -0.1 : 0.1;
+            const center = rect.top + rect.height / 2 - windowHeight / 2;
+            const offset = center * factor;
+
+            el.style.transform = 'translateY(' + offset + 'px)';
         });
     }
 
-    
-    /* ==========================================================================
-    When document is loaded, do
-    ========================================================================== */
-	
-	$(window).on('load', function() {
-		site_preloader();
-        initHeadline();
-	});
-    
-})(jQuery);
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+}
+
+// ============================================================
+// Parallax Scene (reemplaza Parallax.js — mousemove nativo)
+// ============================================================
+function initParallaxScene() {
+    const scene = document.querySelector('.parallax-scene-1');
+    if (!scene) return;
+
+    // Si Parallax global existe (vendor cargado), usarlo directamente
+    if (typeof Parallax !== 'undefined') {
+        new Parallax(scene);
+        return;
+    }
+
+    // Fallback: efecto parallax con mousemove nativo
+    const layers = scene.querySelectorAll('[data-depth]');
+    if (!layers.length) return;
+
+    window.addEventListener('mousemove', (e) => {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const moveX = (e.clientX - centerX) / centerX;
+        const moveY = (e.clientY - centerY) / centerY;
+
+        layers.forEach((layer) => {
+            const depth = parseFloat(layer.getAttribute('data-depth')) || 0;
+            const translateX = moveX * depth * 30;
+            const translateY = moveY * depth * 30;
+            layer.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px)';
+        });
+    });
+}
+
+// ============================================================
+// Spotlight
+// ============================================================
+function initSpotlight() {
+    const spotlight = document.querySelector('.dt_spotlight');
+    if (!spotlight) return;
+
+    let spotlightSize = 'transparent 10px, rgba(3, 4, 21, 0.78) 650px)';
+
+    function updateSpotlight(e) {
+        spotlight.style.backgroundImage =
+            'radial-gradient(circle at ' +
+            (e.pageX / window.innerWidth * 100) + '% ' +
+            (e.pageY / window.innerHeight * 15) + '%, ' +
+            spotlightSize;
+    }
+
+    window.addEventListener('mousemove', updateSpotlight);
+    window.addEventListener('mousedown', (e) => {
+        spotlightSize = 'transparent 10px, rgba(3, 4, 21, 0.78) 500px)';
+        updateSpotlight(e);
+    });
+    window.addEventListener('mouseup', (e) => {
+        spotlightSize = 'transparent 10px, rgba(3, 4, 21, 0.78) 650px)';
+        updateSpotlight(e);
+    });
+}
+
+// ============================================================
+// Inicialización global
+// ============================================================
+window.addEventListener('load', () => {
+    sitePreloader();
+    initHeadline();
+});
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onDOMReady);
+} else {
+    onDOMReady();
+}
+
+function onDOMReady() {
+    initSwiperCarousels();
+    initScrollAnimations();
+    initScrollToTop();
+    initLightbox();
+    initCounters();
+    initParallaxScroll();
+    initParallaxScene();
+    initSpotlight();
+}

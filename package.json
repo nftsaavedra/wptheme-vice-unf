@@ -17,7 +17,8 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "build:css": "postcss src/main.css -o style.css --no-map"
+    "build:css": "postcss src/main.css -o style.css --no-map",
+    "build:framework": "postcss assets/css/framework.css -o assets/css/framework.min.css --no-map"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",

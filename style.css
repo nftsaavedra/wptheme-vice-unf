@@ -1,20 +1,22 @@
 /*
-Theme Name: 	   VPIN — Vicepresidencia de Investigación
+Theme Name: 	   ViceUnf
 Text Domain: 	   viceunf
-Version:            1.0.0
+Template: 			softme
+Version:            0.0.1
 Tested up to:       6.8
 Requires at least:  4.7
 Requires PHP:       7.4
 Author:             @nftsaavedra
 Author URI:         https://viceinvestigacion.unf.edu.pe/
-Theme URI:          https://viceinvestigacion.unf.edu.pe/
-Description:        Tema institucional de la Vicepresidencia de Investigación (VPIN) — Universidad Nacional de Frontera (UNF). Diseñado para fortalecer la presencia digital de la investigación universitaria, la producción científica y la difusión del conocimiento.
+Theme URI:          https://viceinvestigacion.unf.edu.pe/themes/viceunf/
+Description:        ViceUnf es un tema de WordPress ligero, profesional, flexible y visualmente atractivo. ViceUnf es ideal para portales institucionales, soluciones tecnológicas, agencias, marketing, consultoría y empresas de servicios. Basado en un análisis profundo de las necesidades de la Vicepresidencia de Investigación de la Universidad Nacional de Frontera, permite crear sitios web modernos y funcionales con un diseño profesional y adaptable.
 Tags:               una-columna, dos-columnas, barra-lateral-derecha, cabecera-flexible, fondo-personalizado, cabecera-personalizada, menú-personalizado, estilo-editor, imágenes-destacadas, widgets-pie, formatos-de-entrada, opciones-del-tema, comentarios-anidados, listo-para-traducir, plantilla-ancho-completo, logo-personalizado, blog
 License:            GPLv3 o posterior
 License URI:        https://www.gnu.org/licenses/gpl-3.0.html
 
-Desarrollado por la Vicepresidencia de Investigación de la
-Universidad Nacional de Frontera (UNF), Sullana — Perú.
+Este tema, al igual que WordPress, está licenciado bajo la GPL.
+Úsalo para crear algo increíble, diviértete y comparte lo que aprendas
+con otros.
 */
 
 .has-text-align-justify {
@@ -25,14 +27,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   --dt-pri-color: #00794e; /* Color principal */
   --dt-priTwo-color: #2d4260; /* Variante más clara del principal */
   --dt-sec-color: #0b2346; /* Color secundario */
-
-  /* Escala Tipográfica (alineada con framework.css) */
-  --viceunf-fs-xs: 1.2rem;    /* Badges, counters, meta secundaria */
-  --viceunf-fs-sm: 1.4rem;    /* Texto secundario, links de lista */
-  --viceunf-fs-base: 1.6rem;  /* Body, inputs, botones (= body) */
-  --viceunf-fs-md: 1.8rem;    /* Subtítulos secundarios */
-  --viceunf-fs-lg: 2rem;      /* Subtítulos principales (= h5) */
-  --viceunf-fs-xl: 2.4rem;    /* Títulos de sección (= h4) */
 }
 
 /* Button 2 */
@@ -69,7 +63,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(2n) {
-  -webkit-animation-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
   animation-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 
@@ -78,7 +71,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(2n) {
-  -webkit-animation: dt_nanuk_2 0.5s forwards;
   animation: dt_nanuk_2 0.5s forwards;
 }
 
@@ -90,61 +82,51 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(2n + 1) {
-  -webkit-animation: dt_nanuk_1 0.5s forwards;
   animation: dt_nanuk_1 0.5s forwards;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(1),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(1) {
-  -webkit-animation-delay: 0s;
   animation-delay: 0s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(2),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(2) {
-  -webkit-animation-delay: 0.05s;
   animation-delay: 0.05s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(3),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(3) {
-  -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(4),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(4) {
-  -webkit-animation-delay: 0.15s;
   animation-delay: 0.15s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(5),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(5) {
-  -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(6),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(6) {
-  -webkit-animation-delay: 0.25s;
   animation-delay: 0.25s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(7),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(7) {
-  -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(8),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(8) {
-  -webkit-animation-delay: 0.35s;
   animation-delay: 0.35s;
 }
 
 .btn--effect-two .dt-btn:not(.submit-btn):hover .dt-btn-text span:nth-child(9),
 .btn--effect-two .dt-btn:not(.submit-btn):focus .dt-btn-text span:nth-child(9) {
-  -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
@@ -153,7 +135,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(10) {
-  -webkit-animation-delay: 0.45s;
   animation-delay: 0.45s;
 }
 
@@ -162,7 +143,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(11) {
-  -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
 
@@ -171,7 +151,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(12) {
-  -webkit-animation-delay: 0.55s;
   animation-delay: 0.55s;
 }
 
@@ -180,7 +159,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(13) {
-  -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
 
@@ -189,7 +167,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(14) {
-  -webkit-animation-delay: 0.65s;
   animation-delay: 0.65s;
 }
 
@@ -198,7 +175,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(15) {
-  -webkit-animation-delay: 0.7s;
   animation-delay: 0.7s;
 }
 
@@ -207,7 +183,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(16) {
-  -webkit-animation-delay: 0.75s;
   animation-delay: 0.75s;
 }
 
@@ -216,7 +191,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(17) {
-  -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
 
@@ -225,7 +199,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(18) {
-  -webkit-animation-delay: 0.85s;
   animation-delay: 0.85s;
 }
 
@@ -234,7 +207,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(19) {
-  -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
 
@@ -243,7 +215,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(20) {
-  -webkit-animation-delay: 0.95s;
   animation-delay: 0.95s;
 }
 
@@ -252,7 +223,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(21) {
-  -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 
@@ -261,7 +231,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(22) {
-  -webkit-animation-delay: 1.05s;
   animation-delay: 1.05s;
 }
 
@@ -270,7 +239,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(23) {
-  -webkit-animation-delay: 1.1s;
   animation-delay: 1.1s;
 }
 
@@ -279,7 +247,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(24) {
-  -webkit-animation-delay: 1.15s;
   animation-delay: 1.15s;
 }
 
@@ -288,7 +255,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(25) {
-  -webkit-animation-delay: 1.2s;
   animation-delay: 1.2s;
 }
 
@@ -297,7 +263,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(26) {
-  -webkit-animation-delay: 1.25s;
   animation-delay: 1.25s;
 }
 
@@ -306,7 +271,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(27) {
-  -webkit-animation-delay: 1.3s;
   animation-delay: 1.3s;
 }
 
@@ -315,7 +279,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(28) {
-  -webkit-animation-delay: 1.35s;
   animation-delay: 1.35s;
 }
 
@@ -324,7 +287,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(29) {
-  -webkit-animation-delay: 1.4s;
   animation-delay: 1.4s;
 }
 
@@ -333,7 +295,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(30) {
-  -webkit-animation-delay: 1.45s;
   animation-delay: 1.45s;
 }
 
@@ -342,7 +303,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(31) {
-  -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
 
@@ -351,7 +311,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   .dt-btn:not(.submit-btn):focus
   .dt-btn-text
   span:nth-child(32) {
-  -webkit-animation-delay: 1.55s;
   animation-delay: 1.55s;
 }
 
@@ -359,23 +318,19 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   0%,
   100% {
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
   49% {
     opacity: 1;
-    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
   }
   50% {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
     color: inherit;
   }
   51% {
     opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
     color: inherit;
   }
@@ -387,23 +342,19 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   0%,
   100% {
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
   49% {
     opacity: 1;
-    -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
   50% {
     opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
     color: inherit;
   }
   51% {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
     color: inherit;
   }
@@ -412,7 +363,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   }
 }
 
-/* Header Eight */
 /* Header Eight */
 .header--eight .hamburger span {
   background-color: #ffff;
@@ -429,11 +379,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
 
 .header--eight .dt_header-inner .dt_header-topbar {
   background-color: var(--dt-pri-color);
-  color: #fff;
-}
-
-.header--eight .dt_header-inner .dt_header-topbar .contact__body a:hover,
-.header--eight .dt_header-inner .dt_header-topbar .contact__body a:focus {
   color: #fff;
 }
 
@@ -563,8 +508,7 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
 }
 
 .dt_slider--five .dt_slider-wrapper::before,
-.dt_slider--five .dt_slider-content .subtitle::before,
-.dt_slider--five .dt_owl_carousel.owl-carousel .owl-dots {
+.dt_slider--five .dt_slider-content .subtitle::before {
   display: none;
 }
 
@@ -575,78 +519,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   }
   .dt_slider--five .dt_slider-content .title {
     font-size: 8rem;
-  }
-  .dt_slider--five .dt_owl_carousel.owl-carousel .owl-nav {
-    bottom: 0;
-    padding: 0;
-    top: unset;
-    left: unset;
-    position: unset;
-    display: unset;
-    -webkit-transform: unset;
-    transform: unset;
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"]
-    + [class*="owl-"] {
-    margin: 0;
-  }
-  .dt_slider--five .dt_owl_carousel.owl-carousel .owl-nav [class*="owl-"] {
-    position: absolute;
-    top: 50%;
-    width: 6rem;
-    height: 6rem;
-    border-radius: 11rem;
-    background-color: var(--dt-pri-color);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"]:hover {
-    width: 11rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.25);
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"].owl-prev {
-    left: 3.6%;
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"].owl-next {
-    right: 3.6%;
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"].owl-prev:hover {
-    left: 1%;
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"].owl-next:hover {
-    right: 1%;
-  }
-  .dt_slider--five
-    .dt_owl_carousel.owl-carousel
-    .owl-nav
-    [class*="owl-"]
-    .imgholder {
-    border-radius: 11rem;
-  }
-  .dt_slider .dt_owl_carousel.owl-carousel .owl-nav [class*="owl-"] i {
-    vertical-align: middle;
-  }
-
-  .dt_slider--five .dt_owl_carousel.owl-carousel .owl-nav .disabled {
-    display: none !important;
   }
 }
 
@@ -663,7 +535,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   z-index: -1;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -676,52 +547,23 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   left: 0;
   top: 8%;
   background: var(--dt-priGrd-color);
-  -webkit-animation: dt_circle_shapes 20s infinite;
   animation: dt_circle_shapes 20s infinite;
-}
-
-@-webkit-keyframes dt_circle_shapes {
-  0% {
-    -webkit-transform: translate(0, 0) rotate(0deg);
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    -webkit-transform: translate(-10rem -10rem) rotate(90deg);
-    transform: translate(-10rem -10rem) rotate(90deg);
-  }
-  50% {
-    -webkit-transform: translate(10rem, 5rem) rotate(180deg);
-    transform: translate(10rem, 5rem) rotate(180deg);
-  }
-  75% {
-    -webkit-transform: translate(-10rem, 15rem) rotate(270deg);
-    transform: translate(-10rem, 15rem) rotate(270deg);
-  }
-  100% {
-    -webkit-transform: translate(0, 0) rotate(360deg);
-    transform: translate(0, 0) rotate(360deg);
-  }
 }
 
 @keyframes dt_circle_shapes {
   0% {
-    -webkit-transform: translate(0, 0) rotate(0deg);
     transform: translate(0, 0) rotate(0deg);
   }
   25% {
-    -webkit-transform: translate(-10rem -10rem) rotate(90deg);
     transform: translate(-10rem -10rem) rotate(90deg);
   }
   50% {
-    -webkit-transform: translate(10rem, 5rem) rotate(180deg);
     transform: translate(10rem, 5rem) rotate(180deg);
   }
   75% {
-    -webkit-transform: translate(-10rem, 15rem) rotate(270deg);
     transform: translate(-10rem, 15rem) rotate(270deg);
   }
   100% {
-    -webkit-transform: translate(0, 0) rotate(360deg);
     transform: translate(0, 0) rotate(360deg);
   }
 }
@@ -736,28 +578,14 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   right: -5%;
   bottom: -5%;
   left: -5%;
-  -webkit-animation: dt_rounded 30s linear infinite;
   animation: dt_rounded 30s linear infinite;
-}
-
-@-webkit-keyframes dt_rounded {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 
 @keyframes dt_rounded {
   0% {
-    -webkit-transform: rotate(0);
     transform: rotate(0);
   }
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -769,36 +597,17 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   height: 1.8rem;
   position: absolute;
   border-radius: 50%;
-  -webkit-animation: dt_zoomInOutTwo 4s infinite;
   animation: dt_zoomInOutTwo 4s infinite;
-}
-
-@-webkit-keyframes dt_zoomInOutTwo {
-  0% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(0.25);
-    transform: scale(0.25);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
 }
 
 @keyframes dt_zoomInOutTwo {
   0% {
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
   50% {
-    -webkit-transform: scale(0.25);
     transform: scale(0.25);
   }
   100% {
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -812,7 +621,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
 .circle_shapes .circle:after {
   bottom: 6%;
   right: 25%;
-  -webkit-animation-delay: 2s;
   animation-delay: 2s;
   background: #f3ab06;
 }
@@ -831,7 +639,7 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
 
 .dt_protect--one {
   background:
-    url("assets/images/background/featurelist_bg.jpg") no-repeat center top,
+    url("assets/images/background/featurelist_bg.webp") no-repeat center top,
     #f7f7f9;
 }
 
@@ -898,7 +706,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   border-radius: 0;
   background-color: var(--dt-pri-color);
   z-index: -1;
-  -webkit-transition: var(--dt-transition);
   transition: var(--dt-transition);
 }
 
@@ -915,7 +722,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   font-size: 1.8rem;
   color: var(--dt-whi-color);
   background-color: var(--dt-pri-color);
-  -webkit-transition: var(--dt-transition);
   transition: var(--dt-transition);
 }
 
@@ -952,14 +758,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
 .dt_protect--one .dt_item_inner .dt_item_holder .dt_item_title a {
   color: inherit;
   text-decoration: none;
-  background: -webkit-gradient(
-      linear,
-      left top,
-      right top,
-      from(currentcolor),
-      to(currentcolor)
-    )
-    0 86%/0 0.18rem no-repeat;
   background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0
     86%/0 0.18rem no-repeat;
 }
@@ -1006,7 +804,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   border-radius: 12rem;
   text-align: center;
   margin: 0 auto 3.3rem;
-  -webkit-transition: all 300ms linear 0ms;
   transition: all 300ms linear 0ms;
 }
 
@@ -1028,32 +825,16 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
   bottom: 1rem;
   right: 1rem;
   border-radius: 12rem;
-  -webkit-animation: service_hexagon 2s infinite linear;
   animation: service_hexagon 2s infinite linear;
-  -webkit-animation-play-state: paused;
   animation-play-state: paused;
-}
-
-@-webkit-keyframes service_hexagon {
-  0% {
-    -webkit-transform: rotate(30deg);
-    transform: rotate(30deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 
 @keyframes service_hexagon {
   0% {
-    -webkit-transform: rotate(30deg);
     transform: rotate(30deg);
   }
 
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -1134,7 +915,6 @@ Universidad Nacional de Frontera (UNF), Sullana — Perú.
 }
 
 .dt_service--eight .dt_item_inner:hover .num-icon-wrap .dt_item_icon_rotate {
-  -webkit-animation-play-state: running;
   animation-play-state: running;
 }
 
@@ -1303,12 +1083,10 @@ img.aligncenter {
 }
 
 .rtl .header--eight .site--logo:before {
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%);
 }
 
 .rtl .header--eight .site--logo:after {
-  -webkit-clip-path: polygon(3% 0, 100% 0, 100% 100%, 0 100%);
   clip-path: polygon(3% 0, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -1492,10 +1270,6 @@ table.wc-block-cart-items .wc-block-components-product-price {
   color: #fff;
 }
 
-.widget.widget_shopping_cart a:before {
-  display: none;
-}
-
 .widget .wc-block-grid__products a:before {
   display: none;
 }
@@ -1593,7 +1367,6 @@ table.wc-block-cart-items
 }
 
 .wp-block-avatar:hover img {
-  -webkit-transform: scale(1.07);
   transform: scale(1.07);
 }
 
@@ -1726,8 +1499,10 @@ table.wc-block-cart-items
 .dt_event_box .dt_event_img .image img {
   width: 100%;
   height: 256px;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 /* Estilos para móviles */
@@ -1762,11 +1537,6 @@ table.wc-block-cart-items
   text-align: center;
 }
 
-.dt_clients--one .dt_owl_carousel {
-  padding: 4.5rem 0 7rem;
-  border-top: 0.1rem solid rgba(189, 189, 189, 0.35);
-}
-
 .dt_clients_logo {
   display: flex;
   align-items: center;
@@ -1777,7 +1547,6 @@ table.wc-block-cart-items
   margin-top: 2rem;
   margin-bottom: 3.2rem;
   border: 0.1rem solid rgba(189, 189, 189, 0.35);
-  -webkit-transition: var(--dt-transition);
   transition: var(--dt-transition);
 }
 
@@ -1838,46 +1607,14 @@ table.wc-block-cart-items
 
 .dt_clients_logo .image img {
   opacity: 0.5;
-  -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
 
 .dt_clients_logo:hover img,
 .dt_clients_logo:focus-within img {
   transform: scale(1.1);
-  -webkit-filter: grayscale(0%);
   filter: grayscale(0%);
   opacity: 1;
-}
-
-.dt_clients .dt_owl_carousel:not(.slider) .owl-nav [class*="owl-"] {
-  background: rgba(189, 189, 189, 0.35);
-  border-radius: 0;
-  width: 2.6rem;
-  height: 2.6rem;
-}
-
-.dt_clients .dt_owl_carousel:not(.slider) .owl-nav [class*="owl-"]:hover {
-  background: var(--dt-pri-color);
-}
-
-.dt_clients .dt_owl_carousel:not(.slider) .owl-nav [class*="owl-"] i {
-  font-size: 1.45rem;
-}
-
-@media (min-width: 62em) {
-  .dt_clients .dt_owl_carousel:not(.slider) .owl-nav {
-    margin-top: 0;
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    width: 37rem;
-    padding: 0 2rem;
-    justify-content: space-between;
-    background-color: var(--dt-whi-color);
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
 }
 
 /*
@@ -1900,8 +1637,10 @@ table.wc-block-cart-items
 .dt_post_item .image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Esta es la propiedad clave: escala la imagen para cubrir el contenedor sin perder la proporción. */
-  object-position: center; /* Centra la imagen antes de recortarla. */
+  -o-object-fit: cover;
+     object-fit: cover; /* Esta es la propiedad clave: escala la imagen para cubrir el contenedor sin perder la proporción. */
+  -o-object-position: center;
+     object-position: center; /* Centra la imagen antes de recortarla. */
 }
 
 /* Service */
@@ -1976,7 +1715,6 @@ table.wc-block-cart-items
   height: 0;
   border-radius: 0.6rem;
   z-index: -1;
-  -webkit-transition: var(--dt-transition);
   transition: var(--dt-transition);
 }
 
@@ -2048,7 +1786,6 @@ table.wc-block-cart-items
   justify-content: center;
   border-radius: 1rem;
   z-index: 1;
-  -webkit-transition: var(--dt-transition);
   transition: var(--dt-transition);
 }
 
@@ -2068,7 +1805,6 @@ table.wc-block-cart-items
   border-radius: 1rem;
   background-color: #fff;
   z-index: -1;
-  -webkit-transition: var(--dt-transition);
   transition: var(--dt-transition);
 }
 
@@ -2167,7 +1903,6 @@ table.wc-block-cart-items
   border-radius: 12rem;
   text-align: center;
   margin: 0 auto 3.3rem;
-  -webkit-transition: all 300ms linear 0ms;
   transition: all 300ms linear 0ms;
 }
 
@@ -2189,32 +1924,16 @@ table.wc-block-cart-items
   bottom: 1rem;
   right: 1rem;
   border-radius: 12rem;
-  -webkit-animation: service_hexagon 2s infinite linear;
   animation: service_hexagon 2s infinite linear;
-  -webkit-animation-play-state: paused;
   animation-play-state: paused;
-}
-
-@-webkit-keyframes service_hexagon {
-  0% {
-    -webkit-transform: rotate(30deg);
-    transform: rotate(30deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 
 @keyframes service_hexagon {
   0% {
-    -webkit-transform: rotate(30deg);
     transform: rotate(30deg);
   }
 
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -2295,7 +2014,6 @@ table.wc-block-cart-items
 }
 
 .dt_service--eight .dt_item_inner:hover .num-icon-wrap .dt_item_icon_rotate {
-  -webkit-animation-play-state: running;
   animation-play-state: running;
 }
 
@@ -2392,676 +2110,6 @@ table.wc-block-cart-items
  * ===================================================================
  */
 
-.viceunf-recent-posts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* Aumentamos un poco el espacio entre items */
-}
-
-.viceunf-recent-post-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem; /* Espacio entre imagen y título */
-}
-
 /* --- NUEVO: Estilos para los items pares (alternados) --- */
-.viceunf-recent-post-item.item-par {
-  flex-direction: row-reverse; /* <-- La magia sucede aquí */
-}
-
-.viceunf-recent-post-thumbnail {
-  flex-shrink: 0;
-  width: 65px;
-  height: 65px;
-  display: block;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para la imagen */
-}
-
-.viceunf-recent-post-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.viceunf-recent-post-thumbnail:hover img {
-  transform: scale(1.1);
-}
-
-.viceunf-recent-post-content {
-  flex-grow: 1;
-}
 
 /* --- NUEVO: Alineación de texto para los items pares --- */
-.viceunf-recent-post-item.item-par .viceunf-recent-post-content {
-  text-align: right; /* Alineamos el texto a la derecha */
-}
-
-.viceunf-recent-post-title {
-  margin: 0;
-  font-size: var(--viceunf-fs-sm);
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-.viceunf-recent-post-title a {
-  text-decoration: none;
-  color: var(--dt-sec-color);
-}
-
-.viceunf-recent-post-title a:hover {
-  color: var(--dt-pri-color);
-}
-/* ==========================================================================
-   Estilos para el Shortcode de Reglamentos (Versión con Color de Categoría)
-   ========================================================================== */
-
-.reglamentos-container {
-  font-family: sans-serif;
-  margin: 2em 0;
-}
-
-.reglamento-category-group {
-  margin-bottom: 2.5em;
-  /* La variable --category-color es definida aquí por el PHP */
-}
-
-.category-title {
-  font-size: var(--viceunf-fs-sm);
-  color: #333;
-  /* USA LA VARIABLE para el color del borde, con un color por defecto */
-  border-bottom: 2px solid var(--category-color, #cccccc);
-  padding-bottom: 0.5em;
-  margin-bottom: 1em;
-}
-
-.reglamentos-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-/* --- CAMBIO PRINCIPAL: El <li> ahora es el contenedor flex --- */
-.reglamentos-list li {
-  display: flex;
-  justify-content: space-between; /* Alinea los elementos a los extremos */
-  align-items: center;
-  gap: 1em; /* Espacio entre el enlace principal y el botón */
-  margin-bottom: 0.75em;
-  background-color: #f8f9fa;
-  padding: 0.5em 0.5em 0.5em 1.5em; /* Ajustamos el padding */
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  border-left: 5px solid transparent;
-}
-
-.reglamentos-list li:hover {
-  background-color: #e9ecef;
-  border-left-color: var(--category-color, #cccccc);
-  transform: translateX(5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-}
-
-/* El enlace principal que contiene el icono y el título */
-.reglamentos-list .reglamento-main-link {
-  display: flex;
-  align-items: center;
-  flex-grow: 1; /* Permite que ocupe el espacio disponible */
-  text-decoration: none;
-  color: #212529;
-  min-width: 0; /* Soluciona problemas de desbordamiento de flexbox */
-}
-
-.reglamentos-list .reglamento-main-link .fas {
-  font-size: 1.2em;
-  color: var(--category-color, #007bff);
-  margin-right: 1em;
-  width: 20px;
-  text-align: center;
-}
-
-.reglamentos-list .reglamento-main-link span {
-  font-weight: 500;
-  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
-  overflow: hidden;
-  text-overflow: ellipsis; /* Añade "..." si el texto es muy largo */
-}
-
-/* --- NUEVO: Estilos para el botón de descarga --- */
-.button-download-shortcode {
-  flex-shrink: 0; /* Evita que el botón se encoja */
-  padding: 0.5em 1em;
-  font-size: 0.85em;
-  background-color: var(--color-primary, #007bff);
-  color: var(--color-white, #fff) !important;
-  text-decoration: none;
-  border-radius: var(--border-radius, 5px);
-  font-weight: bold;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.button-download-shortcode:hover {
-  background-color: var(--color-primary-dark, #0056b3);
-}
-
-/* ==========================================================================
-   Estilos Combinados para la Plantilla Single de Reglamentos
-   ========================================================================== */
-
-/* 1. Estilo para el Visor de PDF */
-.pdf-preview-wrapper {
-  margin-top: 2em;
-  margin-bottom: 2.5em;
-  text-align: center;
-}
-
-.pdf-preview-iframe {
-  width: 100%;
-  height: 75vh;
-  border: 1px solid var(--color-border, #ddd);
-  background-color: var(--color-light, #f0f0f0);
-  border-radius: var(--border-radius, 5px);
-  margin-bottom: 1.5em;
-}
-
-/* 2. Estilo para la Tarjeta de Descarga (el que te gustó) */
-.download-box-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5em;
-  background-color: var(--color-light-gray, #f8f9fa);
-  border: 1px solid var(--color-border, #e9ecef);
-  border-left: 5px solid var(--color-primary, #007bff);
-  padding: 1.5em;
-  border-radius: var(--border-radius, 5px);
-}
-
-.download-icon .fas {
-  font-size: var(--viceunf-fs-xl);
-  color: var(--color-primary, #007bff);
-}
-
-.download-info {
-  flex: 1;
-  min-width: 200px;
-}
-
-.download-info h4 {
-  margin: 0 0 0.25em 0;
-}
-
-.download-info p {
-  margin: 0;
-  color: var(--color-text-muted, #6c757d);
-  font-size: 0.9em;
-}
-
-.button-download {
-  display: inline-block;
-  padding: 0.75em 1.5em;
-  background-color: var(--color-primary, #007bff);
-  color: var(--color-white, #fff) !important;
-  text-decoration: none;
-  border-radius: var(--border-radius, 5px);
-  font-weight: bold;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.button-download:hover {
-  background-color: var(--color-primary-dark, #0056b3);
-}
-
-/* =============================================
-   Post Navigation Cards (Single Post)
-   ============================================= */
-
-.viceunf-post-nav__card {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-height: 18rem;
-  overflow: hidden;
-  border-radius: 0.6rem;
-  text-decoration: none;
-  transition: all 0.35s ease;
-  background-color: var(--dt-sec-color, #1a2332);
-}
-
-.viceunf-post-nav__card:hover {
-  box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.2);
-  transform: translateY(-0.3rem);
-}
-
-.viceunf-post-nav__img {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.5s ease;
-}
-
-.viceunf-post-nav__card:hover .viceunf-post-nav__img {
-  transform: scale(1.08);
-}
-
-.viceunf-post-nav__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.3) 60%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
-  z-index: 1;
-}
-
-.viceunf-post-nav__content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem 2.5rem;
-  width: 100%;
-}
-
-.viceunf-post-nav__label {
-  display: block;
-  font-size: var(--viceunf-fs-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  color: var(--dt-pri-color, #1b8a4e);
-  margin-bottom: 0.6rem;
-}
-
-.viceunf-post-nav__title {
-  display: block;
-  font-size: var(--viceunf-fs-base);
-  font-weight: 600;
-  line-height: 1.4;
-  color: #ffffff;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.viceunf-post-nav__card--next .viceunf-post-nav__content {
-  text-align: right;
-}
-
-@media (max-width: 62em) {
-  .viceunf-post-nav__card {
-    min-height: 14rem;
-  }
-}
-
-/* =============================================
-   Utilidades Reutilizables (ex inline styles)
-   ============================================= */
-
-.viceunf-section-heading {
-  padding-bottom: 1.2rem;
-  border-bottom: 0.1rem solid rgba(189,189,189,0.35);
-  position: relative;
-}
-
-.viceunf-section-heading__accent {
-  position: absolute;
-  bottom: -0.1rem;
-  left: 0;
-  width: 4.5rem;
-  height: 0.2rem;
-  background-color: var(--dt-pri-color);
-}
-
-.viceunf-btn-group--center {
-  text-align: center;
-  margin-top: 4rem;
-}
-
-/* =============================================
-   Reglamentos Tree / Accordion
-   ============================================= */
-
-.viceunf-reglamentos-tree {
-  max-width: 100%;
-}
-
-.viceunf-accordion {
-  margin-bottom: 0.8rem;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: #ffffff;
-}
-
-.viceunf-accordion--child {
-  margin: 0.5rem 0 0.5rem 1.5rem;
-  border-left: 3px solid var(--acc-color, var(--dt-pri-color));
-}
-
-.viceunf-accordion__header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  padding: 1.3rem 1.8rem;
-  border: none;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  cursor: pointer;
-  text-align: left;
-  font-size: var(--viceunf-fs-base);
-  font-weight: 600;
-  color: #1a2332;
-  transition: background-color 0.2s ease;
-  border-left: 4px solid var(--acc-color, var(--dt-pri-color));
-}
-
-.viceunf-accordion--child .viceunf-accordion__header {
-  padding: 1rem 1.5rem;
-  font-size: var(--viceunf-fs-sm);
-  font-weight: 500;
-  background: #f8f9fa;
-  border-left: none;
-}
-
-.viceunf-accordion__header:hover {
-  background: #eef2f5;
-}
-
-.viceunf-accordion__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 0.5rem;
-  background-color: var(--acc-color, var(--dt-pri-color));
-  color: #ffffff;
-  font-size: var(--viceunf-fs-xs);
-}
-
-.viceunf-accordion--child .viceunf-accordion__icon {
-  min-width: 2.2rem;
-  height: 2.2rem;
-  font-size: var(--viceunf-fs-xs);
-}
-
-.viceunf-accordion__title {
-  flex: 1;
-}
-
-.viceunf-accordion__count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.6rem;
-  height: 2.6rem;
-  padding: 0 0.8rem;
-  border-radius: 5rem;
-  background-color: rgba(0,0,0,0.06);
-  font-size: var(--viceunf-fs-xs);
-  font-weight: 700;
-  color: #64748b;
-}
-
-.viceunf-accordion__chevron {
-  display: flex;
-  align-items: center;
-  transition: transform 0.3s ease;
-  color: #94a3b8;
-  font-size: var(--viceunf-fs-xs);
-}
-
-.viceunf-accordion.is-open > .viceunf-accordion__header .viceunf-accordion__chevron {
-  transform: rotate(180deg);
-  color: var(--acc-color, var(--dt-pri-color));
-}
-
-.viceunf-accordion__body {
-  padding: 0 1.8rem 1.5rem;
-}
-
-.viceunf-accordion--child .viceunf-accordion__body {
-  padding: 0 1.2rem 1rem;
-}
-
-/* Lista de documentos */
-.viceunf-accordion__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.viceunf-accordion__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  transition: background-color 0.15s ease;
-}
-
-.viceunf-accordion__item:last-child {
-  border-bottom: none;
-}
-
-.viceunf-accordion__item:hover {
-  background-color: #f1f5f9;
-  border-radius: 0.4rem;
-}
-
-.viceunf-accordion__link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-  text-decoration: none;
-  color: #334155;
-  font-size: var(--viceunf-fs-sm);
-  font-weight: 400;
-  line-height: 1.5;
-  transition: color 0.2s ease;
-}
-
-.viceunf-accordion__link i {
-  color: var(--acc-color, var(--dt-pri-color));
-  font-size: var(--viceunf-fs-sm);
-  flex-shrink: 0;
-}
-
-.viceunf-accordion__link:hover {
-  color: var(--dt-pri-color);
-}
-
-.viceunf-accordion__download {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-  padding: 0.5rem 1.4rem;
-  border-radius: 0.4rem;
-  font-size: var(--viceunf-fs-xs);
-  font-weight: 600;
-  text-decoration: none;
-  color: #ffffff;
-  background-color: var(--dt-pri-color, #1b8a4e);
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.viceunf-accordion__download:hover {
-  background-color: var(--dt-sec-color, #0e1422);
-  transform: translateY(-1px);
-  color: #ffffff;
-}
-
-/* Responsivo */
-@media (max-width: 48em) {
-  .viceunf-accordion--child {
-    margin-left: 0.8rem;
-  }
-
-  .viceunf-accordion__header {
-    padding: 1rem 1.2rem;
-    font-size: var(--viceunf-fs-sm);
-    gap: 0.7rem;
-  }
-
-  .viceunf-accordion__item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-
-  .viceunf-accordion__download {
-    align-self: flex-end;
-  }
-}
-
-/* Toolbar: Buscador + Filtros */
-.viceunf-reglamentos-toolbar {
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 0.8rem;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.viceunf-reglamentos-search {
-  position: relative;
-  margin-bottom: 1.2rem;
-}
-
-.viceunf-reglamentos-search > i {
-  position: absolute;
-  left: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  font-size: var(--viceunf-fs-sm);
-  pointer-events: none;
-}
-
-.viceunf-reglamentos-search input {
-  width: 100%;
-  padding: 1.2rem 4rem 1.2rem 4.2rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 0.6rem;
-  font-size: var(--viceunf-fs-sm);
-  color: #1a2332;
-  background: #f8fafc;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  outline: none;
-}
-
-.viceunf-reglamentos-search input:focus {
-  border-color: var(--dt-pri-color, #1b8a4e);
-  box-shadow: 0 0 0 3px rgba(27,138,78,0.12);
-  background: #ffffff;
-}
-
-.viceunf-reglamentos-search input::placeholder {
-  color: #94a3b8;
-}
-
-.viceunf-reglamentos-search__clear {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: none;
-  color: #94a3b8;
-  font-size: var(--viceunf-fs-sm);
-  cursor: pointer;
-  padding: 0.5rem;
-  line-height: 1;
-  transition: color 0.15s ease;
-}
-
-.viceunf-reglamentos-search__clear:hover {
-  color: #ef4444;
-}
-
-/* Filtros */
-.viceunf-reglamentos-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.viceunf-filter-btn {
-  padding: 0.5rem 1.3rem;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 5rem;
-  background: #ffffff;
-  color: #475569;
-  font-size: var(--viceunf-fs-xs);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.viceunf-filter-btn:hover {
-  border-color: var(--dt-pri-color, #1b8a4e);
-  color: var(--dt-pri-color, #1b8a4e);
-}
-
-.viceunf-filter-btn.is-active {
-  background: var(--dt-pri-color, #1b8a4e);
-  border-color: var(--dt-pri-color, #1b8a4e);
-  color: #ffffff;
-}
-
-.viceunf-filter-btn--sub {
-  font-size: var(--viceunf-fs-xs);
-  padding: 0.4rem 1.1rem;
-}
-
-/* Sin resultados */
-.viceunf-reglamentos-empty {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #94a3b8;
-}
-
-.viceunf-reglamentos-empty i {
-  font-size: var(--viceunf-fs-xl);
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.viceunf-reglamentos-empty p {
-  font-size: var(--viceunf-fs-base);
-  margin: 0;
-}
-
-/* Compactado de ítems */
-.viceunf-accordion__item {
-  padding: 0.8rem 1rem;
-}
-
-.viceunf-accordion__header {
-  padding: 1.1rem 1.5rem;
-}
-
-.viceunf-accordion--child .viceunf-accordion__header {
-  padding: 0.9rem 1.3rem;
-}
-
-.viceunf-accordion__body {
-  padding: 0 1.5rem 1rem;
-}
-
-.viceunf-accordion--child .viceunf-accordion__body {
-  padding: 0 1rem 0.8rem;
-}
