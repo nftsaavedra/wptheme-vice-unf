@@ -307,7 +307,7 @@ function viceunf_customize_register($wp_customize)
         'viceunf_blog_show_tags'           => __('Mostrar Etiquetas', 'viceunf'),
         'viceunf_blog_show_comments_count' => __('Mostrar Contador de Comentarios', 'viceunf'),
         'viceunf_blog_show_post_navigation' => __('Mostrar Navegación Anterior/Siguiente', 'viceunf'),
-        'viceunf_blog_show_related_posts'  => __('Mostrar Entradas Relacionadas', 'viceunf'),
+        'viceunf_blog_show_related_posts'  => __('Mostrar Contenido Relacionado', 'viceunf'),
     );
 
     foreach ($blog_controls as $setting_id => $label) {
@@ -333,7 +333,7 @@ function viceunf_customize_register($wp_customize)
         'sanitize_callback' => 'absint',
     ));
     $wp_customize->add_control('viceunf_blog_related_posts_count', array(
-        'label'       => __('Número de Entradas Relacionadas', 'viceunf'),
+        'label'       => __('Número de Contenido Relacionado', 'viceunf'),
         'section'     => 'viceunf_blog_section',
         'type'        => 'number',
         'input_attrs' => array(

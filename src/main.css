@@ -2447,3 +2447,251 @@ table.wc-block-cart-items
 .viceunf-recent-post-title a:hover {
   color: var(--dt-pri-color);
 }
+
+/* =================================================================
+   Paginación de WordPress (the_posts_pagination)
+================================================================= */
+.navigation.pagination {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.navigation.pagination .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.navigation.pagination .page-numbers {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 4.5rem;
+  height: 4.5rem;
+  padding: 0 1rem;
+  border-radius: 6px;
+  background-color: var(--dt-whi-color);
+  color: var(--dt-sec-color);
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navigation.pagination .page-numbers:hover,
+.navigation.pagination .page-numbers:focus {
+  background-color: var(--dt-pri-color);
+  color: var(--dt-whi-color);
+  border-color: var(--dt-pri-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation.pagination .page-numbers.current {
+  background-color: var(--dt-pri-color);
+  color: var(--dt-whi-color);
+  border-color: var(--dt-pri-color);
+  pointer-events: none;
+  box-shadow: 0 4px 8px rgba(0, 121, 78, 0.2);
+}
+
+.navigation.pagination .page-numbers.dots {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* =================================================================
+   Post Navigation (Anterior / Siguiente)
+================================================================= */
+.viceunf-post-nav__card {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(189, 189, 189, 0.4);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.viceunf-post-nav__card:hover,
+.viceunf-post-nav__card:focus {
+  background-color: rgba(0, 121, 78, 0.03); /* var(--dt-pri-color) tint */
+  border-color: rgba(0, 121, 78, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 121, 78, 0.08);
+  transform: translateY(-2px);
+}
+
+.viceunf-post-nav__img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 1.5rem;
+}
+
+.viceunf-post-nav__card--next .viceunf-post-nav__img {
+  margin-right: 0;
+  margin-left: 1.5rem;
+  order: 2; /* Mueve la imagen a la derecha para la tarjeta "Siguiente" */
+}
+
+.viceunf-post-nav__card--next .viceunf-post-nav__content {
+  text-align: right;
+  order: 1;
+}
+
+.viceunf-post-nav__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.viceunf-post-nav__card:hover .viceunf-post-nav__img img {
+  transform: scale(1.05);
+}
+
+.viceunf-post-nav__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.viceunf-post-nav__label {
+  font-size: var(--viceunf-fs-xs, 1.2rem);
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.viceunf-post-nav__card--next .viceunf-post-nav__label {
+  justify-content: flex-end;
+}
+
+.viceunf-post-nav__title {
+  font-size: var(--viceunf-fs-base, 1.6rem);
+  font-weight: 700;
+  color: var(--dt-sec-color);
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.viceunf-post-nav__card:hover .viceunf-post-nav__title {
+  color: var(--dt-pri-color);
+}
+
+/* =================================================================
+   Entradas Relacionadas (Related Posts)
+================================================================= */
+.viceunf-related-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(189, 189, 189, 0.4);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  align-items: flex-start;
+}
+
+.viceunf-related-card:hover,
+.viceunf-related-card:focus-within {
+  background-color: rgba(0, 121, 78, 0.03);
+  border-color: rgba(0, 121, 78, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 121, 78, 0.08);
+  transform: translateY(-2px);
+}
+
+.viceunf-related-card__thumb {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 1.5rem;
+}
+
+.viceunf-related-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.viceunf-related-card:hover .viceunf-related-card__thumb img {
+  transform: scale(1.05);
+}
+
+.viceunf-related-card__info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.viceunf-related-card__meta {
+  font-size: var(--viceunf-fs-xs, 1.2rem);
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.viceunf-related-card__title {
+  font-size: var(--viceunf-fs-base, 1.6rem);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.viceunf-related-card__title a {
+  color: var(--dt-sec-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.viceunf-related-card__title a:hover,
+.viceunf-related-card__title a:focus {
+  color: var(--dt-pri-color);
+}
+
+.viceunf-related-card__excerpt {
+  font-size: var(--viceunf-fs-sm, 1.4rem);
+  color: #666;
+  line-height: 1.5;
+}
+
+.viceunf-related-card__excerpt p {
+  margin: 0;
+}
+
+@media (max-width: 575px) {
+  .viceunf-post-nav__img {
+    display: none; /* Ocultar imagen en móviles muy pequeños para dar espacio al texto */
+  }
+  
+  .viceunf-related-card {
+    flex-direction: column;
+  }
+  
+  .viceunf-related-card__thumb {
+    width: 100%;
+    height: 180px;
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+}

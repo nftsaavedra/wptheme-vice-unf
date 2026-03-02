@@ -32,51 +32,50 @@ if (! $related_query->have_posts()) {
 
 <section class="dt_related-posts dt-mt-5 dt-mb-5">
     <h3 class="dt-mb-4 viceunf-section-heading">
-        <?php esc_html_e('Entradas Relacionadas', 'viceunf'); ?>
+        <?php esc_html_e('Contenido Relacionado', 'viceunf'); ?>
         <span class="viceunf-section-heading__accent"></span>
     </h3>
 
     <div class="dt-row dt-g-4">
         <?php while ($related_query->have_posts()) : $related_query->the_post(); ?>
-            <div class="dt-col-lg-4 dt-col-sm-6 dt-col-12">
-                <article <?php post_class(array('dt_post_item', 'dt_posts--one', 'dt-mb-4')); ?>>
+            <div class="dt-col-lg-6 dt-col-12">
+                <article <?php post_class(array('viceunf-related-card')); ?>>
 
                     <?php if (has_post_thumbnail()) : ?>
-                        <a href="<?php the_permalink(); ?>">
-                            <div class="image">
-                                <?php the_post_thumbnail('large', array('alt' => the_title_attribute('echo=0'))); ?>
-                            </div>
-                        </a>
+                        <div class="viceunf-related-card__thumb">
+                            <a href="<?php the_permalink(); ?>">
+                                <?php the_post_thumbnail('thumbnail', array('alt' => the_title_attribute('echo=0'))); ?>
+                            </a>
+                        </div>
                     <?php endif; ?>
 
-                    <div class="inner">
-                        <div class="meta">
-                            <ul>
-                                <li>
-                                    <div class="date">
-                                        <i class="far fa-calendar-alt dt-mr-2" aria-hidden="true"></i>
-                                        <?php echo get_the_date(); ?>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="viceunf-related-card__info">
+                        <div class="viceunf-related-card__meta">
+                            <span class="date">
+                                <i class="far fa-calendar-alt dt-mr-1" aria-hidden="true"></i>
+                                <?php echo get_the_date(); ?>
+                            </span>
+                            <?php if (has_category()) : ?>
+                                <span class="catetag dt-ml-3">
+                                    <i class="fas fa-folder dt-mr-1" aria-hidden="true"></i>
+                                    <?php
+                                    $categories = get_the_category();
+                                    if (!empty($categories)) {
+                                        echo esc_html($categories[0]->name);
+                                    }
+                                    ?>
+                                </span>
+                            <?php endif; ?>
                         </div>
 
-                        <?php if (has_category()) : ?>
-                            <div class="catetag">
-                                <i class="fas fa-folder dt-mr-1" aria-hidden="true"></i>
-                                <?php the_category(', '); ?>
-                            </div>
-                        <?php endif; ?>
-
-                        <h4 class="title">
+                        <h4 class="viceunf-related-card__title">
                             <a href="<?php the_permalink(); ?>" rel="bookmark">
                                 <?php the_title(); ?>
                             </a>
                         </h4>
 
-                        <div class="content">
-                            <p><?php echo wp_kses_post(wp_trim_words(get_the_content(), 20, '...')); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="more-link"><?php esc_html_e('Leer más', 'viceunf'); ?></a>
+                        <div class="viceunf-related-card__excerpt">
+                            <p><?php echo wp_kses_post(wp_trim_words(get_the_content(), 15, '...')); ?></p>
                         </div>
                     </div>
 
