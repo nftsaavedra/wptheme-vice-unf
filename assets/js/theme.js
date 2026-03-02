@@ -143,7 +143,7 @@ const ViceUnfTheme = {
         }
 
         document.addEventListener('keydown', (e) => {
-            if ((e.key === 'Tab' || e.keyCode === 9) && toggle.classList.contains('active')) {
+            if (e.key === 'Tab' && toggle.classList.contains('active')) {
                 if (e.shiftKey) {
                     if (document.activeElement === toggle) {
                         lastFocusable.focus();
@@ -297,7 +297,7 @@ const ViceUnfTheme = {
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab' || e.keyCode === 9) {
+            if (e.key === 'Tab') {
                 if (e.shiftKey) {
                     if (document.activeElement === closeBtn) {
                         lastFocusable.focus();
@@ -354,7 +354,7 @@ const ViceUnfTheme = {
             }
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab' || e.keyCode === 9) {
+                if (e.key === 'Tab') {
                     if (e.shiftKey) {
                         if (document.activeElement === searchField) {
                             lastFocusable.focus();
@@ -413,7 +413,7 @@ const ViceUnfTheme = {
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab' || e.keyCode === 9) {
+            if (e.key === 'Tab') {
                 if (e.shiftKey) {
                     if (document.activeElement === closeBtn) {
                         lastFocusable.focus();

@@ -31,11 +31,10 @@ if ($button_color) {
     );
 }
 
-$custom_logo_id = get_theme_mod('custom_logo');
 $site_logo_html = '';
-if ($show_logos && $custom_logo_id) {
-    $logo_image    = wp_get_attachment_image($custom_logo_id, 'medium', false, array('class' => 'viceunf-footer-cta__logo-img'));
-    $site_logo_html = $logo_image;
+if ($show_logos) {
+    // Usar get_custom_logo() — función oficial FSE-compatible, no depende del Customizer
+    $site_logo_html = get_custom_logo();
 }
 
 $wrapper_attributes = get_block_wrapper_attributes(

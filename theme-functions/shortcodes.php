@@ -1,7 +1,13 @@
 <?php
 
 /**
- * Archivo para registrar los shortcodes personalizados del tema.
+ * Archivo de shortcodes del tema ViceUnf.
+ *
+ * El shortcode `listar_reglamentos` fue eliminado en favor del bloque
+ * Gutenberg nativo `document-list` (src/blocks/document-list).
+ *
+ * Si alguna página todavía usa [listar_reglamentos], mostrará un aviso
+ * de migración descriptivo en lugar de contenido roto.
  *
  * @package ViceUnf
  */
@@ -11,38 +17,19 @@ if (! defined('ABSPATH')) {
 }
 
 /**
- * Shortcode configurable para listar los Reglamentos.
- * Actúa solo como Controlador.
+ * Stub de compatibilidad: muestra un aviso de migración si el shortcode
+ * obsoleto todavía se encuentra en contenido publicado.
  *
- * - Sin atributo `categoria`: renderiza árbol jerárquico completo con acordeones.
- * - Con atributo `categoria`: renderiza lista plana filtrada por slugs.
- *
- * @param array $atts Atributos del shortcode.
- * @return string HTML renderizado.
+ * @deprecated Usar el bloque Gutenberg `document-list` en su lugar.
  */
-function viceunf_listar_reglamentos_shortcode($atts)
-{
-    $atts = shortcode_atts(array('categoria' => ''), $atts, 'listar_reglamentos');
-    $categoria_slugs = ! empty($atts['categoria']) ? array_map('sanitize_title', explode(',', $atts['categoria'])) : array();
-
-    if (! class_exists('\ViceUnf\Core\Service\DocumentService')) {
-        return '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar este componente.</div>';
+add_shortcode('listar_reglamentos', function (): string {
+    // Solo visible para administradores en el frontend
+    if (! current_user_can('manage_options')) {
+        return '';
     }
 
-    $documentService = new \ViceUnf\Core\Service\DocumentService();
-
-    // Vista jerárquica (árbol) o filtrada (plana)
-    if (empty($categoria_slugs)) {
-        $reglamentos_data = $documentService->get_documents_tree('reglamento', 'categoria_reglamento');
-    } else {
-        $reglamentos_data = $documentService->get_documents('reglamento', 'categoria_reglamento', $categoria_slugs);
-    }
-
-    ob_start();
-
-    // Pasar la data a la vista
-    get_template_part('template-parts/shortcodes/reglamentos', 'list', array('reglamentos_data' => $reglamentos_data));
-
-    return ob_get_clean();
-}
-add_shortcode('listar_reglamentos', 'viceunf_listar_reglamentos_shortcode');
+    return '<div style="border:2px solid #d63638;background:#fff5f5;padding:16px 20px;border-radius:4px;font-family:sans-serif;font-size:13px;">'
+        . '<strong>⚠️ Shortcode obsoleto detectado: <code>[listar_reglamentos]</code></strong><br>'
+        . 'Este shortcode fue eliminado. Reemplázalo por el bloque <strong>"Lista de Documentos"</strong> disponible en el editor de bloques de Gutenberg.'
+        . '</div>';
+});

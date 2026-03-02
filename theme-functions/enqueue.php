@@ -36,12 +36,18 @@ function viceunf_enqueue_frontend_assets()
 
     if (is_front_page() || is_singular()) {
         wp_enqueue_style('viceunf-swiper', $theme_uri . '/assets/vendors/css/swiper-bundle.min.css', array(), '11.0.0');
-        wp_enqueue_script('viceunf-swiper', $theme_uri . '/assets/vendors/js/swiper-bundle.min.js', array(), '11.0.0', true);
+        wp_enqueue_script('viceunf-swiper', $theme_uri . '/assets/vendors/js/swiper-bundle.min.js', array(), '11.0.0', array(
+            'strategy'  => 'defer',
+            'in_footer' => true,
+        ));
     }
 
     if (is_singular() || is_page_template('page-templates/frontpage.php')) {
         wp_enqueue_style('viceunf-glightbox', $theme_uri . '/assets/vendors/css/glightbox.min.css', array(), '3.3.0');
-        wp_enqueue_script('viceunf-glightbox', $theme_uri . '/assets/vendors/js/glightbox.min.js', array(), '3.3.0', true);
+        wp_enqueue_script('viceunf-glightbox', $theme_uri . '/assets/vendors/js/glightbox.min.js', array(), '3.3.0', array(
+            'strategy'  => 'defer',
+            'in_footer' => true,
+        ));
     }
 
     // --- Theme Stylesheet (style.css — contiene custom overrides) ---
@@ -58,7 +64,10 @@ function viceunf_enqueue_frontend_assets()
         $theme_uri . '/assets/js/theme.js',
         array(),
         $theme_version,
-        true
+        array(
+            'strategy'  => 'defer',
+            'in_footer' => true,
+        )
     );
 
     wp_enqueue_script(
@@ -66,7 +75,10 @@ function viceunf_enqueue_frontend_assets()
         $theme_uri . '/assets/js/custom.js',
         array('viceunf-theme'),
         $theme_version,
-        true
+        array(
+            'strategy'  => 'defer',
+            'in_footer' => true,
+        )
     );
 
     // Comments reply script.
@@ -88,29 +100,6 @@ function viceunf_preload_critical_assets()
     echo '<link rel="preload" href="' . esc_url($theme_uri . '/assets/webfonts/fa-solid-900.woff2') . '" as="font" type="font/woff2" crossorigin>' . "\n";
 }
 add_action('wp_head', 'viceunf_preload_critical_assets', 1);
-
-/**
- * =================================================================
- * 1.5. Optimización de Performance: Defer a Scripts no Críticos
- * =================================================================
- */
-function viceunf_defer_scripts($tag, $handle, $src)
-{
-    // Array de scripts que no son esenciales para la pintura inicial (First Paint)
-    $defer_scripts = array(
-        'viceunf-swiper',
-        'viceunf-glightbox',
-        'viceunf-theme',
-        'viceunf-custom'
-    );
-
-    if (in_array($handle, $defer_scripts, true)) {
-        return '<script src="' . esc_url($src) . '" defer></script>' . "\n";
-    }
-
-    return $tag;
-}
-add_filter('script_loader_tag', 'viceunf_defer_scripts', 10, 3);
 
 /**
  * =================================================================
