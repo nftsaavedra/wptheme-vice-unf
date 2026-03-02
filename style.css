@@ -1,12 +1,10 @@
 /*
 Theme Name: 	   ViceUnf
 Text Domain: 	   viceunf
-Template: 			softme
 Version:            0.0.1
-Tested up to:       7.0
-Requires at least:  6.0
+Tested up to:       6.8
+Requires at least:  4.7
 Requires PHP:       7.4
-Requires Plugins:   viceunf-core
 Author:             @nftsaavedra
 Author URI:         https://viceinvestigacion.unf.edu.pe/
 Theme URI:          https://viceinvestigacion.unf.edu.pe/themes/viceunf/
@@ -2362,5 +2360,292 @@ table.wc-block-cart-items
     height: 180px;
     margin-right: 0;
     margin-bottom: 1.5rem;
+  }
+}
+
+/* =================================================================
+   Single Reglamento: Rediseño Moderno UI/UX
+================================================================= */
+.viceunf-single-doc-section {
+  background-color: #f8fafc; /* fondo muy claro para contraste */
+}
+
+.viceunf-single-doc__article {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  padding: 4rem 5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.viceunf-single-doc__header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.viceunf-single-doc__tags {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.viceunf-single-doc__tag {
+  background-color: rgba(0, 121, 78, 0.1); /* var(--dt-pri-color) alpha aproximado */
+  color: var(--dt-pri-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.5rem 1.4rem;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+}
+
+.viceunf-single-doc__title {
+  font-size: 3.4rem !important;
+  font-weight: 800;
+  color: var(--dt-sec-color);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.viceunf-single-doc__meta {
+  display: flex;
+  gap: 2.5rem;
+  color: #64748b;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.viceunf-single-doc__meta i {
+  margin-right: 0.6rem;
+  color: var(--dt-pri-color);
+}
+
+.viceunf-single-doc__content {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: #334155;
+  margin-bottom: 4rem;
+}
+
+.viceunf-single-doc__media {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.viceunf-single-doc__preview {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio 4:3 para docs */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+}
+
+.viceunf-single-doc__preview iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.viceunf-single-doc__download-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 2.5rem;
+}
+
+.viceunf-single-doc__download-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 121, 78, 0.1);
+  border-color: var(--dt-pri-color);
+}
+
+.viceunf-single-doc__download-card .card-icon {
+  flex-shrink: 0;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: rgba(0, 121, 78, 0.08); /* Fondo sútil verde */
+  color: var(--dt-pri-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+}
+
+.viceunf-single-doc__download-card .card-info {
+  flex-grow: 1;
+}
+
+.viceunf-single-doc__download-card .card-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--dt-sec-color);
+}
+
+.viceunf-single-doc__download-card .card-desc {
+  margin: 0;
+  color: #64748b;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.viceunf-single-doc__download-card .card-action {
+  flex-shrink: 0;
+}
+
+/* Modificador extra para que el botón interno respire mejor */
+.viceunf-single-doc__download-card .card-action .dt-btn {
+  padding: 1.5rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
+
+.viceunf-single-doc__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 3rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  color: #64748b;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.viceunf-single-doc__empty i {
+  font-size: 4.5rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}
+
+/* Navegación y Volver */
+.viceunf-single-doc__nav-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.viceunf-single-doc__nav-wrap .dt-btn-outline {
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+.viceunf-single-doc__nav-wrap .dt-btn-outline:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* Sección de Documentos Relacionados */
+.viceunf-single-doc__related {
+  margin-top: 5rem;
+  padding-top: 4rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.viceunf-single-doc__related-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--dt-sec-color);
+  margin-bottom: 2.5rem;
+}
+
+/* Tarjetas de Docs Relacionados */
+.viceunf-related-doc-card {
+  align-items: center !important;
+  gap: 1.5rem;
+  text-decoration: none !important;
+}
+
+.viceunf-related-doc-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: rgba(0, 121, 78, 0.08);
+  color: var(--dt-pri-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.viceunf-related-doc-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.viceunf-related-doc-card__date {
+  font-size: 1.2rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.viceunf-related-doc-card__title {
+  font-size: 1.45rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: #1e293b !important;
+  margin: 0 !important;
+  transition: color 0.3s ease;
+}
+
+.viceunf-related-doc-card:hover .viceunf-related-doc-card__title {
+  color: var(--dt-pri-color) !important;
+}
+
+/* Responsive Ajustes */
+@media (max-width: 991px) {
+  .viceunf-single-doc__article {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .viceunf-single-doc__article {
+    padding: 2.5rem 2rem;
+  }
+  .viceunf-single-doc__title {
+    font-size: 2.6rem !important;
+  }
+  .viceunf-single-doc__meta {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .viceunf-single-doc__download-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    gap: 1.5rem;
+  }
+  .viceunf-single-doc__download-card .card-action {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .viceunf-single-doc__download-card .card-action .dt-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

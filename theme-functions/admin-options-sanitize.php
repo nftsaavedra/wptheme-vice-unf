@@ -53,6 +53,13 @@ function viceunf_sanitize_all_options($input)
     }
   }
 
+  // Sanitización especial para array de strings
+  if (isset($input['single_document_post_types']) && is_array($input['single_document_post_types'])) {
+    $sanitized_input['single_document_post_types'] = array_map('sanitize_text_field', $input['single_document_post_types']);
+  } elseif (isset($input['single_document_post_types']) && empty($input['single_document_post_types'])) {
+    $sanitized_input['single_document_post_types'] = [];
+  }
+
   // Sanitización para los items de investigación (fijos)
   for ($i = 1; $i <= 4; $i++) {
     if (isset($input["item_{$i}_page_id"])) $sanitized_input["item_{$i}_page_id"] = absint($input["item_{$i}_page_id"]);

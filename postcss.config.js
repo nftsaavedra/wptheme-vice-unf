@@ -7,8 +7,11 @@ export default {
     autoprefixer,
     purgecss({
       // Rutas a tus archivos
+      // Rutas a tus archivos
       content: [
+        './*.php',
         './**/*.php',
+        './*.js',
         './**/*.js',
       ],
 
@@ -26,7 +29,7 @@ export default {
         ],
         deep: [
           /^(wp-block-)/, /^(has-)/, /^(is-)/, /^(search-)/,
-          /^(wc-)/, /^(swiper-)/,
+          /^(wc-)/, /^(swiper-)/, /^(viceunf-single-doc)/,
         ],
         greedy: [
           /^(page-id-)/, /^(postid-)/, /^(archive-)/, /^(category-)/, /^(tag-)/

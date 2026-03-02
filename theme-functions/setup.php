@@ -157,3 +157,27 @@ function viceunf_register_blocks()
 }
 add_action('init', 'viceunf_register_blocks');
 // --- FIN: REGISTRO DE BLOQUES PERSONALIZADOS ---
+
+/**
+ * Filtro para usar la plantilla single-documento.php para varios CPTs de documentos
+ */
+function viceunf_document_single_template($original_template)
+{
+    global $post;
+
+    // Lista de Post Types que usarán esta plantilla de documento moderna
+    $options = get_option('viceunf_theme_options', []);
+    $document_post_types = isset($options['single_document_post_types']) && is_array($options['single_document_post_types'])
+        ? $options['single_document_post_types']
+        : ['reglamento']; // Fallback por defecto
+
+    if (in_array($post->post_type, $document_post_types)) {
+        $custom_template = locate_template(['single-documento.php']);
+        if ($custom_template) {
+            return $custom_template;
+        }
+    }
+
+    return $original_template;
+}
+add_filter('single_template', 'viceunf_document_single_template');
