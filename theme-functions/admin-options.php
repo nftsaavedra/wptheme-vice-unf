@@ -4,32 +4,65 @@ if (!defined('ABSPATH')) exit;
 
 /**
  * =================================================================
- * Archivo Principal de Opciones del Tema VPIN (Orquestador)
+ * Archivo Principal de Opciones del Tema VPIN (Orquestador React)
  * =================================================================
- * Carga todos los componentes necesarios para la página de opciones.
+ * Carga el backend en React para administrar las opciones del tema.
  */
 
-// 1. Añade el menú al panel de administración de WordPress.
 add_action('admin_menu', function () {
-  add_menu_page(
+  $hook_suffix = add_menu_page(
     'VPIN — Opciones del Tema',
     'VPIN Opciones',
     'manage_options',
     'viceunf_theme_options',
-    'viceunf_render_options_page_html',
+    'viceunf_render_options_page_react',
     'dashicons-welcome-learn-more',
     58
   );
+
+  // Encolar scripts solo en esta página
+  add_action('admin_enqueue_scripts', function ($hook) use ($hook_suffix) {
+    if ($hook !== $hook_suffix) return;
+
+    $asset_file_path = get_stylesheet_directory() . '/build/admin-options.asset.php';
+    if (file_exists($asset_file_path)) {
+      $asset = require $asset_file_path;
+    } else {
+      $asset = array('dependencies' => array('wp-element', 'wp-components', 'wp-api-fetch', 'wp-i18n'), 'version' => time());
+    }
+
+    // Agregar dependencias críticas — wp-media-utils para la librería nativa de medios
+    $dependencies = array_unique(array_merge($asset['dependencies'], array('wp-media-utils')));
+
+    wp_enqueue_media(); // Necesario para componentes que usan Media (Logo de socios)
+
+    wp_enqueue_script(
+      'viceunf-admin-options-js',
+      get_stylesheet_directory_uri() . '/build/admin-options.js',
+      $dependencies,
+      $asset['version'],
+      true
+    );
+
+    wp_enqueue_style(
+      'viceunf-admin-options-css',
+      get_stylesheet_directory_uri() . '/build/style-admin-options.css',
+      array('wp-components'),
+      $asset['version']
+    );
+  });
 });
 
-// Carga los archivos con responsabilidades separadas.
+/**
+ * Renderiza el contenedor raíz para React.
+ */
+function viceunf_render_options_page_react()
+{
+  if (!current_user_can('manage_options')) return;
+  echo '<div id="viceunf-settings-root">Cargando la interfaz moderna...</div>';
+}
+
 $theme_functions_path = get_stylesheet_directory() . '/theme-functions/';
 
-// Registra todas las secciones y campos.
-require_once $theme_functions_path . 'admin-options-register.php';
-
-// Contiene las funciones que renderizan el HTML de cada campo (callbacks).
-require_once $theme_functions_path . 'admin-options-callbacks.php';
-
-// Contiene la lógica de sanitización para guardar los datos.
+// Contiene la lógica de sanitización estricta utilizada por el Endpoint REST API.
 require_once $theme_functions_path . 'admin-options-sanitize.php';

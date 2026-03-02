@@ -1,0 +1,418 @@
+/* ============================================================
+   ViceUnf Admin — Options Page — Design System
+   Ancho completo, responsivo, tarjetas 1:1, WP admin harmony.
+   ============================================================ */
+
+:root {
+    --vu-primary:      #2271b1;
+    --vu-primary-h:    #135e96;
+    --vu-primary-bg:   #f0f6ff;
+    --vu-success:      #00a32a;
+    --vu-danger:       #d63638;
+    --vu-warning-bg:   #fcf9e8;
+    --vu-border:       #dcdcde;
+    --vu-border-focus: #2271b1;
+    --vu-bg:           #f6f7f7;
+    --vu-surface:      #fff;
+    --vu-text:         #1e1e1e;
+    --vu-text-muted:   #6b7280;
+    --vu-radius:       4px;
+    --vu-radius-lg:    8px;
+    --vu-shadow:       0 1px 3px rgba(0,0,0,.10);
+    --vu-shadow-md:    0 4px 12px rgba(0,0,0,.12);
+    --vu-font:         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --vu-gap:          16px;
+}
+
+/* ─── Full-width app container ───────────────────────────── */
+.vu-options-app {
+    /* Sin max-width — usa todo el ancho disponible del content-area */
+    width: 100%;
+    margin: 16px 0;
+    font-family: var(--vu-font);
+    color: var(--vu-text);
+    box-sizing: border-box;
+}
+
+/* ─── Top Bar ────────────────────────────────────────────── */
+.vu-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--vu-surface);
+    border: 1px solid var(--vu-border);
+    border-left: 4px solid var(--vu-primary);
+    border-radius: var(--vu-radius);
+    padding: 14px 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--vu-shadow);
+}
+.vu-topbar__brand  { display: flex; align-items: center; gap: 12px; }
+.vu-topbar__logo   { font-size: 28px; color: var(--vu-primary); flex-shrink: 0; }
+.vu-topbar__title  { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; }
+.vu-topbar__sub    { margin: 3px 0 0; font-size: 12px; color: var(--vu-text-muted); }
+.vu-save-btn       { flex-shrink: 0; }
+
+/* ─── Panel override ─────────────────────────────────────── */
+.vu-panel .components-panel { box-shadow: none !important; border: none !important; }
+.vu-panel .components-panel__body {
+    border: 1px solid var(--vu-border) !important;
+    border-radius: var(--vu-radius) !important;
+    margin-bottom: 6px;
+    overflow: visible !important;
+}
+.vu-panel .components-panel__body-title button {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 14px 16px !important;
+}
+.vu-panel .components-panel__body.is-opened .components-panel__body-title button {
+    border-bottom: 1px solid var(--vu-border);
+}
+.vu-panel .components-panel__row { padding: 16px !important; flex-direction: column; align-items: flex-start; }
+
+/* ─── Card ───────────────────────────────────────────────── */
+.vu-card {
+    background: var(--vu-surface);
+    border: 1px solid var(--vu-border);
+    border-radius: var(--vu-radius-lg);
+    padding: 16px;
+    position: relative;
+    box-shadow: var(--vu-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.vu-card--flat {
+    border: 1px solid var(--vu-border);
+    border-radius: var(--vu-radius);
+    padding: 16px;
+    background: var(--vu-bg);
+    box-shadow: none;
+    gap: 12px;
+}
+.vu-card--media { border-left: 3px solid var(--vu-primary); }
+.vu-card--compact { gap: 10px; }
+
+/* Badge numérico en card */
+.vu-card__badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--vu-primary);
+    background: var(--vu-primary-bg);
+    border-radius: 20px;
+    padding: 2px 10px;
+    align-self: flex-start;
+    margin-bottom: 4px;
+}
+
+.vu-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Tarjeta "Add" */
+.vu-card--add {
+    border: 2px dashed var(--vu-border);
+    background: var(--vu-bg);
+    box-shadow: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--vu-text-muted);
+    min-height: 100px;
+    transition: border-color .2s, color .2s, background .2s;
+}
+.vu-card--add:hover {
+    border-color: var(--vu-primary);
+    color: var(--vu-primary);
+    background: var(--vu-primary-bg);
+}
+.vu-card--add .dashicons { font-size: 28px; width: 28px; height: 28px; }
+.vu-card--add span:last-child { font-size: 13px; font-weight: 600; }
+
+/* ─── Card Grids ─────────────────────────────────────────── */
+.vu-card-grid {
+    display: grid;
+    gap: var(--vu-gap);
+    margin-top: 12px;
+}
+/* 2 columnas: Investigación (ítems grandes con 4 campos) */
+.vu-card-grid--2col {
+    grid-template-columns: repeat(2, 1fr);
+}
+/* 3 columnas: About items (tarjetas compactas 1:1) */
+.vu-card-grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1280px) {
+    .vu-card-grid--3col { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 960px) {
+    .vu-card-grid--2col { grid-template-columns: 1fr; }
+    .vu-card-grid--3col { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .vu-card-grid--2col,
+    .vu-card-grid--3col { grid-template-columns: 1fr; }
+}
+
+/* ─── Two-column inner layout ────────────────────────────── */
+.vu-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--vu-gap);
+}
+@media (max-width: 720px) { .vu-two-col { grid-template-columns: 1fr; } }
+
+/* ─── Section helpers ────────────────────────────────────── */
+.vu-section-hint {
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: var(--vu-text-muted);
+    font-style: italic;
+}
+.vu-sub-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 20px 0 4px;
+    color: var(--vu-text);
+    border-bottom: 1px solid var(--vu-border);
+    padding-bottom: 8px;
+}
+.vu-divider { border: none; border-top: 1px solid var(--vu-border); margin: 20px 0; }
+
+/* ─── Form Fields ────────────────────────────────────────── */
+.vu-field-group { display: flex; flex-direction: column; gap: 5px; }
+.vu-field-label { font-size: 12px; font-weight: 600; color: var(--vu-text); text-transform: uppercase; letter-spacing: .04em; }
+.vu-field-help  { font-size: 11px; color: var(--vu-text-muted); font-style: italic; margin: 0; }
+
+.vu-text-input,
+.vu-textarea {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--vu-border);
+    border-radius: var(--vu-radius);
+    font-size: 13px;
+    color: var(--vu-text);
+    background: var(--vu-surface);
+    box-sizing: border-box;
+    font-family: var(--vu-font);
+    transition: border-color .15s, box-shadow .15s;
+}
+.vu-text-input:focus,
+.vu-textarea:focus {
+    border-color: var(--vu-border-focus);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(34,113,177,.15);
+}
+.vu-textarea { resize: vertical; min-height: 80px; }
+
+/* ─── Image Uploader ─────────────────────────────────────── */
+.vu-image-uploader  { display: flex; gap: 14px; align-items: flex-start; }
+.vu-image-preview   {
+    width: 150px;
+    height: 110px;
+    flex-shrink: 0;
+    border: 2px dashed var(--vu-border);
+    border-radius: var(--vu-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    background: var(--vu-bg);
+    transition: border-color .2s, background .2s;
+}
+.vu-image-preview:hover { border-color: var(--vu-primary); background: var(--vu-primary-bg); }
+.vu-image-preview img   { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vu-image-placeholder   {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--vu-text-muted);
+    font-size: 11px;
+    text-align: center;
+    padding: 8px;
+}
+.vu-image-placeholder .dashicons { font-size: 30px; width: 30px; height: 30px; }
+.vu-image-actions { display: flex; flex-direction: column; gap: 8px; }
+
+/* ─── Search Field ───────────────────────────────────────── */
+.vu-search-field, .vu-icon-picker { position: relative; }
+.vu-search-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--vu-border);
+    border-radius: var(--vu-radius);
+    background: var(--vu-surface);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+}
+.vu-search-input-wrapper:focus-within {
+    border-color: var(--vu-border-focus);
+    box-shadow: 0 0 0 2px rgba(34,113,177,.15);
+}
+.vu-search-icon { padding: 0 8px; color: var(--vu-text-muted); flex-shrink: 0; font-size: 18px; }
+.vu-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 8px 10px 8px 0;
+    font-size: 13px;
+    color: var(--vu-text);
+    font-family: var(--vu-font);
+}
+
+/* ─── Selected Tags ──────────────────────────────────────── */
+.vu-selected-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e8f0fe;
+    border: 1px solid #b6cff5;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.vu-selected-tag--icon { background: #f0fdf4; border-color: #bbf7d0; }
+.vu-tag-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 180px; }
+.vu-tag-icon-preview { font-size: 15px; width: 18px; text-align: center; }
+.vu-tag-clear, .vu-tag-change {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 3px;
+    font-size: 13px;
+    color: var(--vu-text-muted);
+    line-height: 1;
+    transition: color .15s;
+}
+.vu-tag-clear:hover  { color: var(--vu-danger); }
+.vu-tag-change:hover { color: var(--vu-primary); }
+
+/* ─── Search Dropdown ────────────────────────────────────── */
+.vu-search-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--vu-surface);
+    border: 1px solid var(--vu-border);
+    border-radius: var(--vu-radius);
+    box-shadow: var(--vu-shadow-md);
+    max-height: 260px;
+    overflow-y: auto;
+}
+.vu-search-hint, .vu-search-empty {
+    padding: 12px 14px;
+    margin: 0;
+    font-size: 12px;
+    color: var(--vu-text-muted);
+}
+.vu-search-spinner { padding: 12px; display: flex; justify-content: center; }
+.vu-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--vu-border);
+    border-top-color: var(--vu-primary);
+    border-radius: 50%;
+    animation: vu-spin .7s linear infinite;
+}
+@keyframes vu-spin { to { transform: rotate(360deg); } }
+
+/* ─── Results ────────────────────────────────────────────── */
+.vu-results-list { list-style: none; margin: 0; padding: 4px 0; }
+.vu-result-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background .12s;
+    font-size: 13px;
+}
+.vu-result-item:hover,
+.vu-result-item.is-selected { background: var(--vu-primary-bg); }
+.vu-result-title { flex: 1; }
+.vu-result-type  { font-size: 11px; color: var(--vu-text-muted); }
+.vu-result-icon--page { color: var(--vu-primary); font-size: 16px; }
+
+/* ─── Icon Picker ────────────────────────────────────────── */
+.vu-icon-results-list {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px !important;
+}
+.vu-icon-result-item {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 78px;
+    min-height: 78px;
+    gap: 5px;
+    border-radius: 6px;
+    border: 1px solid var(--vu-border);
+    padding: 10px 6px !important;
+    text-align: center;
+    background: var(--vu-bg);
+    transition: all .12s;
+}
+.vu-icon-result-item:hover,
+.vu-icon-result-item.is-selected { background: var(--vu-primary-bg); border-color: var(--vu-primary); }
+.vu-icon-result-preview { font-size: 24px; display: block; }
+.vu-icon-result-label   { font-size: 10px; color: var(--vu-text-muted); word-break: break-all; line-height: 1.2; }
+
+/* ─── Remove button ──────────────────────────────────────── */
+.vu-remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--vu-text-muted);
+    font-size: 13px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transition: all .15s;
+    line-height: 1;
+}
+.vu-remove-btn:hover { background: #fce8e8; color: var(--vu-danger); }
+
+/* ─── Floating Notices ───────────────────────────────────── */
+.vu-notices {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 340px;
+}
+
+/* ─── Loading screen ─────────────────────────────────────── */
+.vu-loading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 0;
+    color: var(--vu-text-muted);
+    font-size: 14px;
+}
+

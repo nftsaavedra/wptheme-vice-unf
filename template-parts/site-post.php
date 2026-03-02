@@ -1,13 +1,21 @@
+<?php
+// Centralizamos en viceunf_theme_options
+$options     = get_option('viceunf_theme_options', []);
+$is_enabled  = !empty($options['viceunf_noticias_section_enabled']);
+if (!$is_enabled) {
+    return;
+}
+$noticias_cantidad = isset($options['noticias_cantidad']) ? (int) $options['noticias_cantidad'] : 3;
+?>
 <section id="dt_posts" class="dt_posts dt-py-default front-posts">
     <div class="dt-container">
         <div class="dt-row">
             <div class="dt-col-xl-7 dt-col-lg-8 dt-col-md-9 dt-col-12 dt-mx-auto dt-mb-6">
                 <div class="dt_siteheading dt-text-center">
                     <?php
-                    // Obtenemos los datos del Personalizador
-                    $subtitulo = get_theme_mod('viceunf_noticias_subtitulo', "Actualidad Académica");
-                    $titulo = get_theme_mod('viceunf_noticias_titulo', "Últimas Noticias y Artículos");
-                    $descripcion = get_theme_mod('viceunf_noticias_descripcion', "Conoce las novedades, logros y actividades académicas de la Vicepresidencia Académica.");
+                    $subtitulo   = $options['viceunf_noticias_subtitulo']   ?? 'Actualidad Académica';
+                    $titulo      = $options['viceunf_noticias_titulo']      ?? 'Últimas Noticias y Artículos';
+                    $descripcion = $options['viceunf_noticias_descripcion'] ?? '';
                     ?>
 
                     <?php if (!empty($subtitulo)) : ?>
@@ -29,7 +37,7 @@
         <div class="dt-row dt-g-4">
             <?php
             // Obtener entradas delegando la consulta a la capa de Servicio
-            $blog_query = class_exists('\ViceUnf\Core\Service\PostService') ? (new \ViceUnf\Core\Service\PostService())->get_recent_posts(3) : new WP_Query();
+            $blog_query = class_exists('\ViceUnf\Core\Service\PostService') ? (new \ViceUnf\Core\Service\PostService())->get_recent_posts($noticias_cantidad) : new WP_Query();
 
             if ($blog_query->have_posts()) :
                 while ($blog_query->have_posts()) : $blog_query->the_post();

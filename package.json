@@ -15,8 +15,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "wp-scripts build",
-    "start": "wp-scripts start",
+    "build": "wp-scripts build --config webpack.config.cjs",
+    "start": "wp-scripts start --config webpack.config.cjs",
     "build:css": "postcss src/main.css -o style.css --no-map",
     "build:framework": "postcss assets/css/framework.css -o assets/css/framework.min.css --no-map"
   },
