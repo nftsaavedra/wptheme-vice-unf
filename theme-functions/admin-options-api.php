@@ -40,12 +40,32 @@ function viceunf_theme_options_permissions_check()
 
 /**
  * Callback GET: Retorna las opciones actuales del tema.
+ * Se enriquece la respuesta resolviendo URLs de imágenes desde sus IDs
+ * cuando el campo _url correspondiente no está guardado (datos legados).
  */
 function viceunf_get_theme_options()
 {
     $options = get_option('viceunf_theme_options', array());
 
-    // Devolvemos la data cruda, el frontend se encargará de los valores por defecto si faltan
+    // ── Resolución automática de URLs de imágenes legadas ──────────────────
+    // Mapa de campos: clave_id => clave_url
+    $image_fields = array(
+        'about_main_image' => 'about_main_image_url',
+    );
+
+    foreach ($image_fields as $id_key => $url_key) {
+        $attachment_id = isset($options[$id_key]) ? (int) $options[$id_key] : 0;
+
+        // Solo resolvemos si hay ID pero la URL está ausente o vacía
+        if ($attachment_id > 0 && empty($options[$url_key])) {
+            $resolved_url = wp_get_attachment_url($attachment_id);
+            if ($resolved_url) {
+                $options[$url_key] = $resolved_url;
+            }
+        }
+    }
+    // ───────────────────────────────────────────────────────────────────────
+
     return rest_ensure_response($options);
 }
 
