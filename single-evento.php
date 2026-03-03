@@ -12,20 +12,20 @@ if (! defined('ABSPATH')) {
 get_header();
 
 // Extraemos los metadatos personalizados del evento
-$lugar = get_post_meta(get_the_ID(), '_evento_lugar', true) ?: get_post_meta(get_the_ID(), 'lugar_evento', true);
+$lugar = get_post_meta(get_the_ID(), '_evento_lugar', true) ?: get_post_meta(get_the_ID(), '_evento_address_key', true);
 $mapa_url = get_post_meta(get_the_ID(), '_evento_mapa_url', true);
 
 $horarios = get_post_meta(get_the_ID(), '_evento_horarios', true);
 if (empty($horarios) || !is_array($horarios)) {
     $horarios = [];
-    // Leer llaves probables antiguas de ACF para migrar al frontend si no se abrieron en backend aún
-    $fecha_antigua = get_post_meta(get_the_ID(), 'fecha_evento', true) ?: get_post_meta(get_the_ID(), 'evento_fecha', true);
+    // Leer llaves probables antiguas genradas por /theme-functions/meta-boxes.php
+    $fecha_antigua = get_post_meta(get_the_ID(), '_evento_date_key', true);
     if (!empty($fecha_antigua)) {
         $horarios[] = [
             'etiqueta' => '',
             'fecha'    => $fecha_antigua,
-            'inicio'   => get_post_meta(get_the_ID(), 'hora_inicio', true) ?: '08:00',
-            'fin'      => get_post_meta(get_the_ID(), 'hora_fin', true) ?: '12:00'
+            'inicio'   => get_post_meta(get_the_ID(), '_evento_start_time_key', true) ?: '08:00',
+            'fin'      => get_post_meta(get_the_ID(), '_evento_end_time_key', true) ?: '12:00'
         ];
     }
 }
