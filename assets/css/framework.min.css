@@ -812,6 +812,14 @@ div.dt-d-none {
   margin-top: var(--dt-gutter-y);
 }
 
+.dt-g-3 {
+  --dt-gutter-x: 1.6rem;
+}
+
+.dt-g-3 {
+  --dt-gutter-y: 1.6rem;
+}
+
 .dt-g-4 {
   --dt-gutter-x: 2.4rem;
 }
@@ -881,6 +889,10 @@ div.dt-d-none {
   margin-right: 0.8rem;
 }
 
+.dt-mb-3 {
+  margin-bottom: 1.6rem;
+}
+
 .dt-mb-4 {
   margin-bottom: 2.4rem;
 }
@@ -901,12 +913,12 @@ div.dt-d-none {
   margin-left: 0.8rem;
 }
 
-.dt-text-left {
-  text-align: left;
+.dt-ml-3 {
+  margin-left: 1.6rem;
 }
 
-.dt-text-right {
-  text-align: right;
+.dt-text-left {
+  text-align: left;
 }
 
 .dt-text-center {
@@ -942,6 +954,11 @@ div.dt-d-none {
 @media (min-width: 48em) {
   .dt-container {
     max-width: 84.907rem; /*72rem*/
+  }
+
+  .dt-col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
   }
 
   .dt-col-md-6 {
@@ -995,6 +1012,11 @@ div.dt-d-none {
     max-width: 66.666667%;
   }
 
+  .dt-col-lg-10 {
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+  }
+
   .dt-col-lg-12 {
     flex: 0 0 100%;
     max-width: 100%;
@@ -1021,6 +1043,11 @@ div.dt-d-none {
   .dt-col-xl-7 {
     flex: 0 0 58.333333%;
     max-width: 58.333333%;
+  }
+
+  .dt-col-xl-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
   }
 }
 /* ---//--- */
@@ -3686,13 +3713,7 @@ button.dt_uptop {
 
 .dt_post_item {
   position: relative;
-  border: 0.1rem solid rgba(189, 189, 189, 0.35);
   transition: var(--dt-transition);
-}
-
-.dt_post_item:not(.single-post):hover,
-.dt_post_item:not(.single-post):focus-within {
-  border-color: transparent;
 }
 
 .dt_post_item .image {
@@ -4291,10 +4312,6 @@ button.dt_uptop {
   gap: 1.6rem;
 }
 
-.dt_pagetitle.dt-text-right .dt_pagetitle_content {
-  flex-direction: row-reverse;
-}
-
 .dt_pagetitle .dt_pagetitle_content .title > * {
   position: relative;
   display: block;
@@ -4517,10 +4534,6 @@ button.dt_uptop {
   margin-bottom: 4rem;
 }
 
-.dt_slider .dt-text-right .dt_slider-content {
-  margin-left: auto;
-}
-
 .dt_slider .dt_slider-content .title {
   font-size: 10rem;
   line-height: 1;
@@ -4637,10 +4650,6 @@ button.dt_uptop {
   .dt_btn-group .dt-btn:not(:last-child) {
     margin-right: 1rem;
   }
-}
-
-.dt_slider .dt-text-right .first {
-  order: 1;
 }
 
 .dt_slider .last {

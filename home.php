@@ -15,7 +15,7 @@
 get_header();
 ?>
 
-<section id="dt_posts" class="dt_posts dt-py-default">
+<section id="dt_posts" class="dt_posts dt-py-default viceunf-bg-canvas">
   <div class="dt-container">
     <div class="dt-row dt-g-5">
 
@@ -37,7 +37,7 @@ get_header();
           <div class="page-header dt-mb-4">
             <h1 class="page-title"><?php single_post_title(); ?></h1>
             <div class="archive-description">
-              <p><?php echo esc_html__( 'Explora nuestras últimas noticias, artículos y comunicados.', 'viceunf' ); ?></p>
+              <p><?php echo esc_html__('Explora nuestras últimas noticias, artículos y comunicados.', 'viceunf'); ?></p>
             </div>
           </div>
 

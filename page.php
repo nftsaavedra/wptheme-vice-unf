@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<div id="content" class="site-content dt-py-default">
+<div id="content" class="site-content dt-py-default viceunf-bg-canvas">
     <div class="dt-container">
         <div class="dt-row dt-g-5">
             <?php
@@ -23,14 +23,19 @@ get_header();
             <div id="dt-main" class="<?php echo esc_attr($main_class); ?>">
                 <?php while (have_posts()) : the_post(); ?>
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                        <div class="dt_page_content entry-content">
-                            <?php
-                            the_content();
-                            wp_link_pages(array(
-                                'before' => '<div class="page-links">' . esc_html__('Páginas:', 'viceunf'),
-                                'after'  => '</div>',
-                            ));
-                            ?>
+                        <div class="viceunf-card-surface">
+                            <header class="viceunf-card-header">
+                                <?php the_title('<h1 class="viceunf-card-title">', '</h1>'); ?>
+                            </header>
+                            <div class="dt_page_content entry-content" style="font-size: 1.6rem; line-height: 1.8; color: #334155;">
+                                <?php
+                                the_content();
+                                wp_link_pages(array(
+                                    'before' => '<div class="page-links">' . esc_html__('Páginas:', 'viceunf'),
+                                    'after'  => '</div>',
+                                ));
+                                ?>
+                            </div>
                         </div>
                     </article>
 

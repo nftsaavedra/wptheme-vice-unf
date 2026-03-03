@@ -12,7 +12,7 @@
  */
 
 // Definimos las clases de diseño para la tarjeta.
-$post_classes = ['dt_post_item', 'dt_posts--one', 'dt-mb-4'];
+$post_classes = ['dt_post_item', 'dt_posts--one', 'dt-mb-4', 'viceunf-card-soft', 'viceunf-card-hoverable'];
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class($post_classes); ?>>

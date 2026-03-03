@@ -121,6 +121,32 @@ add_action('wp_enqueue_scripts', 'viceunf_dequeue_jquery_frontend', 99);
 
 /**
  * =================================================================
+ * 1.7. Evitar Render-Blocking para Vendor CSS
+ * =================================================================
+ *
+ * Transforma las etiquetas <link> de hojas de estilo no críticas (vendor)
+ * en precargas asincrónicas, mejorando el FCP y LCP en PageSpeed Insights.
+ */
+function viceunf_defer_non_critical_css($tag, $handle, $href, $media)
+{
+    $non_critical_handles = [
+        'viceunf-fontawesome',
+        'viceunf-animate',
+        'viceunf-swiper',
+        'viceunf-glightbox'
+    ];
+
+    if (in_array($handle, $non_critical_handles, true)) {
+        return "<link rel='preload' as='style' href='" . esc_url($href) . "' onload=\"this.onload=null;this.rel='stylesheet'\" media='all'>\n" .
+            "<noscript><link rel='stylesheet' href='" . esc_url($href) . "' media='all'></noscript>\n";
+    }
+
+    return $tag;
+}
+add_filter('style_loader_tag', 'viceunf_defer_non_critical_css', 10, 4);
+
+/**
+ * =================================================================
  * 2. Carga Centralizada de Estilos y Scripts para el Panel de Administración
  * =================================================================
  */

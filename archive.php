@@ -15,7 +15,7 @@
 get_header();
 ?>
 
-<section class="dt_posts dt-py-default">
+<section class="dt_posts dt-py-default viceunf-bg-canvas">
   <div class="dt-container">
     <div class="dt-row dt-g-5">
 

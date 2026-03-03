@@ -17,7 +17,9 @@
   "scripts": {
     "build": "wp-scripts build --config webpack.config.cjs",
     "start": "wp-scripts start --config webpack.config.cjs",
-    "build:css": "postcss src/main.css -o style.css --no-map",
+    "build:scss": "sass src/scss/main.scss src/main.css --no-source-map",
+    "build:postcss": "postcss src/main.css -o style.css --no-map",
+    "build:css": "npm-run-all build:scss build:postcss",
     "build:framework": "postcss assets/css/framework.css -o assets/css/framework.min.css --no-map"
   },
   "devDependencies": {
@@ -25,7 +27,9 @@
     "@wordpress/interactivity": "^6.40.0",
     "@wordpress/scripts": "^31.5.0",
     "autoprefixer": "^10.4.20",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1"
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.97.3"
   }
 }

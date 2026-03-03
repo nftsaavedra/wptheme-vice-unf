@@ -8131,13 +8131,7 @@ button.dt_uptop {
 
 .dt_post_item {
   position: relative;
-  border: 0.1rem solid rgba(189, 189, 189, 0.35);
   transition: var(--dt-transition);
-}
-
-.dt_post_item:not(.single-post):hover,
-.dt_post_item:not(.single-post):focus-within {
-  border-color: transparent;
 }
 
 .dt_post_item .image {
