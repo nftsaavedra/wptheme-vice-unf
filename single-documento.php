@@ -74,9 +74,15 @@ get_header();
               ?>
                 <div class="viceunf-single-doc__media">
                   <?php if ($is_pdf) : ?>
-                    <!-- Vista previa del PDF moderna -->
-                    <div class="viceunf-single-doc__preview">
-                      <iframe src="<?php echo esc_url($file_url); ?>#toolbar=0&navpanes=0&scrollbar=0" title="Vista previa de <?php echo esc_attr(get_the_title()); ?>"></iframe>
+                    <!-- Vista previa del PDF nativa y responsiva -->
+                    <div class="viceunf-single-doc__preview" style="width: 100%; height: 85vh; margin-bottom: 2.5rem; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                      <object data="<?php echo esc_url($file_url); ?>#toolbar=0&navpanes=0&scrollbar=0&view=FitH" type="application/pdf" width="100%" height="100%" style="display: block;">
+                        <div style="padding: 2rem; text-align: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+                          <i class="fas fa-file-pdf" style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                          <p style="margin-bottom: 1rem;">El visor de PDF integrado no es compatible con el navegador actual.</p>
+                          <a href="<?php echo esc_url($file_url); ?>" target="_blank" class="dt-btn dt-btn-solid">Descargar el archivo PDF directly</a>
+                        </div>
+                      </object>
                     </div>
                   <?php endif; ?>
 
