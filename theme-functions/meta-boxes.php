@@ -97,47 +97,11 @@ function viceunf_save_reglamento_custom_callback($post_id, $post_data)
 
 add_action('admin_init', function () {
 
-    // 1. Meta Box: SLIDER
-    new ViceUnf_Metabox_Factory(array(
-        'id'        => 'slider_details_metabox',
-        'title'     => 'Datos del Slider',
-        'post_type' => 'slider',
-        'fields'    => array(
-            array('id' => 'slider_subtitle', 'meta_key' => '_slider_subtitle_key', 'label' => 'Subtítulo', 'section' => 'Contenido del Slider'),
-            array('id' => 'slider_description', 'meta_key' => '_slider_description_key', 'type' => 'textarea', 'label' => 'Descripción', 'section' => 'Contenido del Slider'),
-            array('id' => 'slider_text_alignment', 'meta_key' => '_slider_text_alignment_key', 'type' => 'select', 'label' => 'Alineación', 'options' => array('dt-text-left' => 'Izquierda', 'dt-text-center' => 'Centro', 'dt-text-right' => 'Derecha'), 'section' => 'Contenido del Slider'),
-            array('id' => 'slider_btn1_text', 'meta_key' => '_slider_btn1_text_key', 'label' => 'Texto Botón 1', 'section' => 'Botón 1 (Principal)'),
-            array('id' => 'slider_link_type', 'meta_key' => '_slider_link_type_key', 'type' => 'select', 'label' => 'Tipo de Enlace', 'options' => array('none' => 'Ninguno', 'url' => 'URL Personalizada', 'content' => 'Enlazar a Contenido (Buscar)'), 'section' => 'Botón 1 (Principal)'),
-            array('id' => 'slider_link_url', 'meta_key' => '_slider_link_url_key', 'type' => 'url', 'label' => 'URL Personalizada', 'attributes' => 'placeholder="https://ejemplo.com"', 'wrapper_id' => 'campo_url', 'wrapper_class' => 'slider-field conditional-field', 'wrapper_style' => 'display:none', 'section' => 'Botón 1 (Principal)'),
-            array('id' => 'slider_link_content_id', 'meta_key' => '_slider_link_content_id_key', 'type' => 'custom_html', 'render_callback' => 'viceunf_render_slider_content_search_html', 'wrapper_id' => 'campo_contenido', 'wrapper_class' => 'slider-field conditional-field', 'wrapper_style' => 'display:none', 'section' => 'Botón 1 (Principal)'),
-            array('id' => 'slider_btn2_text', 'meta_key' => '_slider_btn2_text_key', 'label' => 'Texto (Opcional)', 'section' => 'Botón 2 (Secundario)'),
-            array('id' => 'slider_btn2_link', 'meta_key' => '_slider_btn2_link_key', 'type' => 'url', 'label' => 'Enlace (Opcional)', 'section' => 'Botón 2 (Secundario)'),
-            array('id' => 'slider_video_link', 'meta_key' => '_slider_video_link_key', 'type' => 'url', 'label' => 'Enlace Video (Opcional)', 'section' => 'Botón de Video'),
-        )
-    ));
-
-    // 2. Meta Box: EVENTO (Eliminado de forma segura. La funcionalidad ha sido migrada al plugin viceunf-core como "Detalles y Horarios del Evento")
-    // new ViceUnf_Metabox_Factory( array(...) );
-    // 3. Meta Box: SOCIO
-    new ViceUnf_Metabox_Factory(array(
-        'id'        => 'socio_details_metabox',
-        'title'     => 'Detalles del Socio',
-        'post_type' => 'socio',
-        'fields'    => array(
-            array('id' => 'socio_url', 'meta_key' => '_socio_url_key', 'type' => 'url', 'label' => 'Enlace Web del Socio (Opcional)', 'wrapper_class' => 'socio-field'),
-        )
-    ));
-
-    // 4. Meta Box: REGLAMENTO
-    new ViceUnf_Metabox_Factory(array(
-        'id'            => 'reglamento_file_metabox',
-        'title'         => 'Archivo del Reglamento (Obligatorio)',
-        'post_type'     => 'reglamento',
-        'save_callback' => 'viceunf_save_reglamento_custom_callback',
-        'fields'        => array(
-            array('id' => 'reglamento_source_ui', 'type' => 'custom_html', 'render_callback' => 'viceunf_render_reglamento_file_selector_html')
-        )
-    ));
+    // Nota Arquitectónica (2025):
+    // Las declaraciones de Meta Boxes para Slider, Evento, Socio y Reglamento han sido REMOVIDAS de manera segura del Tema.
+    // Dicha responsabilidad concierne 100% a la persistencia y base de datos, por tanto, fueron migradas al plugin `viceunf-core`.
+    // Las clases en el core ahora heredan de `AbstractMetaBox` lo que garantiza DRY, estandarización de OWASP,
+    // y perfecta disociación de la UI (Headless Ready).
 });
 
 
