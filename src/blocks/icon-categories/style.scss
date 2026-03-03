@@ -1,0 +1,78 @@
+.viceunf-icon-categories {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 2.4rem;
+	padding: 4rem 2rem;
+
+	// Modo fila: scroll horizontal en móvil.
+	&--row {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		padding-bottom: 1.2rem;
+
+		@media (min-width: 62em) {
+			justify-content: center;
+			flex-wrap: wrap;
+			overflow: visible;
+		}
+	}
+
+	// Modo grilla: respeta columnas via CSS property.
+	&--grid {
+		display: grid;
+		grid-template-columns: repeat( var(--viceunf-icon-cols, 6), 1fr );
+		gap: 2.4rem;
+
+		@media (max-width: 61.95em) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		@media (max-width: 35.95em) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	// Ítem individual.
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		flex-shrink: 0;
+		text-decoration: none;
+		color: inherit;
+
+		&:hover .viceunf-icon-categories__circle {
+			transform: scale(1.1);
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	// Círculo de ícono.
+	&__circle {
+		width: 7rem;
+		height: 7rem;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: var(--dt-transition);
+		background-color: var(--viceunf-icon-bg, var(--dt-pri-color));
+
+		i {
+			font-size: 2.8rem;
+			color: var(--dt-whi-color);
+		}
+	}
+
+	// Etiqueta.
+	&__label {
+		font-size: 1.3rem;
+		font-weight: 600;
+		color: var(--dt-sec-color);
+		text-align: center;
+		max-width: 8rem;
+		line-height: 1.3;
+	}
+}

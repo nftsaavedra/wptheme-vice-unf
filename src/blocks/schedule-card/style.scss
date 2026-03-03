@@ -1,0 +1,82 @@
+.viceunf-schedule-card {
+	background-color: var(--dt-whi-color);
+	border-radius: 1.2rem;
+	overflow: hidden;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+	transition: var(--dt-transition);
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.14);
+	}
+
+	// Cabecera de la tarjeta con perforaciones de libreta.
+	&__header {
+		position: relative;
+		height: 5rem;
+		display: flex;
+		align-items: flex-end;
+		padding-bottom: 0;
+	}
+
+	// Fila de anillas decorativas estilo libreta.
+	&__rings {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-evenly;
+		padding: 0 1.6rem;
+		pointer-events: none;
+	}
+
+	&__ring {
+		width: 1.8rem;
+		height: 1.8rem;
+		border-radius: 50%;
+		border: 3px solid rgba(255, 255, 255, 0.6);
+		background-color: transparent;
+	}
+
+	// Cuerpo de la tarjeta.
+	&__body {
+		padding: 2.4rem;
+	}
+
+	// Fecha destacada.
+	&__date {
+		font-size: 3.2rem;
+		font-weight: 800;
+		color: var(--dt-sec-color);
+		line-height: 1;
+		margin-bottom: 0.8rem;
+	}
+
+	// Nombre/número de sesión.
+	&__session {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: var(--dt-sec-color);
+		margin-bottom: 1.2rem;
+		line-height: 1.3;
+	}
+
+	// Horario y ubicación.
+	&__time,
+	&__location {
+		font-size: 1.4rem;
+		color: var(--dt-base-color);
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		margin-bottom: 0.6rem;
+
+		i {
+			color: var(--dt-pri-color);
+			font-size: 1.3rem;
+			flex-shrink: 0;
+		}
+	}
+}

@@ -1,0 +1,54 @@
+.viceunf-logo-partners {
+	padding: 6rem 0;
+	background-color: var(--dt-whi-color);
+
+	&.alignfull {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+	}
+
+	&__title {
+		text-align: center;
+		color: var(--dt-sec-color);
+		font-size: clamp(2.4rem, 3vw, 3.2rem);
+		margin-bottom: 4rem;
+	}
+
+	// Contenedor de logos en fila centrada.
+	&__track {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 3.2rem 4.8rem;
+	}
+
+	// Cada logo como contendor.
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		transition: var(--dt-transition);
+	}
+
+	// Imagen del logo.
+	&__img {
+		max-height: 56px;
+		width: auto;
+		object-fit: contain;
+		transition: var(--dt-transition);
+	}
+
+	// Modo gris por defecto → color en hover.
+	&--grayscale {
+		.viceunf-logo-partners__img {
+			filter: grayscale(100%) opacity(0.55);
+		}
+
+		.viceunf-logo-partners__item:hover .viceunf-logo-partners__img,
+		.viceunf-logo-partners__item:focus .viceunf-logo-partners__img {
+			filter: grayscale(0%) opacity(1);
+		}
+	}
+}

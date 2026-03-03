@@ -1,0 +1,174 @@
+/* =============================================
+   Recent Posts Block Styles (Theme Widget Style Restored)
+   ============================================= */
+
+.wp-block-viceunf-recent-posts {
+    /* El contenedor global (.widget) ya es proveído por el Sidebar de WordPress.
+       Por lo tanto, el bloque en sí NO debe tener padding ni fondos, para evitar 
+       el error de "caja dentro de caja". */
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0;
+
+    /* REGLA CRÍTICA: Prevenir que los estilos globales de "Widget" del tema
+       inyecten la pequeña línea verde (pseudo-element content: "-") al hacer hover en enlaces. */
+    a, a:hover, a:focus {
+        text-decoration: none !important;
+        &::before, &::after {
+            display: none !important;
+            content: none !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+    }
+
+    li, li:hover, li:focus {
+        &::before, &::after {
+            display: none !important;
+            content: none !important;
+        }
+    }
+
+    .widget-title {
+        margin-bottom: 1.5rem;
+        font-size: var(--viceunf-fs-lg, 1.8rem);
+        font-weight: 700;
+        color: var(--dt-sec-color, #0b2346);
+    }
+
+    .recent-posts-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .recent-post-item {
+        display: flex;
+        flex-direction: row; /* Diseño HORIZONTAL original */
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem; /* Añadir padding interno para que el hover background tenga espacio */
+        margin: 0 -1rem; /* Compensar el padding para mantener el texto alineado con el título del widget */
+        border-radius: 8px; /* Bordes redondeados para la tarjeta iluminada */
+        border: 1px solid transparent; /* Frontera base transparente para evitar saltos al hacer hover */
+        border-bottom-color: rgba(189, 189, 189, 0.4); /* Separador original sólido */
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        
+        &:last-child {
+            border-bottom-color: transparent;
+        }
+
+        /* EFECTO UX MODERNO GRUPAL: Toda la fila se ilumina al pasar el mouse */
+        &:hover, &:focus-within {
+            background-color: rgba(0, 121, 78, 0.03); /* Fondo sutilmente entintado con el color principal */
+            border-color: rgba(0, 121, 78, 0.15); /* Todo el borde de la tarjeta se enciende sutilmente */
+            box-shadow: 0 4px 15px rgba(0, 121, 78, 0.06); /* Sombra suave para dar relieve estático */
+            
+            /* Sincronizar el color del título al enfocar toda la tarjeta */
+            .post-title a {
+                color: var(--dt-pri-color, #00794e);
+            }
+        }
+
+        .post-thumb {
+            width: 75px; /* Imagen pequeña cuadrada original */
+            height: 75px; 
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+
+            a, a:hover, a:focus {
+                display: block;
+                width: 100%;
+                height: 100%;
+                transform: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            img, img:hover {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: cover;
+                transform: none !important;
+                margin: 0 !important;
+            }
+        }
+
+        .post-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+
+            .post-title {
+                font-size: 1.4rem; /* Texto más acorde al diseño lateral */
+                margin: 0 0 0.5rem 0;
+                line-height: 1.3;
+                font-weight: 700;
+
+                a {
+                    color: var(--dt-sec-color, #0b2346);
+                    text-decoration: none;
+                    transition: color 0.2s ease;
+                    display: inline-block;
+
+                    &:hover, &:focus {
+                        color: var(--dt-pri-color, #00794e);
+                        transform: none !important;
+                        padding-left: 0 !important;
+                        margin-left: 0 !important;
+                    }
+                }
+            }
+
+            .post-date {
+                font-size: 1.2rem;
+                color: #888;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                text-transform: capitalize;
+
+                i {
+                    color: #888;
+                    margin-right: 0.6rem;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+
+    /* Modificadores para Footer (Fondo Oscuro) */
+    .dt_footer & {
+        .recent-post-item {
+            border-bottom-color: rgba(255,255,255,0.1);
+            
+            &:hover, &:focus-within {
+                background-color: rgba(255, 255, 255, 0.04); /* Iluminación suave en fondos oscuros */
+                border-color: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                
+                .post-title a {
+                    color: var(--dt-pri-color, #a3d9c2); /* Verde más claro para contraste en dark mode */
+                }
+            }
+
+            .post-info .post-title a {
+                color: #ffffff;
+            }
+            .post-info .post-date {
+                color: rgba(255,255,255,0.6);
+                
+                i {
+                    color: rgba(255,255,255,0.6);
+                }
+            }
+        }
+    }
+}
+

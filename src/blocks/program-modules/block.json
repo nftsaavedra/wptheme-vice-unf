@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/program-modules",
+  "version": "1.0.0",
+  "title": "ViceUnf - Módulos del Programa",
+  "category": "viceunf-blocks",
+  "icon": "chart-pie",
+  "description": "Grid de módulos o fases de un programa formativo con indicador de progreso semicircular SVG y lista de puntos clave.",
+  "attributes": {
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "progressColor": {
+      "type": "string",
+      "default": "#ff4700"
+    },
+    "sectionTitle": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

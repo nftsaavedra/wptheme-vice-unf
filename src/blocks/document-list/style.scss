@@ -1,0 +1,486 @@
+/* =============================================
+   ViceUnf — Document List Block
+   Interactivity API + Modern UI Design
+   ============================================= */
+
+.wp-block-viceunf-document-list {
+
+  // ── Design Tokens ──────────────────────────────────────────────────────
+  --doc-pri:        var(--dt-pri-color, #00794e);
+  --doc-sec:        var(--dt-sec-color, #0b2346);
+  --doc-radius:     6px;
+  --doc-shadow:     0 2px 12px rgba(0, 0, 0, 0.07);
+  --doc-transition: 0.25s ease;
+  --doc-surface:    #ffffff;
+  --doc-bg:         #f4f7f9;
+  --doc-border:     rgba(0, 0, 0, 0.08);
+
+  // ── Toolbar — búsqueda ARRIBA, filtros ABAJO ─────────────────────────────
+  .viceunf-doc-toolbar {
+    display: flex;
+    flex-direction: column;   // ← siempre columna: search encima, filters debajo
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.4rem 1.6rem;
+    background: var(--doc-bg);
+    border-radius: var(--doc-radius);
+    border: 1px solid var(--doc-border);
+  }
+
+  // ── Search ───────────────────────────────────────────────────────────────
+  .viceunf-doc-search {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .viceunf-doc-search__icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--doc-sec);
+    opacity: 0.4;
+    font-size: 1.4rem;
+    pointer-events: none;
+    transition: opacity var(--doc-transition);
+  }
+
+  .viceunf-doc-search__input {
+    width: 100%;
+    padding: 0.9rem 3.6rem 0.9rem 3.6rem;
+    border: 1.5px solid var(--doc-border);
+    border-radius: var(--doc-radius);
+    font-size: 1.5rem;
+    color: var(--doc-sec);
+    background: var(--doc-surface);
+    transition: border-color var(--doc-transition), box-shadow var(--doc-transition);
+    outline: none;
+    appearance: none;
+
+    &:focus {
+      border-color: var(--doc-pri);
+      box-shadow: 0 0 0 3px rgba(0, 121, 78, 0.12);
+
+      ~ .viceunf-doc-search__icon {
+        opacity: 0.9;
+        color: var(--doc-pri);
+      }
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none; // usamos nuestro propio botón
+    }
+  }
+
+  .viceunf-doc-search__clear {
+    // Reset estricto para evitar herencia de estilos globales del tema
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none; // Vanilla JS lo hace visible con .is-visible
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.12);
+    color: var(--doc-sec);
+    font-size: 1rem;
+    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background var(--doc-transition), color var(--doc-transition);
+
+    &.is-visible {
+      display: inline-flex;
+    }
+
+    &:hover {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    i {
+      pointer-events: none;
+      font-size: 0.9rem;
+    }
+  }
+
+  // ── Filters ─────────────────────────────────────────────────────────────
+  .viceunf-doc-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .viceunf-doc-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    border: 1.5px solid var(--doc-border);
+    border-radius: 999px; // pill shape
+    background: var(--doc-surface);
+    color: var(--doc-sec);
+    font-size: 1.35rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--doc-transition);
+    white-space: nowrap;
+
+    &:hover {
+      border-color: var(--doc-pri);
+      color: var(--doc-pri);
+    }
+
+    &.is-active {
+      background: var(--doc-pri);
+      border-color: var(--doc-pri);
+      color: #fff;
+    }
+
+    i {
+      font-size: 1.1rem;
+    }
+  }
+
+  .viceunf-doc-filter-btn--sub {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  // ── Accordion ───────────────────────────────────────────────────────────
+  .viceunf-doc-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  .viceunf-accordion {
+    background: var(--doc-surface);
+    border: 1px solid var(--doc-border);
+    border-radius: var(--doc-radius);
+    box-shadow: var(--doc-shadow);
+    overflow: hidden;
+    transition: box-shadow var(--doc-transition);
+
+    &:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    &--root {
+      border-left: 4px solid var(--acc-color, var(--doc-pri));
+    }
+
+    &--child {
+      margin: 0.5rem 0 0.5rem 2rem;
+      border-left: 3px solid var(--acc-color, var(--doc-pri));
+      box-shadow: none;
+    }
+  }
+
+  .viceunf-accordion__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.1rem 1.4rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--doc-transition);
+    user-select: none;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.025);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--doc-pri);
+      outline-offset: -2px;
+    }
+  }
+
+  .viceunf-accordion__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 6px;
+    background: var(--acc-color, var(--doc-pri));
+    color: #fff;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    transition: background var(--doc-transition);
+  }
+
+  .viceunf-accordion--child .viceunf-accordion__icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.2rem;
+  }
+
+  .viceunf-accordion__title {
+    flex: 1;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--doc-sec);
+    line-height: 1.3;
+  }
+
+  .viceunf-accordion--child .viceunf-accordion__title {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .viceunf-accordion__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.2rem;
+    height: 2.2rem;
+    padding: 0 0.5rem;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--doc-sec);
+    flex-shrink: 0;
+  }
+
+  .viceunf-accordion__chevron {
+    color: var(--doc-sec);
+    font-size: 1.2rem;
+    opacity: 0.4;
+    transition: transform var(--doc-transition), opacity var(--doc-transition);
+    flex-shrink: 0;
+  }
+
+  .viceunf-accordion.is-open > .viceunf-accordion__header {
+    .viceunf-accordion__chevron {
+      transform: rotate(180deg);
+      opacity: 1;
+      color: var(--doc-pri);
+    }
+    .viceunf-accordion__badge {
+      background: var(--acc-color, var(--doc-pri));
+      color: #fff;
+    }
+  }
+
+  // Body con CSS Grid transition (smooth open/close)
+  .viceunf-accordion__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease;
+  }
+
+  .viceunf-accordion.is-open > .viceunf-accordion__body {
+    grid-template-rows: 1fr;
+  }
+
+  .viceunf-accordion__body-inner {
+    overflow: hidden;
+    padding: 0 1.4rem;
+  }
+
+  .viceunf-accordion.is-open > .viceunf-accordion__body > .viceunf-accordion__body-inner {
+    padding-bottom: 1.2rem;
+  }
+
+  // ── Document Items ───────────────────────────────────────────────────────
+  .viceunf-accordion__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .viceunf-accordion__item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    background: var(--doc-bg);
+    border: 1px solid transparent;
+    transition: border-color var(--doc-transition), background var(--doc-transition);
+
+    &:hover {
+      border-color: var(--doc-border);
+      background: #edf1f4;
+    }
+
+    &.is-hidden {
+      display: none !important;
+    }
+  }
+
+  .viceunf-accordion__link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex: 1;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover .viceunf-accordion__link-text {
+      color: var(--doc-pri);
+      text-decoration: underline;
+    }
+  }
+
+  .viceunf-accordion__link-icon {
+    color: #e03131; // rojo PDF
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .viceunf-accordion__link-text {
+    font-size: 1.45rem;
+    color: var(--doc-sec);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color var(--doc-transition);
+  }
+
+  .viceunf-accordion__download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 4px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #fff;
+    background: var(--doc-pri);
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background var(--doc-transition), transform var(--doc-transition);
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--doc-sec);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+
+    i {
+      font-size: 1.1rem;
+    }
+  }
+
+  // ── Empty / No Results States ────────────────────────────────────────────
+  .viceunf-doc-no-results,
+  .viceunf-doc-empty-state {
+    display: none; // visible cuando .is-visible (Interactivity API)
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: var(--doc-bg);
+    border-radius: var(--doc-radius);
+    border: 2px dashed var(--doc-border);
+
+    i {
+      font-size: 3.6rem;
+      color: #adb5bd;
+    }
+
+    p {
+      font-size: 1.5rem;
+      color: var(--doc-sec);
+      opacity: 0.7;
+      margin: 0;
+    }
+  }
+
+  .viceunf-doc-no-results.is-visible,
+  .viceunf-doc-empty-state {
+    display: flex;
+  }
+
+  // La empty state siempre visible (solo cuando no hay datos desde PHP)
+  .viceunf-doc-empty-state {
+    display: flex;
+  }
+
+  // ── Flat list ───────────────────────────────────────────────────────────
+  .viceunf-accordion__list--flat {
+    gap: 0;
+    & .viceunf-accordion__item {
+      border-radius: 0;
+      border-bottom: 1px solid var(--doc-border);
+      background: var(--doc-surface);
+      padding: 0.9rem 1.2rem;
+
+      &:first-child { border-radius: var(--doc-radius) var(--doc-radius) 0 0; }
+      &:last-child  { border-radius: 0 0 var(--doc-radius) var(--doc-radius); border-bottom: none; }
+    }
+  }
+
+  // ── Estado de visibilidad controlado por JS ──────────────────────────────
+  // Accordeones sin resultados en una búsqueda
+  .viceunf-accordion.is-hidden {
+    display: none;
+  }
+
+  // Documentos que no coinciden con la búsqueda
+  .viceunf-accordion__item.is-hidden {
+    display: none !important;
+  }
+
+  // ── Accessibility ────────────────────────────────────────────────────────
+  .viceunf-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // ── Responsive ──────────────────────────────────────────────────────────
+  @media (max-width: 36em) {
+    .viceunf-accordion__item {
+      flex-wrap: wrap;
+    }
+
+    .viceunf-accordion__download {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .viceunf-accordion__link-text {
+      white-space: normal;
+    }
+  }
+}

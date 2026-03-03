@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/recent-posts",
+  "version": "1.0.0",
+  "title": "ViceUnf - Entradas Recientes",
+  "category": "viceunf-blocks",
+  "icon": "welcome-widgets-menus",
+  "description": "Muestra una lista de entradas recientes con miniatura, permitiendo filtrar por categoría. (Reemplazo del widget clásico).",
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Entradas Recientes"
+    },
+    "numberOfPosts": {
+      "type": "integer",
+      "default": 5
+    },
+    "charLimit": {
+      "type": "integer",
+      "default": 55
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "textdomain": "viceunf",
+  "style": "file:./style-index.css",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

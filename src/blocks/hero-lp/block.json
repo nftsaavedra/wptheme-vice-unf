@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/hero-lp",
+  "version": "1.0.0",
+  "title": "ViceUnf - Hero Landing Page",
+  "category": "viceunf-blocks",
+  "icon": "cover-image",
+  "description": "Cabecera de alto impacto para páginas de aterrizaje con imagen/video de fondo, logo del programa y botones CTA configurables.",
+  "attributes": {
+    "backgroundImage": {
+      "type": "object",
+      "default": {}
+    },
+    "backgroundVideo": {
+      "type": "string",
+      "default": ""
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.55
+    },
+    "programLogo": {
+      "type": "object",
+      "default": {}
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaPrimaryText": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaPrimaryUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaSecondaryText": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaSecondaryUrl": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["full"]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

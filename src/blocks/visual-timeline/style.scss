@@ -1,0 +1,38 @@
+.viceunf-visual-timeline {
+	padding: 8rem 0;
+
+	&.alignfull {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+	}
+
+	&__title {
+		text-align: center;
+		color: var(--dt-sec-color);
+		font-size: clamp(2.8rem, 4vw, 4rem);
+		margin-bottom: 6rem;
+	}
+
+	// Track: contiene la línea y los pasos.
+	&__track {
+		position: relative;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	// Línea vertical central.
+	&__line {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		transform: translateX(-50%);
+		background-color: var(--viceunf-timeline-line, var(--dt-pri-color));
+		border-radius: 2px;
+
+		@media (max-width: 61.95em) {
+			left: 2.4rem;
+		}
+	}
+}
