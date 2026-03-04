@@ -108,36 +108,30 @@ $create_animated_subtitle = function ($text) {
           $image_id   = isset($item['image_id']) ? absint($item['image_id']) : 0;
           $image_url  = isset($item['image_url']) ? esc_url($item['image_url']) : '';
         ?>
-          <div class="dt-col-xl-3 dt-col-lg-4 dt-col-md-6 dt-col-12 dt-mb-4">
-            <div class="viceunf-card-soft viceunf-card-hoverable dt-science-card" data-animation="slideInUp" data-animation-delay="<?php echo esc_attr($delay); ?>ms">
+          <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12">
+            <div class="dt_item_inner" data-animation="slideInUp" data-animation-delay="<?php echo esc_attr($delay); ?>ms">
               <?php if ($image_id || $image_url) : ?>
-                <div class="dt_item_image dt-mb-3">
+                <div class="dt_item_image">
                   <a href="<?php echo esc_url($item_url); ?>" aria-hidden="true" tabindex="-1">
                     <?php if ($image_id) : ?>
-                      <?php echo wp_get_attachment_image($image_id, 'large', false, ['alt' => esc_attr($item_title), 'class' => 'img-fluid dt-science-image']); ?>
+                      <?php echo wp_get_attachment_image($image_id, 'large', false, ['alt' => esc_attr($item_title)]); ?>
                     <?php else : ?>
-                      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($item_title); ?>" title="" class="img-fluid dt-science-image">
+                      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($item_title); ?>" title="">
                     <?php endif; ?>
                   </a>
                 </div>
               <?php endif; ?>
-              <div class="dt_item_holder dt-science-holder">
-                <div class="dt-mb-3">
-                  <span class="viceunf-card-chip dt-science-icon-wrap"><i class="<?php echo esc_attr($item_icon); ?>"></i></span>
-                </div>
-                <!-- Jerarquía semántica H2 -> H3 -->
-                <h3 class="dt_item_title dt-science-title dt-mb-3">
+              <div class="dt_item_holder">
+                <div class="dt_item_icon"><i class="<?php echo esc_attr($item_icon); ?>"></i></div>
+                <h5 class="dt_item_title">
                   <a href="<?php echo esc_url($item_url); ?>"><?php echo esc_html($item_title); ?></a>
-                </h3>
+                </h5>
                 <?php if ($item_desc) : ?>
-                  <p class="dt_item_text text dt-science-text dt-mb-4"><?php echo esc_html($item_desc); ?></p>
+                  <p class="dt_item_text text"><?php echo esc_html($item_desc); ?></p>
                 <?php endif; ?>
-                <!-- Accesibilidad y llamado a la acción -->
-                <div class="dt-science-footer">
-                  <a href="<?php echo esc_url($item_url); ?>" class="readmore dt-science-readmore" aria-label="Ver más sobre <?php echo esc_attr(strip_tags($item_title)); ?>">
-                    Ver más <i class="fas fa-long-arrow-right"></i>
-                  </a>
-                </div>
+                <a href="<?php echo esc_url($item_url); ?>" class="readmore" aria-label="Ver más sobre <?php echo esc_attr(strip_tags($item_title)); ?>">
+                  Ver más<i class="fas fa-long-arrow-right"></i>
+                </a>
               </div>
             </div>
           </div>

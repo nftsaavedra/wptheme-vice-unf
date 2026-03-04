@@ -94,7 +94,7 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                         endif;
                         ?>
 
-                        <div class="dt_btn-group viceunf-btn-group--center">
+                        <div class="dt_btn-group dt-text-center dt-mt-4">
                             <a href="<?php echo esc_url(get_post_type_archive_link('evento')); ?>" class="dt-btn dt-btn-primary">
                                 <span class="dt-btn-text">Ver todos los eventos</span>
                             </a>

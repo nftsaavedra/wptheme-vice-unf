@@ -1410,86 +1410,6 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   width: 25.2rem;
   text-align: center;
 }
-
-.dt_clients_logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 3rem;
-  min-height: 11rem;
-  margin-top: 2rem;
-  margin-bottom: 3.2rem;
-  border: 0.1rem solid rgba(189, 189, 189, 0.35);
-  transition: var(--dt-transition);
-}
-
-.dt_clients_logo:after,
-.dt_clients_logo:before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  transform: scale(0);
-  transition: all 0.5s ease-in-out 0s;
-}
-
-.dt_clients_logo:before {
-  border-bottom: 0.6rem double var(--dt-pri-color);
-  border-left: 0.6rem double var(--dt-pri-color);
-  transform-origin: 0 100% 0;
-}
-
-.dt_clients_logo:hover:before {
-  border-left-color: var(--dt-priTwo-color);
-  border-bottom-color: var(--dt-pri-color);
-}
-
-.dt_clients_logo:after {
-  border-right: 0.6rem double var(--dt-pri-color);
-  border-top: 0.6rem double var(--dt-pri-color);
-  transform-origin: 100% 0 0;
-}
-
-.dt_clients_logo:hover:after {
-  border-right-color: var(--dt-pri-color);
-  border-top-color: var(--dt-priTwo-color);
-}
-
-.dt_clients_logo:hover::after,
-.dt_clients_logo:hover::before {
-  transform: scale(1);
-}
-
-.dt_clients_logo .image {
-  z-index: 2;
-}
-
-.dt_clients_logo .image a {
-  display: block;
-}
-
-.dt_clients_logo:hover,
-.dt_clients_logo:focus-within {
-  background-color: var(--dt-whi-color);
-  box-shadow: 0 1.5rem 2.5rem rgba(10, 15, 68, 0.08);
-}
-
-.dt_clients_logo .image img {
-  opacity: 0.5;
-  filter: grayscale(100%);
-}
-
-.dt_clients_logo:hover img,
-.dt_clients_logo:focus-within img {
-  transform: scale(1.1);
-  filter: grayscale(0%);
-  opacity: 1;
-}
 /*
  * ===================================================================
  * Estandariza el tamaño de la imagen en la sección de posts
@@ -2430,51 +2350,81 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   }
 }
 /* =================================================================
-   Producción Científica Cards
+   Socios Académicos Classic UI
 ================================================================= */
-.dt-science-image {
-  border-radius: 8px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  aspect-ratio: 16/9;
+.dt-partner-header-classic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
-
-.dt-science-title {
+.dt-partner-header-classic h5.dt-partner-title {
   font-size: 1.8rem;
   font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 1rem;
-}
-.dt-science-title a {
   color: var(--dt-sec-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
+  padding: 0 1.5rem;
+  margin: 0;
 }
-.dt-science-title a:hover, .dt-science-title a:focus {
-  color: var(--dt-pri-color);
-}
-
-.dt-science-text {
+.dt-partner-header-classic .dt-partner-line {
   flex-grow: 1;
-  color: #475569;
+  height: 1px;
+  background-color: #eaeaea;
 }
-
-.dt-science-readmore {
-  display: inline-flex;
+.dt-partner-header-classic .dt-partner-btn-classic {
+  position: static;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+  background-color: #f1f5f9;
+  color: var(--dt-sec-color);
+  border-radius: 50%;
+  display: flex;
   align-items: center;
-  color: var(--dt-pri-color);
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
-.dt-science-readmore i {
-  margin-left: 0.5rem;
-  transition: transform 0.3s ease;
+.dt-partner-header-classic .dt-partner-btn-classic::after {
+  content: none; /* Ocultar flechas default */
 }
-.dt-science-readmore:hover, .dt-science-readmore:focus {
+.dt-partner-header-classic .dt-partner-btn-classic:hover {
+  background-color: var(--dt-pri-color);
+  color: #fff;
+}
+.dt-partner-header-classic .dt-partner-btn-classic.swiper-button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.dt-partner-header-classic .dt-partner-btn-classic.swiper-button-disabled:hover {
+  background-color: #f1f5f9;
   color: var(--dt-sec-color);
 }
-.dt-science-readmore:hover i, .dt-science-readmore:focus i {
-  transform: translateX(4px);
+
+.dt-partner-slide .dt-partner-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eaeaea;
+  padding: 1.5rem;
+  height: 110px; /* Reducido para logos menos gigantes */
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.dt-partner-slide .dt-partner-box .dt-partner-img {
+  max-height: 100%;
+  max-width: 140px; /* Límite extra para evitar logos muy anchos */
+  -o-object-fit: contain;
+     object-fit: contain;
+  filter: grayscale(100%) opacity(0.6);
+  transform: scale(0.95);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+.dt-partner-slide:hover .dt-partner-box {
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.dt-partner-slide:hover .dt-partner-box .dt-partner-img {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1);
 }

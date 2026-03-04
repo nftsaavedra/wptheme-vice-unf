@@ -100,7 +100,7 @@ $noticias_cantidad = isset($options['noticias_cantidad']) ? (int) $options['noti
         // Si hay una página de entradas configurada, mostramos el botón
         if ($page_for_posts_id) :
         ?>
-            <div class="dt_btn-group viceunf-btn-group--center">
+            <div class="dt_btn-group dt-text-center dt-mt-4">
                 <a href="<?php echo esc_url(get_permalink($page_for_posts_id)); ?>" class="dt-btn dt-btn-primary">
                     <span class="dt-btn-text">Ver todas las noticias</span>
                 </a>
