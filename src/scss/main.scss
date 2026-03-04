@@ -2992,7 +2992,7 @@ table.wc-block-cart-items
 }
 
 /* =================================================================
-   Socios Académicos Classic UI
+   Socios Académicos Classic UI (Homepage)
 ================================================================= */
 .dt-partner-header-classic {
   display: flex;
@@ -3030,7 +3030,7 @@ table.wc-block-cart-items
     flex-shrink: 0;
 
     &::after {
-      content: none; /* Ocultar flechas default */
+      content: none;
     }
 
     &:hover {
@@ -3056,7 +3056,7 @@ table.wc-block-cart-items
     justify-content: center;
     border: 1px solid #eaeaea;
     padding: 1.5rem;
-    height: 110px; /* Reducido para logos menos gigantes */
+    height: 110px;
     background: #fff;
     transition:
       border-color 0.3s ease,
@@ -3064,7 +3064,7 @@ table.wc-block-cart-items
 
     .dt-partner-img {
       max-height: 100%;
-      max-width: 140px; /* Límite extra para evitar logos muy anchos */
+      max-width: 140px;
       object-fit: contain;
       filter: grayscale(100%) opacity(0.6);
       transform: scale(0.95);

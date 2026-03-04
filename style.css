@@ -2350,7 +2350,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   }
 }
 /* =================================================================
-   Socios Académicos Classic UI
+   Socios Académicos Classic UI (Homepage)
 ================================================================= */
 .dt-partner-header-classic {
   display: flex;
@@ -2386,7 +2386,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   flex-shrink: 0;
 }
 .dt-partner-header-classic .dt-partner-btn-classic::after {
-  content: none; /* Ocultar flechas default */
+  content: none;
 }
 .dt-partner-header-classic .dt-partner-btn-classic:hover {
   background-color: var(--dt-pri-color);
@@ -2407,13 +2407,13 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   justify-content: center;
   border: 1px solid #eaeaea;
   padding: 1.5rem;
-  height: 110px; /* Reducido para logos menos gigantes */
+  height: 110px;
   background: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .dt-partner-slide .dt-partner-box .dt-partner-img {
   max-height: 100%;
-  max-width: 140px; /* Límite extra para evitar logos muy anchos */
+  max-width: 140px;
   -o-object-fit: contain;
      object-fit: contain;
   filter: grayscale(100%) opacity(0.6);

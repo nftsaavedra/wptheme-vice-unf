@@ -14,7 +14,7 @@ $section_title = $attributes['sectionTitle'] ?? 'Socios Académicos';
 $post_type = $attributes['postTypeOrigin'] ?? 'socio';
 $limit = isset($attributes['itemsLimit']) ? (int)$attributes['itemsLimit'] : -1;
 
-$wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_clients dt_clients--one front-clients']);
+$wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_clients dt_clients--one front-clients viceunf-carousel-entities-block']);
 
 // Validamos que el CPT existe
 if (!post_type_exists($post_type)) {
@@ -58,15 +58,15 @@ if (!$query->have_posts()) {
                                                                         "loop" => true,
                                                                         "autoplay" => ["delay" => 3000, "disableOnInteraction" => false, "pauseOnMouseEnter" => true],
                                                                         "navigation" => ["nextEl" => ".dt-partner-header-classic .dt-btn-next-partner", "prevEl" => ".dt-partner-header-classic .dt-btn-prev-partner"],
-                                                                        "spaceBetween" => 30,
+                                                                        "spaceBetween" => 2,
                                                                         "slidesPerView" => 2,
                                                                         "speed" => 1000,
                                                                         "breakpoints" => [
-                                                                            "0" => ["spaceBetween" => 20, "slidesPerView" => 2],
-                                                                            "575" => ["spaceBetween" => 30, "slidesPerView" => 3],
-                                                                            "767" => ["spaceBetween" => 30, "slidesPerView" => 4],
-                                                                            "991" => ["spaceBetween" => 30, "slidesPerView" => 5],
-                                                                            "1199" => ["spaceBetween" => 30, "slidesPerView" => 5]
+                                                                            "0" => ["spaceBetween" => 2, "slidesPerView" => 2],
+                                                                            "575" => ["spaceBetween" => 2, "slidesPerView" => 3],
+                                                                            "767" => ["spaceBetween" => 2, "slidesPerView" => 4],
+                                                                            "991" => ["spaceBetween" => 2, "slidesPerView" => 6],
+                                                                            "1199" => ["spaceBetween" => 2, "slidesPerView" => 6]
                                                                         ]
                                                                     ], JSON_UNESCAPED_SLASHES); ?>'>
             <div class="swiper-wrapper">

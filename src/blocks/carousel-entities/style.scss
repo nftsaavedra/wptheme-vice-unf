@@ -1,0 +1,130 @@
+/* =================================================================
+   ViceUnf - Block: Carousel Entities
+================================================================= */
+.viceunf-carousel-entities-block {
+  .dt-partner-header-classic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+
+    h5.dt-partner-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dt-sec-color, #002244);
+      padding: 0 1.2rem;
+      margin: 0;
+      text-align: center;
+
+      @media (max-width: 575px) {
+        font-size: 1.25rem;
+        padding: 0 0.8rem;
+      }
+    }
+
+    .dt-partner-line {
+      flex-grow: 1;
+      height: 1px;
+      background-color: #eaeaea;
+    }
+
+    .dt-partner-btn-classic {
+      position: static;
+      margin: 0;
+      width: 32px;
+      height: 32px;
+      background-color: #f1f5f9;
+      color: var(--dt-sec-color, #002244);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      z-index: 2;
+
+      &::after {
+        content: none;
+      }
+
+      &:hover {
+        background-color: var(--dt-pri-color, #b01821);
+        color: #fff;
+      }
+
+      &.swiper-button-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        &:hover {
+          background-color: #f1f5f9;
+          color: var(--dt-sec-color, #002244);
+        }
+      }
+    }
+  }
+
+  /* Adaptación Flexible de las Cajas */
+  .dt-partner-slide {
+    display: flex;
+    justify-content: center;
+
+    .dt-partner-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #eaeaea;
+      padding: 1rem; /* Padding más compacto */
+
+      /* Responsive box height sizing */
+      height: 85px; /* Mucho menos alto como pediste */
+      width: 100%; /* Swiper maneja el sizing */
+      max-width: 250px;
+      margin: 0; /* Delegado a spaceBetween de Swiper */
+      overflow: hidden; /* Garantiza que ningún logo se desborde visualmente por los márgenes de imagen */
+
+      background: #fff;
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+      border-radius: 4px; /* Bordes suaves modernos */
+
+      .image {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+        }
+      }
+
+      .dt-partner-img {
+        max-height: 100%;
+        max-width: 120px; /* Un poco más pequeño para caber en la caja de 85px */
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        filter: grayscale(100%) opacity(0.6);
+        transform: scale(0.95);
+        transition:
+          filter 0.4s ease,
+          transform 0.4s ease;
+      }
+    }
+
+    &:hover .dt-partner-box {
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+      .dt-partner-img {
+        filter: grayscale(0) opacity(1);
+        transform: scale(1);
+      }
+    }
+  }
+}
