@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/carousel-entities",
+  "version": "1.0.0",
+  "title": "Carrusel de Entidades",
+  "category": "theme",
+  "icon": "images-alt",
+  "description": "Muestra un carrusel dinámico consultando diferentes Tipos de Post.",
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "default": "Socios Académicos"
+    },
+    "postTypeOrigin": {
+      "type": "string",
+      "default": "socio"
+    },
+    "itemsLimit": {
+      "type": "number",
+      "default": -1
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
