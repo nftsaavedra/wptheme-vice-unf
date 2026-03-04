@@ -24,9 +24,7 @@ get_header();
                 <?php while (have_posts()) : the_post(); ?>
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                         <div class="viceunf-card-surface">
-                            <header class="viceunf-card-header">
-                                <?php the_title('<h1 class="viceunf-card-title">', '</h1>'); ?>
-                            </header>
+
                             <div class="dt_page_content entry-content" style="font-size: 1.6rem; line-height: 1.8; color: #334155;">
                                 <?php
                                 the_content();

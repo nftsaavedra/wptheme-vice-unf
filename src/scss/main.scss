@@ -18,6 +18,8 @@ Este tema, al igual que WordPress, está licenciado bajo la GPL.
 con otros.
 */
 
+@use "components/cards";
+
 .has-text-align-justify {
   text-align: justify;
 }
@@ -2981,5 +2983,3 @@ table.wc-block-cart-items
     justify-content: center;
   }
 }
-
-@use "components/cards";

@@ -90,13 +90,12 @@ add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets');
 
 /**
  * =================================================================
- * 1.2. Preload de Recursos Críticos (CSS y Fonts)
+ * 1.2. Preload de Recursos Críticos (Fonts)
  * =================================================================
  */
 function viceunf_preload_critical_assets()
 {
     $theme_uri = get_stylesheet_directory_uri();
-    echo '<link rel="preload" href="' . esc_url($theme_uri . '/assets/css/framework.min.css') . '" as="style">' . "\n";
     echo '<link rel="preload" href="' . esc_url($theme_uri . '/assets/webfonts/fa-solid-900.woff2') . '" as="font" type="font/woff2" crossorigin>' . "\n";
 }
 add_action('wp_head', 'viceunf_preload_critical_assets', 1);

@@ -37,3 +37,7 @@ node_modules/
 
 # Archivos de Build generados (Webpack / Blocks)
 # build/ # (Descomentar si la carpeta build no debe versionarse, aunque para bloques WP normalmente se sube a produccion o se compila en CI/CD)
+
+# Transitorios de SCSS / Gulp / Grunt / PostCSS
+.sass-cache/
+src/main.css

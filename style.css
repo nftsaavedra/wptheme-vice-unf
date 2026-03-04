@@ -18,6 +18,120 @@ Este tema, al igual que WordPress, está licenciado bajo la GPL.
 Úsalo para crear algo increíble, diviértete y comparte lo que aprendas
 con otros.
 */
+/* =================================================================
+   ViceUnf Form System: Card UI (Modern Surface System)
+   Global Utilities for standardized aesthetic layouts
+================================================================= */
+body.viceunf-bg-canvas,
+.viceunf-bg-canvas {
+  background-color: #f8fafc !important; /* Tailwind Slate-50 */
+}
+
+/* Base Card Structural Surface */
+.viceunf-card-surface {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  padding: 4rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .viceunf-card-surface {
+    padding: 4.5rem 5rem;
+  }
+}
+/* Card Visual Variants */
+.viceunf-card-surface:hover.viceunf-card-hoverable,
+.viceunf-card-surface:focus-within.viceunf-card-hoverable {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 121, 78, 0.08); /* Uso muy leve del Primary Color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Interactive Soft Cards for Smaller items (like related posts) */
+.viceunf-card-soft {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s ease;
+}
+
+.viceunf-card-soft:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Typography Inside Cards */
+.viceunf-card-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--dt-sec-color);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+}
+
+.viceunf-card-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Meta Data Pills (Badges/Chips) */
+.viceunf-card-chip {
+  display: inline-flex;
+  background-color: rgba(0, 121, 78, 0.08);
+  color: var(--dt-pri-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.4rem 1.2rem;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.viceunf-card-chip:hover,
+a.viceunf-card-chip:focus {
+  background-color: var(--dt-pri-color);
+  color: var(--dt-whi-color);
+  text-decoration: none;
+}
+
+/* =================================================================
+   Global Sidebar & Widgets Card System
+================================================================= */
+.dt_widget-area .widget {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 3rem 2.5rem;
+  margin-bottom: 3rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.dt_widget-area .widget:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.dt_widget-area .widget .widget-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--dt-sec-color);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
 .has-text-align-justify {
   text-align: justify;
 }
@@ -2314,107 +2428,4 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
     width: 100%;
     justify-content: center;
   }
-}
-/* =================================================================
-   ViceUnf Form System: Card UI (Modern Surface System)
-   Global Utilities for standardized aesthetic layouts
-================================================================= */
-body.viceunf-bg-canvas,
-.viceunf-bg-canvas {
-  background-color: #f8fafc !important; /* Tailwind Slate-50 */
-}
-
-/* Base Card Structural Surface */
-.viceunf-card-surface {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  padding: 4rem;
-  margin-bottom: 3rem;
-  position: relative;
-}
-
-@media (min-width: 992px) {
-  .viceunf-card-surface {
-    padding: 4.5rem 5rem;
-  }
-}
-/* Card Visual Variants */
-.viceunf-card-surface:hover.viceunf-card-hoverable,
-.viceunf-card-surface:focus-within.viceunf-card-hoverable {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(0, 121, 78, 0.08); /* Uso muy leve del Primary Color */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Interactive Soft Cards for Smaller items (like related posts) */
-.viceunf-card-soft {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 2.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-  transition: all 0.25s ease;
-}
-
-.viceunf-card-soft:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-}
-
-/* Typography Inside Cards */
-.viceunf-card-title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  color: var(--dt-sec-color);
-  line-height: 1.25;
-  margin-bottom: 2rem;
-}
-
-.viceunf-card-header {
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 2rem;
-  margin-bottom: 2.5rem;
-}
-
-/* Meta Data Pills (Badges/Chips) */
-.viceunf-card-chip {
-  display: inline-flex;
-  background-color: rgba(0, 121, 78, 0.08);
-  color: var(--dt-pri-color);
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 0.4rem 1.2rem;
-  border-radius: 99px;
-  letter-spacing: 0.5px;
-}
-
-/* =================================================================
-   Global Sidebar & Widgets Card System
-================================================================= */
-.dt_widget-area .widget {
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  padding: 3rem 2.5rem;
-  margin-bottom: 3rem;
-  transition: box-shadow 0.3s ease;
-}
-
-.dt_widget-area .widget:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-}
-
-.dt_widget-area .widget .widget-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--dt-sec-color);
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #f1f5f9;
 }

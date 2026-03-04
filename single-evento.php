@@ -44,9 +44,7 @@ if (empty($horarios) || !is_array($horarios)) {
                                 <article id="post-<?php the_ID(); ?>" <?php post_class(array('dt_post_item', 'dt_posts--one', 'dt-mb-4', 'single-post')); ?>>
 
                                     <div class="viceunf-card-surface">
-                                        <header class="viceunf-card-header">
-                                            <h1 class="viceunf-card-title"><?php the_title(); ?></h1>
-                                        </header>
+
                                         <div class="inner">
                                             <!-- Meta del Evento (Fecha publicación, etc nativo) -->
                                             <div class="meta">

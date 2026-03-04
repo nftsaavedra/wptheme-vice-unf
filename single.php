@@ -36,7 +36,6 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                                     <!-- Main Card Container -->
                                     <div class="viceunf-card-surface">
                                         <header class="viceunf-card-header">
-                                            <h1 class="viceunf-card-title"><?php the_title(); ?></h1>
 
                                             <?php if ($show_date || $show_author || ($show_categories && has_category())) : ?>
                                                 <div class="meta" style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; color: #64748b; font-size: 1.4rem;">
@@ -87,7 +86,15 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                                                     <?php if ($has_tags_to_show) : ?>
                                                         <div class="tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                                                             <i class="fas fa-tags dt-mr-1" aria-hidden="true" style="color: var(--dt-pri-color); align-self: center;"></i>
-                                                            <?php the_tags('<span class="viceunf-card-chip" style="font-size: 1rem; padding: 0.2rem 0.8rem;">', '</span><span class="viceunf-card-chip" style="font-size: 1rem; padding: 0.2rem 0.8rem;">', '</span>'); ?>
+                                                            <?php
+                                                            $tags = get_the_tags();
+                                                            if ($tags) {
+                                                                foreach ($tags as $tag) {
+                                                                    $tag_link = get_tag_link($tag->term_id);
+                                                                    echo '<a href="' . esc_url($tag_link) . '" class="viceunf-card-chip">' . esc_html($tag->name) . '</a>';
+                                                                }
+                                                            }
+                                                            ?>
                                                         </div>
                                                     <?php endif; ?>
 
