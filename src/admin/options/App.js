@@ -82,10 +82,41 @@ function AboutItemCard({ index, item, onChange, onRemove }) {
     );
 }
 
+// ─── ProductionItemCard ──────────────────────────────────────────────────────
+function ProductionItemCard({ index, item, onChange, onRemove }) {
+    return (
+        <div className="vu-card vu-card--compact">
+            <div className="vu-card__header">
+                <span className="vu-card__badge">Ítem {index + 1}</span>
+                <button type="button" className="vu-remove-btn" onClick={onRemove} title="Eliminar">✕</button>
+            </div>
+            <FieldGroup label="Título">
+                <Input value={item.title || ''} onChange={(v) => onChange({ ...item, title: v })} placeholder="Ej: Revistas Científicas" />
+            </FieldGroup>
+            <FieldGroup label="Descripción">
+                <Textarea rows={2} value={item.description || ''} onChange={(v) => onChange({ ...item, description: v })} placeholder="Breve descripción..." />
+            </FieldGroup>
+            <FieldGroup label="Ícono (FontAwesome clases, ej. fas fa-book)">
+                <Input value={item.icon || ''} onChange={(v) => onChange({ ...item, icon: v })} placeholder="fas fa-book-open" />
+            </FieldGroup>
+            <FieldGroup label="Enlace (URL)">
+                <Input type="url" value={item.url || ''} onChange={(v) => onChange({ ...item, url: v })} placeholder="https://..." />
+            </FieldGroup>
+            <ImageUploader
+                label="Imagen de fondo"
+                imageId={item.image_id || 0}
+                imageUrl={item.image_url || ''}
+                onChange={({ id, url }) => onChange({ ...item, image_id: id, image_url: url })}
+            />
+        </div>
+    );
+}
+
 // ─── Tab: Inicio ─────────────────────────────────────────────────────────────
 function TabInicio({ options, setOptions, postTypes }) {
     const set = (key, val) => setOptions(prev => ({ ...prev, [key]: val }));
     const aboutItems = Array.isArray(options.about_items) ? options.about_items : [];
+    const productionItems = Array.isArray(options.production_items) ? options.production_items : [];
 
     // Opciones para el selector de CPT de Socios
     const postTypeOptions = [
@@ -270,6 +301,53 @@ function TabInicio({ options, setOptions, postTypes }) {
                             Todos los posts publicados de ese tipo aparecen automáticamente en esta sección.
                         </Notice>
                     </div>
+                )}
+            </PanelBody>
+
+            {/* ══ 6. PRODUCCIÓN CIENTÍFICA ══ */}
+            <PanelBody title="⑥ Producción Científica" initialOpen={false}>
+                <ToggleControl
+                    label="Mostrar sección en la página de inicio"
+                    checked={!!options.production_section_enabled}
+                    onChange={(v) => set('production_section_enabled', v ? 1 : 0)}
+                />
+                {!!options.production_section_enabled && (
+                    <>
+                        <div className="vu-card vu-card--flat">
+                            <div className="vu-two-col">
+                                <FieldGroup label="Subtítulo animado" help="Aparece letra por letra">
+                                    <Input value={options.production_subtitle || ''} onChange={(v) => set('production_subtitle', v)} placeholder="Publicaciones Académicas" />
+                                </FieldGroup>
+                                <FieldGroup label="Título (acepta <br> y <span>)">
+                                    <Input value={options.production_title || ''} onChange={(v) => set('production_title', v)} placeholder="Conocimiento generado..." />
+                                </FieldGroup>
+                            </div>
+                            <FieldGroup label="Descripción">
+                                <Textarea rows={3} value={options.production_description || ''} onChange={(v) => set('production_description', v)} />
+                            </FieldGroup>
+                        </div>
+                        <Divider />
+                        <h3 className="vu-sub-title">Items de Producción</h3>
+                        <SectionNote>Agrega las tarjetas que aparecerán en la grilla inferior (ej. Revistas, Libros, Boletines...)</SectionNote>
+                        <div className="vu-card-grid vu-card-grid--2col">
+                            {productionItems.map((item, index) => (
+                                <ProductionItemCard
+                                    key={index} index={index} item={item}
+                                    onChange={(updated) => { const a = [...productionItems]; a[index] = updated; set('production_items', a); }}
+                                    onRemove={() => { const a = [...productionItems]; a.splice(index, 1); set('production_items', a); }}
+                                />
+                            ))}
+                            <div
+                                className="vu-card vu-card--add"
+                                onClick={() => set('production_items', [...productionItems, { title: '', description: '', icon: '', url: '', image_id: 0, image_url: '' }])}
+                                role="button" tabIndex={0}
+                                onKeyDown={(e) => e.key === 'Enter' && set('production_items', [...productionItems, { title: '', description: '', icon: '', url: '', image_id: 0, image_url: '' }])}
+                            >
+                                <span className="dashicons dashicons-plus-alt" />
+                                <span>Añadir ítem de Producción</span>
+                            </div>
+                        </div>
+                    </>
                 )}
             </PanelBody>
 

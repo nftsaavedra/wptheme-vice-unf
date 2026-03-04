@@ -22,6 +22,7 @@ function viceunf_sanitize_all_options($input)
     'eventos_section_enabled',
     'viceunf_noticias_section_enabled',
     'socios_section_enabled',
+    'production_section_enabled',
   ];
 
   foreach ($checkbox_keys as $key) {
@@ -45,6 +46,10 @@ function viceunf_sanitize_all_options($input)
     'viceunf_noticias_titulo'       => 'wp_kses_post',
     'viceunf_noticias_descripcion'  => 'sanitize_textarea_field',
     'viceunf_socios_titulo'         => 'sanitize_text_field',
+    // Campos de "Producción Científica"
+    'production_subtitle'    => 'sanitize_text_field',
+    'production_title'       => 'wp_kses_post',
+    'production_description' => 'sanitize_textarea_field',
   ];
 
   foreach ($other_fields_rules as $key => $sanitize_callback) {
@@ -86,8 +91,30 @@ function viceunf_sanitize_all_options($input)
     }
     $sanitized_input['about_items'] = $sanitized_items;
   } else {
-    // Si no se envió ningún item, guardamos un array vacío.
     $sanitized_input['about_items'] = [];
+  }
+
+  // Sanitización para el repetidor de "Producción Científica"
+  if (!empty($input['production_items']) && is_array($input['production_items'])) {
+    $sanitized_p_items = [];
+    $reindexed_p_items = array_values($input['production_items']);
+
+    foreach ($reindexed_p_items as $item) {
+      if (!empty($item['title'])) {
+        $sanitized_item = [
+          'title'       => sanitize_text_field($item['title']),
+          'description' => sanitize_textarea_field(isset($item['description']) ? $item['description'] : ''),
+          'icon'        => sanitize_text_field(isset($item['icon']) ? $item['icon'] : ''),
+          'image_id'    => absint(isset($item['image_id']) ? $item['image_id'] : 0),
+          'image_url'   => esc_url_raw(isset($item['image_url']) ? $item['image_url'] : ''),
+          'url'         => esc_url_raw(isset($item['url']) ? $item['url'] : ''),
+        ];
+        $sanitized_p_items[] = $sanitized_item;
+      }
+    }
+    $sanitized_input['production_items'] = $sanitized_p_items;
+  } else {
+    $sanitized_input['production_items'] = [];
   }
 
   // Fusionamos los datos nuevos y sanitizados con las opciones existentes.
