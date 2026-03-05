@@ -140,6 +140,10 @@ a.viceunf-card-chip:focus {
   --dt-pri-color: #00794e; /* Color principal */
   --dt-priTwo-color: #2d4260; /* Variante más clara del principal */
   --dt-sec-color: #0b2346; /* Color secundario */
+  /* ViceUnf UI Design Tokens (Surfaces & Borders) */
+  --viceunf-surface: #ffffff;
+  --viceunf-surface-alt: #f1f5f9;
+  --viceunf-border-color: #eaeaea;
 }
 
 /* Button 2 */

@@ -11,7 +11,7 @@
     h5.dt-partner-title {
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--dt-sec-color, #002244);
+      color: var(--dt-sec-color, #0b2346);
       padding: 0 1.2rem;
       margin: 0;
       text-align: center;
@@ -25,7 +25,7 @@
     .dt-partner-line {
       flex-grow: 1;
       height: 1px;
-      background-color: #eaeaea;
+      background-color: var(--viceunf-border-color, #eaeaea);
     }
 
     .dt-partner-btn-classic {
@@ -33,8 +33,8 @@
       margin: 0;
       width: 32px;
       height: 32px;
-      background-color: #f1f5f9;
-      color: var(--dt-sec-color, #002244);
+      background-color: var(--viceunf-surface-alt, #f1f5f9);
+      color: var(--dt-sec-color, #0b2346);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -49,16 +49,16 @@
       }
 
       &:hover {
-        background-color: var(--dt-pri-color, #b01821);
-        color: #fff;
+        background-color: var(--dt-pri-color, #00794e);
+        color: var(--viceunf-surface, #ffffff);
       }
 
       &.swiper-button-disabled {
         opacity: 0.5;
         cursor: not-allowed;
         &:hover {
-          background-color: #f1f5f9;
-          color: var(--dt-sec-color, #002244);
+          background-color: var(--viceunf-surface-alt, #f1f5f9);
+          color: var(--dt-sec-color, #0b2346);
         }
       }
     }
@@ -73,7 +73,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #eaeaea;
+      border: 1px solid var(--viceunf-border-color, #eaeaea);
       padding: 1rem; /* Padding más compacto */
 
       /* Responsive box height sizing */
@@ -83,7 +83,7 @@
       margin: 0; /* Delegado a spaceBetween de Swiper */
       overflow: hidden; /* Garantiza que ningún logo se desborde visualmente por los márgenes de imagen */
 
-      background: #fff;
+      background: var(--viceunf-surface, #ffffff);
       transition:
         border-color 0.3s ease,
         box-shadow 0.3s ease;
