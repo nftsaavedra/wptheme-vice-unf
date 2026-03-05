@@ -176,6 +176,20 @@ function viceunf_enqueue_admin_assets($hook)
         ));
     }
 
+    // --- Inyectar nonce AJAX y CSS del IconPicker en el Editor de Bloques ---
+    if ($screen && $screen->is_block_editor()) {
+        wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
+        wp_add_inline_script(
+            'wp-blocks',
+            'window.ajaxurl = window.ajaxurl || "' . admin_url('admin-ajax.php') . '";'
+                . 'window.viceunf_ajax_obj = window.viceunf_ajax_obj || ' . wp_json_encode([
+                    'ajax_url' => admin_url('admin-ajax.php'),
+                    'nonce'    => wp_create_nonce('slider_metabox_nonce_action'),
+                ]) . ';',
+            'before'
+        );
+    }
+
     // --- Carga específica para Página de Opciones ---
     if ($is_options_page) {
         wp_enqueue_media();

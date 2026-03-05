@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/about-section",
+  "version": "1.0.0",
+  "title": "Sección Nosotros",
+  "category": "theme",
+  "icon": "admin-users",
+  "description": "Sección 'Sobre Nosotros' reutilizable con imagen, video, texto descriptivo e items con iconos.",
+  "attributes": {
+    "subtitle": {
+      "type": "string",
+      "default": "Sobre Nosotros"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "personName": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "mainImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "mainImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mainImageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "items": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
