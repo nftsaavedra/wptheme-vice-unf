@@ -17,6 +17,8 @@ if (! $section_enabled) {
     return;
 }
 
+
+
 // 3. Preparamos un array para almacenar los ítems válidos que vamos a mostrar.
 $items_to_render = [];
 
@@ -41,19 +43,9 @@ for ($i = 1; $i <= 4; $i++) {
     $custom_title = ! empty($options["item_{$i}_custom_title"]) ? $options["item_{$i}_custom_title"] : '';
     $title = ! empty($custom_title) ? $custom_title : get_the_title($page_post);
 
-    // Lógica para determinar la descripción: usa la personalizada si existe, si no, crea un extracto.
-    $custom_desc = ! empty($options["item_{$i}_custom_desc"]) ? $options["item_{$i}_custom_desc"] : '';
-    if (! empty($custom_desc)) {
-        $description = $custom_desc;
-    } else {
-        // Generamos un extracto limpio de 10 palabras del contenido de la página.
-        $description = wp_trim_words(strip_tags($page_post->post_content), 10, '...');
-    }
-
     // Guardamos los datos procesados y listos para usar en nuestro array.
     $items_to_render[] = [
         'title'       => $title,
-        'description' => $description,
         'link'        => get_permalink($page_post),
         'icon'        => ! empty($options["item_{$i}_icon"]) ? $options["item_{$i}_icon"] : 'fas fa-info-circle', // Icono por defecto.
     ];
@@ -66,7 +58,7 @@ for ($i = 1; $i <= 4; $i++) {
 
             <?php if (! empty($items_to_render)) : ?>
                 <?php
-                $delay = 0; // Para la animación escalonada.
+                $delay = 0; // Para la animation escalonada.
                 // 5. Ahora recorremos el array con los datos listos y renderizamos el HTML.
                 foreach ($items_to_render as $item) :
                 ?>
@@ -82,7 +74,7 @@ for ($i = 1; $i <= 4; $i++) {
 
                                 <h5 class="dt_item_title"><a href="<?php echo esc_url($item['link']); ?>"><?php echo esc_html($item['title']); ?></a></h5>
 
-                                <div class="dt_item_content"><?php echo esc_html($item['description']); ?></div>
+
 
                                 <div class="dt_item_readmore"><a class="dt-btn-arrow" href="<?php echo esc_url($item['link']); ?>">Ver más</a></div>
                             </div>

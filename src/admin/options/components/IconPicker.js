@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { useAjaxSearch } from '../hooks/useAjaxSearch.js';
 
 /**
@@ -11,7 +11,26 @@ import { useAjaxSearch } from '../hooks/useAjaxSearch.js';
  */
 export function IconPicker({ value, onChange }) {
     const [open, setOpen] = useState(false);
+    const [displayName, setDisplayName] = useState(value);
     const { query, setQuery, results, loading } = useAjaxSearch('viceunf_search_icons');
+
+    // Efecto para humanizar la clase guardada cuando el componente se monta
+    useEffect(() => {
+        if (value) {
+            fetch(`${viceunfAdminData.themeUrl}/assets/data/fontawesome-icons.json`)
+                .then(res => res.json())
+                .then(icons => {
+                    const icon = icons.find(i => i.class === value);
+                    if (icon) {
+                        setDisplayName(icon.name);
+                    } else {
+                        // Si no lo encuentra, usa la misma clase como fallback
+                        setDisplayName(value);
+                    }
+                })
+                .catch(() => setDisplayName(value));
+        }
+    }, [value]);
 
     const select = (iconClass) => {
         onChange(iconClass);
@@ -32,7 +51,7 @@ export function IconPicker({ value, onChange }) {
                     <span className="vu-tag-icon-preview">
                         <i className={value} aria-hidden="true" />
                     </span>
-                    <span className="vu-tag-label" title={value}>{value}</span>
+                    <span className="vu-tag-label" title={value}>{displayName}</span>
                     <button type="button" className="vu-tag-clear" onClick={clear} title="Quitar ícono">✕</button>
                     <button type="button" className="vu-tag-change" onClick={() => { setOpen((o) => !o); }} title="Cambiar ícono">
                         <span className="dashicons dashicons-edit" />

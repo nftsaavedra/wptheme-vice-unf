@@ -44,6 +44,10 @@ add_action('admin_menu', function () {
       true
     );
 
+    wp_localize_script('viceunf-admin-options-js', 'viceunfAdminData', array(
+      'themeUrl' => get_stylesheet_directory_uri()
+    ));
+
     wp_enqueue_style(
       'viceunf-admin-options-css',
       get_stylesheet_directory_uri() . '/build/style-admin-options.css',

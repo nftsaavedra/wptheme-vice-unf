@@ -1,36 +1,51 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, Children, cloneElement, isValidElement } from '@wordpress/element';
 import {
     Panel, PanelBody,
     ToggleControl, RangeControl, Notice, Spinner,
     Button, TabPanel, SelectControl,
 } from '@wordpress/components';
+import { useInstanceId } from '@wordpress/compose';
 import apiFetch from '@wordpress/api-fetch';
 
+import { ImageUploader } from './components/ImageUploader.js';
 import { PageSearch }    from './components/PageSearch.js';
 import { IconPicker }    from './components/IconPicker.js';
-import { ImageUploader } from './components/ImageUploader.js';
+const FieldGroup = ({ label, help, children }) => {
+    const instanceId = useInstanceId(FieldGroup, 'vu-field');
+    
+    // Si hay un hijo o hijos válidos, clona y pasales el id autogenerado, sino renderizalo normal.
+    const childrenWithId = Children.map(children, child => {
+        if (isValidElement(child) && (child.type === Input || child.type === Textarea)) {
+            return cloneElement(child, { id: instanceId });
+        }
+        return child;
+    });
 
-// ─── Primitivos UI ────────────────────────────────────────────────────────────
-const FieldGroup = ({ label, help, children }) => (
-    <div className="vu-field-group">
-        {label && <label className="vu-field-label">{label}</label>}
-        {children}
-        {help && <p className="vu-field-help">{help}</p>}
-    </div>
-);
+    return (
+        <div className="vu-field-group">
+            {label && <label className="vu-field-label" htmlFor={instanceId}>{label}</label>}
+            {childrenWithId}
+            {help && <p className="vu-field-help">{help}</p>}
+        </div>
+    );
+};
 
 const Divider = () => <hr className="vu-divider" />;
 const SectionNote = ({ children }) => <p className="vu-section-hint">{children}</p>;
 
-const Input = ({ value, onChange, placeholder = '', type = 'text' }) => (
-    <input className="vu-text-input" type={type} value={value}
-        onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
-);
+const Input = ({ value, onChange, placeholder = '', type = 'text', id }) => {
+    return (
+        <input className="vu-text-input" type={type} id={id} value={value}
+            onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+    );
+};
 
-const Textarea = ({ value, onChange, rows = 3, placeholder = '' }) => (
-    <textarea className="vu-textarea" rows={rows} value={value}
-        onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
-);
+const Textarea = ({ value, onChange, rows = 3, placeholder = '', id }) => {
+    return (
+        <textarea className="vu-textarea" rows={rows} id={id} value={value}
+            onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+    );
+};
 
 // ─── InvestigacionCard ────────────────────────────────────────────────────────
 function InvestigacionCard({ index, options, setOptions }) {
@@ -52,9 +67,6 @@ function InvestigacionCard({ index, options, setOptions }) {
             </FieldGroup>
             <FieldGroup label="Título personalizado" help="Opcional — usa el título de la página si está vacío.">
                 <Input value={options[`item_${n}_custom_title`] || ''} onChange={(v) => set(`item_${n}_custom_title`, v)} placeholder="Dejar vacío para usar el de la página" />
-            </FieldGroup>
-            <FieldGroup label="Descripción" help="Opcional — se genera un extracto automático si está vacío.">
-                <Textarea rows={2} value={options[`item_${n}_custom_desc`] || ''} onChange={(v) => set(`item_${n}_custom_desc`, v)} />
             </FieldGroup>
         </div>
     );
@@ -133,7 +145,9 @@ function TabInicio({ options, setOptions, postTypes }) {
                     label="Mostrar sección en la página de inicio"
                     checked={!!options.investigacion_section_enabled}
                     onChange={(v) => set('investigacion_section_enabled', v ? 1 : 0)}
+                    __nextHasNoMarginBottom={true}
                 />
+                <Divider />
                 {!!options.investigacion_section_enabled && (
                     <>
                         <SectionNote>Configura los 4 items que aparecen en la sección. Cada uno apunta a una página y muestra su ícono, título y descripción.</SectionNote>
@@ -152,6 +166,7 @@ function TabInicio({ options, setOptions, postTypes }) {
                     label="Mostrar sección en la página de inicio"
                     checked={!!options.about_section_enabled}
                     onChange={(v) => set('about_section_enabled', v ? 1 : 0)}
+                    __nextHasNoMarginBottom={true}
                 />
                 {!!options.about_section_enabled && (
                     <>
@@ -216,6 +231,7 @@ function TabInicio({ options, setOptions, postTypes }) {
                     label="Mostrar sección en la página de inicio"
                     checked={!!options.eventos_section_enabled}
                     onChange={(v) => set('eventos_section_enabled', v ? 1 : 0)}
+                    __nextHasNoMarginBottom={true}
                 />
                 {!!options.eventos_section_enabled && (
                     <div className="vu-card vu-card--flat">
@@ -236,80 +252,20 @@ function TabInicio({ options, setOptions, postTypes }) {
                             onChange={(v) => set('eventos_cantidad', v)}
                             min={1} max={12}
                             help="Número de eventos recientes visibles en la página de inicio."
+                            __next40pxDefaultSize={true}
+                            __nextHasNoMarginBottom={true}
                         />
                     </div>
                 )}
             </PanelBody>
 
-            {/* ══ 4. NOTICIAS ══ */}
-            <PanelBody title="④ Noticias" initialOpen={false}>
-                <ToggleControl
-                    label="Mostrar sección en la página de inicio"
-                    checked={!!options.viceunf_noticias_section_enabled}
-                    onChange={(v) => set('viceunf_noticias_section_enabled', v ? 1 : 0)}
-                />
-                {!!options.viceunf_noticias_section_enabled && (
-                    <div className="vu-card vu-card--flat">
-                        <div className="vu-two-col">
-                            <FieldGroup label="Subtítulo">
-                                <Input value={options.viceunf_noticias_subtitulo || ''} onChange={(v) => set('viceunf_noticias_subtitulo', v)} placeholder="Actualidad Académica" />
-                            </FieldGroup>
-                            <FieldGroup label="Título">
-                                <Input value={options.viceunf_noticias_titulo || ''} onChange={(v) => set('viceunf_noticias_titulo', v)} placeholder="Últimas Noticias" />
-                            </FieldGroup>
-                        </div>
-                        <FieldGroup label="Descripción">
-                            <Textarea rows={3} value={options.viceunf_noticias_descripcion || ''} onChange={(v) => set('viceunf_noticias_descripcion', v)} />
-                        </FieldGroup>
-                        <RangeControl
-                            label="Cantidad de noticias a mostrar"
-                            value={options.noticias_cantidad || 3}
-                            onChange={(v) => set('noticias_cantidad', v)}
-                            min={1} max={10}
-                        />
-                    </div>
-                )}
-            </PanelBody>
-
-            {/* ══ 5. SOCIOS ACADÉMICOS ══ */}
-            <PanelBody title="⑤ Socios Académicos" initialOpen={false}>
-                <ToggleControl
-                    label="Mostrar sección en la página de inicio"
-                    checked={!!options.socios_section_enabled}
-                    onChange={(v) => set('socios_section_enabled', v ? 1 : 0)}
-                />
-                {!!options.socios_section_enabled && (
-                    <div className="vu-card vu-card--flat">
-                        <FieldGroup label="Título de la sección">
-                            <Input value={options.viceunf_socios_titulo || ''} onChange={(v) => set('viceunf_socios_titulo', v)} placeholder="Socios Académicos" />
-                        </FieldGroup>
-
-                        <FieldGroup
-                            label="Custom Post Type a mostrar"
-                            help="Por defecto se usa el CPT 'socio'. Puedes cambiarlo a cualquier otro tipo de post registrado."
-                        >
-                            <SelectControl
-                                value={options.socios_post_type || 'socio'}
-                                options={postTypeOptions}
-                                onChange={(v) => set('socios_post_type', v || 'socio')}
-                            />
-                        </FieldGroup>
-
-                        <Notice status="info" isDismissible={false}>
-                            Los logos y enlaces se gestionan desde el CPT seleccionado arriba
-                            ({' '}<strong>{options.socios_post_type || 'socio'}</strong>).
-                            Todos los posts publicados de ese tipo aparecen automáticamente en esta sección.
-                        </Notice>
-                    </div>
-                )}
-            </PanelBody>
-
-            {/* ══ 6. PRODUCCIÓN CIENTÍFICA ══ */}
-            <PanelBody title="⑥ Producción Científica" initialOpen={false}>
+            {/* ══ 4. PRODUCCIÓN CIENTÍFICA ══ */}
+            <PanelBody title="④ Producción Científica" initialOpen={false}>
                 <ToggleControl
                     label="Mostrar sección en la página de inicio"
                     checked={!!options.production_section_enabled}
                     onChange={(v) => set('production_section_enabled', v ? 1 : 0)}
+                    __nextHasNoMarginBottom={true}
                 />
                 {!!options.production_section_enabled && (
                     <>
@@ -350,6 +306,75 @@ function TabInicio({ options, setOptions, postTypes }) {
                     </>
                 )}
             </PanelBody>
+
+            {/* ══ 5. NOTICIAS ══ */}
+            <PanelBody title="⑤ Noticias" initialOpen={false}>
+                <ToggleControl
+                    label="Mostrar sección en la página de inicio"
+                    checked={!!options.viceunf_noticias_section_enabled}
+                    onChange={(v) => set('viceunf_noticias_section_enabled', v ? 1 : 0)}
+                    __nextHasNoMarginBottom={true}
+                />
+                {!!options.viceunf_noticias_section_enabled && (
+                    <div className="vu-card vu-card--flat">
+                        <div className="vu-two-col">
+                            <FieldGroup label="Subtítulo">
+                                <Input value={options.viceunf_noticias_subtitulo || ''} onChange={(v) => set('viceunf_noticias_subtitulo', v)} placeholder="Actualidad Académica" />
+                            </FieldGroup>
+                            <FieldGroup label="Título">
+                                <Input value={options.viceunf_noticias_titulo || ''} onChange={(v) => set('viceunf_noticias_titulo', v)} placeholder="Últimas Noticias" />
+                            </FieldGroup>
+                        </div>
+                        <FieldGroup label="Descripción">
+                            <Textarea rows={3} value={options.viceunf_noticias_descripcion || ''} onChange={(v) => set('viceunf_noticias_descripcion', v)} />
+                        </FieldGroup>
+                        <RangeControl
+                            label="Cantidad de noticias a mostrar"
+                            value={options.noticias_cantidad || 3}
+                            onChange={(v) => set('noticias_cantidad', v)}
+                            min={1} max={10}
+                            __next40pxDefaultSize={true}
+                            __nextHasNoMarginBottom={true}
+                        />
+                    </div>
+                )}
+            </PanelBody>
+
+            {/* ══ 6. SOCIOS ACADÉMICOS ══ */}
+            <PanelBody title="⑥ Socios Académicos" initialOpen={false}>
+                <ToggleControl
+                    label="Mostrar sección en la página de inicio"
+                    checked={!!options.socios_section_enabled}
+                    onChange={(v) => set('socios_section_enabled', v ? 1 : 0)}
+                    __nextHasNoMarginBottom={true}
+                />
+                {!!options.socios_section_enabled && (
+                    <div className="vu-card vu-card--flat">
+                        <FieldGroup label="Título de la sección">
+                            <Input value={options.viceunf_socios_titulo || ''} onChange={(v) => set('viceunf_socios_titulo', v)} placeholder="Socios Académicos" />
+                        </FieldGroup>
+
+                        <FieldGroup
+                            label="Custom Post Type a mostrar"
+                            help="Por defecto se usa el CPT 'socio'. Puedes cambiarlo a cualquier otro tipo de post registrado."
+                        >
+                            <SelectControl
+                                value={options.socios_post_type || 'socio'}
+                                options={postTypeOptions}
+                                onChange={(v) => set('socios_post_type', v || 'socio')}
+                            />
+                        </FieldGroup>
+
+                        <Notice status="info" isDismissible={false}>
+                            Los logos y enlaces se gestionan desde el CPT seleccionado arriba
+                            ({' '}<strong>{options.socios_post_type || 'socio'}</strong>).
+                            Todos los posts publicados de ese tipo aparecen automáticamente en esta sección.
+                        </Notice>
+                    </div>
+                )}
+            </PanelBody>
+
+
 
         </Panel>
     );

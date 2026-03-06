@@ -225,5 +225,21 @@
   {
     "class": "fab fa-creative-commons",
     "name": "Licenciamiento Creative Commons"
-  }
+  },
+  { "class": "fas fa-heart-pulse", "name": "Bienestar Universitario / Servicio Medico" },
+  { "class": "fas fa-utensils", "name": "Comedor Universitario" },
+  { "class": "fas fa-bus", "name": "Transporte Universitario / Bus" },
+  { "class": "fas fa-scale-balanced", "name": "Defensoria Universitaria" },
+  { "class": "fas fa-hand-holding-heart", "name": "Responsabilidad Social / Voluntariado" },
+  { "class": "fas fa-users-cog", "name": "Consejo Universitario / Asamblea" },
+  { "class": "fas fa-chalkboard-user", "name": "Aula Virtual / Plataforma Educativa" },
+  { "class": "fas fa-building-columns", "name": "Rectorado / Secretaria General" },
+  { "class": "fas fa-medal", "name": "Grados y Titulos" },
+  { "class": "fas fa-user-graduate", "name": "Oficina de Egresados / Alumni" },
+  { "class": "fas fa-book-open-reader", "name": "Biblioteca Central" },
+  { "class": "fas fa-file-contract", "name": "Transparencia Universitaria" },
+  { "class": "fas fa-laptop-code", "name": "Centro de Informatica / ATI" },
+  { "class": "fas fa-person-chalkboard", "name": "Centro de Idiomas" },
+  { "class": "fas fa-building-user", "name": "Centro Preuniversitario (CEPRE)" },
+  { "class": "fas fa-futbol", "name": "Instituto del Deporte Universitario" }
 ]

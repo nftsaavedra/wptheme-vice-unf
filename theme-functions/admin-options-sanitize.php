@@ -26,7 +26,9 @@ function viceunf_sanitize_all_options($input)
   ];
 
   foreach ($checkbox_keys as $key) {
-    $sanitized_input[$key] = (isset($input[$key]) && $input[$key] == 1) ? 1 : 0;
+    if (isset($input[$key])) {
+      $sanitized_input[$key] = ($input[$key] == 1 || $input[$key] === true || $input[$key] === '1') ? 1 : 0;
+    }
   }
 
   // Reglas para el resto de los campos de texto/textarea.
@@ -77,7 +79,6 @@ function viceunf_sanitize_all_options($input)
     if (isset($input["item_{$i}_page_title"])) $sanitized_input["item_{$i}_page_title"] = sanitize_text_field($input["item_{$i}_page_title"]);
     if (isset($input["item_{$i}_icon"])) $sanitized_input["item_{$i}_icon"] = sanitize_text_field($input["item_{$i}_icon"]);
     if (isset($input["item_{$i}_custom_title"])) $sanitized_input["item_{$i}_custom_title"] = sanitize_text_field($input["item_{$i}_custom_title"]);
-    if (isset($input["item_{$i}_custom_desc"])) $sanitized_input["item_{$i}_custom_desc"] = sanitize_textarea_field($input["item_{$i}_custom_desc"]);
   }
 
   // Sanitización para el repetidor de "Sobre Nosotros"

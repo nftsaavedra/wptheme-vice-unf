@@ -181,3 +181,88 @@ function viceunf_document_single_template($original_template)
     return $original_template;
 }
 add_filter('single_template', 'viceunf_document_single_template');
+
+/**
+ * =================================================================
+ * 1.8. Limpieza del Core de WordPress (Performance 100/100)
+ * =================================================================
+ * 
+ * Elimina scripts y metadatos innecesarios del <head> para mejorar 
+ * el primer renderizado (FCP) y reducir el tiempo de bloqueo (TBT).
+ */
+function viceunf_cleanup_head()
+{
+    // Remover Emojis
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    remove_filter('the_content_feed', 'wp_staticize_emoji');
+    remove_filter('comment_text_rss', 'wp_staticize_emoji');
+    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+
+    // Remover oEmbed
+    remove_action('wp_head', 'wp_oembed_add_discovery_links');
+    remove_action('wp_head', 'wp_oembed_add_host_js');
+
+    // Remover metadatos legados
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'wlwmanifest_link');
+    remove_action('wp_head', 'wp_generator');
+    remove_action('wp_head', 'wp_shortlink_wp_head');
+    remove_action('wp_head', 'rest_output_link_wp_head', 10);
+    remove_action('wp_head', 'wp_resource_hints', 2);
+}
+add_action('init', 'viceunf_cleanup_head');
+
+/**
+ * =================================================================
+ * 1.9. Optimización LCP y Speculation Rules (Performance 100/100)
+ * =================================================================
+ * 
+ * Estrategias para mejorar el Largest Contentful Paint (LCP) y 
+ * permitir navegación instantánea.
+ */
+
+// 1. Preload de la imagen destacada (LCP)
+function viceunf_preload_lcp_image()
+{
+    if (is_singular() && has_post_thumbnail()) {
+        $lcp_image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        if ($lcp_image_url) {
+            echo '<link rel="preload" as="image" href="' . esc_url($lcp_image_url) . '" imagesrcset="' . esc_attr(wp_get_attachment_image_srcset(get_post_thumbnail_id(), 'full')) . '" imagesizes="100vw">' . "\n";
+        }
+    }
+}
+add_action('wp_head', 'viceunf_preload_lcp_image', 1);
+
+// 2. Desactivar Lazy Load para la imagen del LCP
+function viceunf_disable_lazy_load_lcp($attributes, $attachment, $size)
+{
+    if (is_singular() && isset($attributes['loading']) && $attachment->ID === get_post_thumbnail_id()) {
+        unset($attributes['loading']);
+    }
+    return $attributes;
+}
+add_filter('wp_get_attachment_image_attributes', 'viceunf_disable_lazy_load_lcp', 10, 3);
+
+// 3. Speculation Rules API (Navegación instantánea)
+function viceunf_add_speculation_rules()
+{
+?>
+    <script type="speculationrules">
+        {
+      "prerender": [{
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "href_matches": ["/wp-admin/*", "/wp-login.php*", "/cart/*", "/checkout/*"] } }
+          ]
+        },
+        "eagerness": "moderate"
+      }]
+    }
+    </script>
+<?php
+}
+add_action('wp_head', 'viceunf_add_speculation_rules');

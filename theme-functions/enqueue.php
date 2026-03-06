@@ -83,10 +83,29 @@ function viceunf_enqueue_frontend_assets()
 
     // Comments reply script.
     if (is_singular() && comments_open() && get_option('thread_comments')) {
-        wp_enqueue_script('comment-reply');
+        wp_enqueue_script('comment-reply', false, array(), false, array('strategy' => 'defer', 'in_footer' => true));
     }
 }
 add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets');
+
+/**
+ * =================================================================
+ * 1.3. Forzar Defer en Scripts del Frontend
+ * =================================================================
+ */
+function viceunf_force_defer_scripts($tag, $handle, $src)
+{
+    if (is_admin()) {
+        return $tag;
+    }
+    // No diferir scripts que ya tienen estrategia definida o son críticos
+    if (strpos($tag, 'defer') !== false || strpos($tag, 'async') !== false) {
+        return $tag;
+    }
+
+    return str_replace(' src', ' defer src', $tag);
+}
+add_filter('script_loader_tag', 'viceunf_force_defer_scripts', 10, 3);
 
 /**
  * =================================================================

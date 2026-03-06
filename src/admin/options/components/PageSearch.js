@@ -1,5 +1,6 @@
-import { useState, useRef } from '@wordpress/element';
+import { useState, useRef, useEffect } from '@wordpress/element';
 import { useAjaxSearch } from '../hooks/useAjaxSearch.js';
+import apiFetch from '@wordpress/api-fetch';
 
 /**
  * PageSearch
@@ -15,6 +16,27 @@ export function PageSearch({ value, valueTitle, onChange, placeholder = 'Escribe
     const [open, setOpen] = useState(false);
     const { query, setQuery, results, loading } = useAjaxSearch('viceunf_search_pages_only');
     const inputRef = useRef(null);
+    const fetchAttemptedFor = useRef(0);
+
+    // Si tenemos un valor (ID) pero falta el valueTitle (por ejemplo después de recargar y si el backend está desactualizado)
+    // intentamos buscar el título con la API REST de WP.
+    useEffect(() => {
+        if (value && !valueTitle && fetchAttemptedFor.current !== value) {
+            fetchAttemptedFor.current = value;
+            apiFetch({ path: `/wp/v2/pages/${value}` })
+                .then(page => {
+                    if (page && page.title && page.title.rendered) {
+                        // Forzamos la actualización hacia el estado padre
+                        onChange({ id: value, title: page.title.rendered });
+                    }
+                })
+                .catch(() => {
+                    // Si no es una page normal sino otro CPT, el fallback será seguir mostrando el ID.
+                    console.warn(`No se pudo obtener el título de la página/post ID: ${value}`);
+                });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value, valueTitle]);
 
     const select = (item) => {
         onChange({ id: item.id, title: item.title });

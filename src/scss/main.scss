@@ -1003,11 +1003,19 @@ con otros.
 
 .dt_service--eight .dt_item_inner {
   position: relative;
-  padding: 3.7rem 3rem 3.2rem;
+  padding: 3rem;
   z-index: 1;
   text-align: center;
   background-color: #fff;
-  box-shadow: 0 4px 35px rgba(57, 57, 57, 0.24);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
 }
 
 .dt_service--eight .dt_item_inner:before {
@@ -2390,6 +2398,46 @@ table.wc-block-cart-items
   .dt-btn-arrow:focus:after {
   border-right-color: var(--dt-pri-color);
   border-top-color: var(--dt-pri-color);
+}
+
+/* ==========================================================================
+   Investigation Service Cards (Style Enforcements)
+   Strictly Enforce 1:1 Aspect Ratio + Layout Adjustments 
+   ========================================================================== */
+.dt_service--eight .dt_item_inner {
+  aspect-ratio: 1 / 1;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dt_service--eight .dt_item_inner .dt_item_holder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dt_service--eight .dt_item_inner .dt_item_title {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.dt_service--eight .dt_item_content {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Límite de 2 líneas descriptivas para no romper la caja */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.dt_service--eight .dt_item_inner .dt_item_readmore {
+  margin-top: auto;
 }
 
 /* Information ( Service Nine ) */
