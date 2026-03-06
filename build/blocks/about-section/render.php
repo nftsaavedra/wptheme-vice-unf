@@ -47,11 +47,11 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_protect dt_pr
         <div class="dt-row dt-g-5">
             <div class="dt-col-lg-6 dt-col-md-12 dt-col-sm-12">
                 <div class="dt_image_block">
-                    <div class="circle_shapes">
-                        <div class="circle"></div>
-                    </div>
                     <?php if ($main_image_id) : ?>
                         <div class="dt_image_box image-1">
+                            <div class="circle_shapes">
+                                <div class="circle"></div>
+                            </div>
                             <figure class="image">
                                 <?php
                                 $image_alt = get_post_meta($main_image_id, '_wp_attachment_image_alt', true);
@@ -66,10 +66,8 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_protect dt_pr
                     <?php endif; ?>
 
                     <?php if (!empty($video_url)) : ?>
-                        <div class="dt_image_box image-2">
-                            <figure class="image">
-                                <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/investigacion_play.webp'); ?>" alt="Ícono de Play">
-                            </figure>
+                        <div class="dt_image_box image-2 about-block-video">
+                            <figure class="image"></figure>
                             <div class="dt_image_video">
                                 <a href="<?php echo esc_url($video_url); ?>" class="dt_lightbox_img dt-btn-play dt-btn-primary" data-caption="">
                                     <i class="fa fa-play" aria-hidden="true"></i>

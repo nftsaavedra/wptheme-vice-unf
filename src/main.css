@@ -706,15 +706,15 @@ a.viceunf-card-chip:focus {
   }
 }
 .circle_shapes .circle {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   position: absolute;
   border-radius: 50%;
   border: 0.1rem solid rgba(189, 189, 189, 0.35);
-  top: -5%;
-  right: -5%;
-  bottom: -5%;
-  left: -5%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 0%;
   -webkit-animation: dt_rounded 30s linear infinite;
   animation: dt_rounded 30s linear infinite;
 }
@@ -825,8 +825,8 @@ a.viceunf-card-chip:focus {
   }
 }
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .image {
-  width: 16.5rem;
-  height: 16.5rem;
+  width: 14rem;
+  height: 14rem;
   border-radius: 100%;
 }
 
@@ -841,14 +841,29 @@ a.viceunf-card-chip:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--dt-sec-color);
-  opacity: 0.8;
+  background-color: transparent;
+  opacity: 1;
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt_image_video {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+}
+
+.dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary {
+  background-color: #e00000;
+  border-color: transparent;
+  color: #e00000;
+}
+
+.dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary i {
+  color: #ffffff;
+}
+
+.dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary::before,
+.dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary::after {
+  box-shadow: 0 0 0 0 rgba(224, 0, 0, 0.6);
 }
 
 .dt_protect--one .dt_item_inner {

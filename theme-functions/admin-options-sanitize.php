@@ -32,20 +32,26 @@ function viceunf_sanitize_all_options($input)
   // Reglas para el resto de los campos de texto/textarea.
   $other_fields_rules = [
     // Campos de "Sobre Nosotros"
-    'about_main_image'  => 'absint', // Guardamos el ID del adjunto como entero
-    'about_video_url'   => 'esc_url_raw',
-    'about_subtitle'    => 'sanitize_text_field',
-    'about_title'       => 'wp_kses_post',
-    'about_person_name' => 'sanitize_text_field',
-    'about_description' => 'sanitize_textarea_field',
-    // Campos existentes
-    'eventos_subtitulo'     => 'sanitize_text_field',
-    'eventos_titulo'        => 'wp_kses_post',
-    'eventos_descripcion'   => 'sanitize_textarea_field',
-    'viceunf_noticias_subtitulo'    => 'sanitize_text_field',
-    'viceunf_noticias_titulo'       => 'wp_kses_post',
-    'viceunf_noticias_descripcion'  => 'sanitize_textarea_field',
-    'viceunf_socios_titulo'         => 'sanitize_text_field',
+    'about_main_image'     => 'absint',
+    'about_main_image_url' => 'esc_url_raw',
+    'about_video_url'      => 'esc_url_raw',
+    'about_subtitle'       => 'sanitize_text_field',
+    'about_title'          => 'wp_kses_post',
+    'about_person_name'    => 'sanitize_text_field',
+    'about_description'    => 'sanitize_textarea_field',
+    // Campos de "Eventos"
+    'eventos_subtitulo'    => 'sanitize_text_field',
+    'eventos_titulo'       => 'wp_kses_post',
+    'eventos_descripcion'  => 'sanitize_textarea_field',
+    'eventos_cantidad'     => 'absint',
+    // Campos de "Noticias"
+    'viceunf_noticias_subtitulo'   => 'sanitize_text_field',
+    'viceunf_noticias_titulo'      => 'wp_kses_post',
+    'viceunf_noticias_descripcion' => 'sanitize_textarea_field',
+    'noticias_cantidad'            => 'absint',
+    // Campos de "Socios"
+    'viceunf_socios_titulo' => 'sanitize_text_field',
+    'socios_post_type'      => 'sanitize_text_field',
     // Campos de "Producción Científica"
     'production_subtitle'    => 'sanitize_text_field',
     'production_title'       => 'wp_kses_post',
@@ -68,6 +74,7 @@ function viceunf_sanitize_all_options($input)
   // Sanitización para los items de investigación (fijos)
   for ($i = 1; $i <= 4; $i++) {
     if (isset($input["item_{$i}_page_id"])) $sanitized_input["item_{$i}_page_id"] = absint($input["item_{$i}_page_id"]);
+    if (isset($input["item_{$i}_page_title"])) $sanitized_input["item_{$i}_page_title"] = sanitize_text_field($input["item_{$i}_page_title"]);
     if (isset($input["item_{$i}_icon"])) $sanitized_input["item_{$i}_icon"] = sanitize_text_field($input["item_{$i}_icon"]);
     if (isset($input["item_{$i}_custom_title"])) $sanitized_input["item_{$i}_custom_title"] = sanitize_text_field($input["item_{$i}_custom_title"]);
     if (isset($input["item_{$i}_custom_desc"])) $sanitized_input["item_{$i}_custom_desc"] = sanitize_textarea_field($input["item_{$i}_custom_desc"]);
@@ -83,8 +90,9 @@ function viceunf_sanitize_all_options($input)
       // Solo procesamos el item si tiene una página y un icono asignado
       if (!empty($item['page_id']) && !empty($item['icon'])) {
         $sanitized_item = [
-          'page_id' => absint($item['page_id']),
-          'icon'    => sanitize_text_field($item['icon']),
+          'page_id'    => absint($item['page_id']),
+          'page_title' => sanitize_text_field($item['page_title'] ?? ''),
+          'icon'       => sanitize_text_field($item['icon']),
         ];
         $sanitized_items[] = $sanitized_item;
       }

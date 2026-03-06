@@ -1,3 +1,4 @@
+import './style.scss';
 import { registerBlockType } from "@wordpress/blocks";
 import {
   useBlockProps,

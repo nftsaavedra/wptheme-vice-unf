@@ -49,7 +49,7 @@ add_action('wp_ajax_viceunf_search_icons', 'viceunf_ajax_search_icons_handler');
 
 function viceunf_ajax_search_icons_handler()
 {
-    check_ajax_referer('slider_metabox_nonce_action', 'nonce');
+    check_ajax_referer('viceunf_ajax_nonce_action', 'nonce');
 
     $search_term = isset($_POST['search']) ? strtolower(sanitize_text_field($_POST['search'])) : '';
 

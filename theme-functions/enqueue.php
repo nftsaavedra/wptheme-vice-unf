@@ -163,16 +163,17 @@ function viceunf_enqueue_admin_assets($hook)
     $screen = get_current_screen();
     $is_options_page           = ('toplevel_page_viceunf_theme_options' == $hook);
     $is_slider_page            = ($screen && 'slider' === $screen->post_type);
+    $is_dependencia_page       = ($screen && 'dependencia' === $screen->post_type);
     $is_reglamento_page        = ($screen && 'reglamento' === $screen->post_type);
     $is_reglamento_category_page = ($screen && 'categoria_reglamento' === $screen->taxonomy);
 
-    // --- Carga para Sliders y Página de Opciones ---
-    if ($is_options_page || $is_slider_page) {
+    // --- Carga para Sliders, Dependencias y Página de Opciones ---
+    if ($is_options_page || $is_slider_page || $is_dependencia_page) {
         wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
         wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', array(), true);
         wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('slider_metabox_nonce_action'),
+            'nonce'    => wp_create_nonce('viceunf_ajax_nonce_action'),
         ));
     }
 
@@ -184,7 +185,7 @@ function viceunf_enqueue_admin_assets($hook)
             'window.ajaxurl = window.ajaxurl || "' . admin_url('admin-ajax.php') . '";'
                 . 'window.viceunf_ajax_obj = window.viceunf_ajax_obj || ' . wp_json_encode([
                     'ajax_url' => admin_url('admin-ajax.php'),
-                    'nonce'    => wp_create_nonce('slider_metabox_nonce_action'),
+                    'nonce'    => wp_create_nonce('viceunf_ajax_nonce_action'),
                 ]) . ';',
             'before'
         );

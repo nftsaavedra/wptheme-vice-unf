@@ -47,7 +47,8 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                         $eventos = array();
                         if (class_exists('\ViceUnf\Core\Service\EventosService')) {
                             $eventosService = new \ViceUnf\Core\Service\EventosService();
-                            $eventos = $eventosService->get_eventos_home(4);
+                            $eventos_limit  = isset($options['eventos_cantidad']) ? (int) $options['eventos_cantidad'] : 4;
+                            $eventos = $eventosService->get_eventos_home($eventos_limit);
                         } else {
                             echo '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar los eventos.</div>';
                         }
