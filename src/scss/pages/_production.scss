@@ -1,0 +1,155 @@
+/* =================================================================
+   ViceUnf Pages: Home - Producción Científica
+================================================================= */
+
+.viceunf-production-card {
+  height: 100%;
+  padding: 0; /* Remove internal padding to stretch image */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  /* Overriding viceunf-card-soft padding and border */
+  &.viceunf-card-soft {
+    padding: 0;
+    border-color: transparent;
+
+    &:hover,
+    &:focus-within {
+      border-color: #e2e8f0;
+      background: #ffffff;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid var(--viceunf-border-color, #eaeaea);
+    background-color: #f1f5f9;
+
+    a {
+      display: block;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  }
+
+  &:hover &__image img {
+    transform: scale(1.08);
+  }
+
+  &__body {
+    padding: 2.2rem 2.2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+  }
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    background-color: rgba(0, 121, 78, 0.08);
+    color: var(--dt-pri-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 2.2rem;
+    margin-bottom: 1.4rem;
+    transition: all 0.3s ease;
+
+    &--overlay {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background-color: var(--dt-pri-color);
+      color: var(--viceunf-surface, #ffffff);
+      margin-bottom: 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      z-index: 5;
+    }
+  }
+
+  &:hover &__icon:not(&__icon--overlay) {
+    background-color: var(--dt-pri-color);
+    color: var(--viceunf-surface, #ffffff);
+    box-shadow: 0 8px 25px rgba(0, 121, 78, 0.25);
+    transform: translateY(-3px);
+  }
+
+  &:hover &__icon--overlay {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 121, 78, 0.35);
+  }
+
+  &__title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--dt-sec-color);
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus {
+        color: var(--dt-pri-color);
+      }
+    }
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  &__footer {
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-top: 1.4rem;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--dt-pri-color);
+    text-decoration: none;
+    transition: color 0.25s ease;
+
+    i {
+      margin-left: 0.8rem;
+      font-size: 1.4rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--dt-sec-color);
+      text-decoration: none;
+
+      i {
+        transform: translateX(4px);
+      }
+    }
+  }
+}

@@ -109,9 +109,9 @@ $create_animated_subtitle = function ($text) {
           $image_url  = isset($item['image_url']) ? esc_url($item['image_url']) : '';
         ?>
           <div class="dt-col-lg-3 dt-col-sm-6 dt-col-12">
-            <div class="dt_item_inner" data-animation="slideInUp" data-animation-delay="<?php echo esc_attr($delay); ?>ms">
+            <div class="viceunf-card-surface viceunf-card-soft viceunf-card-hoverable viceunf-production-card" data-animation="slideInUp" data-animation-delay="<?php echo esc_attr($delay); ?>ms">
               <?php if ($image_id || $image_url) : ?>
-                <div class="dt_item_image">
+                <div class="viceunf-production-card__image">
                   <a href="<?php echo esc_url($item_url); ?>" aria-hidden="true" tabindex="-1">
                     <?php if ($image_id) : ?>
                       <?php echo wp_get_attachment_image($image_id, 'large', false, ['alt' => esc_attr($item_title)]); ?>
@@ -119,19 +119,24 @@ $create_animated_subtitle = function ($text) {
                       <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($item_title); ?>" title="">
                     <?php endif; ?>
                   </a>
+                  <div class="viceunf-production-card__icon viceunf-production-card__icon--overlay"><i class="<?php echo esc_attr($item_icon); ?>"></i></div>
                 </div>
               <?php endif; ?>
-              <div class="dt_item_holder">
-                <div class="dt_item_icon"><i class="<?php echo esc_attr($item_icon); ?>"></i></div>
-                <h5 class="dt_item_title">
+              <div class="viceunf-production-card__body">
+                <?php if (!$image_id && !$image_url) : ?>
+                  <div class="viceunf-production-card__icon"><i class="<?php echo esc_attr($item_icon); ?>"></i></div>
+                <?php endif; ?>
+                <h5 class="viceunf-production-card__title">
                   <a href="<?php echo esc_url($item_url); ?>"><?php echo esc_html($item_title); ?></a>
                 </h5>
                 <?php if ($item_desc) : ?>
-                  <p class="dt_item_text text"><?php echo esc_html($item_desc); ?></p>
+                  <p class="viceunf-production-card__text"><?php echo esc_html($item_desc); ?></p>
                 <?php endif; ?>
-                <a href="<?php echo esc_url($item_url); ?>" class="readmore" aria-label="Ver más sobre <?php echo esc_attr(strip_tags($item_title)); ?>">
-                  Ver más<i class="fas fa-long-arrow-right"></i>
-                </a>
+                <div class="viceunf-production-card__footer">
+                  <a href="<?php echo esc_url($item_url); ?>" class="viceunf-production-card__link" aria-label="Ver más sobre <?php echo esc_attr(strip_tags($item_title)); ?>">
+                    Ver más <i class="fas fa-long-arrow-right"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
