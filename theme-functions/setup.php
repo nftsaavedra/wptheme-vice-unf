@@ -142,14 +142,13 @@ add_filter('block_categories_all', 'viceunf_register_block_category');
 function viceunf_register_blocks()
 {
     $blocks_dir = get_stylesheet_directory() . '/build/blocks/';
-    if (is_dir($blocks_dir)) {
-        $block_folders = scandir($blocks_dir);
+    if (is_dir($blocks_dir) && is_array($block_folders = scandir($blocks_dir))) {
         foreach ($block_folders as $folder) {
             if ('.' === $folder || '..' === $folder) {
                 continue;
             }
             $block_path = $blocks_dir . $folder;
-            if (is_dir($block_path)) {
+            if (is_dir($block_path) && file_exists($block_path . '/block.json')) {
                 register_block_type($block_path);
             }
         }
@@ -164,6 +163,10 @@ add_action('init', 'viceunf_register_blocks');
 function viceunf_document_single_template($original_template)
 {
     global $post;
+
+    if (!is_a($post, 'WP_Post')) {
+        return $original_template;
+    }
 
     // Lista de Post Types que usarán esta plantilla de documento moderna
     $options = get_option('viceunf_theme_options', []);

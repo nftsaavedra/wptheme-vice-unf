@@ -99,11 +99,11 @@ function viceunf_force_defer_scripts($tag, $handle, $src)
         return $tag;
     }
     // No diferir scripts que ya tienen estrategia definida o son críticos
-    if (strpos($tag, 'defer') !== false || strpos($tag, 'async') !== false) {
+    if (strpos($tag, 'defer') !== false || strpos($tag, 'async') !== false || strpos($tag, 'type="module"') !== false) {
         return $tag;
     }
 
-    return str_replace(' src', ' defer src', $tag);
+    return preg_replace('/(<script\b[^>]*)\bsrc=/', '$1 defer="defer" src=', $tag);
 }
 add_filter('script_loader_tag', 'viceunf_force_defer_scripts', 10, 3);
 
@@ -180,11 +180,16 @@ function viceunf_enqueue_admin_assets($hook)
 
     // --- Definición de Páginas Relevantes ---
     $screen = get_current_screen();
+    
+    if (!$screen) {
+        return;
+    }
+
     $is_options_page           = ('toplevel_page_viceunf_theme_options' == $hook);
-    $is_slider_page            = ($screen && 'slider' === $screen->post_type);
-    $is_dependencia_page       = ($screen && 'dependencia' === $screen->post_type);
-    $is_reglamento_page        = ($screen && 'reglamento' === $screen->post_type);
-    $is_reglamento_category_page = ($screen && 'categoria_reglamento' === $screen->taxonomy);
+    $is_slider_page            = (isset($screen->post_type) && 'slider' === $screen->post_type);
+    $is_dependencia_page       = (isset($screen->post_type) && 'dependencia' === $screen->post_type);
+    $is_reglamento_page        = (isset($screen->post_type) && 'reglamento' === $screen->post_type);
+    $is_reglamento_category_page = (isset($screen->taxonomy) && 'categoria_reglamento' === $screen->taxonomy);
 
     // --- Carga para Sliders, Dependencias y Página de Opciones ---
     if ($is_options_page || $is_slider_page || $is_dependencia_page) {
