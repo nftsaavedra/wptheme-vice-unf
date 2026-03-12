@@ -3176,3 +3176,152 @@ table.wc-block-cart-items
     }
   }
 }
+
+/* ==========================================================================
+   Mejora Visual y Efecto Ken Burns (Site Slider)
+   ========================================================================== */
+
+.dt_slider.dt_slider--kenburn {
+  .dt_slider-item {
+    position: relative;
+    overflow: hidden;
+    height: 85vh;
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+
+    /* Capa de oscurecimiento (Gradient Overlay) para maximizar el contraste tipográfico */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.05) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .dt-slider-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      transform: scale(1);
+      -webkit-transition: transform 12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: transform 12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .dt_slider-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    /* Tarjeta Glassmorphism reactiva para el contenido */
+    .dt_slider-content {
+      background: rgba(20, 20, 20, 0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.6rem;
+      padding: 4.5rem;
+      box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.5);
+      max-width: 68rem;
+      opacity: 0;
+      transform: translateY(4rem);
+      transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s, 
+                  transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
+
+      .subtitle {
+        color: var(--dt-pri-color);
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.35rem;
+        margin-bottom: 2rem;
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.6rem 1.8rem;
+        border-radius: 5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .title {
+        color: #ffffff;
+        font-size: clamp(3.6rem, 5vw, 7.2rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 2.5rem;
+        text-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.7);
+        letter-spacing: -0.1rem;
+      }
+
+      .text {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.8rem;
+        line-height: 1.7;
+        margin-bottom: 3.5rem;
+      }
+
+      .dt_btn-group {
+        display: flex;
+        gap: 1.8rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+    }
+  }
+
+  /* Activador del Efecto Ken Burns y aparición de contenido por Slide activo */
+  .swiper-slide-active {
+    .dt-slider-bg {
+      transform: scale(1.15) translate(-2%, 1%);
+    }
+
+    .dt_slider-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Refinamiento moderno de Navegación Swiper */
+  .swiper-button-prev,
+  .swiper-button-next {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      background: var(--dt-pri-color);
+      transform: translateY(-50%) scale(1.08);
+      border-color: transparent;
+      box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    width: 1.4rem;
+    height: 1.4rem;
+    background: #ffffff;
+    opacity: 0.3;
+    transition: all 0.4s ease;
+
+    &.swiper-pagination-bullet-active {
+      opacity: 1;
+      background: var(--dt-pri-color);
+      transform: scale(1.4);
+      box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.5);
+    }
+  }
+}
