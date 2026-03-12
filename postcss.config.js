@@ -30,7 +30,7 @@ export default {
         deep: [
           /^(wp-block-)/, /^(has-)/, /^(is-)/, /^(search-)/,
           /^(wc-)/, /^(swiper-)/, /^(viceunf-single-doc)/,
-          /^(viceunf-card-)/, /^(viceunf-bg-)/,
+          /^(viceunf-card-)/, /^(viceunf-bg-)/, /^(dt-text-)/,
         ],
         greedy: [
           /^(page-id-)/, /^(postid-)/, /^(archive-)/, /^(category-)/, /^(tag-)/

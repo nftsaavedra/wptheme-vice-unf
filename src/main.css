@@ -704,11 +704,13 @@ a.viceunf-card-chip:focus {
   border-width: 0;
   border-style: solid;
   border-color: transparent;
+  color: #ffffff;
   margin-bottom: 2.6rem;
 }
 
-.dt_slider--five .active .dt_slider-content .subtitle {
+.dt_slider--five .swiper-slide-active .dt_slider-content .subtitle {
   opacity: 1;
+  color: #ffffff;
 }
 
 .dt_slider--five .dt-text-left .dt_slider-content .subtitle {
@@ -724,6 +726,40 @@ a.viceunf-card-chip:focus {
 .dt_slider--five .dt-text-right .dt_slider-content .subtitle {
   border-right-width: 0.4rem;
   border-right-color: var(--dt-pri-color);
+}
+
+/* Alineación de bloque de contenido y botones basado en el selector de WordPress */
+.dt_slider--five .dt-text-left .dt-col-lg-12 {
+  display: flex;
+  justify-content: flex-start;
+}
+.dt_slider--five .dt-text-left .dt_slider-content {
+  text-align: left;
+}
+.dt_slider--five .dt-text-left .dt_slider-content .dt_btn-group {
+  justify-content: flex-start;
+}
+
+.dt_slider--five .dt-text-center .dt-col-lg-12 {
+  display: flex;
+  justify-content: center;
+}
+.dt_slider--five .dt-text-center .dt_slider-content {
+  text-align: center;
+}
+.dt_slider--five .dt-text-center .dt_slider-content .dt_btn-group {
+  justify-content: center;
+}
+
+.dt_slider--five .dt-text-right .dt-col-lg-12 {
+  display: flex;
+  justify-content: flex-end;
+}
+.dt_slider--five .dt-text-right .dt_slider-content {
+  text-align: right;
+}
+.dt_slider--five .dt-text-right .dt_slider-content .dt_btn-group {
+  justify-content: flex-end;
 }
 
 .dt_slider--five .dt_slider-wrapper::before,
@@ -3051,4 +3087,107 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
 .dt-partner-slide:hover .dt-partner-box .dt-partner-img {
   filter: grayscale(0) opacity(1);
   transform: scale(1);
+}
+
+/* ==========================================================================
+   Ken Burns Effect — Swiper
+   ========================================================================== */
+.dt_slider--kenburn .swiper-slide.dt_slider-item {
+  overflow: hidden;
+}
+
+.dt_slider--kenburn .swiper-slide.dt_slider-item > img,
+.dt_slider--kenburn .swiper-slide.dt_slider-item img.dt-slider-bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-style: flat;
+  transition: transform 20s linear;
+}
+
+.dt_slider--kenburn .swiper-slide.dt_slider-item:nth-child(even) > img,
+.dt_slider--kenburn .swiper-slide.dt_slider-item:nth-child(even) img.dt-slider-bg {
+  transform: scale(1.4);
+  transform-origin: bottom right;
+}
+
+.dt_slider--kenburn .swiper-slide.dt_slider-item:nth-child(odd) > img,
+.dt_slider--kenburn .swiper-slide.dt_slider-item:nth-child(odd) img.dt-slider-bg {
+  transform: scale(1.1);
+  transform-origin: bottom left;
+}
+
+.dt_slider--kenburn .swiper-slide-active.dt_slider-item:nth-child(even) > img,
+.dt_slider--kenburn .swiper-slide-active.dt_slider-item:nth-child(even) img.dt-slider-bg {
+  transform: scale(1.1);
+}
+
+.dt_slider--kenburn .swiper-slide-active.dt_slider-item:nth-child(odd) > img,
+.dt_slider--kenburn .swiper-slide-active.dt_slider-item:nth-child(odd) img.dt-slider-bg {
+  transform: scale(1.4);
+}
+
+/* ==========================================================================
+   Thumbnav Navigation — Swiper
+   ========================================================================== */
+.dt_slider--thumbnav .swiper-button-prev,
+.dt_slider--thumbnav .swiper-button-next {
+  width: 5.1rem;
+  height: 5.1rem;
+  overflow: hidden;
+  background-color: rgba(189, 189, 189, 0.25);
+  font-size: 2.2rem;
+  color: var(--dt-whi-color);
+  border-radius: 50%;
+  z-index: 10;
+  backdrop-filter: blur(1.5rem);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.dt_slider--thumbnav .swiper-button-prev::after,
+.dt_slider--thumbnav .swiper-button-next::after {
+  font-size: 2.2rem;
+}
+.dt_slider--thumbnav .swiper-button-prev:hover,
+.dt_slider--thumbnav .swiper-button-next:hover {
+  width: 11rem;
+  border-radius: 11rem;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.25);
+}
+.dt_slider--thumbnav .swiper-button-prev .imgholder,
+.dt_slider--thumbnav .swiper-button-next .imgholder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.68);
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 50%;
+  transform: translateX(-100%) scale(0);
+  transition: all 0.3s;
+  z-index: -1;
+}
+.dt_slider--thumbnav .swiper-button-next .imgholder {
+  transform: translateX(100%) scale(0);
+}
+.dt_slider--thumbnav .swiper-button-prev:hover .imgholder,
+.dt_slider--thumbnav .swiper-button-next:hover .imgholder {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  border-radius: 11rem;
+}
+
+@media (min-width: 62em) {
+  .dt_slider--thumbnav .swiper-button-prev,
+  .dt_slider--thumbnav .swiper-button-next {
+    width: 6rem;
+    height: 6rem;
+  }
+  .dt_slider--thumbnav .swiper-button-prev:hover,
+  .dt_slider--thumbnav .swiper-button-next:hover {
+    width: 11rem;
+  }
 }

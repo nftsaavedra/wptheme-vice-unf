@@ -11,7 +11,7 @@ if ($slider_query->have_posts()) :
                                                                                 "slidesPerView" => 1,
                                                                                 "spaceBetween" => 0,
                                                                                 "speed" => 1000,
-                                                                                "autoplay" => ["delay" => 30000, "disableOnInteraction" => false],
+                                                                                "autoplay" => ["delay" => 5000, "disableOnInteraction" => false],
                                                                                 "effect" => "fade",
                                                                                 "fadeEffect" => ["crossFade" => true],
                                                                                 "pagination" => ["el" => "#dt_slider .swiper-pagination", "clickable" => true],
