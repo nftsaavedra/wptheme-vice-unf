@@ -1,252 +1,150 @@
 <?php
-// Salir si se accede directamente.
-if (! defined('ABSPATH')) {
-    exit;
-}
 
-/**
- * =================================================================
- * 1. Carga de Estilos y Scripts para el Frontend (Standalone)
- * =================================================================
- */
-function viceunf_enqueue_frontend_assets()
+declare(strict_types=1);
+
+namespace ViceUnf\Theme;
+
+class Assets
 {
-
-    $theme_version = wp_get_theme()->get('Version');
-    $theme_uri     = get_stylesheet_directory_uri();
-
-    // --- CSS Framework (grid, tipografía, botones, componentes) ---
-    wp_enqueue_style(
-        'viceunf-framework',
-        $theme_uri . '/assets/css/framework.min.css',
-        array(),
-        $theme_version
-    );
-
-    wp_enqueue_style(
-        'viceunf-core',
-        $theme_uri . '/assets/css/core.css',
-        array('viceunf-framework'),
-        $theme_version
-    );
-
-    // --- Vendor CSS Condicional ---
-    wp_enqueue_style('viceunf-fontawesome', $theme_uri . '/assets/css/all.min.css', array(), '6.7.2');
-    wp_enqueue_style('viceunf-animate', $theme_uri . '/assets/vendors/css/animate.css', array(), '4.1.1');
-
-    if (is_front_page() || is_singular()) {
-        wp_enqueue_style('viceunf-swiper', $theme_uri . '/assets/vendors/css/swiper-bundle.min.css', array(), '11.0.0');
-        wp_enqueue_script('viceunf-swiper', $theme_uri . '/assets/vendors/js/swiper-bundle.min.js', array(), '11.0.0', array(
-            'strategy'  => 'defer',
-            'in_footer' => true,
-        ));
+    public function __construct()
+    {
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_frontend_assets']);
+        add_filter('script_loader_tag', [$this, 'force_defer_scripts'], 10, 3);
+        add_action('wp_head', [$this, 'preload_critical_assets'], 1);
+        add_action('wp_enqueue_scripts', [$this, 'dequeue_jquery_frontend'], 99);
+        add_filter('style_loader_tag', [$this, 'defer_non_critical_css'], 10, 4);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
     }
 
-    if (is_singular() || is_page_template('page-templates/frontpage.php')) {
-        wp_enqueue_style('viceunf-glightbox', $theme_uri . '/assets/vendors/css/glightbox.min.css', array(), '3.3.0');
-        wp_enqueue_script('viceunf-glightbox', $theme_uri . '/assets/vendors/js/glightbox.min.js', array(), '3.3.0', array(
-            'strategy'  => 'defer',
-            'in_footer' => true,
-        ));
+    public function enqueue_frontend_assets(): void
+    {
+        $theme_version = wp_get_theme()->get('Version');
+        $theme_uri     = get_stylesheet_directory_uri();
+
+        wp_enqueue_style('viceunf-framework', $theme_uri . '/assets/css/framework.min.css', [], $theme_version);
+        wp_enqueue_style('viceunf-core', $theme_uri . '/assets/css/core.css', ['viceunf-framework'], $theme_version);
+        wp_enqueue_style('viceunf-fontawesome', $theme_uri . '/assets/css/all.min.css', [], '6.7.2');
+        wp_enqueue_style('viceunf-animate', $theme_uri . '/assets/vendors/css/animate.css', [], '4.1.1');
+
+        if (is_front_page() || is_singular()) {
+            wp_enqueue_style('viceunf-swiper', $theme_uri . '/assets/vendors/css/swiper-bundle.min.css', [], '11.0.0');
+            wp_enqueue_script('viceunf-swiper', $theme_uri . '/assets/vendors/js/swiper-bundle.min.js', [], '11.0.0', ['strategy' => 'defer', 'in_footer' => true]);
+        }
+
+        if (is_front_page() || is_singular() || is_page_template('page-templates/frontpage.php')) {
+            wp_enqueue_style('viceunf-glightbox', $theme_uri . '/assets/vendors/css/glightbox.min.css', [], '3.3.0');
+            wp_enqueue_script('viceunf-glightbox', $theme_uri . '/assets/vendors/js/glightbox.min.js', [], '3.3.0', ['strategy' => 'defer', 'in_footer' => true]);
+        }
+
+        wp_enqueue_style('viceunf-style', get_stylesheet_uri(), ['viceunf-framework', 'viceunf-core', 'viceunf-fontawesome'], $theme_version);
+        wp_enqueue_script('viceunf-theme', $theme_uri . '/assets/js/theme.js', [], $theme_version, ['strategy' => 'defer', 'in_footer' => true]);
+        wp_enqueue_script('viceunf-custom', $theme_uri . '/assets/js/custom.js', ['viceunf-theme'], $theme_version, ['strategy' => 'defer', 'in_footer' => true]);
+
+        if (is_singular() && comments_open() && get_option('thread_comments')) {
+            wp_enqueue_script('comment-reply');
+        }
     }
 
-    // --- Theme Stylesheet (style.css — contiene custom overrides) ---
-    wp_enqueue_style(
-        'viceunf-style',
-        get_stylesheet_uri(),
-        array('viceunf-framework', 'viceunf-core', 'viceunf-fontawesome'),
-        $theme_version
-    );
+    public function force_defer_scripts(string $tag, string $handle, string $src): string
+    {
+        if (is_admin()) {
+            return $tag;
+        }
 
-    // --- Theme JS ---
-    wp_enqueue_script(
-        'viceunf-theme',
-        $theme_uri . '/assets/js/theme.js',
-        array(),
-        $theme_version,
-        array(
-            'strategy'  => 'defer',
-            'in_footer' => true,
-        )
-    );
+        if (strpos($tag, 'defer') !== false || strpos($tag, 'async') !== false || strpos($tag, 'type="module"') !== false) {
+            return $tag;
+        }
 
-    wp_enqueue_script(
-        'viceunf-custom',
-        $theme_uri . '/assets/js/custom.js',
-        array('viceunf-theme'),
-        $theme_version,
-        array(
-            'strategy'  => 'defer',
-            'in_footer' => true,
-        )
-    );
-
-    // Comments reply script.
-    if (is_singular() && comments_open() && get_option('thread_comments')) {
-        wp_enqueue_script('comment-reply', false, array(), false, array('strategy' => 'defer', 'in_footer' => true));
+        return preg_replace('/(<script\b[^>]*)\bsrc=/', '$1 defer="defer" src=', $tag) ?? $tag;
     }
-}
-add_action('wp_enqueue_scripts', 'viceunf_enqueue_frontend_assets');
 
-/**
- * =================================================================
- * 1.3. Forzar Defer en Scripts del Frontend
- * =================================================================
- */
-function viceunf_force_defer_scripts($tag, $handle, $src)
-{
-    if (is_admin()) {
-        return $tag;
+    public function preload_critical_assets(): void
+    {
+        echo '<link rel="preload" href="' . esc_url(get_stylesheet_directory_uri() . '/assets/webfonts/fa-solid-900.woff2') . '" as="font" type="font/woff2" crossorigin>' . "\n";
     }
-    // No diferir scripts que ya tienen estrategia definida o son críticos
-    if (strpos($tag, 'defer') !== false || strpos($tag, 'async') !== false || strpos($tag, 'type="module"') !== false) {
+
+    public function dequeue_jquery_frontend(): void
+    {
+        if (!is_admin()) {
+            wp_dequeue_script('jquery');
+        }
+    }
+
+    public function defer_non_critical_css(string $tag, string $handle, string $href, string $media): string
+    {
+        $non_critical_handles = ['viceunf-fontawesome', 'viceunf-animate', 'viceunf-swiper', 'viceunf-glightbox'];
+
+        if (in_array($handle, $non_critical_handles, true)) {
+            return "<link rel='preload' as='style' href='" . esc_url($href) . "' onload=\"this.onload=null;this.rel='stylesheet'\" media='all'>\n" .
+                   "<noscript><link rel='stylesheet' href='" . esc_url($href) . "' media='all'></noscript>\n";
+        }
+
         return $tag;
     }
 
-    return preg_replace('/(<script\b[^>]*)\bsrc=/', '$1 defer="defer" src=', $tag);
-}
-add_filter('script_loader_tag', 'viceunf_force_defer_scripts', 10, 3);
+    public function enqueue_admin_assets(string $hook): void
+    {
+        wp_enqueue_style('viceunf-fontawesome-admin', get_stylesheet_directory_uri() . '/assets/css/all.min.css', [], '6.7.2');
 
-/**
- * =================================================================
- * 1.2. Preload de Recursos Críticos (Fonts)
- * =================================================================
- */
-function viceunf_preload_critical_assets()
-{
-    $theme_uri = get_stylesheet_directory_uri();
-    echo '<link rel="preload" href="' . esc_url($theme_uri . '/assets/webfonts/fa-solid-900.woff2') . '" as="font" type="font/woff2" crossorigin>' . "\n";
-}
-add_action('wp_head', 'viceunf_preload_critical_assets', 1);
+        $screen = get_current_screen();
+        if (!$screen) return;
 
-/**
- * =================================================================
- * 1.6. Desacoplar jQuery del Frontend
- * =================================================================
- *
- * jQuery ya no es necesario en el frontend del tema.
- * Se desencola condicionalmente para no impactar plugins de terceros en el admin.
- * Si un plugin frontend necesita jQuery, WordPress lo volverá a cargar automáticamente
- * al declararlo como dependencia vía wp_enqueue_script().
- */
-function viceunf_dequeue_jquery_frontend()
-{
-    if (! is_admin()) {
-        wp_dequeue_script('jquery');
-    }
-}
-add_action('wp_enqueue_scripts', 'viceunf_dequeue_jquery_frontend', 99);
+        $is_options_page           = ('toplevel_page_viceunf_theme_options' == $hook);
+        $is_slider_page            = (isset($screen->post_type) && 'slider' === $screen->post_type);
+        $is_dependencia_page       = (isset($screen->post_type) && 'dependencia' === $screen->post_type);
+        $is_reglamento_page        = (isset($screen->post_type) && 'reglamento' === $screen->post_type);
+        $is_reglamento_category    = (isset($screen->taxonomy) && 'categoria_reglamento' === $screen->taxonomy);
 
-/**
- * =================================================================
- * 1.7. Evitar Render-Blocking para Vendor CSS
- * =================================================================
- *
- * Transforma las etiquetas <link> de hojas de estilo no críticas (vendor)
- * en precargas asincrónicas, mejorando el FCP y LCP en PageSpeed Insights.
- */
-function viceunf_defer_non_critical_css($tag, $handle, $href, $media)
-{
-    $non_critical_handles = [
-        'viceunf-fontawesome',
-        'viceunf-animate',
-        'viceunf-swiper',
-        'viceunf-glightbox'
-    ];
+        if ($is_options_page || $is_slider_page || $is_dependencia_page) {
+            wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
+            wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', [], true);
+            wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce'    => wp_create_nonce('viceunf_ajax_nonce_action'),
+            ]);
+        }
 
-    if (in_array($handle, $non_critical_handles, true)) {
-        return "<link rel='preload' as='style' href='" . esc_url($href) . "' onload=\"this.onload=null;this.rel='stylesheet'\" media='all'>\n" .
-            "<noscript><link rel='stylesheet' href='" . esc_url($href) . "' media='all'></noscript>\n";
-    }
-
-    return $tag;
-}
-add_filter('style_loader_tag', 'viceunf_defer_non_critical_css', 10, 4);
-
-/**
- * =================================================================
- * 2. Carga Centralizada de Estilos y Scripts para el Panel de Administración
- * =================================================================
- */
-function viceunf_enqueue_admin_assets($hook)
-{
-    // --- Carga Global ---
-    wp_enqueue_style(
-        'viceunf-fontawesome-admin',
-        get_stylesheet_directory_uri() . '/assets/css/all.min.css',
-        array(),
-        '6.7.2'
-    );
-
-    // --- Definición de Páginas Relevantes ---
-    $screen = get_current_screen();
-    
-    if (!$screen) {
-        return;
-    }
-
-    $is_options_page           = ('toplevel_page_viceunf_theme_options' == $hook);
-    $is_slider_page            = (isset($screen->post_type) && 'slider' === $screen->post_type);
-    $is_dependencia_page       = (isset($screen->post_type) && 'dependencia' === $screen->post_type);
-    $is_reglamento_page        = (isset($screen->post_type) && 'reglamento' === $screen->post_type);
-    $is_reglamento_category_page = (isset($screen->taxonomy) && 'categoria_reglamento' === $screen->taxonomy);
-
-    // --- Carga para Sliders, Dependencias y Página de Opciones ---
-    if ($is_options_page || $is_slider_page || $is_dependencia_page) {
-        wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
-        wp_enqueue_script('viceunf-admin-search', get_stylesheet_directory_uri() . '/assets/js/admin-search.js', array(), true);
-        wp_localize_script('viceunf-admin-search', 'viceunf_ajax_obj', array(
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('viceunf_ajax_nonce_action'),
-        ));
-    }
-
-    // --- Inyectar nonce AJAX y CSS del IconPicker en el Editor de Bloques ---
-    if ($screen && $screen->is_block_editor()) {
-        wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
-        wp_add_inline_script(
-            'wp-blocks',
-            'window.ajaxurl = window.ajaxurl || "' . admin_url('admin-ajax.php') . '";'
-                . 'window.viceunf_ajax_obj = window.viceunf_ajax_obj || ' . wp_json_encode([
+        if ($screen->is_block_editor()) {
+            wp_enqueue_style('viceunf-admin-options-style', get_stylesheet_directory_uri() . '/assets/css/admin-options.css');
+            wp_add_inline_script(
+                'wp-blocks',
+                'window.ajaxurl = window.ajaxurl || "' . admin_url('admin-ajax.php') . '";' .
+                'window.viceunf_ajax_obj = window.viceunf_ajax_obj || ' . wp_json_encode([
                     'ajax_url' => admin_url('admin-ajax.php'),
                     'nonce'    => wp_create_nonce('viceunf_ajax_nonce_action'),
                 ]) . ';',
-            'before'
-        );
-    }
-
-    // --- Carga específica para Página de Opciones ---
-    if ($is_options_page) {
-        wp_enqueue_media();
-        wp_enqueue_script(
-            'viceunf-admin-options-manager',
-            get_stylesheet_directory_uri() . '/assets/js/admin-options-manager.js',
-            array('viceunf-admin-search'),
-            '1.0.1',
-            true
-        );
-    }
-
-    // --- Carga de Estilos Generales para nuestros Meta-Boxes ---
-    if ($is_slider_page || $is_reglamento_page || $is_reglamento_category_page) {
-        wp_enqueue_style('viceunf-admin-styles', get_stylesheet_directory_uri() . '/assets/css/admin-style.css');
-    }
-
-    // --- INICIO: LÓGICA DE CARGA PARA REGLAMENTOS Y CATEGORÍAS ---
-    if ($is_reglamento_page || $is_reglamento_category_page) {
-        $main_script_dependencies = array();
-        if ($is_reglamento_category_page) {
-            wp_enqueue_style('wp-color-picker');
-            $main_script_dependencies[] = 'wp-color-picker';
+                'before'
+            );
         }
-        wp_enqueue_script(
-            'viceunf-admin-main',
-            get_stylesheet_directory_uri() . '/assets/js/admin-main.js',
-            $main_script_dependencies,
-            '1.0.2',
-            true
-        );
+
+        if ($is_options_page) {
+            wp_enqueue_media();
+            wp_enqueue_script(
+                'viceunf-admin-options-manager',
+                get_stylesheet_directory_uri() . '/assets/js/admin-options-manager.js',
+                ['viceunf-admin-search'],
+                '1.0.1',
+                true
+            );
+        }
+
+        if ($is_slider_page || $is_reglamento_page || $is_reglamento_category) {
+            wp_enqueue_style('viceunf-admin-styles', get_stylesheet_directory_uri() . '/assets/css/admin-style.css');
+        }
+
+        if ($is_reglamento_page || $is_reglamento_category) {
+            $main_script_dependencies = [];
+            if ($is_reglamento_category) {
+                wp_enqueue_style('wp-color-picker');
+                $main_script_dependencies[] = 'wp-color-picker';
+            }
+            wp_enqueue_script(
+                'viceunf-admin-main',
+                get_stylesheet_directory_uri() . '/assets/js/admin-main.js',
+                $main_script_dependencies,
+                '1.0.2',
+                true
+            );
+        }
     }
-    // --- FIN: LÓGICA DE CARGA PARA REGLAMENTOS ---
 }
-add_action('admin_enqueue_scripts', 'viceunf_enqueue_admin_assets');

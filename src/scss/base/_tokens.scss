@@ -1,0 +1,35 @@
+/*
+ * VP IN DEV Design Tokens
+ * Fuente de Verdad: theme.json
+ */
+
+:root {
+  /* ==========================================================================
+     Colors (Mapped to theme.json palette)
+     ========================================================================== */
+  --viceunf-primary: #122a61; /* Azul Institucional */
+  --viceunf-secondary: #ea5a0b; /* Naranja Institucional */
+  --viceunf-tertiary: #00774b; /* Verde Institucional */
+  --viceunf-legacy-sec: #0b2346; /* Azul Medianoche */
+  --viceunf-legacy-pri2: #053b5b; /* Azul Oscuro */
+  --viceunf-surface: #ffffff; /* Blanco */
+  --viceunf-surface-alt: #fefbfa; /* Fondo Claro */
+  --viceunf-black: #000000; /* Negro */
+  --viceunf-border: #eaeaea;
+  --viceunf-play-accent: #e00000; /* Rojo Play Video */
+
+  /* Legacy System Mappings to preserve existing classes without breaking them */
+  --dt-pri-color: var(--viceunf-tertiary);
+  --dt-priTwo-color: var(--viceunf-legacy-pri2);
+  --dt-sec-color: var(--viceunf-legacy-sec);
+
+  /* ==========================================================================
+     Typography Elements (Fluid Clamp Scale)
+     ========================================================================== */
+  --viceunf-font-xs: clamp(0.75rem, 0.7vw + 0.6rem, 0.85rem);
+  --viceunf-font-sm: clamp(0.875rem, 0.81vw + 0.68rem, 1rem);
+  --viceunf-font-base: clamp(1rem, 0.96vw + 0.76rem, 1.15rem);
+  --viceunf-font-md: clamp(1.25rem, 1.1vw + 0.95rem, 1.45rem);
+  --viceunf-font-lg: clamp(1.5rem, 1.4vw + 1.25rem, 2rem);
+  --viceunf-font-xl: clamp(2rem, 1.8vw + 1.6rem, 2.75rem);
+}

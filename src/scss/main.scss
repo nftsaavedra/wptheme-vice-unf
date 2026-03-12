@@ -18,22 +18,12 @@ Este tema, al igual que WordPress, está licenciado bajo la GPL.
 con otros.
 */
 
+@use "base/tokens";
 @use "components/cards";
 @use "pages/production";
 
 .has-text-align-justify {
   text-align: justify;
-}
-
-:root {
-  --dt-pri-color: #00794e; /* Color principal */
-  --dt-priTwo-color: #2d4260; /* Variante más clara del principal */
-  --dt-sec-color: #0b2346; /* Color secundario */
-
-  /* ViceUnf UI Design Tokens (Surfaces & Borders) */
-  --viceunf-surface: #ffffff;
-  --viceunf-surface-alt: #f1f5f9;
-  --viceunf-border-color: #eaeaea;
 }
 
 /* Button 2 */
@@ -660,7 +650,7 @@ con otros.
   position: absolute;
   border-radius: 50%;
   background: transparent;
-  z-index: -1;
+  z-index: 2;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -829,6 +819,11 @@ con otros.
   background-size: 100% 0.18rem;
 }
 
+/* Control de Pointer Events para no ahogar Hover de la Imagen 1 */
+.dt_protect--one .dt_image_block .dt_image_box.image-1 .circle_shapes {
+  pointer-events: none;
+}
+
 .dt_protect--one {
   background:
     url("assets/images/background/featurelist_bg.webp") no-repeat center top,
@@ -856,6 +851,7 @@ con otros.
   width: 14rem;
   height: 14rem;
   border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.85); /* Blanco con ligera transparencia */
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .image:before {
@@ -871,21 +867,23 @@ con otros.
   height: 100%;
   background-color: transparent;
   opacity: 1;
+  pointer-events: none; /* Asegura que la capa vacía no capture clics para no bloquear hovers o el modal de video */
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt_image_video {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  z-index: 5; /* Eleva el tag del href GLightbox sobre el figure pseudo-after */
 }
 
 .dt_protect--one
   .dt_image_block
   .dt_image_box.image-2
   .dt-btn-play.dt-btn-primary {
-  background-color: #e00000;
+  background-color: var(--viceunf-play-accent); /* Rojo Institucional o dinámico */
   border-color: transparent;
-  color: #e00000;
+  color: var(--viceunf-play-accent);
 }
 
 .dt_protect--one
@@ -894,6 +892,16 @@ con otros.
   .dt-btn-play.dt-btn-primary
   i {
   color: #ffffff;
+}
+
+/* Sombra/Halo Exterior Animado Rojo Dinámico */
+@keyframes ripple-red {
+  70% {
+    box-shadow: 0 0 0 30px rgba(224, 0, 0, 0); /* Mantenido RGBA estático al nivel motor porque SCSS native var no interpola opacidad sin librerías externas o rgb() nativo en css. Se deja rgba con valor rojo */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(224, 0, 0, 0);
+  }
 }
 
 .dt_protect--one
@@ -905,6 +913,7 @@ con otros.
   .dt_image_box.image-2
   .dt-btn-play.dt-btn-primary::after {
   box-shadow: 0 0 0 0 rgba(224, 0, 0, 0.6);
+  animation: ripple-red 3s infinite;
 }
 
 .dt_protect--one .dt_item_inner {

@@ -1,26 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Theme functions and definitions (Standalone)
  *
  * @package ViceUnf
  */
 
-// Define la ruta a la carpeta de funciones para no repetirla.
-$functions_path = get_stylesheet_directory() . '/theme-functions/';
-
-/**
- * Carga de archivos de infraestructura (NavWalker primero).
- */
 require_once get_stylesheet_directory() . '/inc/class-wp-bootstrap-navwalker.php';
 
-/**
- * Define el orden de carga explícito.
- */
-$files_to_load = array(
-    'setup.php',
+$viceunf_functions_path = get_stylesheet_directory() . '/theme-functions/';
+
+// Carga Manual de Namespaces Estructurales Principales
+require_once $viceunf_functions_path . 'setup.php';
+require_once $viceunf_functions_path . 'enqueue.php';
+
+new \ViceUnf\Theme\Setup();
+new \ViceUnf\Theme\Assets();
+
+// Carga del resto de utilidades Legacy y Procedimentales
+$viceunf_files = [
     'template-tags.php',
-    'enqueue.php',
     'meta-boxes.php',
     'customizer.php',
     'admin-options.php',
@@ -28,15 +29,8 @@ $files_to_load = array(
     'admin-tweaks.php',
     'helpers.php',
     'shortcodes.php',
-);
+];
 
-// Itera sobre el array y carga cada archivo.
-foreach ($files_to_load as $file) {
-    $file_path = $functions_path . $file;
-    if (file_exists($file_path)) {
-        require_once $file_path;
-    }
+foreach ($viceunf_files as $viceunf_file) {
+    require_once $viceunf_functions_path . $viceunf_file;
 }
-
-// Limpia las variables del ámbito global.
-unset($functions_path, $files_to_load, $file, $file_path);

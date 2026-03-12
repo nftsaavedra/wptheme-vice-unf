@@ -15,13 +15,19 @@ if (!$is_enabled) {
 $socios_titulo    = $options['viceunf_socios_titulo'] ?? 'Socios Académicos';
 $socios_post_type = !empty($options['socios_post_type']) ? sanitize_key($options['socios_post_type']) : 'socio';
 
-$socios_query = new WP_Query([
-    'post_type'      => $socios_post_type,
-    'posts_per_page' => -1,
-    'orderby'        => 'menu_order',
-    'order'          => 'ASC',
-    'no_found_rows'  => true,
-]);
+if (class_exists('\ViceUnf\Core\Service\SocioService') && $socios_post_type === 'socio') {
+    $socios_query = (new \ViceUnf\Core\Service\SocioService())->get_all_socios();
+} else {
+    $socios_query = new WP_Query([
+        'post_type'              => $socios_post_type,
+        'posts_per_page'         => -1,
+        'orderby'                => 'menu_order',
+        'order'                  => 'ASC',
+        'no_found_rows'          => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+    ]);
+}
 
 if (!$socios_query->have_posts()) {
     return;

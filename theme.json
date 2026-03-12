@@ -15,6 +15,21 @@
           "name": "Naranja Institucional"
         },
         {
+          "slug": "viceunf-tertiary",
+          "color": "#00794e",
+          "name": "Verde Institucional"
+        },
+        {
+          "slug": "viceunf-legacy-pri2",
+          "color": "#2d4260",
+          "name": "Azul Obscuro"
+        },
+        {
+          "slug": "viceunf-legacy-sec",
+          "color": "#0b2346",
+          "name": "Azul Medianoche"
+        },
+        {
           "slug": "viceunf-light",
           "color": "#fefbfa",
           "name": "Fondo Claro"

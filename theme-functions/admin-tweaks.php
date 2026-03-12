@@ -51,22 +51,32 @@ function viceunf_ajax_search_icons_handler()
 {
     check_ajax_referer('viceunf_ajax_nonce_action', 'nonce');
 
+    if (!current_user_can('edit_themes') && !current_user_can('edit_posts')) {
+        wp_send_json_error('Privilegios insuficientes para ejecutar esta acción.', 403);
+    }
+
     $search_term = isset($_POST['search']) ? strtolower(sanitize_text_field($_POST['search'])) : '';
 
     if (empty($search_term)) {
         wp_send_json_success([]);
     }
 
-    $icons_json_path = get_stylesheet_directory() . '/assets/data/fontawesome-icons.json';
+    $icons_list = get_transient('viceunf_icons_json');
 
-    if (! file_exists($icons_json_path)) {
-        wp_send_json_error('Archivo de iconos no encontrado.');
-    }
+    if (false === $icons_list) {
+        $icons_json_path = get_stylesheet_directory() . '/assets/data/fontawesome-icons.json';
 
-    $icons_list = json_decode(file_get_contents($icons_json_path), true);
+        if (!file_exists($icons_json_path)) {
+            wp_send_json_error('Archivo de iconos no encontrado.');
+        }
 
-    if (! is_array($icons_list)) {
-        wp_send_json_error('Formato de JSON de iconos inválido.');
+        $icons_list = json_decode(file_get_contents($icons_json_path), true);
+
+        if (!is_array($icons_list)) {
+            wp_send_json_error('Formato de JSON de iconos inválido.');
+        }
+
+        set_transient('viceunf_icons_json', $icons_list, WEEK_IN_SECONDS);
     }
 
     $results = [];

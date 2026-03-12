@@ -18,6 +18,39 @@ Este tema, al igual que WordPress, está licenciado bajo la GPL.
 Úsalo para crear algo increíble, diviértete y comparte lo que aprendas
 con otros.
 */
+/*
+ * VP IN DEV Design Tokens
+ * Fuente de Verdad: theme.json
+ */
+:root {
+  /* ==========================================================================
+     Colors (Mapped to theme.json palette)
+     ========================================================================== */
+  --viceunf-primary: #122a61; /* Azul Institucional */
+  --viceunf-secondary: #ea5a0b; /* Naranja Institucional */
+  --viceunf-tertiary: #00774b; /* Verde Institucional */
+  --viceunf-legacy-sec: #0b2346; /* Azul Medianoche */
+  --viceunf-legacy-pri2: #053b5b; /* Azul Oscuro */
+  --viceunf-surface: #ffffff; /* Blanco */
+  --viceunf-surface-alt: #fefbfa; /* Fondo Claro */
+  --viceunf-black: #000000; /* Negro */
+  --viceunf-border: #eaeaea;
+  --viceunf-play-accent: #e00000; /* Rojo Play Video */
+  /* Legacy System Mappings to preserve existing classes without breaking them */
+  --dt-pri-color: var(--viceunf-tertiary);
+  --dt-priTwo-color: var(--viceunf-legacy-pri2);
+  --dt-sec-color: var(--viceunf-legacy-sec);
+  /* ==========================================================================
+     Typography Elements (Fluid Clamp Scale)
+     ========================================================================== */
+  --viceunf-font-xs: clamp(0.75rem, 0.7vw + 0.6rem, 0.85rem);
+  --viceunf-font-sm: clamp(0.875rem, 0.81vw + 0.68rem, 1rem);
+  --viceunf-font-base: clamp(1rem, 0.96vw + 0.76rem, 1.15rem);
+  --viceunf-font-md: clamp(1.25rem, 1.1vw + 0.95rem, 1.45rem);
+  --viceunf-font-lg: clamp(1.5rem, 1.4vw + 1.25rem, 2rem);
+  --viceunf-font-xl: clamp(2rem, 1.8vw + 1.6rem, 2.75rem);
+}
+
 /* =================================================================
    ViceUnf Form System: Card UI (Modern Surface System)
    Global Utilities for standardized aesthetic layouts
@@ -267,16 +300,6 @@ a.viceunf-card-chip:focus {
 
 .has-text-align-justify {
   text-align: justify;
-}
-
-:root {
-  --dt-pri-color: #00794e; /* Color principal */
-  --dt-priTwo-color: #2d4260; /* Variante más clara del principal */
-  --dt-sec-color: #0b2346; /* Color secundario */
-  /* ViceUnf UI Design Tokens (Surfaces & Borders) */
-  --viceunf-surface: #ffffff;
-  --viceunf-surface-alt: #f1f5f9;
-  --viceunf-border-color: #eaeaea;
 }
 
 /* Button 2 */
@@ -672,7 +695,7 @@ a.viceunf-card-chip:focus {
   position: absolute;
   border-radius: 50%;
   background: transparent;
-  z-index: -1;
+  z-index: 2;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -771,6 +794,11 @@ a.viceunf-card-chip:focus {
   background-size: 100% 0.18rem;
 }
 
+/* Control de Pointer Events para no ahogar Hover de la Imagen 1 */
+.dt_protect--one .dt_image_block .dt_image_box.image-1 .circle_shapes {
+  pointer-events: none;
+}
+
 .dt_protect--one {
   background: url("assets/images/background/featurelist_bg.webp") no-repeat center top, #f7f7f9;
 }
@@ -795,6 +823,7 @@ a.viceunf-card-chip:focus {
   width: 14rem;
   height: 14rem;
   border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.85); /* Blanco con ligera transparencia */
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .image:before {
@@ -810,27 +839,39 @@ a.viceunf-card-chip:focus {
   height: 100%;
   background-color: transparent;
   opacity: 1;
+  pointer-events: none; /* Asegura que la capa vacía no capture clics para no bloquear hovers o el modal de video */
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt_image_video {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  z-index: 5; /* Eleva el tag del href GLightbox sobre el figure pseudo-after */
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary {
-  background-color: #e00000;
+  background-color: var(--viceunf-play-accent); /* Rojo Institucional o dinámico */
   border-color: transparent;
-  color: #e00000;
+  color: var(--viceunf-play-accent);
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary i {
   color: #ffffff;
 }
 
+/* Sombra/Halo Exterior Animado Rojo Dinámico */
+@keyframes ripple-red {
+  70% {
+    box-shadow: 0 0 0 30px rgba(224, 0, 0, 0); /* Mantenido RGBA estático al nivel motor porque SCSS native var no interpola opacidad sin librerías externas o rgb() nativo en css. Se deja rgba con valor rojo */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(224, 0, 0, 0);
+  }
+}
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary::before,
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary::after {
   box-shadow: 0 0 0 0 rgba(224, 0, 0, 0.6);
+  animation: ripple-red 3s infinite;
 }
 
 .dt_protect--one .dt_item_inner {

@@ -23,13 +23,17 @@ if (!post_type_exists($post_type)) {
 }
 
 $args = [
-    'post_type'      => $post_type,
-    'post_status'    => 'publish',
-    'posts_per_page' => $limit,
-    'orderby'        => 'menu_order date',
-    'order'          => 'ASC'
+    'post_type'              => $post_type,
+    'post_status'            => 'publish',
+    'posts_per_page'         => $limit,
+    'orderby'                => 'menu_order date',
+    'order'                  => 'ASC',
+    'no_found_rows'          => true,
+    'update_post_meta_cache' => false,
+    'update_post_term_cache' => false,
 ];
 
+// Fallback de query rápida para entidades generalizadas.
 $query = new WP_Query($args);
 
 if (!$query->have_posts()) {

@@ -19,14 +19,20 @@ if (! post_type_exists('socio')) {
     return;
 }
 
-$socios = new WP_Query(array(
-    'post_type'      => 'socio',
-    'post_status'    => 'publish',
-    'posts_per_page' => -1,
-    'orderby'        => 'menu_order',
-    'order'          => 'ASC',
-    'no_found_rows'  => true,
-));
+if (class_exists('\ViceUnf\Core\Service\SocioService')) {
+    $socios = (new \ViceUnf\Core\Service\SocioService())->get_all_socios();
+} else {
+    $socios = new WP_Query(array(
+        'post_type'              => 'socio',
+        'post_status'            => 'publish',
+        'posts_per_page'         => -1,
+        'orderby'                => 'menu_order',
+        'order'                  => 'ASC',
+        'no_found_rows'          => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+    ));
+}
 
 if (! $socios->have_posts()) {
     wp_reset_postdata();
