@@ -469,7 +469,7 @@
   }
 
   // ── Responsive ──────────────────────────────────────────────────────────
-  @media (max-width: 36em) {
+  @include mq(sm) {
     .viceunf-accordion__item {
       flex-wrap: wrap;
     }
