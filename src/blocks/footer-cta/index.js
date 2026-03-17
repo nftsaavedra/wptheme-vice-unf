@@ -5,7 +5,7 @@ import {
 	PanelBody,
 	TextControl,
 	ToggleControl,
-	ColorPicker,
+	ColorPalette,
 } from '@wordpress/components';
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
@@ -57,16 +57,16 @@ function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 				<PanelBody title={ __( 'Colores', 'viceunf' ) } initialOpen={ false }>
 					<p style={ { fontSize: '12px', marginBottom: '8px' } }>{ __( 'Color de fondo de la sección', 'viceunf' ) }</p>
-					<ColorPicker
-						color={ bgColor }
+					<ColorPalette
+						value={ bgColor }
 						onChange={ ( val ) => setAttributes( { bgColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 					<p style={ { fontSize: '12px', marginTop: '16px', marginBottom: '8px' } }>{ __( 'Color del botón (vacío = color primario del tema)', 'viceunf' ) }</p>
-					<ColorPicker
-						color={ buttonColor }
+					<ColorPalette
+						value={ buttonColor }
 						onChange={ ( val ) => setAttributes( { buttonColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 			</InspectorControls>

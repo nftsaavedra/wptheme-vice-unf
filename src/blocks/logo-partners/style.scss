@@ -2,11 +2,6 @@
 	padding: 6rem 0;
 	background-color: var(--dt-whi-color);
 
-	&.alignfull {
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
-	}
-
 	&__title {
 		text-align: center;
 		color: var(--dt-sec-color);

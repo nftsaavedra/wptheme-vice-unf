@@ -1,11 +1,6 @@
 .viceunf-visual-timeline {
 	padding: 8rem 0;
 
-	&.alignfull {
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
-	}
-
 	&__title {
 		text-align: center;
 		color: var(--dt-sec-color);
@@ -31,7 +26,7 @@
 		background-color: var(--viceunf-timeline-line, var(--dt-pri-color));
 		border-radius: 2px;
 
-		@media (max-width: 61.95em) {
+		@include mq(md) {
 			left: 2.4rem;
 		}
 	}

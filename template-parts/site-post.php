@@ -36,8 +36,12 @@ $noticias_cantidad = isset($options['noticias_cantidad']) ? (int) $options['noti
         </div>
         <div class="dt-row dt-g-4">
             <?php
-            // Obtener entradas delegando la consulta a la capa de Servicio
-            $blog_query = class_exists('\ViceUnf\Core\Service\PostService') ? (new \ViceUnf\Core\Service\PostService())->get_recent_posts($noticias_cantidad) : new WP_Query();
+            // Obtener entradas de forma nativa ya que se purgó PostService.php por estar obsoleto
+            $blog_query = new WP_Query([
+                'post_type'      => 'post',
+                'posts_per_page' => $noticias_cantidad,
+                'post_status'    => 'publish',
+            ]);
 
             if ($blog_query->have_posts()) :
                 while ($blog_query->have_posts()) : $blog_query->the_post();

@@ -7,7 +7,7 @@ import {
 	Button,
 	RangeControl,
 	SelectControl,
-	ColorPicker,
+	ColorPalette,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -66,10 +66,10 @@ function Edit( { attributes, setAttributes } ) {
 					<p style={ { fontSize: '12px', marginTop: '16px', marginBottom: '8px' } }>
 						{ __( 'Color de fondo de los círculos', 'viceunf' ) }
 					</p>
-					<ColorPicker
-						color={ iconBgColor }
+					<ColorPalette
+						value={ iconBgColor }
 						onChange={ ( val ) => setAttributes( { iconBgColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 				<PanelBody title={ __( 'Ítems', 'viceunf' ) } initialOpen={ true }>

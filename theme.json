@@ -2,6 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/theme.json",
   "version": 3,
   "settings": {
+    "useRootPaddingAwareAlignments": true,
     "color": {
       "palette": [
         {
@@ -49,7 +50,73 @@
     },
     "typography": {
       "customFontSize": true,
-      "dropCap": false
+      "dropCap": false,
+      "fluid": true,
+      "fontSizes": [
+        {
+          "slug": "xs",
+          "size": "0.85rem",
+          "fluid": {
+            "min": "0.75rem",
+            "max": "0.85rem"
+          },
+          "name": "Extra Pequeño"
+        },
+        {
+          "slug": "sm",
+          "size": "1rem",
+          "fluid": {
+            "min": "0.875rem",
+            "max": "1rem"
+          },
+          "name": "Pequeño"
+        },
+        {
+          "slug": "base",
+          "size": "1.15rem",
+          "fluid": {
+            "min": "1rem",
+            "max": "1.15rem"
+          },
+          "name": "Base"
+        },
+        {
+          "slug": "base-alt",
+          "size": "1.38rem",
+          "fluid": {
+            "min": "1.2rem",
+            "max": "1.38rem"
+          },
+          "name": "Base Alt"
+        },
+        {
+          "slug": "md",
+          "size": "1.45rem",
+          "fluid": {
+            "min": "1.25rem",
+            "max": "1.45rem"
+          },
+          "name": "Medio"
+        },
+        {
+          "slug": "lg",
+          "size": "2rem",
+          "fluid": {
+            "min": "1.5rem",
+            "max": "2rem"
+          },
+          "name": "Grande"
+        },
+        {
+          "slug": "xl",
+          "size": "2.75rem",
+          "fluid": {
+            "min": "2rem",
+            "max": "2.75rem"
+          },
+          "name": "Extra Grande"
+        }
+      ]
     },
     "spacing": {
       "padding": true,

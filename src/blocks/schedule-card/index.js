@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ColorPicker } from '@wordpress/components';
+import { PanelBody, TextControl, ColorPalette } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -36,10 +36,10 @@ function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 				<PanelBody title={ __( 'Color de Cabecera', 'viceunf' ) } initialOpen={ false }>
-					<ColorPicker
-						color={ headerColor }
+					<ColorPalette
+						value={ headerColor }
 						onChange={ ( val ) => setAttributes( { headerColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 			</InspectorControls>

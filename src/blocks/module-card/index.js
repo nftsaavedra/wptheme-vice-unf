@@ -6,7 +6,7 @@ import {
 	TextControl,
 	RangeControl,
 	Button,
-	ColorPicker,
+	ColorPalette,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -111,17 +111,17 @@ function Edit( { attributes, setAttributes, context } ) {
 					</Button>
 				</PanelBody>
 				<PanelBody title={ __( 'Color de la Tarjeta', 'viceunf' ) } initialOpen={ false }>
-					<ColorPicker
-						color={ cardColor }
+					<ColorPalette
+						value={ cardColor }
 						onChange={ ( val ) => setAttributes( { cardColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 			</InspectorControls>
 
 			<div { ...blockProps }>
 				{ label && <p className="viceunf-module-card__label">{ label }</p> }
-				<SemiCircleProgress percent={ progressPercent } color={ progressColor } icon={ icon } />
+				<SemiCircleProgress percent={ progressPercent } value={ progressColor } icon={ icon } />
 				<div className="viceunf-module-card__body">
 					{ bulletPoints.length > 0 && (
 						<ul className="viceunf-module-card__bullets">

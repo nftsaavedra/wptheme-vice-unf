@@ -36,13 +36,13 @@ const ViceUnfTheme = {
     setupMobileSubmenus() {
         const hasChildrenItems = document.querySelectorAll('.dt_mobilenav-mainmenu .dropdown, .dt_mobilenav-mainmenu .menu-item-has-children');
         hasChildrenItems.forEach(item => {
-            if (!item.querySelector('> .dt_mobilenav-dropdown-toggle')) {
+            if (!item.querySelector(':scope > .dt_mobilenav-dropdown-toggle')) {
                 const btn = document.createElement('button');
                 btn.className = 'dt_mobilenav-dropdown-toggle';
                 btn.setAttribute('aria-expanded', 'false');
                 btn.setAttribute('aria-label', 'Toggle submenu');
                 
-                const submenu = item.querySelector('> .dropdown-menu, > .sub-menu');
+                const submenu = item.querySelector(':scope > .dropdown-menu, :scope > .sub-menu');
                 if (submenu) {
                     submenu.setAttribute('aria-hidden', 'true');
                     item.insertBefore(btn, submenu);

@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks, useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ColorPicker } from '@wordpress/components';
+import { PanelBody, TextControl, ColorPalette } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -27,10 +27,10 @@ function Edit( { attributes, setAttributes } ) {
 					<p style={ { fontSize: '12px', marginBottom: '8px' } }>
 						{ __( 'Color de la línea vertical', 'viceunf' ) }
 					</p>
-					<ColorPicker
-						color={ lineColor }
+					<ColorPalette
+						value={ lineColor }
 						onChange={ ( val ) => setAttributes( { lineColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 			</InspectorControls>

@@ -11,7 +11,7 @@
 		scrollbar-width: thin;
 		padding-bottom: 1.2rem;
 
-		@media (min-width: 62em) {
+		@media (min-width: 992px) {
 			justify-content: center;
 			flex-wrap: wrap;
 			overflow: visible;
@@ -24,11 +24,11 @@
 		grid-template-columns: repeat( var(--viceunf-icon-cols, 6), 1fr );
 		gap: 2.4rem;
 
-		@media (max-width: 61.95em) {
+		@include mq(md) {
 			grid-template-columns: repeat(4, 1fr);
 		}
 
-		@media (max-width: 35.95em) {
+		@include mq(sm) {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}

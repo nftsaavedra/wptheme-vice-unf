@@ -19,6 +19,7 @@ con otros.
 */
 
 @use "base/tokens";
+@use "base/mixins" as *;
 @use "components/cards";
 @use "components/mobile-menu";
 @use "pages/production";

@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, TextareaControl, RangeControl, ColorPicker } from '@wordpress/components';
+import { PanelBody, TextControl, TextareaControl, RangeControl, ColorPalette } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -38,10 +38,10 @@ function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 				<PanelBody title={ __( 'Color de acento', 'viceunf' ) } initialOpen={ false }>
-					<ColorPicker
-						color={ accentColor }
+					<ColorPalette
+						value={ accentColor }
 						onChange={ ( val ) => setAttributes( { accentColor: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 			</InspectorControls>

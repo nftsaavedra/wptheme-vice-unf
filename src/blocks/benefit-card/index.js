@@ -2,7 +2,7 @@ import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ColorPicker } from '@wordpress/components';
+import { PanelBody, TextControl, ColorPalette } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -40,16 +40,16 @@ function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 				<PanelBody title={ __( 'Color de Degradado', 'viceunf' ) } initialOpen={ false }>
 					<p style={ { fontSize: '12px', marginBottom: '8px' } }>{ __( 'Color inicio', 'viceunf' ) }</p>
-					<ColorPicker
-						color={ gradientStart }
+					<ColorPalette
+						value={ gradientStart }
 						onChange={ ( val ) => setAttributes( { gradientStart: val } ) }
-						enableAlpha={ false }
+
 					/>
 					<p style={ { fontSize: '12px', marginBottom: '8px', marginTop: '16px' } }>{ __( 'Color fin', 'viceunf' ) }</p>
-					<ColorPicker
-						color={ gradientEnd }
+					<ColorPalette
+						value={ gradientEnd }
 						onChange={ ( val ) => setAttributes( { gradientEnd: val } ) }
-						enableAlpha={ false }
+
 					/>
 				</PanelBody>
 			</InspectorControls>

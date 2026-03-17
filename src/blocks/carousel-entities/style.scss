@@ -16,7 +16,7 @@
       margin: 0;
       text-align: center;
 
-      @media (max-width: 575px) {
+      @include mq(sm) {
         font-size: 1.25rem;
         padding: 0 0.8rem;
       }
@@ -77,7 +77,7 @@
       padding: 1rem; /* Padding más compacto */
 
       /* Responsive box height sizing */
-      height: 85px; /* Mucho menos alto como pediste */
+      min-height: 85px; /* Mucho menos alto como pediste */
       width: 100%; /* Swiper maneja el sizing */
       max-width: 250px;
       margin: 0; /* Delegado a spaceBetween de Swiper */

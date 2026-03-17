@@ -1,11 +1,6 @@
 .viceunf-footer-cta {
-	padding: 9rem 0;
+	padding: clamp(3rem, 8vw, 9rem) 0;
 	text-align: center;
-
-	&.alignfull {
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
-	}
 
 	&__inner {
 		max-width: 760px;
@@ -38,7 +33,7 @@
 		font-weight: 700;
 		letter-spacing: 0.03em;
 
-		@media (max-width: 35.95em) {
+		@include mq(sm) {
 			width: 100%;
 			text-align: center;
 		}

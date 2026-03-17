@@ -1,0 +1,27 @@
+/* =================================================================
+   src/scss/base/_mixins.scss
+================================================================= */
+
+$breakpoints: (
+    xs: 480px,
+    sm: 767px,
+    md: 991px,
+    lg: 1200px,
+    xl: 1440px
+);
+
+@mixin mq($size) {
+    @if map-has-key($breakpoints, $size) {
+        @media screen and (max-width: map-get($breakpoints, $size)) {
+            @content;
+        }
+    } @else {
+        @warn "El breakpoint '#{$size}' no existe en la variable de configuración.";
+    }
+}
+
+@mixin tap-safe-target {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.8rem 1.6rem;
+}

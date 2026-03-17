@@ -2,11 +2,6 @@
 	padding: 8rem 0;
 	background-color: var(--dt-gray-color);
 
-	&.alignfull {
-		width: 100vw;
-		margin-left: calc(50% - 50vw);
-	}
-
 	&__header {
 		text-align: center;
 		margin-bottom: 5rem;
@@ -32,11 +27,11 @@
 		grid-template-columns: repeat( var(--viceunf-grid-cols, 3), 1fr );
 		gap: 2.4rem;
 
-		@media (max-width: 61.95em) {
+		@include mq(md) {
 			grid-template-columns: repeat(2, 1fr);
 		}
 
-		@media (max-width: 35.95em) {
+		@include mq(sm) {
 			grid-template-columns: 1fr;
 		}
 	}
