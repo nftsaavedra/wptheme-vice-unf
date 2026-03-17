@@ -263,26 +263,32 @@ const ViceUnfTheme = {
         const toggle = e.target.closest('.dt_mobilenav-dropdown-toggle');
         if (!toggle) return;
 
-        setTimeout(() => {
-            const parent = toggle.parentElement;
-            if (parent) parent.classList.toggle('current');
+        // Eliminar timeout para ganar responsivity natural en mobile.
+        const parent = toggle.parentElement;
+        const submenu = toggle.nextElementSibling;
+        
+        if (!submenu) return;
 
-            const submenu = toggle.nextElementSibling;
-            if (submenu) {
-                // slideToggle equivalente
-                if (submenu.classList.contains('is-expanded')) {
-                    submenu.style.maxHeight = '0';
-                    submenu.classList.remove('is-expanded');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    submenu.setAttribute('aria-hidden', 'true');
-                } else {
-                    submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                    submenu.classList.add('is-expanded');
-                    toggle.setAttribute('aria-expanded', 'true');
-                    submenu.setAttribute('aria-hidden', 'false');
-                }
-            }
-        }, 150);
+        // SlideToggle Logic Native
+        if (submenu.classList.contains('is-expanded')) {
+            submenu.style.maxHeight = '0';
+            submenu.classList.remove('is-expanded');
+            if (parent) parent.classList.remove('current');
+            toggle.setAttribute('aria-expanded', 'false');
+            submenu.setAttribute('aria-hidden', 'true');
+        } else {
+            if (parent) parent.classList.add('current');
+            submenu.style.display = 'block'; // Fallback por seguridad
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            submenu.classList.add('is-expanded');
+            toggle.setAttribute('aria-expanded', 'true');
+            submenu.setAttribute('aria-hidden', 'false');
+            
+            // Re-ejecutar altura si hay sub-sub menus anidados
+            setTimeout(() => {
+                submenu.style.maxHeight = submenu.scrollHeight + 100 + 'px';
+            }, 300);
+        }
     },
 
     resetVerticalMobileMenu() {

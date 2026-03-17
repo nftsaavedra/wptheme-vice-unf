@@ -47,15 +47,15 @@ $viceunf_sticky_header = get_theme_mod('viceunf_sticky_header', '1');
 					<div class="dt-container">
 						<div class="dt-row">
 							<div class="dt-col-12">
-								<div class="dt_mobilenav-menu">
+								<div class="dt_mobilenav-menu dt-d-flex dt-justify-content-between dt-align-items-center">
 									<div class="dt_mobilenav-logo">
 										<div class="site--logo">
 											<?php do_action('viceunf_site_mobile_logo'); ?>
 										</div>
 									</div>
-									<div class="dt_mobilenav-toggles" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
+									<div class="dt_mobilenav-toggles dt-d-flex dt-align-items-center">
 										<div class="dt_mobilenav-right">
-											<ul class="dt_navbar-list-right" style="margin: 0; padding: 0; display: flex;">
+											<ul class="dt_navbar-list-right">
 												<?php do_action('viceunf_site_main_search'); ?>
 												<?php do_action('viceunf_header_button'); ?>
 											</ul>
@@ -69,8 +69,15 @@ $viceunf_sticky_header = get_theme_mod('viceunf_sticky_header', '1');
 											<div class="off--layer"></div>
 											<nav id="mobile-menu-content" class="dt_mobilenav-mainmenu-content" aria-hidden="true">
 												<div class="dt_mobilenav-mainmenu-inner">
-													<button type="button" class="dt_header-closemenu site--close" aria-label="Cerrar menú" aria-controls="mobile-menu-content"></button>
-													<?php do_action('viceunf_site_header_navigation'); ?>
+													<div class="dt_mobilenav-header">
+														<div class="site--logo">
+															<?php do_action('viceunf_site_mobile_logo'); ?>
+														</div>
+														<button type="button" class="dt_header-closemenu site--close" aria-label="Cerrar menú" aria-controls="mobile-menu-content"></button>
+													</div>
+													<div class="dt_mobilenav-scroll">
+														<?php do_action('viceunf_site_header_navigation'); ?>
+													</div>
 												</div>
 											</nav>
 										</div>
