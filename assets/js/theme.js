@@ -28,8 +28,29 @@ const ViceUnfTheme = {
         this.headerHeight();
         this.topbarMobile();
         this.mobileNavRight();
+        this.setupMobileSubmenus();
         this.menuFocusAccessibility();
         this.bindEvents();
+    },
+
+    setupMobileSubmenus() {
+        const hasChildrenItems = document.querySelectorAll('.dt_mobilenav-mainmenu .dropdown, .dt_mobilenav-mainmenu .menu-item-has-children');
+        hasChildrenItems.forEach(item => {
+            if (!item.querySelector('> .dt_mobilenav-dropdown-toggle')) {
+                const btn = document.createElement('button');
+                btn.className = 'dt_mobilenav-dropdown-toggle';
+                btn.setAttribute('aria-expanded', 'false');
+                btn.setAttribute('aria-label', 'Toggle submenu');
+                
+                const submenu = item.querySelector('> .dropdown-menu, > .sub-menu');
+                if (submenu) {
+                    submenu.setAttribute('aria-hidden', 'true');
+                    item.insertBefore(btn, submenu);
+                } else {
+                    item.appendChild(btn);
+                }
+            }
+        });
     },
 
     bindEvents() {
@@ -201,15 +222,14 @@ const ViceUnfTheme = {
         this.body.classList.toggle(this.classes.isOverlay);
         menuToggle.classList.toggle(this.classes.toggled);
 
-        // fadeToggle equivalente
-        if (this.body.classList.contains(this.classes.mobileMainMenuActive)) {
-            menuContent.style.opacity = '1';
-            menuContent.style.visibility = 'visible';
+        const isActive = this.body.classList.contains(this.classes.mobileMainMenuActive);
+        menuToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        menuContent.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+
+        if (isActive) {
             const closeBtn = document.querySelector('.dt_header-closemenu');
             if (closeBtn) closeBtn.focus();
         } else {
-            menuContent.style.opacity = '0';
-            menuContent.style.visibility = 'hidden';
             menuToggle.focus();
         }
 
@@ -229,8 +249,10 @@ const ViceUnfTheme = {
             this.body.classList.remove(this.classes.mobileMainMenuActive);
             this.body.classList.remove(this.classes.isOverlay);
             menuToggle.classList.remove(this.classes.toggled);
-            menuContent.style.opacity = '0';
-            menuContent.style.visibility = 'hidden';
+            
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuContent.setAttribute('aria-hidden', 'true');
+
             this.resetVerticalMobileMenu();
             e.stopPropagation();
         }
@@ -251,12 +273,16 @@ const ViceUnfTheme = {
                 if (submenu.classList.contains('is-expanded')) {
                     submenu.style.maxHeight = '0';
                     submenu.classList.remove('is-expanded');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    submenu.setAttribute('aria-hidden', 'true');
                 } else {
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
                     submenu.classList.add('is-expanded');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    submenu.setAttribute('aria-hidden', 'false');
                 }
             }
-        }, 250);
+        }, 150);
     },
 
     resetVerticalMobileMenu() {

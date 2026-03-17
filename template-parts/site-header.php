@@ -42,20 +42,8 @@ $viceunf_sticky_header = get_theme_mod('viceunf_sticky_header', '1');
 				</div>
 				<!--=== / Fin: DT_Navbar / === -->
 				<!--=== / Inicio: DT_Menú Móvil / === -->
-				<div class="dt_mobilenav <?php if ($viceunf_sticky_header == '1'): esc_attr_e('is--sticky', 'viceunf');
-															endif; ?> dt-d-lg-none">
-					<div class="dt_mobilenav-topbar">
-						<button type="button" class="dt_mobilenav-topbar-toggle"><i class="fas fa-angle-double-down" aria-hidden="true"></i></button>
-						<div class="dt_mobilenav-topbar-content">
-							<div class="dt-container">
-								<div class="dt-row">
-									<div class="dt-col-12">
-										<?php do_action('viceunf_site_header'); ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="dt_mobilenav <?php if ($viceunf_sticky_header == '1'): esc_attr_e('is--sticky', 'viceunf'); endif; ?> dt-d-lg-none">
+					<!-- Topbar móvil eliminada por considerarse redudante (UI/UX) -->
 					<div class="dt-container">
 						<div class="dt-row">
 							<div class="dt-col-12">
@@ -65,23 +53,23 @@ $viceunf_sticky_header = get_theme_mod('viceunf_sticky_header', '1');
 											<?php do_action('viceunf_site_mobile_logo'); ?>
 										</div>
 									</div>
-									<div class="dt_mobilenav-toggles">
+									<div class="dt_mobilenav-toggles" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
 										<div class="dt_mobilenav-right">
-											<ul class="dt_navbar-list-right">
+											<ul class="dt_navbar-list-right" style="margin: 0; padding: 0; display: flex;">
 												<?php do_action('viceunf_site_main_search'); ?>
 												<?php do_action('viceunf_header_button'); ?>
 											</ul>
 										</div>
 										<div class="dt_mobilenav-mainmenu">
-											<button type="button" class="hamburger dt_mobilenav-mainmenu-toggle">
+											<button type="button" aria-expanded="false" class="hamburger dt_mobilenav-mainmenu-toggle" aria-label="Abrir menú" aria-controls="mobile-menu-content">
 												<span></span>
 												<span></span>
 												<span></span>
 											</button>
-											<nav class="dt_mobilenav-mainmenu-content">
-												<div class="dt_header-closemenu off--layer"></div>
+											<div class="off--layer"></div>
+											<nav id="mobile-menu-content" class="dt_mobilenav-mainmenu-content" aria-hidden="true">
 												<div class="dt_mobilenav-mainmenu-inner">
-													<button type="button" class="dt_header-closemenu site--close"></button>
+													<button type="button" class="dt_header-closemenu site--close" aria-label="Cerrar menú" aria-controls="mobile-menu-content"></button>
 													<?php do_action('viceunf_site_header_navigation'); ?>
 												</div>
 											</nav>

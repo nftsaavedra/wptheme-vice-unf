@@ -21,16 +21,28 @@
     "build:scss": "sass src/scss/main.scss src/main.css --no-source-map",
     "build:postcss": "postcss src/main.css -o style.css --no-map",
     "build:css": "npm run build:scss && npm run build:postcss",
-    "build:framework": "postcss assets/css/framework.css -o assets/css/framework.min.css --no-map"
+    "build:framework": "postcss assets/css/framework.css -o assets/css/framework.min.css --no-map",
+    "build:production": "npm run clean && npm run build && npm run build:css && npm run build:framework && npm run optimize:assets",
+    "clean": "rimraf build && mkdirp build",
+    "optimize:assets": "npm run optimize:css && npm run optimize:js",
+    "optimize:css": "postcss assets/css/*.css assets/vendors/css/*.css --dir build/assets/css --use autoprefixer --use cssnano",
+    "optimize:js": "terser assets/js/*.js assets/vendors/js/*.js --compress --mangle --output build/assets/theme_bundle.js",
+    "generate:sw": "node build/generate-sw.js",
+    "package": "cd build && cp -r ../assets ../theme-functions ../*.php . && zip -r ../viceunf-theme-v1.0.0-prod.zip .",
+    "test:production": "php build/test-production.php"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@wordpress/interactivity": "^6.40.0",
     "@wordpress/scripts": "^31.5.0",
     "autoprefixer": "^10.4.20",
+    "cssnano": "^6.0.1",
+    "mkdirp": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
-    "sass": "^1.97.3"
+    "rimraf": "^5.0.5",
+    "sass": "^1.97.3",
+    "terser": "^5.19.2"
   }
 }

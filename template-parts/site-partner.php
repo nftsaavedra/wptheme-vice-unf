@@ -16,7 +16,8 @@ $socios_titulo    = $options['viceunf_socios_titulo'] ?? 'Socios Académicos';
 $socios_post_type = !empty($options['socios_post_type']) ? sanitize_key($options['socios_post_type']) : 'socio';
 
 if (class_exists('\ViceUnf\Core\Service\SocioService') && $socios_post_type === 'socio') {
-    $socios_query = (new \ViceUnf\Core\Service\SocioService())->get_all_socios();
+    $socios_service = new \ViceUnf\Core\Service\SocioService();
+    $socios_data = $socios_service->get_socios_for_carousel();
 } else {
     $socios_query = new WP_Query([
         'post_type'              => $socios_post_type,
@@ -29,7 +30,7 @@ if (class_exists('\ViceUnf\Core\Service\SocioService') && $socios_post_type === 
     ]);
 }
 
-if (!$socios_query->have_posts()) {
+if (empty($socios_data) && !$socios_query->have_posts()) {
     return;
 }
 ?>
@@ -63,27 +64,53 @@ if (!$socios_query->have_posts()) {
                                                                     ], JSON_UNESCAPED_SLASHES); ?>'>
             <div class="swiper-wrapper">
                 <?php
-                while ($socios_query->have_posts()) : $socios_query->the_post();
-                    $socio_url = get_post_meta(get_the_ID(), '_socio_url_key', true);
-                    $link_target = !empty($socio_url) ? ' target="_blank" rel="noopener noreferrer"' : '';
-                    $link_href = !empty($socio_url) ? esc_url($socio_url) : '#';
-                ?>
-                    <div class="swiper-slide dt-partner-slide" data-wow-delay="100ms" data-wow-duration="1500ms">
-                        <div class="dt-partner-box">
-                            <figure class="image dt-m-0 dt-w-100">
-                                <a href="<?php echo $link_href; ?>" <?php echo $link_target; ?> class="dt-d-block dt-w-100">
-                                    <?php
-                                    if (has_post_thumbnail()) {
-                                        the_post_thumbnail('medium', ['alt' => get_the_title(), 'class' => 'img-fluid dt-partner-img']);
-                                    }
-                                    ?>
-                                </a>
-                            </figure>
+                // Usar datos optimizados del cache si está disponible
+                if (!empty($socios_data)) {
+                    foreach ($socios_data as $socio) {
+                        $link_target = !empty($socio['url']) ? ' target="_blank" rel="noopener noreferrer"' : '';
+                        $link_href = !empty($socio['url']) ? esc_url($socio['url']) : '#';
+                        ?>
+                        <div class="swiper-slide dt-partner-slide" data-wow-delay="100ms" data-wow-duration="1500ms">
+                            <div class="dt-partner-box">
+                                <figure class="image dt-m-0 dt-w-100">
+                                    <a href="<?php echo $link_href; ?>" <?php echo $link_target; ?> class="dt-d-block dt-w-100">
+                                        <?php
+                                        if (!empty($socio['thumbnail'])) {
+                                            ?>
+                                            <img src="<?php echo esc_url($socio['thumbnail']); ?>" alt="<?php echo esc_attr($socio['title']); ?>" class="img-fluid dt-partner-img">
+                                            <?php
+                                        }
+                                        ?>
+                                    </a>
+                                </figure>
+                            </div>
                         </div>
-                    </div>
-                <?php
-                endwhile;
-                wp_reset_postdata();
+                        <?php
+                    }
+                } else {
+                    // Fallback a WP_Query tradicional
+                    while ($socios_query->have_posts()) : $socios_query->the_post();
+                        $socio_url = get_post_meta(get_the_ID(), '_socio_url_key', true);
+                        $link_target = !empty($socio_url) ? ' target="_blank" rel="noopener noreferrer"' : '';
+                        $link_href = !empty($socio_url) ? esc_url($socio_url) : '#';
+                        ?>
+                        <div class="swiper-slide dt-partner-slide" data-wow-delay="100ms" data-wow-duration="1500ms">
+                            <div class="dt-partner-box">
+                                <figure class="image dt-m-0 dt-w-100">
+                                    <a href="<?php echo $link_href; ?>" <?php echo $link_target; ?> class="dt-d-block dt-w-100">
+                                        <?php
+                                        if (has_post_thumbnail()) {
+                                            the_post_thumbnail('medium', ['alt' => get_the_title(), 'class' => 'img-fluid dt-partner-img']);
+                                        }
+                                        ?>
+                                    </a>
+                                </figure>
+                            </div>
+                        </div>
+                        <?php
+                    endwhile;
+                    wp_reset_postdata();
+                }
                 ?>
             </div>
         </div>

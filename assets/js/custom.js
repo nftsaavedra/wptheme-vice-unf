@@ -275,35 +275,37 @@ function updateSliderThumbnav(swiper, swiperEl) {
 
     if (!prevHolder || !nextHolder) return;
 
-    const slides = swiper.slides;
-    if (!slides || slides.length === 0) return;
+    // Get total slides by counting unique data-swiper-slide-index, or by counting non-duplicates
+    const totalSlides = swiperEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)').length;
+    
+    if (totalSlides <= 1) return;
 
-    let activeIndex = swiper.activeIndex;
-    let prevIndex = activeIndex - 1;
-    let nextIndex = activeIndex + 1;
+    let currentRealIndex = swiper.realIndex;
+    if (typeof currentRealIndex === 'undefined') currentRealIndex = 0;
 
-    // Boundary safe-checks
-    if (prevIndex < 0) prevIndex = slides.length - 1;
-    if (nextIndex >= slides.length) nextIndex = 0;
+    let prevRealIndex = currentRealIndex - 1;
+    let nextRealIndex = currentRealIndex + 1;
 
-    const prevSlide = slides[prevIndex];
-    const nextSlide = slides[nextIndex];
+    // Wrap around for looping
+    if (prevRealIndex < 0) prevRealIndex = totalSlides - 1;
+    if (nextRealIndex >= totalSlides) nextRealIndex = 0;
 
-    if (prevSlide) {
-        const prevImg = prevSlide.querySelector('img.dt-slider-bg') || prevSlide.querySelector('img');
-        if (prevImg) {
-            const src = prevImg.currentSrc || prevImg.getAttribute('src');
-            if (src) prevHolder.style.backgroundImage = 'url(' + src + ')';
-        }
-    }
+    // Fetch the specific slides using the reliable data-swiper-slide-index attribute
+    // We target the non-duplicate original slide to extract the image
+    const prevSlide = swiperEl.querySelector(`.swiper-slide[data-swiper-slide-index="${prevRealIndex}"]:not(.swiper-slide-duplicate)`);
+    const nextSlide = swiperEl.querySelector(`.swiper-slide[data-swiper-slide-index="${nextRealIndex}"]:not(.swiper-slide-duplicate)`);
 
-    if (nextSlide) {
-        const nextImg = nextSlide.querySelector('img.dt-slider-bg') || nextSlide.querySelector('img');
-        if (nextImg) {
-            const src = nextImg.currentSrc || nextImg.getAttribute('src');
-            if (src) nextHolder.style.backgroundImage = 'url(' + src + ')';
-        }
-    }
+    const getImgSrc = (slide) => {
+        if (!slide) return null;
+        const img = slide.querySelector('img.dt-slider-bg') || slide.querySelector('img');
+        return img ? (img.currentSrc || img.getAttribute('src')) : null;
+    };
+
+    const prevSrc = getImgSrc(prevSlide);
+    const nextSrc = getImgSrc(nextSlide);
+
+    if (prevSrc) prevHolder.style.backgroundImage = 'url(' + prevSrc + ')';
+    if (nextSrc) nextHolder.style.backgroundImage = 'url(' + nextSrc + ')';
 }
 
 // ============================================================

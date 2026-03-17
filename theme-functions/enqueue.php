@@ -23,17 +23,17 @@ class Assets
 
         wp_enqueue_style('viceunf-framework', $theme_uri . '/assets/css/framework.min.css', [], $theme_version);
         wp_enqueue_style('viceunf-core', $theme_uri . '/assets/css/core.css', ['viceunf-framework'], $theme_version);
-        wp_enqueue_style('viceunf-fontawesome', $theme_uri . '/assets/css/all.min.css', [], '6.7.2');
-        wp_enqueue_style('viceunf-animate', $theme_uri . '/assets/vendors/css/animate.css', [], '4.1.1');
+        wp_enqueue_style('viceunf-fontawesome', $theme_uri . '/assets/css/all.min.css', [], VICEUNF_FONTAWESOME_VERSION);
+        wp_enqueue_style('viceunf-animate', $theme_uri . '/assets/vendors/css/animate.css', [], VICEUNF_ANIMATE_VERSION);
 
         if (is_front_page() || is_singular()) {
-            wp_enqueue_style('viceunf-swiper', $theme_uri . '/assets/vendors/css/swiper-bundle.min.css', [], '11.0.0');
-            wp_enqueue_script('viceunf-swiper', $theme_uri . '/assets/vendors/js/swiper-bundle.min.js', [], '11.0.0', ['strategy' => 'defer', 'in_footer' => true]);
+            wp_enqueue_style('viceunf-swiper', $theme_uri . '/assets/vendors/css/swiper-bundle.min.css', [], VICEUNF_SWIPER_VERSION);
+            wp_enqueue_script('viceunf-swiper', $theme_uri . '/assets/vendors/js/swiper-bundle.min.js', [], VICEUNF_SWIPER_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
         }
 
         if (is_front_page() || is_singular() || is_page_template('page-templates/frontpage.php')) {
-            wp_enqueue_style('viceunf-glightbox', $theme_uri . '/assets/vendors/css/glightbox.min.css', [], '3.3.0');
-            wp_enqueue_script('viceunf-glightbox', $theme_uri . '/assets/vendors/js/glightbox.min.js', [], '3.3.0', ['strategy' => 'defer', 'in_footer' => true]);
+            wp_enqueue_style('viceunf-glightbox', $theme_uri . '/assets/vendors/css/glightbox.min.css', [], VICEUNF_GLIGHTBOX_VERSION);
+            wp_enqueue_script('viceunf-glightbox', $theme_uri . '/assets/vendors/js/glightbox.min.js', [], VICEUNF_GLIGHTBOX_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
         }
 
         wp_enqueue_style('viceunf-style', get_stylesheet_uri(), ['viceunf-framework', 'viceunf-core', 'viceunf-fontawesome'], $theme_version);
@@ -84,7 +84,7 @@ class Assets
 
     public function enqueue_admin_assets(string $hook): void
     {
-        wp_enqueue_style('viceunf-fontawesome-admin', get_stylesheet_directory_uri() . '/assets/css/all.min.css', [], '6.7.2');
+        wp_enqueue_style('viceunf-fontawesome-admin', get_stylesheet_directory_uri() . '/assets/css/all.min.css', [], VICEUNF_FONTAWESOME_VERSION);
 
         $screen = get_current_screen();
         if (!$screen) return;

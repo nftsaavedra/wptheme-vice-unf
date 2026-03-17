@@ -70,6 +70,14 @@ function viceunf_ajax_search_icons_handler()
             wp_send_json_error('Archivo de iconos no encontrado.');
         }
 
+        // Validar tamaño del archivo para prevenir problemas de memoria
+        $max_size = 500 * 1024; // 500KB límite seguro
+        $file_size = filesize($icons_json_path);
+        
+        if ($file_size === false || $file_size > $max_size) {
+            wp_send_json_error('Archivo de iconos demasiado grande o no accesible.');
+        }
+
         $icons_list = json_decode(file_get_contents($icons_json_path), true);
 
         if (!is_array($icons_list)) {

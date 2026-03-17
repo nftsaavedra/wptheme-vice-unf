@@ -31,6 +31,7 @@ export default {
           /^(wp-block-)/, /^(has-)/, /^(is-)/, /^(search-)/,
           /^(wc-)/, /^(swiper-)/, /^(viceunf-single-doc)/,
           /^(viceunf-card-)/, /^(viceunf-bg-)/, /^(dt-text-)/,
+          /^(dt_mobilenav)/, /^(overlay--enabled)/, /^(active)/,
         ],
         greedy: [
           /^(page-id-)/, /^(postid-)/, /^(archive-)/, /^(category-)/, /^(tag-)/

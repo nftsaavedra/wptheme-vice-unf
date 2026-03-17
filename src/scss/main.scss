@@ -20,6 +20,7 @@ con otros.
 
 @use "base/tokens";
 @use "components/cards";
+@use "components/mobile-menu";
 @use "pages/production";
 
 .has-text-align-justify {
@@ -523,15 +524,17 @@ con otros.
 
 .dt_slider--five .dt_slider-content .subtitle {
   /* width: max-content; */
-  font-size: 1.7rem;
+  font-size: clamp(1.4rem, 4vw, 1.7rem);
   font-weight: 400;
-  padding: 1.2rem 2rem;
+  padding: clamp(0.6rem, 2vw, 1.2rem) clamp(1rem, 3vw, 2rem);
   background-color: var(--dt-sec-color);
   border-width: 0;
   border-style: solid;
   border-color: transparent;
   color: #ffffff;
   margin-bottom: 2.6rem;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .dt_slider--five .swiper-slide-active .dt_slider-content .subtitle {
@@ -593,6 +596,20 @@ con otros.
 .dt_slider--five .dt_slider-content .subtitle::before,
 .dt_slider--five .dt_owl_carousel.owl-carousel .owl-dots {
   display: none;
+}
+
+.dt_slider--five .dt_slider_img_with_content {
+  position: relative;
+}
+
+.dt_slider--five .dt_slider-content {
+  padding: 0 clamp(30px, 8vw, 80px); /* Margen protector (flechas swiper) */
+}
+
+.dt_slider--five .dt_slider-content .title {
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1.1;
+  word-break: break-word;
 }
 
 @media (min-width: 62em) {

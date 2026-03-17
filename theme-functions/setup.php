@@ -66,7 +66,12 @@ class Setup
             'primary_menu' => __('Menú Principal', 'viceunf'),
         ]);
 
+        // Tamaños de imagen optimizados para el tema
         add_image_size('viceunf-blog-thumb', 720, 480, true);
+        add_image_size('viceunf-hero', 1920, 1080, true);
+        add_image_size('viceunf-card', 400, 300, true);
+        add_image_size('viceunf-thumbnail', 150, 150, true);
+        add_image_size('viceunf-large', 1200, 800, false);
     }
 
     public function content_width(): void
@@ -196,9 +201,17 @@ class Setup
 
     public function disable_lazy_load_lcp(array $attributes, \WP_Post $attachment, string|array $size): array
     {
+        // Deshabilitar lazy loading para imágenes above-the-fold críticas
         if (is_singular() && isset($attributes['loading']) && $attachment->ID === get_post_thumbnail_id()) {
             unset($attributes['loading']);
         }
+        
+        // Asegurar lazy loading para imágenes en listados y related posts
+        if (!is_singular() || is_home() || is_archive() || is_search()) {
+            $attributes['loading'] = 'lazy';
+            $attributes['decoding'] = 'async';
+        }
+        
         return $attributes;
     }
 
