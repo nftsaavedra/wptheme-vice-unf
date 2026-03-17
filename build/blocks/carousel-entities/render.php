@@ -22,19 +22,13 @@ if (!post_type_exists($post_type)) {
     return;
 }
 
-$args = [
-    'post_type'              => $post_type,
-    'post_status'            => 'publish',
-    'posts_per_page'         => $limit,
-    'orderby'                => 'menu_order date',
-    'order'                  => 'ASC',
-    'no_found_rows'          => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-];
+if (!class_exists('\ViceUnf\Core\Service\CarouselService')) {
+    echo sprintf('<div %s><p style="padding: 20px; text-align: center; border: 1px dashed red;">El plugin ViceUnf Core no está detectado (CarouselService faltante).</p></div>', $wrapper_attributes);
+    return;
+}
 
-// Fallback de query rápida para entidades generalizadas.
-$query = new WP_Query($args);
+$carousel_service = new \ViceUnf\Core\Service\CarouselService();
+$query = $carousel_service->get_entities($post_type, $limit);
 
 if (!$query->have_posts()) {
     echo sprintf('<div %s><p style="padding: 20px; text-align: center; border: 1px dashed orange;">No hay elementos para mostrar bajo el formato "%s".</p></div>', $wrapper_attributes, esc_html($post_type));

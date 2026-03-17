@@ -1,0 +1,140 @@
+@import "../../scss/base/mixins";
+
+.viceunf-event-gallery {
+    --gallery-height: 60vh;
+    --gallery-min-height: 400px;
+    --gallery-max-height: 700px;
+
+    width: 100%;
+    margin: 2rem 0;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        @include mq(md) {
+            flex-direction: row;
+            height: var(--gallery-height);
+            min-height: var(--gallery-min-height);
+            max-height: var(--gallery-max-height);
+            gap: 20px;
+        }
+    }
+
+    // Main Swiper
+    &__main {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        position: relative;
+        
+        .swiper-slide {
+            height: 100%;
+            background-color: #000;
+        }
+    }
+
+    // Modern Navigation Controls
+    &__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) scale(0.9);
+        z-index: 10;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        opacity: 0;
+        outline: none;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+            color: white;
+        }
+
+        &.viceunf-event-gallery__prev {
+            left: 20px;
+        }
+
+        &.viceunf-event-gallery__next {
+            right: 20px;
+        }
+    }
+
+    &:hover &__nav {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+
+    // Modern Pagination
+    &__pagination {
+        bottom: 25px !important; // Distance from bottom
+        
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            opacity: 1;
+            transition: all 0.3s ease;
+            
+            &-active {
+                background: white;
+                width: 25px; // Emotional horizontal expansion
+                border-radius: 5px;
+            }
+        }
+    }
+
+    &__main-item {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 8s ease-out;
+            
+            // Ken Burns effect (Always active for premium feel)
+            animation: kenBurns 25s infinite alternate ease-in-out;
+        }
+    }
+
+    .swiper-slide-active &__main-item img {
+        transform: scale(1.05);
+    }
+
+    // Thumb Swiper removed as requested
+    &__thumbs {
+        display: none;
+    }
+}
+
+// Ocultar scrollbars en los thumbs
+.viceunf-event-gallery__thumbs {
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}

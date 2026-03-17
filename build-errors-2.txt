@@ -1,0 +1,4 @@
+﻿
+> viceunf@1.0.0 build
+> wp-scripts build --config webpack.config.cjs --stats-error-details --color-false
+

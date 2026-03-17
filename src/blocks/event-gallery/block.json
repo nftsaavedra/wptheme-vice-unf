@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "viceunf/event-gallery",
+  "version": "1.0.0",
+  "title": "Galería de Eventos Institucionales",
+  "category": "viceunf-blocks",
+  "icon": "format-gallery",
+  "description": "Galería de imágenes con Swiper.js. Imagen principal + miniaturas laterales (Desktop) y carrusel táctil (Mobile).",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "images": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "textdomain": "viceunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
