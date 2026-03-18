@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, TextControl } from '@wordpress/components';
+import { useBlockProps, useInnerBlocksProps, InspectorControls, InnerBlocks, RichText } from '@wordpress/block-editor';
+import { PanelBody, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -18,15 +18,19 @@ function Edit( { attributes, setAttributes } ) {
 		style: { '--viceunf-sched-cols': columns },
 	} );
 
+	const innerBlocksProps = useInnerBlocksProps(
+		{ className: 'viceunf-event-schedule__grid' },
+		{
+			allowedBlocks: [ 'viceunf/schedule-card' ],
+			template: TEMPLATE,
+			orientation: 'horizontal',
+		}
+	);
+
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuración', 'viceunf' ) }>
-					<TextControl
-						label={ __( 'Título de sección (opcional)', 'viceunf' ) }
-						value={ sectionTitle }
-						onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
-					/>
 					<RangeControl
 						label={ __( 'Columnas', 'viceunf' ) }
 						value={ columns }
@@ -38,19 +42,15 @@ function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ sectionTitle && (
-					<h2 style={ { textAlign: 'center', marginBottom: '4rem' } }>{ sectionTitle }</h2>
-				) }
-				<div
-					className="viceunf-event-schedule__grid"
-					style={ { display: 'grid', gridTemplateColumns: `repeat(${ columns }, 1fr)`, gap: '2.4rem' } }
-				>
-					<InnerBlocks
-						allowedBlocks={ [ 'viceunf/schedule-card' ] }
-						template={ TEMPLATE }
-						orientation="horizontal"
-					/>
-				</div>
+				<RichText
+					tagName="h2"
+					value={ sectionTitle }
+					onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
+					placeholder={ __( 'Título de sección...', 'viceunf' ) }
+					allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+					style={ { textAlign: 'center', marginBottom: '4rem' } }
+				/>
+				<div { ...innerBlocksProps }></div>
 			</div>
 		</>
 	);

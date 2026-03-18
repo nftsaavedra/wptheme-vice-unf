@@ -32,27 +32,27 @@ $wrapper_attributes = get_block_wrapper_attributes(
     <div class="viceunf-schedule-card__body">
         <?php if ($date) : ?>
             <div class="viceunf-schedule-card__date">
-                <?php echo esc_html($date); ?>
+                <?php echo wp_kses_post($date); ?>
             </div>
         <?php endif; ?>
 
         <?php if ($session_label) : ?>
             <h4 class="viceunf-schedule-card__session">
-                <?php echo esc_html($session_label); ?>
+                <?php echo wp_kses_post($session_label); ?>
             </h4>
         <?php endif; ?>
 
         <?php if ($time) : ?>
             <p class="viceunf-schedule-card__time">
                 <i class="fa-regular fa-clock" aria-hidden="true"></i>
-                <?php echo esc_html($time); ?>
+                <?php echo wp_kses_post($time); ?>
             </p>
         <?php endif; ?>
 
         <?php if ($location) : ?>
             <p class="viceunf-schedule-card__location">
                 <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                <?php echo esc_html($location); ?>
+                <?php echo wp_kses_post($location); ?>
             </p>
         <?php endif; ?>
     </div>

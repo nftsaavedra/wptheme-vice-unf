@@ -21,6 +21,22 @@ $main_image_id = isset($attributes['mainImageId']) ? (int) $attributes['mainImag
 $main_image_alt = $attributes['mainImageAlt'] ?? '';
 $video_url     = $attributes['videoUrl'] ?? '';
 $items         = isset($attributes['items']) && is_array($attributes['items']) ? $attributes['items'] : [];
+$autoridad_id  = intval($attributes['autoridadId'] ?? 0);
+
+if (!empty($autoridad_id)) {
+    $autoridad_post = get_post($autoridad_id);
+    if ($autoridad_post && $autoridad_post->post_type === 'autoridad') {
+        $grado = get_post_meta($autoridad_id, '_autoridad_grado', true);
+        $full_name = trim($grado . ' ' . $autoridad_post->post_title);
+        $person_name = $full_name;
+
+        $thumb_id = get_post_thumbnail_id($autoridad_id);
+        if ($thumb_id) {
+            $main_image_id = $thumb_id;
+            $main_image_alt = $full_name;
+        }
+    }
+}
 
 if (empty($title) && empty($description) && $main_image_id === 0) {
     echo sprintf(

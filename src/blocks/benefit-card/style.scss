@@ -2,12 +2,15 @@
 .viceunf-benefit-card {
 	position: relative;
 	border-radius: 1.2rem;
-	padding: 3.2rem 2.4rem;
+	padding: clamp(2.4rem, 3vw, 3.2rem) clamp(2rem, 2.5vw, 2.4rem);
 	@include mq(sm) {
 		padding: 2rem;
 	}
 	overflow: hidden;
 	transition: var(--dt-transition);
+	max-width: 420px;
+	width: 100%;
+	margin: 0 auto;
 	border: 1px solid rgba(255, 255, 255, 0.05); // Less solid overall
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15), inset -1px -1px 0px rgba(0, 0, 0, 0.2); // Premium glassmorphism light/dark edge
 
@@ -60,7 +63,7 @@
 		position: relative;
 		z-index: 1;
 		color: var(--dt-whi-color, #ffffff);
-		font-size: 2rem;
+		font-size: clamp(1.8rem, 1.5vw + 1rem, 2.2rem);
 		font-weight: 700;
 		margin-bottom: 1.2rem;
 		line-height: 1.3;
@@ -70,7 +73,7 @@
 		position: relative;
 		z-index: 1;
 		color: rgba(255, 255, 255, 0.75);
-		font-size: 1.5rem;
+		font-size: clamp(1.5rem, 1vw + 0.8rem, 1.7rem);
 		line-height: 1.7;
 		margin-bottom: 0;
 	}

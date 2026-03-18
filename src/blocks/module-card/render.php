@@ -12,6 +12,7 @@ $label           = $attributes['label'] ?? '';
 $icon            = preg_replace('/[^a-zA-Z0-9\s\-]/', '', $attributes['icon'] ?? 'fa-solid fa-book');
 $progress        = isset($attributes['progressPercent']) ? max(0, min(100, (int) $attributes['progressPercent'])) : 75;
 $bullet_points   = $attributes['bulletPoints'] ?? [];
+$bullet_points_html = $attributes['bulletPointsHtml'] ?? '';
 $card_color      = $attributes['cardColor'] ?? '#1e2a4a';
 
 // Cálculo SVG para el arco semicircular.
@@ -26,7 +27,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 <div <?php echo $wrapper_attributes; ?> style="background-color: <?php echo esc_attr($card_color); ?>;">
 
     <?php if ($label) : ?>
-        <p class="viceunf-module-card__label"><?php echo esc_html($label); ?></p>
+        <p class="viceunf-module-card__label"><?php echo wp_kses_post($label); ?></p>
     <?php endif; ?>
 
     <div class="viceunf-module-card__progress" aria-hidden="true">
@@ -52,10 +53,14 @@ $wrapper_attributes = get_block_wrapper_attributes(
     </div>
 
     <div class="viceunf-module-card__body">
-        <?php if ($bullet_points) : ?>
+        <?php if (!empty($bullet_points_html)) : ?>
+            <ul class="viceunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'viceunf'); ?>">
+                <?php echo wp_kses_post($bullet_points_html); ?>
+            </ul>
+        <?php elseif (!empty($bullet_points)) : ?>
             <ul class="viceunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'viceunf'); ?>">
                 <?php foreach ($bullet_points as $point) : ?>
-                    <li><?php echo esc_html($point); ?></li>
+                    <li><?php echo wp_kses_post($point); ?></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>

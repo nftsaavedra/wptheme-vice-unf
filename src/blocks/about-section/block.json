@@ -40,6 +40,10 @@
       "type": "string",
       "default": ""
     },
+    "autoridadId": {
+      "type": "number",
+      "default": 0
+    },
     "items": {
       "type": "array",
       "default": []

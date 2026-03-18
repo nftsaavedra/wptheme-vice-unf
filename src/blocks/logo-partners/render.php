@@ -41,7 +41,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
         <?php if ($section_title) : ?>
             <h2 class="viceunf-logo-partners__title">
-                <?php echo esc_html($section_title); ?>
+                <?php echo wp_kses_post($section_title); ?>
             </h2>
         <?php endif; ?>
 

@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
+import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -13,11 +13,6 @@ function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuración', 'viceunf' ) }>
-					<TextControl
-						label={ __( 'Título de sección', 'viceunf' ) }
-						value={ sectionTitle }
-						onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
-					/>
 					<SelectControl
 						label={ __( 'Fuente de logos', 'viceunf' ) }
 						value={ source }
@@ -45,11 +40,14 @@ function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ sectionTitle && (
-					<h2 style={ { textAlign: 'center', marginBottom: '3.2rem', color: '#0e1422' } }>
-						{ sectionTitle }
-					</h2>
-				) }
+				<RichText
+					tagName="h2"
+					value={ sectionTitle }
+					onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
+					placeholder={ __( 'Título de sección (opcional)...', 'viceunf' ) }
+					allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+					style={ { textAlign: 'center', marginBottom: '3.2rem', color: '#0e1422' } }
+				/>
 				<div style={ { textAlign: 'center', padding: '4rem', border: '1px dashed #ccc', borderRadius: '8px', color: '#999' } }>
 					<i className="fa-solid fa-handshake" style={ { fontSize: '3rem', marginBottom: '1.2rem', display: 'block' } }></i>
 					<p style={ { margin: 0 } }>

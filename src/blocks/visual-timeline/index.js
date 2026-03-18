@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ColorPalette } from '@wordpress/components';
+import { InnerBlocks, useBlockProps, useInnerBlocksProps, InspectorControls, RichText } from '@wordpress/block-editor';
+import { PanelBody, ColorPalette } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -13,17 +13,18 @@ const TEMPLATE = [
 
 function Edit( { attributes, setAttributes } ) {
 	const { lineColor, sectionTitle } = attributes;
-	const blockProps = useBlockProps( { className: 'viceunf-visual-timeline-editor' } );
+	const blockProps = useBlockProps( { className: 'viceunf-visual-timeline-editor' } );	const { children, ...innerBlocksProps } = useInnerBlocksProps(
+		{ className: 'viceunf-visual-timeline__track' },
+		{
+			allowedBlocks: [ 'viceunf/timeline-step' ],
+			template: TEMPLATE,
+		}
+	);
 
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuración', 'viceunf' ) }>
-					<TextControl
-						label={ __( 'Título de sección (opcional)', 'viceunf' ) }
-						value={ sectionTitle }
-						onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
-					/>
 					<p style={ { fontSize: '12px', marginBottom: '8px' } }>
 						{ __( 'Color de la línea vertical', 'viceunf' ) }
 					</p>
@@ -36,15 +37,17 @@ function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps } style={ { '--viceunf-timeline-line': lineColor } }>
-				{ sectionTitle && (
-					<h2 style={ { textAlign: 'center', marginBottom: '5rem' } }>{ sectionTitle }</h2>
-				) }
-				<div className="viceunf-visual-timeline__track">
-					<div className="viceunf-visual-timeline__line" aria-hidden="true"></div>
-					<InnerBlocks
-						allowedBlocks={ [ 'viceunf/timeline-step' ] }
-						template={ TEMPLATE }
-					/>
+				<RichText
+					tagName="h2"
+					value={ sectionTitle }
+					onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
+					placeholder={ __( 'Título de sección (opcional)...', 'viceunf' ) }
+					allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+					style={ { textAlign: 'center', marginBottom: '5rem' } }
+				/>
+				<div { ...innerBlocksProps }>
+					<div className="viceunf-visual-timeline__line" aria-hidden="true" style={ { backgroundColor: lineColor } }></div>
+					{ children }
 				</div>
 			</div>
 		</>

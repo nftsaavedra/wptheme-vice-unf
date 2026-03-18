@@ -1,6 +1,6 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
@@ -51,36 +51,19 @@ function SemiCircleProgress( { percent, color, icon } ) {
 	);
 }
 
-function Edit( { attributes, setAttributes, context } ) {
-	const { label, icon, progressPercent, bulletPoints, cardColor } = attributes;
-	const progressColor = '#ff4700';
-	const [ newBullet, setNewBullet ] = useState( '' );
+function Edit( { attributes, setAttributes } ) {
+	const { label, icon, progressPercent, bulletPointsHtml, cardColor } = attributes;
+	const progressColor = 'var(--viceunf-progress-color, #ff4700)';
 
 	const blockProps = useBlockProps( {
 		className: 'viceunf-module-card',
 		style: { backgroundColor: cardColor },
 	} );
 
-	const addBullet = () => {
-		if ( newBullet.trim() ) {
-			setAttributes( { bulletPoints: [ ...bulletPoints, newBullet.trim() ] } );
-			setNewBullet( '' );
-		}
-	};
-
-	const removeBullet = ( index ) => {
-		setAttributes( { bulletPoints: bulletPoints.filter( ( _, i ) => i !== index ) } );
-	};
-
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Contenido del Módulo', 'viceunf' ) }>
-					<TextControl
-						label={ __( 'Etiqueta (ej: 01 sesión)', 'viceunf' ) }
-						value={ label }
-						onChange={ ( val ) => setAttributes( { label: val } ) }
-					/>
 					<TextControl
 						label={ __( 'Clase de ícono FA', 'viceunf' ) }
 						value={ icon }
@@ -94,21 +77,8 @@ function Edit( { attributes, setAttributes, context } ) {
 						max={ 100 }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Puntos Clave', 'viceunf' ) } initialOpen={ false }>
-					{ bulletPoints.map( ( point, i ) => (
-						<div key={ i } style={ { display: 'flex', gap: '8px', marginBottom: '6px', alignItems: 'center' } }>
-							<span style={ { flex: 1, fontSize: '12px' } }>{ point }</span>
-							<Button isSmall isDestructive variant="tertiary" onClick={ () => removeBullet( i ) }>✕</Button>
-						</div>
-					) ) }
-					<TextControl
-						label={ __( 'Nuevo punto clave', 'viceunf' ) }
-						value={ newBullet }
-						onChange={ setNewBullet }
-					/>
-					<Button variant="secondary" onClick={ addBullet } style={ { width: '100%', justifyContent: 'center' } }>
-						{ __( '+ Agregar', 'viceunf' ) }
-					</Button>
+				<PanelBody title={ __( 'Puntos Clave (Legacy)', 'viceunf' ) } initialOpen={ false }>
+					<p style={{ fontSize: '12px', color: '#666' }}>Esta sección ha sido reemplazada por el editor directo en la tarjeta. Escriba los puntos clave directamente sobre la tarjeta a la izquierda.</p>
 				</PanelBody>
 				<PanelBody title={ __( 'Color de la Tarjeta', 'viceunf' ) } initialOpen={ false }>
 					<ColorPalette
@@ -120,21 +90,23 @@ function Edit( { attributes, setAttributes, context } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ label && <p className="viceunf-module-card__label">{ label }</p> }
-				<SemiCircleProgress percent={ progressPercent } value={ progressColor } icon={ icon } />
+				<RichText
+					tagName="p"
+					className="viceunf-module-card__label"
+					value={ label }
+					onChange={ ( val ) => setAttributes( { label: val } ) }
+					placeholder={ __( 'Etiqueta (ej: 01 sesión)', 'viceunf' ) }
+				/>
+				<SemiCircleProgress percent={ progressPercent } color={ progressColor } icon={ icon } />
 				<div className="viceunf-module-card__body">
-					{ bulletPoints.length > 0 && (
-						<ul className="viceunf-module-card__bullets">
-							{ bulletPoints.map( ( point, i ) => (
-								<li key={ i }>{ point }</li>
-							) ) }
-						</ul>
-					) }
-					{ bulletPoints.length === 0 && (
-						<p style={ { color: 'rgba(255,255,255,0.5)', fontSize: '1.3rem', textAlign: 'center' } }>
-							{ __( 'Agrega puntos clave desde el panel lateral →', 'viceunf' ) }
-						</p>
-					) }
+					<RichText
+						tagName="ul"
+						multiline="li"
+						className="viceunf-module-card__bullets"
+						value={ bulletPointsHtml }
+						onChange={ ( val ) => setAttributes( { bulletPointsHtml: val } ) }
+						placeholder="<li>Escribe puntos clave...</li>"
+					/>
 				</div>
 			</div>
 		</>

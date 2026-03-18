@@ -45,7 +45,7 @@ $css_vars = sprintf(
             </div>
             <?php if ($label) : ?>
                 <span class="viceunf-icon-categories__label">
-                    <?php echo esc_html($label); ?>
+                    <?php echo wp_kses_post($label); ?>
                 </span>
             <?php endif; ?>
         </<?php echo $tag; ?>>

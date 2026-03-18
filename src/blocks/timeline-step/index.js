@@ -1,7 +1,7 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, TextareaControl, RangeControl, ColorPalette } from '@wordpress/components';
+import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
+import { PanelBody, TextControl, RangeControl, ColorPalette } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
@@ -20,16 +20,6 @@ function Edit( { attributes, setAttributes } ) {
 						onChange={ ( val ) => setAttributes( { stepNumber: val } ) }
 						min={ 1 }
 						max={ 20 }
-					/>
-					<TextControl
-						label={ __( 'Título', 'viceunf' ) }
-						value={ title }
-						onChange={ ( val ) => setAttributes( { title: val } ) }
-					/>
-					<TextareaControl
-						label={ __( 'Descripción', 'viceunf' ) }
-						value={ description }
-						onChange={ ( val ) => setAttributes( { description: val } ) }
 					/>
 					<TextControl
 						label={ __( 'Clase de ícono FA (opcional)', 'viceunf' ) }
@@ -55,8 +45,22 @@ function Edit( { attributes, setAttributes } ) {
 					) }
 				</div>
 				<div className="viceunf-timeline-step__card" style={ { borderLeftColor: accentColor } }>
-					{ title && <h3 className="viceunf-timeline-step__title">{ title }</h3> }
-					{ description && <p className="viceunf-timeline-step__desc">{ description }</p> }
+					<RichText
+						tagName="h3"
+						className="viceunf-timeline-step__title"
+						value={ title }
+						onChange={ ( val ) => setAttributes( { title: val } ) }
+						placeholder={ __( 'Título del paso', 'viceunf' ) }
+						allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+					/>
+					<RichText
+						tagName="p"
+						className="viceunf-timeline-step__desc"
+						value={ description }
+						onChange={ ( val ) => setAttributes( { description: val } ) }
+						placeholder={ __( 'Descripción del paso...', 'viceunf' ) }
+						allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+					/>
 				</div>
 			</div>
 		</>

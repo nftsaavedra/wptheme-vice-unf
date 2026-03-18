@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, RangeControl, FormTokenField } from '@wordpress/components';
+import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
+import { PanelBody, RangeControl, FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -32,11 +32,6 @@ export default function Edit({ attributes, setAttributes }) {
 		<div {...useBlockProps()}>
 			<InspectorControls>
 				<PanelBody title={__('Configuración del Bloque', 'viceunf')}>
-					<TextControl
-						label={__('Título', 'viceunf')}
-						value={title}
-						onChange={(val) => setAttributes({ title: val })}
-					/>
 					<RangeControl
 						label={__('Número de Entradas', 'viceunf')}
 						value={numberOfPosts}
@@ -62,7 +57,13 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div className="viceunf-editor-recent-posts-preview" style={{ padding: '20px', border: '1px dashed #ccc', backgroundColor: '#fafafa' }}>
-				<h3>{title || __('Entradas Recientes', 'viceunf')}</h3>
+				<RichText
+					tagName="h3"
+					value={title}
+					onChange={(val) => setAttributes({ title: val })}
+					placeholder={__('Escribe el título...', 'viceunf')}
+					allowedFormats={['core/bold', 'core/italic', 'core/link']}
+				/>
 				<p><em>{__('Mostrando preview estática en el editor. El diseño real se renderizará en el frontend.', 'viceunf')}</em></p>
 				<p>Nº de Posts: <strong>{numberOfPosts}</strong></p>
 				<p>Categorías seleccionadas: <strong>{selectedCategoryNames.join(', ') || 'Ninguna (Todas)'}</strong></p>

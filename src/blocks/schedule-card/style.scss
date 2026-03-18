@@ -5,6 +5,9 @@
 	overflow: hidden;
 	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 	transition: var(--dt-transition);
+	max-width: 420px;
+	width: 100%;
+	margin: 0 auto;
 
 	&:hover {
 		transform: translateY(-4px);
@@ -14,7 +17,7 @@
 	// Cabecera de la tarjeta con perforaciones de libreta.
 	&__header {
 		position: relative;
-		height: 5rem;
+		height: clamp(5rem, 4.5vw, 6.5rem);
 		display: flex;
 		align-items: flex-end;
 		padding-bottom: 0;
@@ -43,12 +46,12 @@
 
 	// Cuerpo de la tarjeta.
 	&__body {
-		padding: 2.4rem;
+		padding: clamp(2.4rem, 3.5vw, 3.2rem);
 	}
 
 	// Fecha destacada.
 	&__date {
-		font-size: 3.2rem;
+		font-size: clamp(3.2rem, 3.5vw + 1rem, 4.2rem);
 		font-weight: 800;
 		color: var(--dt-sec-color);
 		line-height: 1;
@@ -57,7 +60,7 @@
 
 	// Nombre/número de sesión.
 	&__session {
-		font-size: 1.8rem;
+		font-size: clamp(1.8rem, 2vw + 1rem, 2.4rem);
 		font-weight: 700;
 		color: var(--dt-sec-color);
 		margin-bottom: 1.2rem;
@@ -67,7 +70,7 @@
 	// Horario y ubicación.
 	&__time,
 	&__location {
-		font-size: 1.4rem;
+		font-size: clamp(1.4rem, 1.2vw + 1rem, 1.6rem);
 		color: var(--dt-base-color);
 		display: flex;
 		align-items: center;

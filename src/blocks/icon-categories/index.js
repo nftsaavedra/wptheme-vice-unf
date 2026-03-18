@@ -1,6 +1,6 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
@@ -145,7 +145,14 @@ function Edit( { attributes, setAttributes } ) {
 							>
 								<i className={ iconClass } aria-hidden="true"></i>
 							</div>
-							<span className="viceunf-icon-categories__label">{ item.label }</span>
+							<RichText
+								tagName="span"
+								className="viceunf-icon-categories__label"
+								value={ item.label }
+								onChange={ ( val ) => updateItem( index, 'label', val ) }
+								placeholder={ __( 'Nombre de categoría', 'viceunf' ) }
+								withoutInteractiveFormatting
+							/>
 						</div>
 					);
 				} ) }

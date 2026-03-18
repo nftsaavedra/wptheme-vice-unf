@@ -24,6 +24,10 @@
       "type": "array",
       "default": []
     },
+    "bulletPointsHtml": {
+      "type": "string",
+      "default": "<li>Punto clave 1</li><li>Punto clave 2</li>"
+    },
     "cardColor": {
       "type": "string",
       "default": "#1e2a4a"

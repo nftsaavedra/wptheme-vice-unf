@@ -17,6 +17,7 @@ import {
   BaseControl,
 } from "@wordpress/components";
 import { useState, useRef, useEffect } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
 import metadata from "./block.json";
 
 /* ─── Hook AJAX (portado desde admin/options) ─── */
@@ -181,6 +182,119 @@ function IconPicker({ value, onChange }) {
   );
 }
 
+/* ─── AutoridadPicker ─── */
+function AutoridadPicker({ value, onChange }) {
+  const [open, setOpen] = useState(false);
+  const { query, setQuery, results, loading } = useAjaxSearch(
+    "viceunf_search_autoridades"
+  );
+
+  const currentAutoridad = useSelect((select) => {
+    return value ? select("core").getEntityRecord("postType", "autoridad", value) : null;
+  }, [value]);
+
+  const selectItem = (item) => {
+    onChange(item.id);
+    setQuery("");
+    setOpen(false);
+  };
+  const clear = () => {
+    onChange(0);
+    setQuery("");
+  };
+
+  const displayTitle = currentAutoridad ? (currentAutoridad.title?.rendered || currentAutoridad.title) : (value ? `Cargando ID: ${value}...` : "");
+
+  return (
+    <div className="vu-icon-picker" style={{ position: "relative", marginBottom: "16px" }}>
+      {value ? (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', border: '1px solid var(--viceunf-primary-color, #e05e00)', borderRadius: '4px', background: 'rgba(224, 94, 0, 0.05)' }}>
+          <span style={{ fontWeight: 'bold', flex: 1 }}>
+            <span className="dashicons dashicons-businessman" style={{ marginRight: '8px', color: 'var(--viceunf-primary-color, #e05e00)' }}></span>
+            {displayTitle}
+          </span>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Button variant="secondary" isSmall onClick={() => setOpen((o) => !o)} title="Cambiar Autoridad">
+              <span className="dashicons dashicons-edit" />
+            </Button>
+            <Button isDestructive isSmall onClick={clear} title="Quitar Autoridad">
+              ✕
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="vu-search-input-wrapper">
+          <span className="dashicons dashicons-search vu-search-icon" />
+          <input
+            type="text"
+            className="vu-search-input"
+            placeholder="Buscar Autoridad por nombre..."
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setOpen(true);
+            }}
+            onFocus={() => setOpen(true)}
+            autoComplete="off"
+            style={{ width: '100%', padding: '8px 8px 8px 30px', boxSizing: 'border-box' }}
+          />
+        </div>
+      )}
+      
+      {open && value && (
+        <div style={{ marginTop: "8px" }}>
+          <div className="vu-search-input-wrapper">
+            <span className="dashicons dashicons-search vu-search-icon" />
+            <input
+              type="text"
+              className="vu-search-input"
+              placeholder="Buscar otra autoridad..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              autoComplete="off"
+              autoFocus
+              style={{ width: '100%', padding: '8px 8px 8px 30px', boxSizing: 'border-box' }}
+            />
+          </div>
+        </div>
+      )}
+
+      {open && (
+        <div className="vu-search-dropdown vu-icon-dropdown" style={{ maxHeight: '250px', overflowY: 'auto' }}>
+          {loading && (
+            <div className="vu-search-spinner">
+              <span className="vu-spinner" />
+            </div>
+          )}
+          {!loading && query.length < 2 && (
+            <p className="vu-search-hint">Escribe al menos 2 letras.</p>
+          )}
+          {!loading && query.length >= 2 && results.length === 0 && (
+            <p className="vu-search-empty">No se encontraron autoridades.</p>
+          )}
+          {!loading && results.length > 0 && (
+            <ul className="vu-results-list vu-icon-results-list">
+              {results.map((item) => (
+                <li
+                  key={item.id}
+                  className={`vu-result-item vu-icon-result-item ${item.id === value ? "is-selected" : ""}`}
+                  onMouseDown={() => selectItem(item)}
+                  style={{ padding: '8px', cursor: 'pointer', borderBottom: '1px solid #eee' }}
+                >
+                  <span className="dashicons dashicons-businessman" style={{ marginRight: '8px', color: '#666' }} />
+                  <span className="vu-icon-result-label" style={{ fontWeight: item.id === value ? 'bold' : 'normal' }}>
+                    {item.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ─── Registro del Bloque ─── */
 registerBlockType(metadata.name, {
   edit({ attributes, setAttributes }) {
@@ -193,8 +307,13 @@ registerBlockType(metadata.name, {
       mainImageUrl,
       mainImageAlt,
       videoUrl,
+      autoridadId,
       items,
     } = attributes;
+
+    const currentAutoridadInfo = useSelect((select) => {
+      return autoridadId ? select("core").getEntityRecord("postType", "autoridad", autoridadId) : null;
+    }, [autoridadId]);
 
     const blockProps = useBlockProps({
       className: "viceunf-about-section-editor-preview",
@@ -213,7 +332,16 @@ registerBlockType(metadata.name, {
     return (
       <div {...blockProps}>
         <InspectorControls>
-          {/* ── Panel: Contenido Principal ELIMINADO a favor del lienzo (RichText) ── */}
+          {/* ── Panel: Vinculación de Autoridad ── */}
+          <PanelBody title="Vinculación con Autoridad" initialOpen={true}>
+            <p style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
+              Si seleccionas una Autoridad, su <strong>Fotografía</strong>, <strong>Grado</strong> y <strong>Nombre</strong> reemplazarán automáticamente los campos manuales en la web pública.
+            </p>
+            <AutoridadPicker
+              value={autoridadId}
+              onChange={(val) => setAttributes({ autoridadId: val })}
+            />
+          </PanelBody>
 
           {/* ── Panel: Imagen Principal ── */}
           <PanelBody title="Imagen Principal" initialOpen={false}>
@@ -373,13 +501,22 @@ registerBlockType(metadata.name, {
               placeholder="Escribe el título de la sección..."
               style={{ color: "var(--dt-sec-color, #0b2346)", fontWeight: "900", fontSize: "32px", marginBottom: "4px" }}
             />
-            <RichText
-              tagName="div"
-              value={personName}
-              onChange={(v) => setAttributes({ personName: v })}
-              placeholder="Nombre de la persona (Opcional)"
-              style={{ fontSize: "18px", fontWeight: "bold", color: "#555", marginBottom: "16px" }}
-            />
+            
+            {autoridadId ? (
+              <div style={{ padding: '8px 12px', background: 'rgba(224,94,0,0.1)', display: 'inline-block', borderRadius: '4px', marginBottom: '16px', border: '1px solid rgba(224,94,0,0.3)', color: '#e05e00', fontWeight: 'bold' }}>
+                <span className="dashicons dashicons-businessman" style={{ marginRight: '6px' }} />
+                [ Datos de Persona Vinculados Dinámicamente ]
+              </div>
+            ) : (
+              <RichText
+                tagName="div"
+                value={personName}
+                onChange={(v) => setAttributes({ personName: v })}
+                placeholder="Nombre de la persona (Opcional)"
+                style={{ fontSize: "18px", fontWeight: "bold", color: "#555", marginBottom: "16px" }}
+              />
+            )}
+
             <RichText
               tagName="div"
               value={description}
@@ -389,9 +526,9 @@ registerBlockType(metadata.name, {
             />
           </div>
 
-          <div style={{ padding: "12px", border: "1px dashed #ccc", marginBottom: "24px" }}>
+          <div style={{ padding: "12px", border: "1px dashed #ccc", marginBottom: "24px", background: "#fdfdfd" }}>
             <strong>Media Adjunta:</strong>{" "}
-            {mainImageUrl ? "✓ Imagen Configurada" : "✗ Sin imagen"} | {" "}
+            {autoridadId ? "✓ Foto Dinámica (Autoridad)" : (mainImageUrl ? "✓ Imagen Configurada Manualmente" : "✗ Sin imagen principal")} | {" "}
             {videoUrl ? "✓ Video Configurado" : "✗ Sin video"}
           </div>
 
