@@ -5,6 +5,9 @@ import {
   InspectorControls,
   MediaUpload,
   MediaUploadCheck,
+  RichText,
+  BlockControls,
+  AlignmentControl,
 } from "@wordpress/block-editor";
 import {
   PanelBody,
@@ -210,30 +213,7 @@ registerBlockType(metadata.name, {
     return (
       <div {...blockProps}>
         <InspectorControls>
-          {/* ── Panel: Contenido Principal ── */}
-          <PanelBody title="Contenido Principal" initialOpen={true}>
-            <TextControl
-              label="Subtítulo"
-              value={subtitle}
-              onChange={(v) => setAttributes({ subtitle: v })}
-            />
-            <TextControl
-              label="Título"
-              value={title}
-              onChange={(v) => setAttributes({ title: v })}
-            />
-            <TextControl
-              label="Nombre de Persona (opcional)"
-              value={personName}
-              onChange={(v) => setAttributes({ personName: v })}
-            />
-            <TextareaControl
-              label="Descripción"
-              value={description}
-              onChange={(v) => setAttributes({ description: v })}
-              rows={4}
-            />
-          </PanelBody>
+          {/* ── Panel: Contenido Principal ELIMINADO a favor del lienzo (RichText) ── */}
 
           {/* ── Panel: Imagen Principal ── */}
           <PanelBody title="Imagen Principal" initialOpen={false}>
@@ -362,65 +342,97 @@ registerBlockType(metadata.name, {
           </PanelBody>
         </InspectorControls>
 
-        {/* ── Preview en el Editor ── */}
+        {/* ── Preview en el Editor (WYSIWYG) ── */}
         <div
           style={{
             padding: "24px",
-            border: "2px dashed var(--dt-sec-color, #0b2346)",
-            textAlign: "center",
-            backgroundColor: "var(--viceunf-surface-alt, #f1f5f9)",
+            border: "1px solid var(--viceunf-border-color, #eaeaea)",
+            backgroundColor: "var(--viceunf-surface-alt, #fcfcfc)",
             borderRadius: "8px",
           }}
         >
-          <h3 style={{ margin: 0, color: "var(--dt-sec-color, #0b2346)" }}>
-            [Bloque: Sección Nosotros]
-          </h3>
-          <p style={{ margin: "10px 0 0", fontSize: "14px", color: "#666" }}>
-            <strong>Subtítulo:</strong> {subtitle || "(vacío)"} <br />
-            <strong>Título:</strong> {title || "(vacío)"} <br />
-            {personName && (
-              <>
-                <strong>Persona:</strong> {personName} <br />
-              </>
-            )}
-            <strong>Imagen:</strong>{" "}
-            {mainImageUrl ? "✓ Configurada" : "✗ Sin imagen"} <br />
-            <strong>Video:</strong> {videoUrl ? "✓ Configurado" : "✗ Sin video"}{" "}
-            <br />
-            <strong>Items:</strong> {items.length} configurado(s)
-          </p>
+          <BlockControls group="block">
+            <AlignmentControl
+              value={attributes.textAlign}
+              onChange={(val) => setAttributes({ textAlign: val })}
+            />
+          </BlockControls>
+          
+          <div style={{ textAlign: attributes.textAlign || 'left', marginBottom: '32px' }}>
+            <RichText
+              tagName="p"
+              value={subtitle}
+              onChange={(v) => setAttributes({ subtitle: v })}
+              placeholder="Escribe el subtítulo..."
+              style={{ color: "var(--viceunf-primary-color, #e05e00)", fontWeight: "bold", textTransform: "uppercase", fontSize: "14px", marginBottom: "8px" }}
+            />
+            <RichText
+              tagName="h2"
+              value={title}
+              onChange={(v) => setAttributes({ title: v })}
+              placeholder="Escribe el título de la sección..."
+              style={{ color: "var(--dt-sec-color, #0b2346)", fontWeight: "900", fontSize: "32px", marginBottom: "4px" }}
+            />
+            <RichText
+              tagName="div"
+              value={personName}
+              onChange={(v) => setAttributes({ personName: v })}
+              placeholder="Nombre de la persona (Opcional)"
+              style={{ fontSize: "18px", fontWeight: "bold", color: "#555", marginBottom: "16px" }}
+            />
+            <RichText
+              tagName="div"
+              value={description}
+              onChange={(v) => setAttributes({ description: v })}
+              placeholder="Escribe la descripción fluida aquí..."
+              style={{ color: "#666", fontSize: "16px", lineHeight: "1.6" }}
+            />
+          </div>
+
+          <div style={{ padding: "12px", border: "1px dashed #ccc", marginBottom: "24px" }}>
+            <strong>Media Adjunta:</strong>{" "}
+            {mainImageUrl ? "✓ Imagen Configurada" : "✗ Sin imagen"} | {" "}
+            {videoUrl ? "✓ Video Configurado" : "✗ Sin video"}
+          </div>
+
           {items.length > 0 && (
             <div
               style={{
-                display: "flex",
-                gap: "8px",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                marginTop: "12px",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "16px",
               }}
             >
               {items.map((item, i) => (
-                <span
+                <div
                   key={i}
                   style={{
-                    padding: "4px 10px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "16px",
                     background: "var(--viceunf-surface, #fff)",
                     border: "1px solid var(--viceunf-border-color, #eaeaea)",
-                    borderRadius: "4px",
-                    fontSize: "12px",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    transition: "all 0.3s",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.02)"
                   }}
                 >
                   {item.icon && (
-                    <i className={item.icon} style={{ marginRight: "4px" }} />
+                    <i className={item.icon} style={{ fontSize: "24px", color: "var(--viceunf-primary-color, #e05e00)" }} />
                   )}
-                  {item.title || `Item ${i + 1}`}
-                </span>
+                  <RichText
+                    tagName="h5"
+                    value={item.title}
+                    onChange={(v) => updateItem(i, "title", v)}
+                    placeholder={`Título del ítem ${i + 1}`}
+                    style={{ margin: 0, fontSize: "18px", color: "var(--dt-sec-color, #0b2346)" }}
+                  />
+                </div>
               ))}
             </div>
           )}
-          <p style={{ margin: "12px 0 0", fontSize: "11px", color: "#999" }}>
-            El layout completo se renderiza en la vista pública.
-          </p>
         </div>
       </div>
     );

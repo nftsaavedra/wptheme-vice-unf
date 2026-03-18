@@ -12,8 +12,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-$icon            = $attributes['icon'] ?? 'fa-solid fa-star';
-$title           = $attributes['title'] ?? '';
+$icon            = isset( $attributes['icon'] ) ? $attributes['icon'] : 'fa-solid fa-star';
+$icon_color      = isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#ea5a0b';
+$title           = isset( $attributes['title'] ) ? $attributes['title'] : '';
 $description     = $attributes['description'] ?? '';
 $gradient_start  = $attributes['gradientStart'] ?? '#1e2a4a';
 $gradient_end    = $attributes['gradientEnd'] ?? '#0e1422';
@@ -32,19 +33,21 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 ?>
 <div <?php echo $wrapper_attributes; ?> style="<?php echo esc_attr($card_style); ?>">
-    <div class="viceunf-benefit-card__icon-wrap" aria-hidden="true">
-        <i class="<?php echo esc_attr($icon_class); ?>"></i>
-    </div>
+    <?php if ( $icon ) : ?>
+        <div class="viceunf-benefit-card__icon-wrap">
+            <i class="<?php echo esc_attr( $icon_class ); ?>" style="color: <?php echo esc_attr( $icon_color ); ?>;" aria-hidden="true"></i>
+        </div>
+    <?php endif; ?>
 
     <?php if ($title) : ?>
         <h3 class="viceunf-benefit-card__title">
-            <?php echo esc_html($title); ?>
+            <?php echo wp_kses_post($title); ?>
         </h3>
     <?php endif; ?>
 
     <?php if ($description) : ?>
         <p class="viceunf-benefit-card__desc">
-            <?php echo esc_html($description); ?>
+            <?php echo wp_kses_post($description); ?>
         </p>
     <?php endif; ?>
 </div>

@@ -14,6 +14,14 @@ class Assets
         add_action('wp_enqueue_scripts', [$this, 'dequeue_jquery_frontend'], 99);
         add_filter('style_loader_tag', [$this, 'defer_non_critical_css'], 10, 4);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
+        add_action('enqueue_block_assets', [$this, 'enqueue_block_editor_assets']);
+    }
+
+    public function enqueue_block_editor_assets(): void
+    {
+        if (is_admin()) {
+            wp_enqueue_style('viceunf-fontawesome-editor', get_stylesheet_directory_uri() . '/assets/css/all.min.css', [], VICEUNF_FONTAWESOME_VERSION);
+        }
     }
 
     public function enqueue_frontend_assets(): void
@@ -42,6 +50,19 @@ class Assets
 
         if (is_singular() && comments_open() && get_option('thread_comments')) {
             wp_enqueue_script('comment-reply');
+        }
+
+        /* Bypass del Loader Gutenberiano: Encola recursivamente el CSS de los bloques personalizados (Fase 2) */
+        $blocks_dir = get_stylesheet_directory() . '/build/blocks/';
+        if (is_dir($blocks_dir) && is_array($block_folders = scandir($blocks_dir))) {
+            foreach ($block_folders as $folder) {
+                if ('.' !== $folder && '..' !== $folder) {
+                    $style_path = $blocks_dir . $folder . '/style-index.css';
+                    if (file_exists($style_path)) {
+                        wp_enqueue_style('viceunf-block-' . $folder, $theme_uri . '/build/blocks/' . $folder . '/style-index.css', [], $theme_version);
+                    }
+                }
+            }
         }
     }
 

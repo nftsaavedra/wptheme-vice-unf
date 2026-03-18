@@ -53,7 +53,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
             <?php if ($subtitle) : ?>
                 <p class="viceunf-footer-cta__subtitle">
-                    <?php echo esc_html($subtitle); ?>
+                    <?php echo wp_kses_post($subtitle); ?>
                 </p>
             <?php endif; ?>
 
@@ -63,7 +63,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                         href="<?php echo esc_url($button_url); ?>"
                         class="dt-btn dt-btn-primary viceunf-footer-cta__btn btn--effect-one"
                         style="<?php echo esc_attr($btn_style); ?>">
-                        <span class="dt-btn-text"><?php echo esc_html($button_text); ?></span>
+                        <span class="dt-btn-text"><?php echo wp_kses_post($button_text); ?></span>
                     </a>
                 </div>
             <?php endif; ?>

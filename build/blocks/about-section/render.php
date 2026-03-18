@@ -32,7 +32,8 @@ if (empty($title) && empty($description) && $main_image_id === 0) {
 
 $create_animated_subtitle = function ($text) {
     $output = '';
-    $chars = mb_str_split($text);
+    $clean_text = wp_strip_all_tags($text); // Strip HTML to avoid breaking letter animation
+    $chars = mb_str_split($clean_text);
     foreach ($chars as $char) {
         $output .= '<i class="in">' . esc_html($char) . '</i>';
     }
@@ -93,11 +94,11 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_protect dt_pr
                             <h2 class="title">
                                 <?php echo wp_kses_post($title); ?>
                                 <?php if (!empty($person_name)) : ?>
-                                    <br><span><?php echo esc_html($person_name); ?></span>
+                                    <br><span><?php echo wp_kses_post($person_name); ?></span>
                                 <?php endif; ?>
                             </h2>
                             <div class="text dt-mt-3 wow fadeInUp" data-wow-duration="1500ms">
-                                <p><?php echo esc_html($description); ?></p>
+                                <p><?php echo wp_kses_post($description); ?></p>
                             </div>
                         </div>
 
@@ -114,7 +115,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_protect dt_pr
                                         <div class="dt_item_inner wow slideInUp animated" data-wow-delay="<?php echo esc_attr($index * 100); ?>ms" data-wow-duration="1500ms">
                                             <div class="dt_item_icon"><i class="<?php echo esc_attr($item_icon); ?>" aria-hidden="true"></i></div>
                                             <div class="dt_item_holder">
-                                                <h5 class="dt_item_title"><a href="<?php echo $item_url; ?>"><?php echo esc_html($item['title']); ?></a></h5>
+                                                <h5 class="dt_item_title"><a href="<?php echo $item_url; ?>"><?php echo wp_kses_post($item['title']); ?></a></h5>
                                             </div>
                                         </div>
                                     </div>

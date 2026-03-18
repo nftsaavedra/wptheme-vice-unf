@@ -19,6 +19,10 @@
     "sectionSubtitle": {
       "type": "string",
       "default": ""
+    },
+    "textAlign": {
+      "type": "string",
+      "default": "center"
     }
   },
   "supports": {
@@ -26,7 +30,26 @@
     "align": [
       "wide",
       "full"
-    ]
+    ],
+    "color": {
+      "text": true,
+      "background": true,
+      "gradients": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    }
   },
   "textdomain": "viceunf",
   "editorScript": "file:./index.js",

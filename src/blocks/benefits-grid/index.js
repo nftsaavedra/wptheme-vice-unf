@@ -1,13 +1,20 @@
 import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
-import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, TextControl } from '@wordpress/components';
+import { 
+	InnerBlocks, 
+	useBlockProps, 
+	useInnerBlocksProps, 
+	InspectorControls, 
+	BlockControls, 
+	AlignmentControl, 
+	RichText 
+} from '@wordpress/block-editor';
+import { PanelBody, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import metadata from './block.json';
 
 function Edit( { attributes, setAttributes } ) {
-	const { columns, sectionTitle, sectionSubtitle } = attributes;
+	const { columns, sectionTitle, sectionSubtitle, textAlign } = attributes;
 
 	const TEMPLATE = [
 		[ 'viceunf/benefit-card', { title: __( 'Beneficio 1', 'viceunf' ), icon: 'fa-solid fa-rocket' } ],
@@ -17,22 +24,22 @@ function Edit( { attributes, setAttributes } ) {
 
 	const blockProps = useBlockProps( {
 		className: 'viceunf-benefits-grid-editor',
+		style: { '--viceunf-grid-cols': columns }
 	} );
+
+	const innerBlocksProps = useInnerBlocksProps(
+		{ className: 'viceunf-benefits-grid__grid' },
+		{
+			allowedBlocks: [ 'viceunf/benefit-card' ],
+			template: TEMPLATE,
+			orientation: "horizontal"
+		}
+	);
 
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuración de Sección', 'viceunf' ) }>
-					<TextControl
-						label={ __( 'Título de sección', 'viceunf' ) }
-						value={ sectionTitle }
-						onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
-					/>
-					<TextControl
-						label={ __( 'Subtítulo de sección', 'viceunf' ) }
-						value={ sectionSubtitle }
-						onChange={ ( val ) => setAttributes( { sectionSubtitle: val } ) }
-					/>
 					<RangeControl
 						label={ __( 'Columnas', 'viceunf' ) }
 						value={ columns }
@@ -43,26 +50,34 @@ function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 			</InspectorControls>
 
+			<BlockControls>
+				<AlignmentControl
+					value={ textAlign }
+					onChange={ ( nextAlign ) => setAttributes( { textAlign: nextAlign } ) }
+				/>
+			</BlockControls>
+
 			<div { ...blockProps }>
-				{ sectionTitle && (
-					<div style={ { textAlign: 'center', marginBottom: '3.2rem' } }>
-						<h2 style={ { color: '#0e1422', marginBottom: '1rem' } }>{ sectionTitle }</h2>
-						{ sectionSubtitle && <p style={ { color: '#666' } }>{ sectionSubtitle }</p> }
-					</div>
-				) }
-				<div
-					style={ {
-						display: 'grid',
-						gridTemplateColumns: `repeat(${ columns }, 1fr)`,
-						gap: '2.4rem',
-					} }
-				>
-					<InnerBlocks
-						allowedBlocks={ [ 'viceunf/benefit-card' ] }
-						template={ TEMPLATE }
-						orientation="horizontal"
+				<div style={ { textAlign: textAlign, marginBottom: '3.2rem', color: 'inherit' } }>
+					<RichText
+						tagName="h2"
+						className="viceunf-benefits-grid__title"
+						style={ { marginBottom: '1rem' } }
+						value={ sectionTitle }
+						allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+						onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
+						placeholder={ __( 'Escribe el Título de sección...', 'viceunf' ) }
+					/>
+					<RichText
+						tagName="p"
+						className="viceunf-benefits-grid__subtitle"
+						value={ sectionSubtitle }
+						allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
+						onChange={ ( val ) => setAttributes( { sectionSubtitle: val } ) }
+						placeholder={ __( 'Escribe un Subtítulo (opcional)...', 'viceunf' ) }
 					/>
 				</div>
+				<div { ...innerBlocksProps } />
 			</div>
 		</>
 	);
@@ -70,5 +85,5 @@ function Edit( { attributes, setAttributes } ) {
 
 registerBlockType( metadata.name, {
 	edit: Edit,
-	save: () => null,
+	save: () => <InnerBlocks.Content />,
 } );

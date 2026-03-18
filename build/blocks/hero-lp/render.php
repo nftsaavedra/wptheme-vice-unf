@@ -23,6 +23,13 @@ $cta_primary_url   = $attributes['ctaPrimaryUrl'] ?? '';
 $cta_secondary_text = $attributes['ctaSecondaryText'] ?? '';
 $cta_secondary_url  = $attributes['ctaSecondaryUrl'] ?? '';
 
+// Nuevos colores
+$subtitle_color             = $attributes['subtitleColor'] ?? '#ff4700';
+$cta_primary_bg_color       = $attributes['ctaPrimaryBgColor'] ?? '#ff4700';
+$cta_primary_text_color     = $attributes['ctaPrimaryTextColor'] ?? '#ffffff';
+$cta_secondary_border_color = $attributes['ctaSecondaryBorderColor'] ?? '#ffffff';
+$cta_secondary_text_color   = $attributes['ctaSecondaryTextColor'] ?? '#ffffff';
+
 // Limitar la opacidad a un rango seguro.
 $overlay_opacity = max(0, min(1, $overlay_opacity));
 
@@ -67,8 +74,8 @@ $wrapper_attributes = get_block_wrapper_attributes(
         <?php endif; ?>
 
         <?php if ($subtitle) : ?>
-            <p class="viceunf-hero-lp__subtitle">
-                <?php echo esc_html($subtitle); ?>
+            <p class="viceunf-hero-lp__subtitle" style="color: <?php echo esc_attr($subtitle_color); ?>;">
+                <?php echo wp_kses_post($subtitle); ?>
             </p>
         <?php endif; ?>
 
@@ -83,16 +90,18 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 <?php if ($cta_primary_text && $cta_primary_url) : ?>
                     <a
                         href="<?php echo esc_url($cta_primary_url); ?>"
-                        class="dt-btn dt-btn-primary btn--effect-one">
-                        <span class="dt-btn-text"><?php echo esc_html($cta_primary_text); ?></span>
+                        class="dt-btn dt-btn-primary btn--effect-one"
+                        style="background-color: <?php echo esc_attr($cta_primary_bg_color); ?>; color: <?php echo esc_attr($cta_primary_text_color); ?>; border-color: <?php echo esc_attr($cta_primary_bg_color); ?>;">
+                        <span class="dt-btn-text" style="color: inherit;"><?php echo wp_kses_post($cta_primary_text); ?></span>
                     </a>
                 <?php endif; ?>
 
                 <?php if ($cta_secondary_text && $cta_secondary_url) : ?>
                     <a
                         href="<?php echo esc_url($cta_secondary_url); ?>"
-                        class="dt-btn dt-btn-white dt-btn-border">
-                        <span class="dt-btn-text"><?php echo esc_html($cta_secondary_text); ?></span>
+                        class="dt-btn dt-btn-white dt-btn-border"
+                        style="border: 2px solid <?php echo esc_attr($cta_secondary_border_color); ?>; color: <?php echo esc_attr($cta_secondary_text_color); ?>; background: transparent;">
+                        <span class="dt-btn-text" style="color: inherit;"><?php echo wp_kses_post($cta_secondary_text); ?></span>
                     </a>
                 <?php endif; ?>
             </div>

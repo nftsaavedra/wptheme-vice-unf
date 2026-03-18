@@ -6,10 +6,32 @@
   "title": "Galería de Eventos Institucionales",
   "category": "viceunf-blocks",
   "icon": "format-gallery",
-  "description": "Galería de imágenes con Swiper.js. Imagen principal + miniaturas laterales (Desktop) y carrusel táctil (Mobile).",
+  "description": "Galería de imágenes con Swiper.js. Imagen principal con efecto Ken Burns y lista de miniaturas inferior táctil.",
   "supports": {
     "html": false,
-    "align": ["wide", "full"]
+    "align": [
+      "wide",
+      "full"
+    ],
+    "color": {
+      "text": true,
+      "background": true,
+      "gradients": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    }
   },
   "attributes": {
     "images": {

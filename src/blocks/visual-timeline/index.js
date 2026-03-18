@@ -53,5 +53,5 @@ function Edit( { attributes, setAttributes } ) {
 
 registerBlockType( metadata.name, {
 	edit: Edit,
-	save: () => null,
+	save: () => <InnerBlocks.Content />,
 } );

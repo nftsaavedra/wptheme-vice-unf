@@ -7,9 +7,6 @@
   "category": "viceunf-blocks",
   "icon": "clock",
   "description": "Tarjeta individual de sesión o evento con fecha, nombre, horario y location. Solo para usar dentro de Event Schedule.",
-  "parent": [
-    "viceunf/event-schedule"
-  ],
   "attributes": {
     "date": {
       "type": "string",
@@ -34,7 +31,26 @@
   },
   "supports": {
     "html": false,
-    "reusable": false
+    "reusable": false,
+    "color": {
+      "text": true,
+      "background": true,
+      "gradients": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    }
   },
   "textdomain": "viceunf",
   "editorScript": "file:./index.js",

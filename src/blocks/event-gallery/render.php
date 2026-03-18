@@ -25,6 +25,7 @@ $main_options = [
     'fadeEffect' => ['crossFade' => true],
     'speed' => 900,
     'autoplay' => ['delay' => 5000, 'disableOnInteraction' => false],
+    'keyboard' => ['enabled' => true],
     'navigation' => [
         'nextEl' => '.viceunf-event-gallery__next',
         'prevEl' => '.viceunf-event-gallery__prev',
@@ -51,6 +52,10 @@ $thumbs_options = [
         '768' => [
             'slidesPerView' => 4,
             'spaceBetween' => 12,
+        ],
+        '1024' => [
+            'slidesPerView' => 5,
+            'spaceBetween' => 16,
         ]
     ]
 ];
@@ -68,7 +73,7 @@ $thumbs_options = [
                             if (!empty($img['id'])) {
                                 echo wp_get_attachment_image($img['id'], 'large', false, ['class' => 'viceunf-event-gallery__img']);
                             } else {
-                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" class="viceunf-event-gallery__img" />';
+                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" loading="lazy" class="viceunf-event-gallery__img" />';
                             }
                             ?>
                         </div>
@@ -77,11 +82,11 @@ $thumbs_options = [
             </div>
 
             <!-- Basic Navigation for stability -->
-            <button type="button" class="viceunf-event-gallery__nav viceunf-event-gallery__prev">
-                <i class="fas fa-chevron-left"></i>
+            <button type="button" class="viceunf-event-gallery__nav viceunf-event-gallery__prev" aria-label="<?php esc_attr_e('Imagen anterior', 'viceunf'); ?>">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </button>
-            <button type="button" class="viceunf-event-gallery__nav viceunf-event-gallery__next">
-                <i class="fas fa-chevron-right"></i>
+            <button type="button" class="viceunf-event-gallery__nav viceunf-event-gallery__next" aria-label="<?php esc_attr_e('Siguiente imagen', 'viceunf'); ?>">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
             </button>
         </div>
 
@@ -95,7 +100,7 @@ $thumbs_options = [
                             if (!empty($img['id'])) {
                                 echo wp_get_attachment_image($img['id'], 'medium', false, ['class' => 'viceunf-event-gallery__thumb-img']);
                             } else {
-                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" class="viceunf-event-gallery__thumb-img" />';
+                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" loading="lazy" class="viceunf-event-gallery__thumb-img" />';
                             }
                             ?>
                         </div>

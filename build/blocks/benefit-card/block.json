@@ -6,14 +6,15 @@
   "title": "ViceUnf - Tarjeta de Beneficio",
   "category": "viceunf-blocks",
   "icon": "tag",
-  "description": "Tarjeta individual con ícono FontAwesome, título, descripción y degradado configurable. Solo para usar dentro del bloque Benefits Grid.",
-  "parent": [
-    "viceunf/benefits-grid"
-  ],
+  "description": "Tarjeta individual con ícono FontAwesome, título, descripción y degradado configurable. Se puede usar libremente.",
   "attributes": {
     "icon": {
       "type": "string",
       "default": "fa-solid fa-star"
+    },
+    "iconColor": {
+      "type": "string",
+      "default": "#ea5a0b"
     },
     "title": {
       "type": "string",
@@ -25,16 +26,34 @@
     },
     "gradientStart": {
       "type": "string",
-      "default": "#1e2a4a"
+      "default": "#1e293b"
     },
     "gradientEnd": {
       "type": "string",
-      "default": "#0e1422"
+      "default": "#0f172a"
     }
   },
   "supports": {
+    "color": {
+      "text": true,
+      "background": true
+    },
     "html": false,
-    "reusable": false
+    "reusable": false,
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    }
   },
   "textdomain": "viceunf",
   "editorScript": "file:./index.js",

@@ -25,20 +25,21 @@ $wrapper_attributes = get_block_wrapper_attributes(
         'style'                   => '--viceunf-grid-cols: ' . $columns . ';',
     )
 );
+$text_align = $attributes['textAlign'] ?? 'center';
 ?>
 <section <?php echo $wrapper_attributes; ?>>
     <div class="dt-container">
 
         <?php if ($section_title || $section_subtitle) : ?>
-            <div class="viceunf-benefits-grid__header">
+            <div class="viceunf-benefits-grid__header" style="text-align: <?php echo esc_attr($text_align); ?>; margin-bottom: 3.2rem;">
                 <?php if ($section_title) : ?>
-                    <h2 class="viceunf-benefits-grid__title">
-                        <?php echo esc_html($section_title); ?>
+                    <h2 class="viceunf-benefits-grid__title" style="margin-bottom: 1rem;">
+                        <?php echo wp_kses_post($section_title); ?>
                     </h2>
                 <?php endif; ?>
                 <?php if ($section_subtitle) : ?>
                     <p class="viceunf-benefits-grid__subtitle">
-                        <?php echo esc_html($section_subtitle); ?>
+                        <?php echo wp_kses_post($section_subtitle); ?>
                     </p>
                 <?php endif; ?>
             </div>

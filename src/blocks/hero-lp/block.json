@@ -47,11 +47,52 @@
     "ctaSecondaryUrl": {
       "type": "string",
       "default": ""
+    },
+    "subtitleColor": {
+      "type": "string",
+      "default": "#ff4700"
+    },
+    "ctaPrimaryBgColor": {
+      "type": "string",
+      "default": "#ff4700"
+    },
+    "ctaPrimaryTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "ctaSecondaryBorderColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "ctaSecondaryTextColor": {
+      "type": "string",
+      "default": "#ffffff"
     }
   },
   "supports": {
     "html": false,
-    "align": ["full"]
+    "align": [
+      "full"
+    ],
+    "color": {
+      "text": true,
+      "background": true,
+      "gradients": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    }
   },
   "textdomain": "viceunf",
   "editorScript": "file:./index.js",

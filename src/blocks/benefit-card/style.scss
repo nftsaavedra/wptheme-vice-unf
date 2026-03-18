@@ -4,20 +4,21 @@
 	border-radius: 1.2rem;
 	padding: 3.2rem 2.4rem;
 	@include mq(sm) {
-		padding: 1.5rem;
+		padding: 2rem;
 	}
 	overflow: hidden;
 	transition: var(--dt-transition);
-	border: 1px solid rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.05); // Less solid overall
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15), inset -1px -1px 0px rgba(0, 0, 0, 0.2); // Premium glassmorphism light/dark edge
 
 	// Efecto glassmorphism en la capa interna.
 	&::before {
 		content: '';
 		position: absolute;
 		inset: 0;
-		background: rgba(255, 255, 255, 0.04);
-		backdrop-filter: blur(4px);
-		-webkit-backdrop-filter: blur(4px);
+		background: rgba(255, 255, 255, 0.03);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 		border-radius: inherit;
 		pointer-events: none;
 	}
@@ -25,11 +26,20 @@
 	@media (hover: hover) and (prefers-reduced-motion: no-preference) {
 		&:hover {
 			transform: translateY(-6px);
-			box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+			box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.2), inset -1px -1px 0px rgba(0, 0, 0, 0.2), 0 2rem 4rem rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.15); // Slightly stronger highlight
+
+            // Icon hover micro-animation
+            .viceunf-benefit-card__icon-wrap i {
+                transform: scale(1.15) rotate(5deg);
+                color: var(--dt-whi-color);
+            }
 		}
 	}
 
 	&__icon-wrap {
+		position: relative;
+		z-index: 1;
 		width: 6rem;
 		height: 6rem;
 		border-radius: 50%;
@@ -41,12 +51,15 @@
 
 		i {
 			font-size: 2.4rem;
-			color: var(--dt-pri-color);
+			color: var(--dt-pri-color, #ea5a0b);
+            transition: transform 0.3s ease, color 0.3s ease;
 		}
 	}
 
 	&__title {
-		color: var(--dt-whi-color);
+		position: relative;
+		z-index: 1;
+		color: var(--dt-whi-color, #ffffff);
 		font-size: 2rem;
 		font-weight: 700;
 		margin-bottom: 1.2rem;
@@ -54,10 +67,11 @@
 	}
 
 	&__desc {
+		position: relative;
+		z-index: 1;
 		color: rgba(255, 255, 255, 0.75);
 		font-size: 1.5rem;
 		line-height: 1.7;
 		margin-bottom: 0;
 	}
 }
-

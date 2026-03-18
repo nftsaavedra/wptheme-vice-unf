@@ -3,6 +3,10 @@ import {
 	InspectorControls,
 	MediaUpload,
 	MediaUploadCheck,
+	RichText,
+	BlockControls,
+	AlignmentControl,
+	PanelColorSettings
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -31,6 +35,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		ctaPrimaryUrl,
 		ctaSecondaryText,
 		ctaSecondaryUrl,
+		subtitleColor,
+		ctaPrimaryBgColor,
+		ctaPrimaryTextColor,
+		ctaSecondaryBorderColor,
+		ctaSecondaryTextColor,
 	} = attributes;
 
 	const hasBackground = backgroundImage?.url || backgroundVideo;
@@ -142,36 +151,12 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				{/* ── Contenido ── */}
-				<PanelBody title={ __( 'Contenido', 'viceunf' ) } initialOpen={ true }>
-					<TextControl
-						label={ __( 'Título principal (H1)', 'viceunf' ) }
-						value={ title }
-						onChange={ ( val ) => setAttributes( { title: val } ) }
-					/>
-					<TextControl
-						label={ __( 'Subtítulo / Etiqueta', 'viceunf' ) }
-						value={ subtitle }
-						onChange={ ( val ) => setAttributes( { subtitle: val } ) }
-					/>
-				</PanelBody>
-
-				{/* ── CTAs ── */}
-				<PanelBody title={ __( 'Botones CTA', 'viceunf' ) } initialOpen={ false }>
-					<TextControl
-						label={ __( 'Texto botón primario', 'viceunf' ) }
-						value={ ctaPrimaryText }
-						onChange={ ( val ) => setAttributes( { ctaPrimaryText: val } ) }
-					/>
+				<PanelBody title={ __( 'Enlaces de Botones', 'viceunf' ) } initialOpen={ true }>
 					<TextControl
 						label={ __( 'URL botón primario', 'viceunf' ) }
 						value={ ctaPrimaryUrl }
 						onChange={ ( val ) => setAttributes( { ctaPrimaryUrl: val } ) }
 						type="url"
-					/>
-					<TextControl
-						label={ __( 'Texto botón secundario (opcional)', 'viceunf' ) }
-						value={ ctaSecondaryText }
-						onChange={ ( val ) => setAttributes( { ctaSecondaryText: val } ) }
 					/>
 					<TextControl
 						label={ __( 'URL botón secundario (opcional)', 'viceunf' ) }
@@ -180,6 +165,39 @@ export default function Edit( { attributes, setAttributes } ) {
 						type="url"
 					/>
 				</PanelBody>
+
+				{/* ── Colores Avanzados ── */}
+				<PanelColorSettings
+					title={ __( 'Colores de Elementos', 'viceunf' ) }
+					initialOpen={ false }
+					colorSettings={ [
+						{
+							value: subtitleColor,
+							onChange: ( val ) => setAttributes( { subtitleColor: val } ),
+							label: __( 'Color del Subtítulo', 'viceunf' ),
+						},
+						{
+							value: ctaPrimaryBgColor,
+							onChange: ( val ) => setAttributes( { ctaPrimaryBgColor: val } ),
+							label: __( 'Fondo de Botón Primario', 'viceunf' ),
+						},
+						{
+							value: ctaPrimaryTextColor,
+							onChange: ( val ) => setAttributes( { ctaPrimaryTextColor: val } ),
+							label: __( 'Texto de Botón Primario', 'viceunf' ),
+						},
+						{
+							value: ctaSecondaryBorderColor,
+							onChange: ( val ) => setAttributes( { ctaSecondaryBorderColor: val } ),
+							label: __( 'Borde de Botón Secundario', 'viceunf' ),
+						},
+						{
+							value: ctaSecondaryTextColor,
+							onChange: ( val ) => setAttributes( { ctaSecondaryTextColor: val } ),
+							label: __( 'Texto de Botón Secundario', 'viceunf' ),
+						},
+					] }
+				/>
 			</InspectorControls>
 
 			{/* ── Vista del editor ── */}
@@ -216,25 +234,35 @@ export default function Edit( { attributes, setAttributes } ) {
 							style={ { maxHeight: '80px', marginBottom: '1.6rem' } }
 						/>
 					) }
-					{ subtitle && (
-						<p style={ { color: '#ff4700', fontWeight: 700, fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.8rem' } }>
-							{ subtitle }
-						</p>
-					) }
-					<h1 style={ { color: '#ffffff', fontSize: '3.6rem', fontWeight: 800, marginBottom: '1.6rem', margin: '0 0 1.6rem' } }>
-						{ title || __( '[ Título del programa ]', 'viceunf' ) }
-					</h1>
+					<RichText
+						tagName="p"
+						value={ subtitle }
+						onChange={ ( val ) => setAttributes( { subtitle: val } ) }
+						placeholder={ __( 'Subtítulo del Hero...', 'viceunf' ) }
+						style={ { color: subtitleColor, fontWeight: 700, fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.8rem', outline: 'none' } }
+					/>
+					<RichText
+						tagName="h1"
+						value={ title }
+						onChange={ ( val ) => setAttributes( { title: val } ) }
+						placeholder={ __( '[ Título principal del programa ]', 'viceunf' ) }
+						style={ { color: '#ffffff', fontSize: '3.6rem', fontWeight: 800, marginBottom: '1.6rem', margin: '0 0 1.6rem', outline: 'none' } }
+					/>
 					<div style={ { display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' } }>
-						{ ctaPrimaryText && (
-							<span style={ { background: '#ff4700', color: '#fff', padding: '1.2rem 3rem', fontWeight: 700, fontSize: '1.5rem', borderRadius: '2px' } }>
-								{ ctaPrimaryText }
-							</span>
-						) }
-						{ ctaSecondaryText && (
-							<span style={ { border: '2px solid #fff', color: '#fff', padding: '1.2rem 3rem', fontWeight: 700, fontSize: '1.5rem', borderRadius: '2px' } }>
-								{ ctaSecondaryText }
-							</span>
-						) }
+						<RichText
+							tagName="span"
+							value={ ctaPrimaryText }
+							onChange={ ( val ) => setAttributes( { ctaPrimaryText: val } ) }
+							placeholder={ __( 'Texto CTA Principal', 'viceunf' ) }
+							style={ { background: ctaPrimaryBgColor, color: ctaPrimaryTextColor, padding: '1.2rem 3rem', fontWeight: 700, fontSize: '1.5rem', borderRadius: '4px', outline: 'none', cursor: 'text' } }
+						/>
+						<RichText
+							tagName="span"
+							value={ ctaSecondaryText }
+							onChange={ ( val ) => setAttributes( { ctaSecondaryText: val } ) }
+							placeholder={ __( 'Texto CTA Secundario', 'viceunf' ) }
+							style={ { border: `2px solid ${ctaSecondaryBorderColor}`, color: ctaSecondaryTextColor, padding: '1.2rem 3rem', fontWeight: 700, fontSize: '1.5rem', borderRadius: '4px', outline: 'none', cursor: 'text' } }
+						/>
 					</div>
 				</div>
 			</div>
