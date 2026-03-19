@@ -33,4 +33,23 @@
   --viceunf-font-md: var(--wp--preset--font-size--md);
   --viceunf-font-lg: var(--wp--preset--font-size--lg);
   --viceunf-font-xl: var(--wp--preset--font-size--xl);
+
+  /* ==========================================================================
+     Spacing Tokens (Mapped from theme.json spacingScale)
+     WP genera: --wp--preset--spacing--10 ... --wp--preset--spacing--70
+     ========================================================================== */
+  --viceunf-space-xs:  var(--wp--preset--spacing--10); /* ~0.44rem  */
+  --viceunf-space-sm:  var(--wp--preset--spacing--20); /* ~0.67rem  */
+  --viceunf-space-md:  var(--wp--preset--spacing--30); /* ~1rem      */
+  --viceunf-space-lg:  var(--wp--preset--spacing--40); /* ~1.5rem    */
+  --viceunf-space-xl:  var(--wp--preset--spacing--50); /* ~2.25rem   */
+  --viceunf-space-2xl: var(--wp--preset--spacing--60); /* ~3.38rem   */
+  --viceunf-space-3xl: var(--wp--preset--spacing--70); /* ~5.06rem   */
+
+  /* ==========================================================================
+     Border Radius Tokens (Mapped from theme.json border.radiusSizes)
+     ========================================================================== */
+  --viceunf-radius-sm: 4px;
+  --viceunf-radius-md: 8px;
+  --viceunf-radius-lg: 16px;
 }

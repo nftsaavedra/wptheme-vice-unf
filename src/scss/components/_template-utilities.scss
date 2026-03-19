@@ -1,0 +1,65 @@
+// =================================================================
+// Unified Content Typography (FSE-Ready Fluid System)
+// Replaces inline styles across single.php, page.php, etc.
+// Uses design tokens from _tokens.scss for full FSE compatibility.
+// =================================================================
+
+.viceunf-entry-content {
+  font-size: var(--viceunf-font-base);
+  line-height: 1.8;
+  color: #334155;
+}
+
+.viceunf-post-meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  color: #64748b;
+  font-size: var(--viceunf-font-sm);
+
+  i {
+    color: var(--dt-pri-color);
+    margin-right: 0.5rem;
+  }
+}
+
+.viceunf-post-footer {
+  margin-top: clamp(1.5rem, 2vw, 3rem);
+  padding-top: clamp(1rem, 1.5vw, 2rem);
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.viceunf-tag-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+
+  i {
+    color: var(--dt-pri-color);
+  }
+}
+
+.viceunf-comments-link {
+  color: var(--dt-sec-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: var(--dt-pri-color);
+    text-decoration: none;
+  }
+
+  i {
+    color: var(--dt-pri-color);
+    margin-right: 0.4rem;
+  }
+}

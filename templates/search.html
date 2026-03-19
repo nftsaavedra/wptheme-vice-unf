@@ -1,0 +1,43 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
+<main class="wp-block-group">
+
+    <!-- wp:group {"layout":{"type":"constrained"}} -->
+    <div class="wp-block-group">
+        <!-- wp:heading {"level":1} -->
+        <h1>Resultados de búsqueda</h1>
+        <!-- /wp:heading -->
+        <!-- wp:search {"label":"Buscar","placeholder":"Buscar...","buttonText":"Buscar","buttonPosition":"button-outside"} /-->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- wp:query {"query":{"perPage":9,"offset":0,"postType":"post","inherit":true}} -->
+    <div class="wp-block-query">
+
+        <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+            <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9"} /-->
+            <!-- wp:post-title {"isLink":true,"level":3} /-->
+            <!-- wp:post-excerpt {"moreText":"Leer más"} /-->
+        <!-- /wp:post-template -->
+
+        <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
+            <!-- wp:query-pagination-previous /-->
+            <!-- wp:query-pagination-numbers /-->
+            <!-- wp:query-pagination-next /-->
+        <!-- /wp:query-pagination -->
+
+        <!-- wp:query-no-results -->
+            <!-- wp:paragraph {"align":"center"} -->
+            <p class="has-text-align-center">No se encontraron resultados. Intenta con otros términos.</p>
+            <!-- /wp:paragraph -->
+            <!-- wp:search {"label":"Buscar","placeholder":"Buscar de nuevo...","buttonText":"Buscar","buttonPosition":"button-outside"} /-->
+        <!-- /wp:query-no-results -->
+
+    </div>
+    <!-- /wp:query -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

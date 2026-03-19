@@ -25,7 +25,7 @@ get_header();
                     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                         <div class="viceunf-card-surface">
 
-                            <div class="dt_page_content entry-content" style="font-size: 1.6rem; line-height: 1.8; color: #334155;">
+                            <div class="dt_page_content entry-content viceunf-entry-content">
                                 <?php
                                 the_content();
                                 wp_link_pages(array(

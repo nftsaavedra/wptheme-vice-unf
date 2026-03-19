@@ -38,24 +38,24 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                                         <header class="viceunf-card-header">
 
                                             <?php if ($show_date || $show_author || ($show_categories && has_category())) : ?>
-                                                <div class="meta" style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; color: #64748b; font-size: 1.4rem;">
+                                                <div class="meta viceunf-post-meta">
                                                     <?php if ($show_categories && has_category()) : ?>
                                                         <div class="catetag viceunf-card-chip">
-                                                            <i class="fas fa-folder dt-mr-1" aria-hidden="true" style="margin-right: 0.5rem;"></i>
+                                                            <i class="fas fa-folder dt-mr-1" aria-hidden="true"></i>
                                                             <?php the_category(', '); ?>
                                                         </div>
                                                     <?php endif; ?>
 
                                                     <?php if ($show_date) : ?>
                                                         <div class="date">
-                                                            <i class="far fa-calendar-alt dt-mr-2" aria-hidden="true" style="color: var(--dt-pri-color); margin-right: 0.5rem;"></i>
+                                                            <i class="far fa-calendar-alt dt-mr-2" aria-hidden="true"></i>
                                                             <?php echo get_the_date(); ?>
                                                         </div>
                                                     <?php endif; ?>
 
                                                     <?php if ($show_author) : ?>
                                                         <div class="author">
-                                                            <i class="far fa-user dt-mr-2" aria-hidden="true" style="color: var(--dt-pri-color); margin-right: 0.5rem;"></i>
+                                                            <i class="far fa-user dt-mr-2" aria-hidden="true"></i>
                                                             <?php the_author(); ?>
                                                         </div>
                                                     <?php endif; ?>
@@ -67,7 +67,7 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
 
 
 
-                                            <div class="content" style="font-size: 1.6rem; line-height: 1.8; color: #334155;">
+                                            <div class="content viceunf-entry-content">
                                                 <?php
                                                 the_content();
                                                 wp_link_pages(array(
@@ -82,10 +82,10 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                                             $has_comments_to_show = $show_comments && (comments_open() || get_comments_number());
                                             ?>
                                             <?php if ($has_tags_to_show || $has_comments_to_show) : ?>
-                                                <footer class="meta_bottom" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                                <footer class="meta_bottom viceunf-post-footer">
                                                     <?php if ($has_tags_to_show) : ?>
-                                                        <div class="tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                                            <i class="fas fa-tags dt-mr-1" aria-hidden="true" style="color: var(--dt-pri-color); align-self: center;"></i>
+                                                        <div class="tags viceunf-tag-list">
+                                                            <i class="fas fa-tags dt-mr-1" aria-hidden="true"></i>
                                                             <?php
                                                             $tags = get_the_tags();
                                                             if ($tags) {
@@ -100,8 +100,8 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
 
                                                     <?php if ($has_comments_to_show) : ?>
                                                         <div class="comments_count">
-                                                            <a href="#comments" class="count" style="color: var(--dt-sec-color); font-weight: 600;">
-                                                                <i class="far fa-comment dt-mr-1" aria-hidden="true" style="color: var(--dt-pri-color);"></i>
+                                                            <a href="#comments" class="count viceunf-comments-link">
+                                                                <i class="far fa-comment dt-mr-1" aria-hidden="true"></i>
                                                                 <?php echo get_comments_number(); ?> <?php esc_html_e('Comentarios', 'viceunf'); ?>
                                                             </a>
                                                         </div>
