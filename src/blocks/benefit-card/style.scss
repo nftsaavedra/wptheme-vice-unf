@@ -2,10 +2,7 @@
 .viceunf-benefit-card {
 	position: relative;
 	border-radius: 1.2rem;
-	padding: clamp(2.4rem, 3vw, 3.2rem) clamp(2rem, 2.5vw, 2.4rem);
-	@include mq(sm) {
-		padding: 2rem;
-	}
+	padding: clamp(2rem, 4vw, 3.2rem) clamp(1.5rem, 3vw, 2.4rem);
 	overflow: hidden;
 	transition: var(--dt-transition);
 	max-width: 420px;

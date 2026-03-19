@@ -10,17 +10,12 @@
     margin-bottom: 2.5rem;
 
     h5.dt-partner-title {
-      font-size: 1.5rem;
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem);
       font-weight: 700;
       color: var(--dt-sec-color, #0b2346);
-      padding: 0 1.2rem;
+      padding: 0 clamp(0.5rem, 2vw, 1.2rem);
       margin: 0;
       text-align: center;
-
-      @include mq(sm) {
-        font-size: 1.25rem;
-        padding: 0 0.8rem;
-      }
     }
 
     .dt-partner-line {
@@ -32,8 +27,8 @@
     .dt-partner-btn-classic {
       position: static;
       margin: 0;
-      width: 32px;
-      height: 32px;
+      width: clamp(40px, 5vw, 48px);
+      height: clamp(40px, 5vw, 48px);
       background-color: var(--viceunf-surface-alt, #f1f5f9);
       color: var(--dt-sec-color, #0b2346);
       border-radius: 50%;

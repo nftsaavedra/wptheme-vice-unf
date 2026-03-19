@@ -25,7 +25,7 @@
 		do_action('viceunf_site_main_header');
 
 		// Theme Breadcrumb
-		if (!is_page_template('page-templates/frontpage.php')) {
+		if (!is_page_template('page-templates/frontpage.php') && !is_page_template('page-templates/pagebuilder.php')) {
 			get_template_part('/template-parts/site', 'breadcrumb');
 		}
 		?>
