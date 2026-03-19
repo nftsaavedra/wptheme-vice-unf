@@ -2,8 +2,8 @@
 /*
 Theme Name: 	   ViceUnf
 Text Domain: 	   viceunf
-Version:            0.0.1
-Tested up to:       6.8
+Version:            1.1.0
+Tested up to:       7.0
 Requires at least:  4.7
 Requires PHP:       7.4
 Author:             @nftsaavedra
@@ -2765,6 +2765,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
 .dt_service--eight .dt_item_content {
   display: -webkit-box;
   -webkit-line-clamp: 2; /* Límite de 2 líneas descriptivas para no romper la caja */
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

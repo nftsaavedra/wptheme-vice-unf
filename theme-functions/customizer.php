@@ -15,7 +15,7 @@ function viceunf_customize_register($wp_customize)
     // --- Panel padre: VPIN ---
     $wp_customize->add_panel('viceunf_panel', array(
         'title'       => __('VPIN — Configuración del Tema', 'viceunf'),
-        'description' => __('Opciones de personalización del tema VPIN — Vicepresidencia de Investigación, UNF.', 'viceunf'),
+        'description' => __('Opciones de personalización del tema VPIN — Vicepresidencia de Investigación, UNF. <strong>Nota WP 7.0:</strong> Colores, tipografía y espaciado también pueden gestionarse visualmente en <a href="' . admin_url('site-editor.php?path=/styles') . '">Apariencia → Editor de Sitio → Estilos</a> sin necesidad de recargar.', 'viceunf'),
         'priority'    => 30,
     ));
 

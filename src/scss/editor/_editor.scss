@@ -1,0 +1,93 @@
+// =================================================================
+// ViceUnf - Editor Styles (FSE iframe-aware)
+// Compilado a: assets/css/editor-style.css
+// Contexto: Gutenberg editor (post editor) + Site Editor (FSE iframe)
+// Fuente de verdad: tokens de theme.json vía --wp--preset--
+// =================================================================
+
+// El editor FSE usa un iframe que aísla los estilos del admin.
+// Estas reglas se inyectan DENTRO del iframe via add_editor_style().
+
+.editor-styles-wrapper {
+  // Fondo y tipografía base
+  background-color: var(--wp--preset--color--viceunf-light, #fefbfa);
+  font-family: inherit;
+  font-size: var(--wp--preset--font-size--base, 1.15rem);
+  line-height: 1.8;
+  color: #334155;
+
+  // Tipografía de encabezados en el editor — coherente con el frontend
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--wp--preset--color--viceunf-primary, #122a61);
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  h1 { font-size: var(--wp--preset--font-size--xl, 2.75rem); }
+  h2 { font-size: var(--wp--preset--font-size--lg, 2rem); }
+  h3 { font-size: var(--wp--preset--font-size--md, 1.45rem); }
+
+  // Párrafos
+  p {
+    font-size: var(--wp--preset--font-size--base, 1.15rem);
+    max-width: 75ch;
+  }
+
+  // Links
+  a {
+    color: var(--wp--preset--color--viceunf-secondary, #ea5a0b);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--wp--preset--color--viceunf-primary, #122a61);
+    }
+  }
+
+  // Separadores horizontales
+  hr {
+    border-color: var(--wp--preset--color--viceunf-secondary, #ea5a0b);
+    border-width: 2px;
+    margin-block: var(--wp--preset--spacing--50, 2.25rem);
+  }
+
+  // Bloques básicos con border-radius de tema
+  .wp-block-image img,
+  .wp-block-cover {
+    border-radius: 8px; // --viceunf-radius-md
+  }
+
+  // Botones en el editor
+  .wp-block-button__link {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.75em 1.5em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+// =================================================================
+// Preview del bloque ViceUnf Recent Posts en el editor
+// =================================================================
+.viceunf-editor-recent-posts-preview {
+  background: var(--wp--preset--color--white, #fff);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px; // --viceunf-radius-md
+  padding: var(--wp--preset--spacing--50, 2.25rem);
+  border-left: 4px solid var(--wp--preset--color--viceunf-secondary, #ea5a0b);
+}
+
+// =================================================================
+// Ayudas visuales para el Site Editor (iframe context)
+// =================================================================
+
+// Indicador de "ancho completo" en el editor
+.alignfull {
+  margin-inline: calc(-1 * var(--wp--style--root--padding-left, 2rem));
+  width: calc(100% + 2 * var(--wp--style--root--padding-left, 2rem));
+}
+
+// Asegurar que los template parts sean visibles en el editor
+.wp-block-template-part {
+  outline: 2px dashed rgba(18, 42, 97, 0.2); // viceunf-primary con opacidad
+  outline-offset: 2px;
+}
