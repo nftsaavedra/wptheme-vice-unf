@@ -38,7 +38,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
         style="border-left-color: <?php echo esc_attr($accent_color); ?>;">
         <?php if ($title) : ?>
             <h3 class="viceunf-timeline-step__title">
-                <?php echo esc_html($title); ?>
+                <?php echo wp_kses_post($title); ?>
             </h3>
         <?php endif; ?>
         <?php if ($description) : ?>

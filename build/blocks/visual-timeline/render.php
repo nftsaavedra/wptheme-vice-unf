@@ -19,7 +19,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
     <div class="dt-container">
         <?php if ($section_title) : ?>
             <h2 class="viceunf-visual-timeline__title">
-                <?php echo esc_html($section_title); ?>
+                <?php echo wp_kses_post($section_title); ?>
             </h2>
         <?php endif; ?>
         <div class="viceunf-visual-timeline__track">

@@ -60,7 +60,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
         <?php elseif (!empty($bullet_points)) : ?>
             <ul class="viceunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'viceunf'); ?>">
                 <?php foreach ($bullet_points as $point) : ?>
-                    <li><?php echo esc_html($point); ?></li>
+                    <li><?php echo wp_kses_post($point); ?></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>

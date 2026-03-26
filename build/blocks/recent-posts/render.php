@@ -25,7 +25,7 @@ if (class_exists('\ViceUnf\Core\Service\PostService')) {
 ?>
 <div <?php echo $wrapper_attributes; ?>>
     <?php if (! empty($title)) : ?>
-        <h4 class="widget-title"><?php echo esc_html($title); ?></h4>
+        <h4 class="widget-title"><?php echo wp_kses_post($title); ?></h4>
     <?php endif; ?>
 
     <?php if ($recent_posts->have_posts()) : ?>

@@ -80,4 +80,7 @@ add_action('init', function (): void {
             return ob_get_clean();
         },
     ]);
+
+    // 5. Bloque Dinámico: Organigrama Jerárquico (React + PHP)
+    register_block_type(get_template_directory() . '/build/blocks/organigrama');
 });
