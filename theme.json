@@ -198,6 +198,16 @@
     {
       "name": "404",
       "title": "Página 404"
+    },
+    {
+      "name": "single-documento",
+      "title": "Documento Individual",
+      "postTypes": ["reglamento", "documento"]
+    },
+    {
+      "name": "single-evento",
+      "title": "Evento Individual",
+      "postTypes": ["evento"]
     }
   ]
 }

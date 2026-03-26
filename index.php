@@ -12,7 +12,7 @@
 get_header();
 ?>
 
-<main id="main-content" class="site-main dt-py-default viceunf-bg-canvas">
+<section class="dt-py-default viceunf-bg-canvas">
     <div class="dt-container">
         <?php
         if (have_posts()) :
@@ -26,7 +26,7 @@ get_header();
         endif;
         ?>
     </div>
-</main>
+</section>
 
 <?php
 get_footer();

@@ -49,3 +49,6 @@ $viceunf_files = [
 foreach ($viceunf_files as $viceunf_file) {
     require_once $viceunf_functions_path . $viceunf_file;
 }
+
+// FSE Dynamic Blocks — WordPress 7.0
+require_once get_stylesheet_directory() . '/inc/fse-blocks.php';

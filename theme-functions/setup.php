@@ -13,7 +13,7 @@ class Setup
         add_action('widgets_init', [$this, 'register_sidebars']);
         add_filter('block_categories_all', [$this, 'register_block_category']);
         add_action('init', [$this, 'register_blocks']);
-        add_filter('single_template', [$this, 'document_single_template']);
+        // Filtro single_template eliminado — FSE resuelve la jerarquía via templates/single-{post_type}.html
         add_action('init', [$this, 'cleanup_head']);
         add_action('wp_head', [$this, 'preload_lcp_image'], 1);
         add_filter('wp_get_attachment_image_attributes', [$this, 'disable_lazy_load_lcp'], 10, 3);
@@ -62,10 +62,7 @@ class Setup
         add_editor_style('assets/css/editor-style.css');
         add_theme_support('woocommerce');
 
-        // --- FSE Hybrid Mode (WordPress 6.0+) ---
-        // Activa el Site Editor sin abandonar las plantillas PHP.
-        // Los archivos /templates/*.html y /parts/*.html coexisten
-        // con header.php, footer.php y los page-templates/*.php existentes.
+        // --- FSE Block Theme (WordPress 7.0) ---
         add_theme_support('block-templates');
         add_theme_support('block-template-parts');
 

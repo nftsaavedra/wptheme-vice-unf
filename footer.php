@@ -9,8 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 ?>
-        </div><!-- .site-content -->
-    </div><!-- .site-content-inner -->
+    </div><!-- #content .site-content -->
 
     <footer id="dt_footer" class="dt_footer dt_footer--one">
         <?php do_action( 'viceunf_footer_widget' ); ?>
@@ -18,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </footer>
 
     <?php do_action( 'viceunf_top_scroller' ); ?>
-</div><!-- .dt-site-wrapper -->
+</div><!-- #page .site -->
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -16,7 +16,7 @@
   flex-wrap: wrap;
   align-items: center;
   color: #64748b;
-  font-size: var(--viceunf-font-sm);
+  font-size: clamp(1.4rem, 1.8vw, 1.6rem);
 
   i {
     color: var(--dt-pri-color);
@@ -62,4 +62,122 @@
     color: var(--dt-pri-color);
     margin-right: 0.4rem;
   }
+}
+
+/* =================================================================
+   Breadcrumb Height Override
+   Framework sets 12rem padding which is disproportionate.
+   This reduces it to a proportional height.
+================================================================= */
+#dt_pagetitle.dt_pagetitle {
+  padding: clamp(10rem, 12vw, 15rem) 0;
+  margin-top: 0 !important;
+}
+
+/* =================================================================
+   Entry Content Heading Hierarchy (Single Post)
+   Ensures proper spacing and sizing inside the_content() output
+================================================================= */
+.viceunf-entry-content {
+  h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--dt-sec-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--dt-sec-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.35;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--viceunf-radius-md, 8px);
+    margin: 1.5rem 0;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--dt-pri-color);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: rgba(0, 121, 78, 0.04);
+    border-radius: 0 var(--viceunf-radius-md, 8px) var(--viceunf-radius-md, 8px) 0;
+    font-style: italic;
+    color: #475569;
+  }
+
+  ul, ol {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+}
+
+/* =================================================================
+   Pagination Styles
+================================================================= */
+.dt_pagination,
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+
+  .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4rem;
+    height: 4rem;
+    padding: 0 1.2rem;
+    border-radius: var(--viceunf-radius-md, 8px);
+    background: #ffffff;
+    color: var(--dt-sec-color);
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background: var(--dt-pri-color);
+      color: #ffffff;
+      border-color: var(--dt-pri-color);
+    }
+
+    &.current {
+      background: var(--dt-pri-color);
+      color: #ffffff;
+      border-color: var(--dt-pri-color);
+    }
+  }
+}
+
+/* =================================================================
+   Single Post Entry Title (H2)
+   Estilos fluidos para jerarquizar por debajo del Hero Breadcrumb (H1)
+================================================================= */
+.viceunf-card-header .entry-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--dt-pri-color);
+  line-height: 1.3;
+  margin-top: 0;
 }

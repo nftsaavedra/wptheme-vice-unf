@@ -1,10 +1,43 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group">
-    <!-- wp:post-title {"level":1} /-->
-    <!-- wp:post-content /-->
-</main>
+<!-- wp:viceunf/site-breadcrumb /-->
+
+<!-- wp:group {"className":"dt-py-default viceunf-bg-canvas","layout":{"type":"default"}} -->
+<div class="wp-block-group dt-py-default viceunf-bg-canvas">
+
+	<!-- wp:group {"className":"dt-container","layout":{"type":"default"}} -->
+	<div class="wp-block-group dt-container">
+
+		<!-- wp:group {"className":"dt-row dt-g-5","layout":{"type":"default"}} -->
+		<div class="wp-block-group dt-row dt-g-5">
+
+			<!-- wp:group {"className":"dt-col-lg-8 dt-col-md-12 dt-col-12","layout":{"type":"default"}} -->
+			<div class="wp-block-group dt-col-lg-8 dt-col-md-12 dt-col-12">
+
+				<!-- wp:group {"className":"viceunf-card-surface","layout":{"type":"default"}} -->
+				<div class="wp-block-group viceunf-card-surface">
+					<!-- wp:group {"className":"dt_page_content entry-content viceunf-entry-content dt-p-4","layout":{"type":"default"}} -->
+					<div class="wp-block-group dt_page_content entry-content viceunf-entry-content dt-p-4">
+						<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+					</div>
+					<!-- /wp:group -->
+				</div>
+				<!-- /wp:group -->
+
+				<!-- wp:post-comments-form /-->
+
+			</div>
+			<!-- /wp:group -->
+
+			<!-- wp:viceunf/site-sidebar /-->
+
+		</div>
+		<!-- /wp:group -->
+
+	</div>
+	<!-- /wp:group -->
+
+</div>
 <!-- /wp:group -->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

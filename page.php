@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<div id="content" class="site-content dt-py-default viceunf-bg-canvas">
+<div class="dt-py-default viceunf-bg-canvas">
     <div class="dt-container">
         <div class="dt-row dt-g-5">
             <?php

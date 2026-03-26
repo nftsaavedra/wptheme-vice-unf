@@ -1,15 +1,39 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group">
-    <!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"var:preset|font-size|xl"}}} -->
-    <h1>Página no encontrada</h1>
-    <!-- /wp:heading -->
-    <!-- wp:paragraph -->
-    <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
-    <!-- /wp:paragraph -->
-    <!-- wp:search {"label":"Buscar","placeholder":"Buscar en el sitio...","buttonText":"Buscar","buttonPosition":"button-outside"} /-->
-</main>
+<!-- wp:viceunf/site-breadcrumb /-->
+
+<!-- wp:group {"className":"dt-py-default viceunf-bg-canvas","layout":{"type":"default"}} -->
+<div class="wp-block-group dt-py-default viceunf-bg-canvas">
+
+	<!-- wp:group {"className":"dt-container","layout":{"type":"default"}} -->
+	<div class="wp-block-group dt-container">
+
+		<!-- wp:group {"className":"dt-row dt-justify-content-center","layout":{"type":"default"}} -->
+		<div class="wp-block-group dt-row dt-justify-content-center">
+
+			<!-- wp:group {"className":"dt-col-lg-8 dt-col-md-10 dt-col-12 dt-text-center","layout":{"type":"default"}} -->
+			<div class="wp-block-group dt-col-lg-8 dt-col-md-10 dt-col-12 dt-text-center">
+
+				<!-- wp:heading {"level":1,"className":"dt-mb-3","style":{"typography":{"fontSize":"2.5rem"}}} -->
+				<h1 class="dt-mb-3" style="font-size:2.5rem">Página no encontrada</h1>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"align":"center","className":"dt-mb-4"} -->
+				<p class="has-text-align-center dt-mb-4">Lo sentimos, la página que buscas no existe o ha sido movida. Puedes intentar buscar lo que necesitas:</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:search {"label":"Buscar","placeholder":"Buscar en el sitio...","buttonText":"Buscar","buttonPosition":"button-outside","className":"dt-mb-5"} /-->
+
+			</div>
+			<!-- /wp:group -->
+
+		</div>
+		<!-- /wp:group -->
+
+	</div>
+	<!-- /wp:group -->
+
+</div>
 <!-- /wp:group -->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

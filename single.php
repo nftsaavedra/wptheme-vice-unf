@@ -23,8 +23,7 @@ $show_nav        = get_theme_mod('viceunf_blog_show_post_navigation', '1') !== '
 $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0';
 ?>
 
-<div id="content" class="site-content viceunf-bg-canvas">
-    <section id="dt_posts" class="dt_posts dt-py-default">
+    <section id="dt_posts" class="dt_posts dt-py-default viceunf-bg-canvas">
         <div class="dt-container">
             <div class="dt-row dt-g-4">
                 <div id="dt-main" class="dt-col-lg-8 dt-col-md-12 dt-col-12">
@@ -35,7 +34,14 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
 
                                     <!-- Main Card Container -->
                                     <div class="viceunf-card-surface">
-                                        <header class="viceunf-card-header">
+                                        
+                                        <header class="viceunf-card-header dt-mb-3">
+                                            <h1 class="entry-title dt-mb-2"><?php the_title(); ?></h1>
+                                            <?php if (has_post_thumbnail() && $show_image) : ?>
+                                                <div class="viceunf-entry-thumbnail dt-mb-3">
+                                                    <?php the_post_thumbnail('full', ['class' => 'img-fluid dt-rounded']); ?>
+                                                </div>
+                                            <?php endif; ?>
 
                                             <?php if ($show_date || $show_author || ($show_categories && has_category())) : ?>
                                                 <div class="meta viceunf-post-meta">
@@ -63,7 +69,7 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                                             <?php endif; ?>
                                         </header>
 
-                                        <div class="inner">
+                                        <div class="viceunf-card-inner dt-p-4">
 
 
 
@@ -108,7 +114,7 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                                                     <?php endif; ?>
                                                 </footer>
                                             <?php endif; ?>
-                                        </div> <!-- End .inner -->
+                                        </div> <!-- End .viceunf-card-inner -->
                                     </div> <!-- End .viceunf-card-surface -->
                                 </article>
                             </div>
@@ -120,9 +126,11 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
                             get_template_part('template-parts/post', 'navigation');
                         endif;
 
-                        // Entradas Relacionadas
+                        // Entradas Relacionadas con prevencion de Errores Fatales
                         if ($show_related) :
-                            get_template_part('template-parts/related', 'posts');
+                            if (class_exists('ViceUnf\Core\Service\PostService') && method_exists('ViceUnf\Core\Service\PostService', 'get_related_posts')) {
+                                get_template_part('template-parts/related', 'posts');
+                            }
                         endif;
 
                         // Comentarios
@@ -136,6 +144,5 @@ $show_related    = get_theme_mod('viceunf_blog_show_related_posts', '1') !== '0'
             </div>
         </div>
     </section>
-</div>
 
 <?php get_footer(); ?>
