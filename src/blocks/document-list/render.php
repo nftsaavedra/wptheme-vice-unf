@@ -8,12 +8,12 @@ $post_type           = $attributes['postType'] ?? 'reglamento';
 $taxonomy            = $attributes['taxonomy'] ?? 'categoria_reglamento';
 $selected_categories = $attributes['selectedCategories'] ?? [];
 
-if (! class_exists('ViceUnf\\Core\\Service\\DocumentService')) {
-    echo '<div class="viceunf-doc-notice"><p>' . esc_html__('Error: Plugin ViceUnf Core no está activo.', 'viceunf') . '</p></div>';
+if (! class_exists('VpinUnf\\Core\\Service\\DocumentService')) {
+    echo '<div class="viceunf-doc-notice"><p>' . esc_html__('Error: Plugin VpinUnf Core no está activo.', 'vpinunf') . '</p></div>';
     return;
 }
 
-$documentService = new \ViceUnf\Core\Service\DocumentService();
+$documentService = new \VpinUnf\Core\Service\DocumentService();
 
 $categoria_slugs = [];
 if (! empty($selected_categories) && is_array($selected_categories)) {

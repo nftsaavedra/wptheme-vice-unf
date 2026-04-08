@@ -22,12 +22,12 @@ if (!post_type_exists($post_type)) {
     return;
 }
 
-if (!class_exists('\ViceUnf\Core\Service\CarouselService')) {
-    echo sprintf('<div %s><p style="padding: 20px; text-align: center; border: 1px dashed red;">El plugin ViceUnf Core no está detectado (CarouselService faltante).</p></div>', $wrapper_attributes);
+if (!class_exists('\VpinUnf\Core\Service\CarouselService')) {
+    echo sprintf('<div %s><p style="padding: 20px; text-align: center; border: 1px dashed red;">El plugin VpinUnf Core no está detectado (CarouselService faltante).</p></div>', $wrapper_attributes);
     return;
 }
 
-$carousel_service = new \ViceUnf\Core\Service\CarouselService();
+$carousel_service = new \VpinUnf\Core\Service\CarouselService();
 $query = $carousel_service->get_entities($post_type, $limit);
 
 if (!$query->have_posts()) {

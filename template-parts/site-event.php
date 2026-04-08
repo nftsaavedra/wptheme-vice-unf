@@ -45,12 +45,12 @@ $descripcion = isset($options['eventos_descripcion']) ? $options['eventos_descri
                         <?php
                         // Obtenemos la data purgada desde la capa de servicio (Validando que el plugin exista)
                         $eventos = array();
-                        if (class_exists('\ViceUnf\Core\Service\EventosService')) {
-                            $eventosService = new \ViceUnf\Core\Service\EventosService();
+                        if (class_exists('\VpinUnf\Core\Service\EventosService')) {
+                            $eventosService = new \VpinUnf\Core\Service\EventosService();
                             $eventos_limit  = isset($options['eventos_cantidad']) ? (int) $options['eventos_cantidad'] : 4;
                             $eventos = $eventosService->get_eventos_home($eventos_limit);
                         } else {
-                            echo '<div class="alert alert-warning">Se requiere activar el plugin <strong>ViceUnf Core</strong> para visualizar los eventos.</div>';
+                            echo '<div class="alert alert-warning">Se requiere activar el plugin <strong>VpinUnf Core</strong> para visualizar los eventos.</div>';
                         }
 
                         if (! empty($eventos)) :

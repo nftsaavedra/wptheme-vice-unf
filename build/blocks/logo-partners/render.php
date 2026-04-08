@@ -19,11 +19,11 @@ if (! post_type_exists('socio')) {
     return;
 }
 
-if (!class_exists('\ViceUnf\Core\Service\SocioService')) {
+if (!class_exists('\VpinUnf\Core\Service\SocioService')) {
     return;
 }
 
-$socios = (new \ViceUnf\Core\Service\SocioService())->get_all_socios();
+$socios = (new \VpinUnf\Core\Service\SocioService())->get_all_socios();
 
 if (! $socios->have_posts()) {
     wp_reset_postdata();

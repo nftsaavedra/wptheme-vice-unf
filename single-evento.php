@@ -87,7 +87,7 @@ if (empty($horarios) || !is_array($horarios)) {
                                             <!-- Módulo: Cronograma del Evento (Inyectado estéticamente dentro del inner) -->
                                             <?php if (!empty($horarios)) : ?>
                                                 <div class="evento-schedule-box dt-mt-4 p-4 border rounded" style="background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.08);">
-                                                    <h5 class="dt-mb-3"><i class="far fa-clock dt-mr-2"></i> <?php _e('Cronograma del Evento', 'viceunf-core'); ?></h5>
+                                                    <h5 class="dt-mb-3"><i class="far fa-clock dt-mr-2"></i> <?php _e('Cronograma del Evento', 'vpinunf-core'); ?></h5>
                                                     <ul class="schedule-list" style="list-style:none; padding:0; margin:0;">
                                                         <?php foreach ($horarios as $index => $horario) :
                                                             $fecha_obj = DateTime::createFromFormat('Y-m-d', $horario['fecha']);
@@ -116,7 +116,7 @@ if (empty($horarios) || !is_array($horarios)) {
                                             <!-- Tags u otras opciones como compartir pueden ir aquí según tu tema -->
                                             <div class="meta_bottom">
                                                 <div class="tags">
-                                                    <span class="badge" style="background: var(--dt-color-primary); color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.8em;"><?php _e('Evento Universitario', 'viceunf-core'); ?></span>
+                                                    <span class="badge" style="background: var(--dt-color-primary); color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.8em;"><?php _e('Evento Universitario', 'vpinunf-core'); ?></span>
                                                 </div>
                                             </div>
                                         </div>

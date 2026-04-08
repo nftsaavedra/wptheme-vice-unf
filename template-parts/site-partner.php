@@ -15,8 +15,8 @@ if (!$is_enabled) {
 $socios_titulo    = $options['viceunf_socios_titulo'] ?? 'Socios Académicos';
 $socios_post_type = !empty($options['socios_post_type']) ? sanitize_key($options['socios_post_type']) : 'socio';
 
-if (class_exists('\ViceUnf\Core\Service\SocioService') && $socios_post_type === 'socio') {
-    $socios_service = new \ViceUnf\Core\Service\SocioService();
+if (class_exists('\VpinUnf\Core\Service\SocioService') && $socios_post_type === 'socio') {
+    $socios_service = new \VpinUnf\Core\Service\SocioService();
     $socios_data = $socios_service->get_socios_for_carousel();
 } else {
     $socios_query = new WP_Query([

@@ -22,7 +22,7 @@ if (empty($categories)) {
 $category_ids = wp_list_pluck($categories, 'term_id');
 $related_count = absint(get_theme_mod('viceunf_blog_related_posts_count', 3));
 
-$related_query = class_exists('\ViceUnf\Core\Service\PostService') ? (new \ViceUnf\Core\Service\PostService())->get_related_posts(get_the_ID(), $related_count) : new WP_Query();
+$related_query = class_exists('\VpinUnf\Core\Service\PostService') ? (new \VpinUnf\Core\Service\PostService())->get_related_posts(get_the_ID(), $related_count) : new WP_Query();
 
 if (! $related_query->have_posts()) {
     wp_reset_postdata();

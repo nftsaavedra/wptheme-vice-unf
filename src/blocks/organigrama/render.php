@@ -1,18 +1,18 @@
 <?php
 /**
  * Renderizado en Frontend Dinámico del Organigrama.
- * Consumiendo Servicio de Capa Data del plugin viceunf-core.
+ * Consumiendo Servicio de Capa Data del plugin vpinunf-core.
  */
 
 declare(strict_types=1);
 
-if (! class_exists('\ViceUnf\Core\Service\DependenciaService')) {
-    echo '<p>Error: El motor de datos ViceUnf Core no está activado.</p>';
+if (! class_exists('\VpinUnf\Core\Service\DependenciaService')) {
+    echo '<p>Error: El motor de datos VpinUnf Core no está activado.</p>';
     return;
 }
 
 $parent_id = isset($attributes['parentId']) ? (int) $attributes['parentId'] : 0;
-$service   = new \ViceUnf\Core\Service\DependenciaService();
+$service   = new \VpinUnf\Core\Service\DependenciaService();
 $tree      = $service->get_dependencia_tree($parent_id);
 
 $wrapper_attributes = get_block_wrapper_attributes(['class' => 'viceunf-organigrama']);
@@ -24,6 +24,10 @@ if (! function_exists('viceunf_render_org_node')) {
     function viceunf_render_org_node(array $node) {
         $html = '<li class="org-node-item">';
         $html .= '<div class="org-card">';
+        
+        if (!empty($node['image_url'])) {
+            $html .= '<div class="org-avatar-container"><img class="org-avatar" src="' . esc_url($node['image_url']) . '" alt="' . esc_attr($node['title']) . '"/></div>';
+        }
         
         if (!empty($node['title'])) {
             $html .= '<h3 class="org-title">' . esc_html($node['title']) . '</h3>';

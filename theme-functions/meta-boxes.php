@@ -22,7 +22,7 @@ add_action('admin_init', function () {
 
     // Nota Arquitectónica (2025):
     // Las declaraciones de Meta Boxes para Slider, Evento, Socio y Reglamento han sido REMOVIDAS de manera segura del Tema.
-    // Dicha responsabilidad concierne 100% a la persistencia y base de datos, por tanto, fueron migradas al plugin `viceunf-core`.
+    // Dicha responsabilidad concierne 100% a la persistencia y base de datos, por tanto, fueron migradas al plugin `vpinunf-core`.
     // Las clases en el core ahora heredan de `AbstractMetaBox` lo que garantiza DRY, estandarización de OWASP,
     // y perfecta disociación de la UI (Headless Ready).
 });

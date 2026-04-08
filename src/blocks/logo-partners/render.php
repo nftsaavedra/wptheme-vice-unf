@@ -2,9 +2,9 @@
 
 /**
  * Render del bloque viceunf/logo-partners.
- * Lee los logos desde el CPT 'socio' (plugin viceunf-core).
+ * Lee los logos desde el CPT 'socio' (plugin vpinunf-core).
  *
- * Dependencia: Post Type 'socio' registrado en el plugin viceunf-core.
+ * Dependencia: Post Type 'socio' registrado en el plugin vpinunf-core.
  * Si el plugin no está activo, el bloque muestra un mensaje de fallback.
  */
 if (! defined('ABSPATH')) {
@@ -19,11 +19,11 @@ if (! post_type_exists('socio')) {
     return;
 }
 
-if (!class_exists('\ViceUnf\Core\Service\SocioService')) {
+if (!class_exists('\VpinUnf\Core\Service\SocioService')) {
     return;
 }
 
-$socios = (new \ViceUnf\Core\Service\SocioService())->get_all_socios();
+$socios = (new \VpinUnf\Core\Service\SocioService())->get_all_socios();
 
 if (! $socios->have_posts()) {
     wp_reset_postdata();

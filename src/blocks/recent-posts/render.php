@@ -14,8 +14,8 @@ $categories     = isset($attributes['categories']) ? $attributes['categories'] :
 $wrapper_attributes = get_block_wrapper_attributes(array('class' => 'viceunf-recent-posts-block'));
 
 // Consumir el Servicio del Plugin (Clean Architecture / DRY)
-if (class_exists('\ViceUnf\Core\Service\PostService')) {
-    $postService = new \ViceUnf\Core\Service\PostService();
+if (class_exists('\VpinUnf\Core\Service\PostService')) {
+    $postService = new \VpinUnf\Core\Service\PostService();
     $recent_posts = $postService->get_recent_posts($number_of_posts, $categories);
 } else {
     // Fallback de contingencia si el plugin core está desactivado
