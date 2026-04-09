@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-logo-partners {
 	padding: 6rem 0;
 	background-color: var(--dt-whi-color);

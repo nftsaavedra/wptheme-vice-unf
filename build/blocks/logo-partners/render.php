@@ -2,9 +2,9 @@
 
 /**
  * Render del bloque viceunf/logo-partners.
- * Lee los logos desde el CPT 'socio' (plugin viceunf-core).
+ * Lee los logos desde el CPT 'socio' (plugin vpinunf-core).
  *
- * Dependencia: Post Type 'socio' registrado en el plugin viceunf-core.
+ * Dependencia: Post Type 'socio' registrado en el plugin vpinunf-core.
  * Si el plugin no está activo, el bloque muestra un mensaje de fallback.
  */
 if (! defined('ABSPATH')) {

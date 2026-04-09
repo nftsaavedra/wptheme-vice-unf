@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-schedule-card {
 	background-color: var(--dt-whi-color);
 	border-radius: 1.2rem;

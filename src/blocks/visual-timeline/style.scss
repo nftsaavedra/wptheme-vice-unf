@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-visual-timeline {
 	padding: clamp(4rem, 10vw, 8rem) 0;
 

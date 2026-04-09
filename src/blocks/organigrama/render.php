@@ -23,16 +23,17 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'viceunf-organigr
 if (! function_exists('viceunf_render_org_node')) {
     function viceunf_render_org_node(array $node) {
         $html = '<li class="org-node-item">';
-        $html .= '<div class="org-card">';
         
-        if (!empty($node['image_url'])) {
-            $html .= '<div class="org-avatar-container"><img class="org-avatar" src="' . esc_url($node['image_url']) . '" alt="' . esc_attr($node['title']) . '"/></div>';
-        }
+        $tag = (!empty($node['permalink']) && $node['id'] > 0) ? 'a' : 'div';
+        $href = ($tag === 'a') ? ' href="' . esc_url($node['permalink']) . '"' : '';
+        $interactive_class = ($tag === 'a') ? ' org-interactive' : '';
+
+        $html .= '<' . $tag . $href . ' class="org-card' . $interactive_class . '">';
         
         if (!empty($node['title'])) {
             $html .= '<h3 class="org-title">' . esc_html($node['title']) . '</h3>';
         }
-        
+
         $has_meta = !empty($node['siglas']) || !empty($node['autoridad']);
         
         if ($has_meta) {
@@ -45,12 +46,14 @@ if (! function_exists('viceunf_render_org_node')) {
             }
             $html .= '</div>';
         }
-        
-        if (!empty($node['permalink']) && $node['id'] > 0) {
-            $html .= '<a href="' . esc_url($node['permalink']) . '" class="org-link">Ver Más</a>';
+
+        if (!empty($node['image_url'])) {
+            $html .= '<div class="org-avatar-container"><img class="org-avatar" src="' . esc_url($node['image_url']) . '" alt="' . esc_attr($node['title']) . '"/></div>';
+        } elseif (!empty($node['icon_class'])) {
+            $html .= '<div class="org-avatar-container"><div class="org-icon"><i class="' . esc_attr($node['icon_class']) . '"></i></div></div>';
         }
         
-        $html .= '</div>';
+        $html .= '</' . $tag . '>';
         
         if (!empty($node['children'])) {
             $html .= '<ul class="org-children">';

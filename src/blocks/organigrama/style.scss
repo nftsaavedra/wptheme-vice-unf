@@ -74,7 +74,7 @@
     position: absolute;
     top: 0;
     left: 50%;
-    border-left: 2px solid var(--dt-pri-color);
+    border-left: 2px solid var(--dt-sec-color, #173b64);
     width: 0;
     height: 20px;
     margin-left: -1px;
@@ -83,80 +83,138 @@
     display: none;
   }
 
-  // Estilos de la tarjeta (nodo) heredando FSE Theme.json
+  // Estilos de la tarjeta (nodo) para igualar composición visual referencial
   .org-card {
-    border: 1px solid rgba(0,0,0,0.1);
-    background-color: var(--wp--preset--color--base, #fff);
-    border-radius: 8px;
-    padding: clamp(1rem, 1.5vw, 1.5rem);
-    display: inline-block;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     text-decoration: none;
+    min-width: 160px;
+    max-width: 240px;
     transition: all 0.3s ease;
-    min-width: 180px;
-    max-width: 280px;
-
-    &:hover {
-      background-color: var(--wp--preset--color--tertiary, #f8fafc);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
-  }
-  
-  .org-avatar-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
     
-    .org-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--wp--preset--color--tertiary, #f1f5f9);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
+    // NEW PREMIUM DESIGN
+    background-color: var(--dt-whi-color, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: visible; // Cambiado a visible para que el avatar inferior pueda sobresalir
+    padding-bottom: 25px; // Espaciado extra para el avatar inferior
+    position: relative;
+    z-index: 2;
   }
 
-  .org-card:hover .org-avatar {
-    transform: scale(1.05);
-    border-color: var(--dt-pri-color);
+  .org-card.org-interactive {
+    cursor: pointer;
+  }
+
+  .org-card.org-interactive:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    border-color: var(--dt-sec-color, #173b64);
+    
+    .org-avatar, .org-icon {
+      transform: scale(1.08);
+      box-shadow: 0 6px 15px rgba(14, 89, 165, 0.2);
+    }
   }
 
   .org-title {
-    font-size: clamp(1.3rem, 1.4vw, 1.5rem);
+    background-color: var(--dt-sec-color, #173b64);
+    color: #ffffff;
+    font-size: clamp(1rem, 1.5vw, 1.25rem); // Aumentado — era clamp(0.95rem, 1vw, 1.1rem)
     font-weight: 700;
-    margin: 0 0 0.5rem 0;
-    color: var(--wp--preset--color--contrast, #1e293b);
+    margin: 0;
+    padding: 18px 14px;
+    text-align: center;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    z-index: 3;
+    line-height: 1.35;
+  }
+
+  .org-meta {
+    margin-top: 15px;
+    padding: 0 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
+  .org-avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px; // Espaciado natural desde la metadata
+    margin-bottom: -35px; // Hacer que sobresalga ligeramente hacia ABAJO
+    position: relative;
+    z-index: 4;
+    padding: 0 10px;
+    
+    .org-avatar, .org-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: 3px solid #ffffff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .org-avatar {
+        object-fit: cover;
+    }
+    
+    .org-icon {
+        color: var(--dt-sec-color, #173b64);
+        font-size: 32px;
+    }
   }
 
   .org-badge {
-    background-color: var(--dt-pri-color);
+    background-color: var(--dt-pri-color, #0e59a5); // Color primario para diferenciar del título
     color: #fff;
-    padding: 2px 8px;
+    padding: 4px 14px;
     border-radius: 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 0.95rem; // Era 0.8rem
+    font-weight: 700;
     display: inline-block;
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
   }
 
   .org-autoridad {
-    font-size: 1.2rem;
-    color: #475569;
-    margin: 0 0 0.5rem 0;
+    font-size: 1rem;  // Era 0.9rem
+    color: var(--dt-text-color, #475569);
+    margin: 0;
+    line-height: 1.5;
+
+    strong {
+      display: block;
+      color: var(--dt-sec-color, #173b64);
+      font-size: 0.8rem; // Etiqueta "JEFATURA:"
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 3px;
+    }
   }
 
-  .org-link {
-    font-size: 1.2rem;
-    color: var(--dt-pri-color);
-    text-decoration: none;
-    font-weight: 600;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  // Trazado de líneas horizontales entre hermanos
+  li::before,
+  li::after {
+    border-top-color: var(--dt-sec-color, #173b64);
+  }
+  li::after {
+    border-left-color: var(--dt-sec-color, #173b64);
+  }
+  li:last-child::before {
+    border-right-color: var(--dt-sec-color, #173b64);
   }
 
   // Responsividad: Colapsar en árbol vertical para móviles

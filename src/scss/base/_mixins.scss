@@ -2,6 +2,8 @@
    src/scss/base/_mixins.scss
 ================================================================= */
 
+@use "sass:map";
+
 $breakpoints: (
     xs: 480px,
     sm: 767px,
@@ -11,8 +13,8 @@ $breakpoints: (
 );
 
 @mixin mq($size) {
-    @if map-has-key($breakpoints, $size) {
-        @media screen and (max-width: map-get($breakpoints, $size)) {
+    @if map.has-key($breakpoints, $size) {
+        @media screen and (max-width: map.get($breakpoints, $size)) {
             @content;
         }
     } @else {

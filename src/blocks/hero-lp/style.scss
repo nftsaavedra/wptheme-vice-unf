@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-hero-lp {
 	position: relative;
 	min-height: 100vh;

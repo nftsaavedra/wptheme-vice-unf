@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 
 .viceunf-event-gallery {
     --gallery-min-height: 400px;

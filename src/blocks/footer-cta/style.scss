@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-footer-cta {
 	padding: clamp(3rem, 8vw, 9rem) 0;
 	text-align: center;

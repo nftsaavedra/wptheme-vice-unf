@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 /* =================================================================
    ViceUnf - Block: About Section
    Ajustes aislados para alinear el borde circular con la imagen.

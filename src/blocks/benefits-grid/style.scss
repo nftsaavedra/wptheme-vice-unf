@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-benefits-grid {
 	padding: 8rem 0;
 	background-color: var(--dt-gray-color);

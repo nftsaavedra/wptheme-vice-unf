@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-module-card {
 	border-radius: 1.2rem;
 	padding: clamp(2.4rem, 3vw, 3.6rem) clamp(2rem, 2.5vw, 3rem);

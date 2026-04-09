@@ -1,4 +1,4 @@
-@import "../../scss/base/mixins";
+@use "../../scss/base/mixins" as *;
 .viceunf-icon-categories {
 	display: flex;
 	flex-wrap: nowrap;
