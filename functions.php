@@ -20,7 +20,7 @@ add_action('admin_notices', function (): void {
     }
 });
 
-require_once get_stylesheet_directory() . '/inc/class-wp-bootstrap-navwalker.php';
+
 
 $viceunf_functions_path = get_stylesheet_directory() . '/theme-functions/';
 
@@ -39,9 +39,6 @@ new \ViceUnf\ImageOptimizerAdmin();
 $viceunf_files = [
     'template-tags.php',
     'meta-boxes.php',
-    'customizer.php',
-    'admin-options.php',
-    'admin-options-api.php',
     'admin-tweaks.php',
     'helpers.php',
 ];
@@ -49,6 +46,3 @@ $viceunf_files = [
 foreach ($viceunf_files as $viceunf_file) {
     require_once $viceunf_functions_path . $viceunf_file;
 }
-
-// FSE Dynamic Blocks — WordPress 7.0
-require_once get_stylesheet_directory() . '/inc/fse-blocks.php';

@@ -19,9 +19,12 @@
   --viceunf-play-accent: #e00000; /* Arbitrary unmapped color preserved */
 
   /* Legacy System Mappings to preserve existing classes without breaking them */
-  --dt-pri-color: var(--viceunf-tertiary);
+  --dt-pri-color: var(--viceunf-primary);
   --dt-priTwo-color: var(--viceunf-legacy-pri2);
   --dt-sec-color: var(--viceunf-legacy-sec);
+  --dt-whi-color: var(--viceunf-surface);
+  --dt-text-color: var(--viceunf-legacy-pri2);
+  --dt-bg-color: var(--viceunf-surface-alt);
 
   /* ==========================================================================
      Typography Elements (Fluid Clamp Scale)

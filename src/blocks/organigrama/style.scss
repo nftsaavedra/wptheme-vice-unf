@@ -36,14 +36,14 @@
     position: absolute;
     top: 0;
     right: 50%;
-    border-top: 2px solid var(--dt-pri-color);
+    border-top: 2px solid var(--wp--preset--color--viceunf-primary);
     width: 50%;
     height: 20px;
   }
   li::after {
     right: auto;
     left: 50%;
-    border-left: 2px solid var(--dt-pri-color);
+    border-left: 2px solid var(--wp--preset--color--viceunf-primary);
   }
 
   // Eliminación de la línea exterior en bordes
@@ -61,7 +61,7 @@
   }
 
   li:last-child::before {
-    border-right: 2px solid var(--dt-pri-color);
+    border-right: 2px solid var(--wp--preset--color--viceunf-primary);
     border-radius: 0 5px 0 0;
   }
   li:first-child::after {
@@ -74,7 +74,7 @@
     position: absolute;
     top: 0;
     left: 50%;
-    border-left: 2px solid var(--dt-sec-color, #173b64);
+    border-left: 2px solid var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
     width: 0;
     height: 20px;
     margin-left: -1px;
@@ -94,7 +94,7 @@
     transition: all 0.3s ease;
     
     // NEW PREMIUM DESIGN
-    background-color: var(--dt-whi-color, #ffffff);
+    background-color: var(--wp--preset--color--white, #ffffff);
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     border: 1px solid rgba(0, 0, 0, 0.04);
@@ -111,7 +111,7 @@
   .org-card.org-interactive:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-    border-color: var(--dt-sec-color, #173b64);
+    border-color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
     
     .org-avatar, .org-icon {
       transform: scale(1.08);
@@ -120,7 +120,7 @@
   }
 
   .org-title {
-    background-color: var(--dt-sec-color, #173b64);
+    background-color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
     color: #ffffff;
     font-size: clamp(1rem, 1.5vw, 1.25rem); // Aumentado — era clamp(0.95rem, 1vw, 1.1rem)
     font-weight: 700;
@@ -172,13 +172,13 @@
     }
     
     .org-icon {
-        color: var(--dt-sec-color, #173b64);
+        color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
         font-size: 32px;
     }
   }
 
   .org-badge {
-    background-color: var(--dt-pri-color, #0e59a5); // Color primario para diferenciar del título
+    background-color: var(--wp--preset--color--viceunf-primary, #122a61); // Color primario para diferenciar del título
     color: #fff;
     padding: 4px 14px;
     border-radius: 20px;
@@ -190,13 +190,13 @@
 
   .org-autoridad {
     font-size: 1rem;  // Era 0.9rem
-    color: var(--dt-text-color, #475569);
+    color: var(--wp--preset--color--viceunf-legacy-pri2, #2d4260);
     margin: 0;
     line-height: 1.5;
 
     strong {
       display: block;
-      color: var(--dt-sec-color, #173b64);
+      color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
       font-size: 0.8rem; // Etiqueta "JEFATURA:"
       font-weight: 800;
       text-transform: uppercase;
@@ -208,13 +208,13 @@
   // Trazado de líneas horizontales entre hermanos
   li::before,
   li::after {
-    border-top-color: var(--dt-sec-color, #173b64);
+    border-top-color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
   }
   li::after {
-    border-left-color: var(--dt-sec-color, #173b64);
+    border-left-color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
   }
   li:last-child::before {
-    border-right-color: var(--dt-sec-color, #173b64);
+    border-right-color: var(--wp--preset--color--viceunf-legacy-sec, #0b2346);
   }
 
   // Responsividad: Colapsar en árbol vertical para móviles
@@ -246,7 +246,7 @@
     .org-card {
       width: 100%;
       max-width: 100%;
-      border-left: 4px solid var(--dt-pri-color); // Estilo lista vertical
+      border-left: 4px solid var(--wp--preset--color--viceunf-primary); // Estilo lista vertical
     }
   }
 }

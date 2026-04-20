@@ -52,18 +52,6 @@ class Assets
             wp_enqueue_script('comment-reply');
         }
 
-        /* Bypass del Loader Gutenberiano: Encola recursivamente el CSS de los bloques personalizados (Fase 2) */
-        $blocks_dir = get_stylesheet_directory() . '/build/blocks/';
-        if (is_dir($blocks_dir) && is_array($block_folders = scandir($blocks_dir))) {
-            foreach ($block_folders as $folder) {
-                if ('.' !== $folder && '..' !== $folder) {
-                    $style_path = $blocks_dir . $folder . '/style-index.css';
-                    if (file_exists($style_path)) {
-                        wp_enqueue_style('viceunf-block-' . $folder, $theme_uri . '/build/blocks/' . $folder . '/style-index.css', [], $theme_version);
-                    }
-                }
-            }
-        }
     }
 
     public function force_defer_scripts(string $tag, string $handle, string $src): string
