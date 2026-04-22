@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Image Optimization para WordPress Theme ViceUnf
+ * Image Optimization para WordPress Theme VpinUnf
  * 
  * Implementa optimización automática de imágenes, WebP y compresión
  * 
  * @version 1.0.0
- * @package ViceUnf
+ * @package VpinUnf
  */
 
-namespace ViceUnf;
+namespace VpinUnf;
 
 // Evitar acceso directo
 if (!defined('ABSPATH')) {
@@ -52,27 +52,27 @@ class ImageOptimizer
      */
     private function load_settings()
     {
-        $settings = get_option('viceunf_image_settings', []);
+        $settings = get_option('vpinunf_image_settings', []);
         
         // Solo usar settings si existen, sino mantener valores por defecto
-        if (isset($settings['viceunf_jpeg_quality'])) {
-            $this->quality_jpeg = (int) $settings['viceunf_jpeg_quality'];
+        if (isset($settings['vpinunf_jpeg_quality'])) {
+            $this->quality_jpeg = (int) $settings['vpinunf_jpeg_quality'];
         }
         
-        if (isset($settings['viceunf_png_quality'])) {
-            $this->quality_png = (int) $settings['viceunf_png_quality'];
+        if (isset($settings['vpinunf_png_quality'])) {
+            $this->quality_png = (int) $settings['vpinunf_png_quality'];
         }
         
-        if (isset($settings['viceunf_webp_quality'])) {
-            $this->quality_webp = (int) $settings['viceunf_webp_quality'];
+        if (isset($settings['vpinunf_webp_quality'])) {
+            $this->quality_webp = (int) $settings['vpinunf_webp_quality'];
         }
         
-        if (isset($settings['viceunf_max_width'])) {
-            $this->max_width = (int) $settings['viceunf_max_width'];
+        if (isset($settings['vpinunf_max_width'])) {
+            $this->max_width = (int) $settings['vpinunf_max_width'];
         }
         
-        if (isset($settings['viceunf_max_height'])) {
-            $this->max_height = (int) $settings['viceunf_max_height'];
+        if (isset($settings['vpinunf_max_height'])) {
+            $this->max_height = (int) $settings['vpinunf_max_height'];
         }
     }
 
@@ -335,19 +335,19 @@ class ImageOptimizer
         // Solo añadimos nuestros tamaños optimizados
         
         // Añadir tamaños optimizados para el tema (sin afectar los existentes)
-        $sizes['viceunf-hero'] = [
+        $sizes['vpinunf-hero'] = [
             'width' => 1920,
             'height' => 1080,
             'crop' => true,
         ];
         
-        $sizes['viceunf-card'] = [
+        $sizes['vpinunf-card'] = [
             'width' => 400,
             'height' => 300,
             'crop' => true,
         ];
         
-        $sizes['viceunf-thumbnail'] = [
+        $sizes['vpinunf-thumbnail'] = [
             'width' => 150,
             'height' => 150,
             'crop' => true,
@@ -396,11 +396,11 @@ class ImageOptimizer
      */
     public function maybe_regenerate_images()
     {
-        if (isset($_GET['viceunf_regenerate_images']) && current_user_can('manage_options')) {
-            check_admin_referer('viceunf_regenerate_images');
+        if (isset($_GET['vpinunf_regenerate_images']) && current_user_can('manage_options')) {
+            check_admin_referer('vpinunf_regenerate_images');
             
             $this->regenerate_all_images();
-            wp_redirect(admin_url('options-general.php?page=viceunf_image_options&regenerated=1'));
+            wp_redirect(admin_url('options-general.php?page=vpinunf_image_options&regenerated=1'));
             exit;
         }
     }
@@ -414,6 +414,3 @@ class ImageOptimizer
         // Esto debería usarse con un sistema de colas para timeouts
     }
 }
-
-// Inicializar el optimizador de imágenes
-new ImageOptimizer();

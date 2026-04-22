@@ -31,40 +31,40 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls>
-				<PanelBody title={__('Configuración del Bloque', 'viceunf')}>
+				<PanelBody title={__('Configuración del Bloque', 'vpinunf')}>
 					<RangeControl
-						label={__('Número de Entradas', 'viceunf')}
+						label={__('Número de Entradas', 'vpinunf')}
 						value={numberOfPosts}
 						onChange={(val) => setAttributes({ numberOfPosts: val })}
 						min={1}
 						max={20}
 					/>
 					<RangeControl
-						label={__('Límite de Caracteres (Título)', 'viceunf')}
+						label={__('Límite de Caracteres (Título)', 'vpinunf')}
 						value={charLimit}
 						onChange={(val) => setAttributes({ charLimit: val })}
 						min={10}
 						max={150}
 					/>
 					<FormTokenField
-						label={__('Filtrar por Categoría (Opcional)', 'viceunf')}
+						label={__('Filtrar por Categoría (Opcional)', 'vpinunf')}
 						value={selectedCategoryNames}
 						suggestions={categorySuggestions}
 						onChange={onCategoryChange}
 						__experimentalExpandOnFocus={true}
-						help={__('Deja en blanco para mostrar todas las categorías.', 'viceunf')}
+						help={__('Deja en blanco para mostrar todas las categorías.', 'vpinunf')}
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div className="viceunf-editor-recent-posts-preview" style={{ padding: '20px', border: '1px dashed #ccc', backgroundColor: '#fafafa' }}>
+			<div className="vpinunf-editor-recent-posts-preview" style={{ padding: '20px', border: '1px dashed #ccc', backgroundColor: '#fafafa' }}>
 				<RichText
 					tagName="h3"
 					value={title}
 					onChange={(val) => setAttributes({ title: val })}
-					placeholder={__('Escribe el título...', 'viceunf')}
+					placeholder={__('Escribe el título...', 'vpinunf')}
 					allowedFormats={['core/bold', 'core/italic', 'core/link']}
 				/>
-				<p><em>{__('Mostrando preview estática en el editor. El diseño real se renderizará en el frontend.', 'viceunf')}</em></p>
+				<p><em>{__('Mostrando preview estática en el editor. El diseño real se renderizará en el frontend.', 'vpinunf')}</em></p>
 				<p>Nº de Posts: <strong>{numberOfPosts}</strong></p>
 				<p>Categorías seleccionadas: <strong>{selectedCategoryNames.join(', ') || 'Ninguna (Todas)'}</strong></p>
 			</div>

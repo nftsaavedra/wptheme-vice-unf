@@ -12,12 +12,12 @@ import { useAjaxSearch } from '../hooks/useAjaxSearch.js';
 export function IconPicker({ value, onChange }) {
     const [open, setOpen] = useState(false);
     const [displayName, setDisplayName] = useState(value);
-    const { query, setQuery, results, loading } = useAjaxSearch('viceunf_search_icons');
+    const { query, setQuery, results, loading } = useAjaxSearch('vpinunf_search_icons');
 
     // Efecto para humanizar la clase guardada cuando el componente se monta
     useEffect(() => {
         if (value) {
-            fetch(`${viceunfAdminData.themeUrl}/assets/data/fontawesome-icons.json`)
+            fetch(`${vpinunfAdminData.themeUrl}/assets/data/fontawesome-icons.json`)
                 .then(res => res.json())
                 .then(icons => {
                     const icon = icons.find(i => i.class === value);

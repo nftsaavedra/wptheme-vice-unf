@@ -401,4 +401,8 @@ body .is-layout-flex {
 .dt_widget-area .widget .wp-block-social-links.is-style-default:not(.is-style-logos-only) li a:not(:hover, :focus) {
     color: var(--dt-whi-color);
 }
-
+
+/* FSE Native Mobile Menu Adjustments */
+.wp-block-navigation__responsive-container-open { color: var(--wp--preset--color--primary, #fff); background-color: var(--wp--preset--color--secondary, #0e1422); border-radius: 4px; padding: 10px; }
+.wp-block-navigation__responsive-container-open svg { width: 24px; height: 24px; fill: currentColor; }
+

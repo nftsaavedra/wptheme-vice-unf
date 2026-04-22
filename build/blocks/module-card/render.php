@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/module-card.
+ * Render del bloque vpinunf/module-card.
  * Genera el SVG semicircular de progreso en PHP para evitar dependencias JS en frontend.
  */
 if (! defined('ABSPATH')) {
@@ -21,17 +21,17 @@ $circumference = M_PI * $radius;
 $offset     = $circumference - ($circumference * $progress / 100);
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-module-card')
+    array('class' => 'vpinunf-module-card')
 );
 ?>
 <div <?php echo $wrapper_attributes; ?> style="background-color: <?php echo esc_attr($card_color); ?>;">
 
     <?php if ($label) : ?>
-        <p class="viceunf-module-card__label"><?php echo wp_kses_post($label); ?></p>
+        <p class="vpinunf-module-card__label"><?php echo wp_kses_post($label); ?></p>
     <?php endif; ?>
 
-    <div class="viceunf-module-card__progress" aria-hidden="true">
-        <svg viewBox="0 0 100 56" class="viceunf-module-card__arc" aria-hidden="true">
+    <div class="vpinunf-module-card__progress" aria-hidden="true">
+        <svg viewBox="0 0 100 56" class="vpinunf-module-card__arc" aria-hidden="true">
             <path
                 d="M 10,50 A 40,40 0 0,1 90,50"
                 fill="none"
@@ -41,24 +41,24 @@ $wrapper_attributes = get_block_wrapper_attributes(
             <path
                 d="M 10,50 A 40,40 0 0,1 90,50"
                 fill="none"
-                stroke="var(--viceunf-progress-color, #ff4700)"
+                stroke="var(--vpinunf-progress-color, #ff4700)"
                 stroke-width="8"
                 stroke-linecap="round"
                 stroke-dasharray="<?php echo esc_attr($circumference); ?>"
                 stroke-dashoffset="<?php echo esc_attr($offset); ?>" />
         </svg>
-        <div class="viceunf-module-card__progress-icon">
+        <div class="vpinunf-module-card__progress-icon">
             <i class="<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
         </div>
     </div>
 
-    <div class="viceunf-module-card__body">
+    <div class="vpinunf-module-card__body">
         <?php if (!empty($bullet_points_html)) : ?>
-            <ul class="viceunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'viceunf'); ?>">
+            <ul class="vpinunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'vpinunf'); ?>">
                 <?php echo wp_kses_post($bullet_points_html); ?>
             </ul>
         <?php elseif (!empty($bullet_points)) : ?>
-            <ul class="viceunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'viceunf'); ?>">
+            <ul class="vpinunf-module-card__bullets" aria-label="<?php esc_attr_e('Puntos clave del módulo', 'vpinunf'); ?>">
                 <?php foreach ($bullet_points as $point) : ?>
                     <li><?php echo wp_kses_post($point); ?></li>
                 <?php endforeach; ?>

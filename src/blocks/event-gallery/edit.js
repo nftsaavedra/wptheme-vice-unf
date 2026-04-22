@@ -5,7 +5,7 @@ import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 export default function Edit({ attributes, setAttributes }) {
     const { images } = attributes;
     const blockProps = useBlockProps({
-        className: 'viceunf-event-gallery-editor'
+        className: 'vpinunf-event-gallery-editor'
     });
 
     const onSelectMedia = (media) => {
@@ -27,8 +27,8 @@ export default function Edit({ attributes, setAttributes }) {
                 <MediaPlaceholder
                     icon="format-gallery"
                     labels={{
-                        title: __('Galería de Eventos Institucionales', 'viceunf'),
-                        instructions: __('Selecciona imágenes para crear una galería moderna.', 'viceunf'),
+                        title: __('Galería de Eventos Institucionales', 'vpinunf'),
+                        instructions: __('Selecciona imágenes para crear una galería moderna.', 'vpinunf'),
                     }}
                     onSelect={onSelectMedia}
                     accept="image/*"
@@ -51,15 +51,15 @@ export default function Edit({ attributes, setAttributes }) {
                             gallery
                             value={images.map(img => img.id)}
                             render={({ open }) => (
-                                <ToolbarButton onClick={open} icon="edit" title={__('Editar Galería', 'viceunf')} />
+                                <ToolbarButton onClick={open} icon="edit" title={__('Editar Galería', 'vpinunf')} />
                             )}
                         />
                     </MediaUploadCheck>
-                    <ToolbarButton icon="trash" title={__('Vaciar Galería', 'viceunf')} onClick={removeImages} />
+                    <ToolbarButton icon="trash" title={__('Vaciar Galería', 'vpinunf')} onClick={removeImages} />
                 </ToolbarGroup>
             </BlockControls>
             
-            <div className="viceunf-gallery-admin-preview" style={{ border: '1px dashed #ccc', borderRadius: '8px', padding: '16px', background: '#f9f9f9', marginTop: '16px' }}>
+            <div className="vpinunf-gallery-admin-preview" style={{ border: '1px dashed #ccc', borderRadius: '8px', padding: '16px', background: '#f9f9f9', marginTop: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                     <p style={{ margin: 0, fontSize: '13px', color: '#555' }}>
                         <span className="dashicons dashicons-format-gallery" style={{ verticalAlign: 'middle', marginRight: '6px' }}></span>

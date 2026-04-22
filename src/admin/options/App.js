@@ -311,22 +311,22 @@ function TabInicio({ options, setOptions, postTypes }) {
             <PanelBody title="⑤ Noticias" initialOpen={false}>
                 <ToggleControl
                     label="Mostrar sección en la página de inicio"
-                    checked={!!options.viceunf_noticias_section_enabled}
-                    onChange={(v) => set('viceunf_noticias_section_enabled', v ? 1 : 0)}
+                    checked={!!options.vpinunf_noticias_section_enabled}
+                    onChange={(v) => set('vpinunf_noticias_section_enabled', v ? 1 : 0)}
                     __nextHasNoMarginBottom={true}
                 />
-                {!!options.viceunf_noticias_section_enabled && (
+                {!!options.vpinunf_noticias_section_enabled && (
                     <div className="vu-card vu-card--flat">
                         <div className="vu-two-col">
                             <FieldGroup label="Subtítulo">
-                                <Input value={options.viceunf_noticias_subtitulo || ''} onChange={(v) => set('viceunf_noticias_subtitulo', v)} placeholder="Actualidad Académica" />
+                                <Input value={options.vpinunf_noticias_subtitulo || ''} onChange={(v) => set('vpinunf_noticias_subtitulo', v)} placeholder="Actualidad Académica" />
                             </FieldGroup>
                             <FieldGroup label="Título">
-                                <Input value={options.viceunf_noticias_titulo || ''} onChange={(v) => set('viceunf_noticias_titulo', v)} placeholder="Últimas Noticias" />
+                                <Input value={options.vpinunf_noticias_titulo || ''} onChange={(v) => set('vpinunf_noticias_titulo', v)} placeholder="Últimas Noticias" />
                             </FieldGroup>
                         </div>
                         <FieldGroup label="Descripción">
-                            <Textarea rows={3} value={options.viceunf_noticias_descripcion || ''} onChange={(v) => set('viceunf_noticias_descripcion', v)} />
+                            <Textarea rows={3} value={options.vpinunf_noticias_descripcion || ''} onChange={(v) => set('vpinunf_noticias_descripcion', v)} />
                         </FieldGroup>
                         <RangeControl
                             label="Cantidad de noticias a mostrar"
@@ -351,7 +351,7 @@ function TabInicio({ options, setOptions, postTypes }) {
                 {!!options.socios_section_enabled && (
                     <div className="vu-card vu-card--flat">
                         <FieldGroup label="Título de la sección">
-                            <Input value={options.viceunf_socios_titulo || ''} onChange={(v) => set('viceunf_socios_titulo', v)} placeholder="Socios Académicos" />
+                            <Input value={options.vpinunf_socios_titulo || ''} onChange={(v) => set('vpinunf_socios_titulo', v)} placeholder="Socios Académicos" />
                         </FieldGroup>
 
                         <FieldGroup
@@ -428,7 +428,7 @@ export default function App() {
 
     // Cargar opciones
     useEffect(() => {
-        apiFetch({ path: '/viceunf/v1/options' })
+        apiFetch({ path: '/vpinunf/v1/options' })
             .then((data) => setOptions(data || {}))
             .catch(() => addNotice('No se pudo conectar con la REST API.', 'error'));
     }, []);
@@ -464,7 +464,7 @@ export default function App() {
     const handleSave = async () => {
         setIsSaving(true);
         try {
-            const res = await apiFetch({ path: '/viceunf/v1/options', method: 'POST', data: options });
+            const res = await apiFetch({ path: '/vpinunf/v1/options', method: 'POST', data: options });
             addNotice(res.message || '✅ Cambios guardados correctamente.');
         } catch {
             addNotice('❌ Error al guardar las opciones.', 'error');

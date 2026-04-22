@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/benefit-card",
+  "name": "vpinunf/benefit-card",
   "version": "1.0.0",
-  "title": "ViceUnf - Tarjeta de Beneficio",
-  "category": "viceunf-blocks",
+  "title": "VpinUnf - Tarjeta de Beneficio",
+  "category": "vpinunf-blocks",
   "icon": "tag",
   "description": "Tarjeta individual con ícono FontAwesome, título, descripción y degradado configurable. Se puede usar libremente.",
   "attributes": {
@@ -55,7 +55,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

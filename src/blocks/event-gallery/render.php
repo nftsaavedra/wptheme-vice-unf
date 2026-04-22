@@ -15,7 +15,7 @@ if (empty($images)) {
 
 $unique_id = 'swiper-' . wp_generate_password(6, false);
 $wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'viceunf-event-gallery viceunf-event-gallery--' . $unique_id
+    'class' => 'vpinunf-event-gallery vpinunf-event-gallery--' . $unique_id
 ]);
 
 // Configuración Swiper Principal
@@ -27,11 +27,11 @@ $main_options = [
     'autoplay' => ['delay' => 5000, 'disableOnInteraction' => false],
     'keyboard' => ['enabled' => true],
     'navigation' => [
-        'nextEl' => '.viceunf-event-gallery__next',
-        'prevEl' => '.viceunf-event-gallery__prev',
+        'nextEl' => '.vpinunf-event-gallery__next',
+        'prevEl' => '.vpinunf-event-gallery__prev',
     ],
     'pagination' => [
-        'el' => '.viceunf-event-gallery__pagination',
+        'el' => '.vpinunf-event-gallery__pagination',
         'clickable' => true,
     ],
     'thumbs' => ['swiper' => '.' . $unique_id . '-thumbs'],
@@ -62,18 +62,18 @@ $thumbs_options = [
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
-    <div class="viceunf-event-gallery__container">
+    <div class="vpinunf-event-gallery__container">
         <!-- Main Swiper -->
-        <div class="swiper viceunf-event-gallery__main dt_swiper_carousel" data-swiper-options='<?php echo json_encode($main_options); ?>'>
+        <div class="swiper vpinunf-event-gallery__main dt_swiper_carousel" data-swiper-options='<?php echo json_encode($main_options); ?>'>
             <div class="swiper-wrapper">
                 <?php foreach ($images as $img) : ?>
                     <div class="swiper-slide">
-                        <div class="viceunf-event-gallery__main-item">
+                        <div class="vpinunf-event-gallery__main-item">
                             <?php 
                             if (!empty($img['id'])) {
-                                echo wp_get_attachment_image($img['id'], 'large', false, ['class' => 'viceunf-event-gallery__img']);
+                                echo wp_get_attachment_image($img['id'], 'large', false, ['class' => 'vpinunf-event-gallery__img']);
                             } else {
-                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" loading="lazy" class="viceunf-event-gallery__img" />';
+                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" loading="lazy" class="vpinunf-event-gallery__img" />';
                             }
                             ?>
                         </div>
@@ -82,25 +82,25 @@ $thumbs_options = [
             </div>
 
             <!-- Basic Navigation for stability -->
-            <button type="button" class="viceunf-event-gallery__nav viceunf-event-gallery__prev" aria-label="<?php esc_attr_e('Imagen anterior', 'viceunf'); ?>">
+            <button type="button" class="vpinunf-event-gallery__nav vpinunf-event-gallery__prev" aria-label="<?php esc_attr_e('Imagen anterior', 'vpinunf'); ?>">
                 <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </button>
-            <button type="button" class="viceunf-event-gallery__nav viceunf-event-gallery__next" aria-label="<?php esc_attr_e('Siguiente imagen', 'viceunf'); ?>">
+            <button type="button" class="vpinunf-event-gallery__nav vpinunf-event-gallery__next" aria-label="<?php esc_attr_e('Siguiente imagen', 'vpinunf'); ?>">
                 <i class="fas fa-chevron-right" aria-hidden="true"></i>
             </button>
         </div>
 
         <!-- Thumbs Swiper (Now Below) -->
-        <div class="swiper viceunf-event-gallery__thumbs <?php echo $unique_id; ?>-thumbs dt_swiper_carousel" data-swiper-options='<?php echo json_encode($thumbs_options); ?>'>
+        <div class="swiper vpinunf-event-gallery__thumbs <?php echo $unique_id; ?>-thumbs dt_swiper_carousel" data-swiper-options='<?php echo json_encode($thumbs_options); ?>'>
             <div class="swiper-wrapper">
                 <?php foreach ($images as $img) : ?>
                     <div class="swiper-slide">
-                        <div class="viceunf-event-gallery__thumb-item">
+                        <div class="vpinunf-event-gallery__thumb-item">
                             <?php 
                             if (!empty($img['id'])) {
-                                echo wp_get_attachment_image($img['id'], 'medium', false, ['class' => 'viceunf-event-gallery__thumb-img']);
+                                echo wp_get_attachment_image($img['id'], 'medium', false, ['class' => 'vpinunf-event-gallery__thumb-img']);
                             } else {
-                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" loading="lazy" class="viceunf-event-gallery__thumb-img" />';
+                                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt']) . '" loading="lazy" class="vpinunf-event-gallery__thumb-img" />';
                             }
                             ?>
                         </div>

@@ -1,5 +1,5 @@
 @use "../../scss/base/mixins" as *;
-.viceunf-icon-categories {
+.vpinunf-icon-categories {
 	display: flex;
 	flex-wrap: nowrap;
 	gap: 2.4rem;
@@ -22,7 +22,7 @@
 	// Modo grilla: respeta columnas via CSS property.
 	&--grid {
 		display: grid;
-		grid-template-columns: repeat( var(--viceunf-icon-cols, 6), 1fr );
+		grid-template-columns: repeat( var(--vpinunf-icon-cols, 6), 1fr );
 		gap: 2.4rem;
 
 		@include mq(md) {
@@ -44,7 +44,7 @@
 		text-decoration: none;
 		color: inherit;
 
-		&:hover .viceunf-icon-categories__circle {
+		&:hover .vpinunf-icon-categories__circle {
 			transform: scale(1.1);
 			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 		}
@@ -59,7 +59,7 @@
 		align-items: center;
 		justify-content: center;
 		transition: var(--dt-transition);
-		background-color: var(--viceunf-icon-bg, var(--dt-pri-color));
+		background-color: var(--vpinunf-icon-bg, var(--dt-pri-color));
 
 		i {
 			font-size: 2.8rem;

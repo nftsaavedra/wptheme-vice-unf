@@ -20,7 +20,7 @@ function Edit( { attributes, setAttributes } ) {
 	const [ editingIndex, setEditingIndex ] = useState( null );
 
 	const blockProps = useBlockProps( {
-		className: `viceunf-icon-categories viceunf-icon-categories--${ layout }`,
+		className: `vpinunf-icon-categories vpinunf-icon-categories--${ layout }`,
 	} );
 
 	const addItem = () => {
@@ -44,19 +44,19 @@ function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Diseño', 'viceunf' ) }>
+				<PanelBody title={ __( 'Diseño', 'vpinunf' ) }>
 					<SelectControl
-						label={ __( 'Disposición', 'viceunf' ) }
+						label={ __( 'Disposición', 'vpinunf' ) }
 						value={ layout }
 						options={ [
-							{ label: __( 'Fila (horizontal)', 'viceunf' ), value: 'row' },
-							{ label: __( 'Grilla', 'viceunf' ), value: 'grid' },
+							{ label: __( 'Fila (horizontal)', 'vpinunf' ), value: 'row' },
+							{ label: __( 'Grilla', 'vpinunf' ), value: 'grid' },
 						] }
 						onChange={ ( val ) => setAttributes( { layout: val } ) }
 					/>
 					{ layout === 'grid' && (
 						<RangeControl
-							label={ __( 'Columnas (desktop)', 'viceunf' ) }
+							label={ __( 'Columnas (desktop)', 'vpinunf' ) }
 							value={ columns }
 							onChange={ ( val ) => setAttributes( { columns: val } ) }
 							min={ 3 }
@@ -64,7 +64,7 @@ function Edit( { attributes, setAttributes } ) {
 						/>
 					) }
 					<p style={ { fontSize: '12px', marginTop: '16px', marginBottom: '8px' } }>
-						{ __( 'Color de fondo de los círculos', 'viceunf' ) }
+						{ __( 'Color de fondo de los círculos', 'vpinunf' ) }
 					</p>
 					<ColorPalette
 						value={ iconBgColor }
@@ -72,21 +72,21 @@ function Edit( { attributes, setAttributes } ) {
 
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Ítems', 'viceunf' ) } initialOpen={ true }>
+				<PanelBody title={ __( 'Ítems', 'vpinunf' ) } initialOpen={ true }>
 					{ items.map( ( item, index ) => (
 						<div
 							key={ index }
 							style={ { borderBottom: '1px solid #eee', paddingBottom: '12px', marginBottom: '12px' } }
 						>
 							<div style={ { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' } }>
-								<strong style={ { fontSize: '12px' } }>{ item.label || `${ __( 'Ítem', 'viceunf' ) } ${ index + 1 }` }</strong>
+								<strong style={ { fontSize: '12px' } }>{ item.label || `${ __( 'Ítem', 'vpinunf' ) } ${ index + 1 }` }</strong>
 								<div>
 									<Button
 										isSmall
 										variant="tertiary"
 										onClick={ () => setEditingIndex( editingIndex === index ? null : index ) }
 									>
-										{ editingIndex === index ? __( 'Cerrar', 'viceunf' ) : __( 'Editar', 'viceunf' ) }
+										{ editingIndex === index ? __( 'Cerrar', 'vpinunf' ) : __( 'Editar', 'vpinunf' ) }
 									</Button>
 									<Button
 										isSmall
@@ -102,17 +102,17 @@ function Edit( { attributes, setAttributes } ) {
 							{ editingIndex === index && (
 								<>
 									<TextControl
-										label={ __( 'Etiqueta', 'viceunf' ) }
+										label={ __( 'Etiqueta', 'vpinunf' ) }
 										value={ item.label }
 										onChange={ ( val ) => updateItem( index, 'label', val ) }
 									/>
 									<TextControl
-										label={ __( 'Clase de ícono FA (ej: fa-solid fa-code)', 'viceunf' ) }
+										label={ __( 'Clase de ícono FA (ej: fa-solid fa-code)', 'vpinunf' ) }
 										value={ item.icon }
 										onChange={ ( val ) => updateItem( index, 'icon', val ) }
 									/>
 									<TextControl
-										label={ __( 'URL (opcional)', 'viceunf' ) }
+										label={ __( 'URL (opcional)', 'vpinunf' ) }
 										value={ item.url }
 										onChange={ ( val ) => updateItem( index, 'url', val ) }
 										type="url"
@@ -122,35 +122,35 @@ function Edit( { attributes, setAttributes } ) {
 						</div>
 					) ) }
 					<Button variant="primary" onClick={ addItem } style={ { width: '100%', justifyContent: 'center' } }>
-						{ __( '+ Agregar ítem', 'viceunf' ) }
+						{ __( '+ Agregar ítem', 'vpinunf' ) }
 					</Button>
 				</PanelBody>
 			</InspectorControls>
 
 			<div { ...blockProps }
-				style={ { '--viceunf-icon-bg': iconBgColor, '--viceunf-icon-cols': columns } }
+				style={ { '--vpinunf-icon-bg': iconBgColor, '--vpinunf-icon-cols': columns } }
 			>
 				{ items.length === 0 && (
 					<p style={ { textAlign: 'center', color: '#999', padding: '2rem', width: '100%' } }>
-						{ __( 'Agrega ítems desde el panel lateral →', 'viceunf' ) }
+						{ __( 'Agrega ítems desde el panel lateral →', 'vpinunf' ) }
 					</p>
 				) }
 				{ items.map( ( item, index ) => {
 					const iconClass = ( item.icon || 'fa-solid fa-circle' ).replace( /[^a-zA-Z0-9\s\-]/g, '' );
 					return (
-						<div key={ index } className="viceunf-icon-categories__item">
+						<div key={ index } className="vpinunf-icon-categories__item">
 							<div
-								className="viceunf-icon-categories__circle"
+								className="vpinunf-icon-categories__circle"
 								style={ { backgroundColor: iconBgColor } }
 							>
 								<i className={ iconClass } aria-hidden="true"></i>
 							</div>
 							<RichText
 								tagName="span"
-								className="viceunf-icon-categories__label"
+								className="vpinunf-icon-categories__label"
 								value={ item.label }
 								onChange={ ( val ) => updateItem( index, 'label', val ) }
-								placeholder={ __( 'Nombre de categoría', 'viceunf' ) }
+								placeholder={ __( 'Nombre de categoría', 'vpinunf' ) }
 								withoutInteractiveFormatting
 							/>
 						</div>

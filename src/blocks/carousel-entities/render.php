@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Render del bloque viceunf/carousel-entities
+ * Render del bloque vpinunf/carousel-entities
  *
- * @package ViceUnf
+ * @package VpinUnf
  */
 
 if (!defined('ABSPATH')) {
@@ -14,7 +14,7 @@ $section_title = $attributes['sectionTitle'] ?? 'Socios Académicos';
 $post_type = $attributes['postTypeOrigin'] ?? 'socio';
 $limit = isset($attributes['itemsLimit']) ? (int)$attributes['itemsLimit'] : -1;
 
-$wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_clients dt_clients--one front-clients viceunf-carousel-entities-block']);
+$wrapper_attributes = get_block_wrapper_attributes(['class' => 'dt_clients dt_clients--one front-clients vpinunf-carousel-entities-block']);
 
 // Validamos que el CPT existe
 if (!post_type_exists($post_type)) {

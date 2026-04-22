@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vpinunf/home-investigation",
+  "version": "1.0.0",
+  "title": "Portada — Investigación",
+  "category": "theme",
+  "icon": "admin-links",
+  "description": "Sección de tarjetas de líneas de investigación en la portada. Lee desde Theme Options.",
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ],
+    "spacing": {
+      "margin": true
+    }
+  },
+  "textdomain": "vpinunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

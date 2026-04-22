@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/footer-cta",
+  "name": "vpinunf/footer-cta",
   "version": "1.0.0",
-  "title": "ViceUnf - Footer CTA",
-  "category": "viceunf-blocks",
+  "title": "VpinUnf - Footer CTA",
+  "category": "vpinunf-blocks",
   "icon": "megaphone",
   "description": "Sección de cierre de página con llamado a la acción de alto impacto: título, subtítulo, botón grande y fondo de color configurable.",
   "attributes": {
@@ -63,7 +63,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

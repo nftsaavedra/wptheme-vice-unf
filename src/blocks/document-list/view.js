@@ -1,11 +1,11 @@
 /**
- * Frontend Vanilla JS para el bloque viceunf/document-list.
+ * Frontend Vanilla JS para el bloque vpinunf/document-list.
  * Gestiona acordeones, búsqueda en tiempo real y filtros de categoría.
  *
  * Compatible WP 6.x / 7.0 — sin dependencias externas.
  */
 document.addEventListener( 'DOMContentLoaded', () => {
-	document.querySelectorAll( '.viceunf-document-list-block' ).forEach( initBlock );
+	document.querySelectorAll( '.vpinunf-document-list-block' ).forEach( initBlock );
 } );
 
 function initBlock( block ) {
@@ -16,11 +16,11 @@ function initBlock( block ) {
 
 // ─── Acordeones ───────────────────────────────────────────────────────────────
 function initAccordions( block ) {
-	block.querySelectorAll( '.viceunf-accordion__header' ).forEach( ( btn ) => {
+	block.querySelectorAll( '.vpinunf-accordion__header' ).forEach( ( btn ) => {
 		btn.addEventListener( 'click', () => {
-			const acc    = btn.closest( '.viceunf-accordion' );
+			const acc    = btn.closest( '.vpinunf-accordion' );
 			const isOpen = acc.classList.contains( 'is-open' );
-			const icon   = btn.querySelector( '.viceunf-accordion__icon i' );
+			const icon   = btn.querySelector( '.vpinunf-accordion__icon i' );
 
 			acc.classList.toggle( 'is-open' );
 			btn.setAttribute( 'aria-expanded', String( ! isOpen ) );
@@ -34,15 +34,15 @@ function initAccordions( block ) {
 
 // ─── Búsqueda en tiempo real ─────────────────────────────────────────────────
 function initSearch( block ) {
-	const input    = block.querySelector( '.viceunf-doc-search__input' );
-	const clearBtn = block.querySelector( '.viceunf-doc-search__clear' );
-	const emptyMsg = block.querySelector( '.viceunf-doc-no-results' );
-	const tree     = block.querySelector( '.viceunf-doc-tree' );
+	const input    = block.querySelector( '.vpinunf-doc-search__input' );
+	const clearBtn = block.querySelector( '.vpinunf-doc-search__clear' );
+	const emptyMsg = block.querySelector( '.vpinunf-doc-no-results' );
+	const tree     = block.querySelector( '.vpinunf-doc-tree' );
 
 	if ( ! input ) return;
 
-	const allItems      = block.querySelectorAll( '.viceunf-accordion__item[data-title]' );
-	const allAccordions = block.querySelectorAll( '.viceunf-accordion' );
+	const allItems      = block.querySelectorAll( '.vpinunf-accordion__item[data-title]' );
+	const allAccordions = block.querySelectorAll( '.vpinunf-accordion' );
 
 	input.addEventListener( 'input', () => {
 		const query = input.value.toLowerCase().trim();
@@ -85,7 +85,7 @@ function filterByQuery( query, allItems, allAccordions, emptyMsg, tree ) {
 	accordionList.forEach( ( acc ) => {
 		acc.classList.add( 'is-hidden' );
 		acc.classList.remove( 'is-open' );
-		const btn = acc.querySelector( ':scope > .viceunf-accordion__header' );
+		const btn = acc.querySelector( ':scope > .vpinunf-accordion__header' );
 		if ( btn ) btn.setAttribute( 'aria-expanded', 'false' );
 	} );
 
@@ -94,7 +94,7 @@ function filterByQuery( query, allItems, allAccordions, emptyMsg, tree ) {
 		// Buscar items DIRECTOS (excluyendo los de sub-acordeones)
 		// usando scope > body-inner > list > item
 		const directItems = acc.querySelectorAll(
-			':scope > .viceunf-accordion__body > .viceunf-accordion__body-inner > .viceunf-accordion__list > .viceunf-accordion__item[data-title]'
+			':scope > .vpinunf-accordion__body > .vpinunf-accordion__body-inner > .vpinunf-accordion__list > .vpinunf-accordion__item[data-title]'
 		);
 		const hasDirectMatch = Array.from( directItems ).some(
 			( item ) => ! item.classList.contains( 'is-hidden' )
@@ -116,14 +116,14 @@ function filterByQuery( query, allItems, allAccordions, emptyMsg, tree ) {
  */
 function showAccordionAndAncestors( acc ) {
 	let current = acc;
-	while ( current && current.classList.contains( 'viceunf-accordion' ) ) {
+	while ( current && current.classList.contains( 'vpinunf-accordion' ) ) {
 		current.classList.remove( 'is-hidden' );
 		current.classList.add( 'is-open' );
-		const btn = current.querySelector( ':scope > .viceunf-accordion__header' );
+		const btn = current.querySelector( ':scope > .vpinunf-accordion__header' );
 		if ( btn ) btn.setAttribute( 'aria-expanded', 'true' );
 
 		// Subir al siguiente accordeón padre en el árbol
-		const parent = current.parentElement?.closest( '.viceunf-accordion' );
+		const parent = current.parentElement?.closest( '.vpinunf-accordion' );
 		current = parent ?? null;
 	}
 }
@@ -138,16 +138,16 @@ function restoreAll( allItems, allAccordions, emptyMsg, tree ) {
 
 // ─── Filtros de categoría ────────────────────────────────────────────────────
 function initFilters( block ) {
-	const filterBtns = block.querySelectorAll( '.viceunf-doc-filter-btn' );
-	const input      = block.querySelector( '.viceunf-doc-search__input' );
-	const clearBtn   = block.querySelector( '.viceunf-doc-search__clear' );
-	const emptyMsg   = block.querySelector( '.viceunf-doc-no-results' );
-	const tree       = block.querySelector( '.viceunf-doc-tree' );
+	const filterBtns = block.querySelectorAll( '.vpinunf-doc-filter-btn' );
+	const input      = block.querySelector( '.vpinunf-doc-search__input' );
+	const clearBtn   = block.querySelector( '.vpinunf-doc-search__clear' );
+	const emptyMsg   = block.querySelector( '.vpinunf-doc-no-results' );
+	const tree       = block.querySelector( '.vpinunf-doc-tree' );
 
 	if ( ! filterBtns.length ) return;
 
-	const allItems      = block.querySelectorAll( '.viceunf-accordion__item[data-title]' );
-	const allAccordions = block.querySelectorAll( '.viceunf-accordion' );
+	const allItems      = block.querySelectorAll( '.vpinunf-accordion__item[data-title]' );
+	const allAccordions = block.querySelectorAll( '.vpinunf-accordion' );
 
 	filterBtns.forEach( ( btn ) => {
 		btn.addEventListener( 'click', () => {
@@ -170,8 +170,8 @@ function initFilters( block ) {
 				// Mostrar todos los acordeones, solo el primero abierto
 				allAccordions.forEach( ( acc, i ) => {
 					acc.classList.remove( 'is-hidden' );
-					const header = acc.querySelector( '.viceunf-accordion__header' );
-					if ( acc.classList.contains( 'viceunf-accordion--root' ) ) {
+					const header = acc.querySelector( '.vpinunf-accordion__header' );
+					if ( acc.classList.contains( 'vpinunf-accordion--root' ) ) {
 						const shouldOpen = i === 0;
 						acc.classList.toggle( 'is-open', shouldOpen );
 						header?.setAttribute( 'aria-expanded', String( shouldOpen ) );
@@ -189,7 +189,7 @@ function initFilters( block ) {
 				if ( isTarget || hasTarget ) {
 					acc.classList.remove( 'is-hidden' );
 					acc.classList.add( 'is-open' );
-					acc.querySelector( '.viceunf-accordion__header' )
+					acc.querySelector( '.vpinunf-accordion__header' )
 						?.setAttribute( 'aria-expanded', 'true' );
 				} else {
 					acc.classList.add( 'is-hidden' );

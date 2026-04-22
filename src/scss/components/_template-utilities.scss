@@ -4,13 +4,13 @@
 // Uses design tokens from _tokens.scss for full FSE compatibility.
 // =================================================================
 
-.viceunf-entry-content {
-  font-size: var(--viceunf-font-base);
+.vpinunf-entry-content {
+  font-size: var(--vpinunf-font-base);
   line-height: 1.8;
   color: #334155;
 }
 
-.viceunf-post-meta {
+.vpinunf-post-meta {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -24,7 +24,7 @@
   }
 }
 
-.viceunf-post-footer {
+.vpinunf-post-footer {
   margin-top: clamp(1.5rem, 2vw, 3rem);
   padding-top: clamp(1rem, 1.5vw, 2rem);
   border-top: 1px solid #e2e8f0;
@@ -35,7 +35,7 @@
   gap: 1rem;
 }
 
-.viceunf-tag-list {
+.vpinunf-tag-list {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
@@ -46,7 +46,7 @@
   }
 }
 
-.viceunf-comments-link {
+.vpinunf-comments-link {
   color: var(--dt-sec-color);
   font-weight: 600;
   text-decoration: none;
@@ -78,7 +78,7 @@
    Entry Content Heading Hierarchy (Single Post)
    Ensures proper spacing and sizing inside the_content() output
 ================================================================= */
-.viceunf-entry-content {
+.vpinunf-entry-content {
   h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
@@ -104,7 +104,7 @@
   img {
     max-width: 100%;
     height: auto;
-    border-radius: var(--viceunf-radius-md, 8px);
+    border-radius: var(--vpinunf-radius-md, 8px);
     margin: 1.5rem 0;
   }
 
@@ -113,7 +113,7 @@
     padding: 1.5rem 2rem;
     margin: 2rem 0;
     background: rgba(0, 121, 78, 0.04);
-    border-radius: 0 var(--viceunf-radius-md, 8px) var(--viceunf-radius-md, 8px) 0;
+    border-radius: 0 var(--vpinunf-radius-md, 8px) var(--vpinunf-radius-md, 8px) 0;
     font-style: italic;
     color: #475569;
   }
@@ -147,7 +147,7 @@
     min-width: 4rem;
     height: 4rem;
     padding: 0 1.2rem;
-    border-radius: var(--viceunf-radius-md, 8px);
+    border-radius: var(--vpinunf-radius-md, 8px);
     background: #ffffff;
     color: var(--dt-sec-color);
     font-weight: 600;
@@ -174,7 +174,7 @@
    Single Post Entry Title (H2)
    Estilos fluidos para jerarquizar por debajo del Hero Breadcrumb (H1)
 ================================================================= */
-.viceunf-card-header .entry-title {
+.vpinunf-card-header .entry-title {
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 700;
   color: var(--dt-pri-color);

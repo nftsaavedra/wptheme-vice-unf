@@ -1,5 +1,5 @@
 @use "../../scss/base/mixins" as *;
-.viceunf-timeline-step {
+.vpinunf-timeline-step {
 	position: relative;
 	display: flex;
 	align-items: flex-start;
@@ -12,17 +12,17 @@
 			flex-direction: row;
 			padding-right: calc(50% + 3.5rem);
 
-			.viceunf-timeline-step__bubble {
+			.vpinunf-timeline-step__bubble {
 				order: 2;
 				position: absolute;
 				left: calc(50% - 2.4rem);
 				top: 0;
 			}
 
-			.viceunf-timeline-step__card {
+			.vpinunf-timeline-step__card {
 				order: 1;
 				border-left: none;
-				border-right: 4px solid var(--viceunf-accent, var(--dt-pri-color));
+				border-right: 4px solid var(--vpinunf-accent, var(--dt-pri-color));
 				text-align: right;
 			}
 		}
@@ -31,7 +31,7 @@
 			flex-direction: row-reverse;
 			padding-left: calc(50% + 3.5rem);
 
-			.viceunf-timeline-step__bubble {
+			.vpinunf-timeline-step__bubble {
 				position: absolute;
 				left: calc(50% - 2.4rem);
 				top: 0;
@@ -44,7 +44,7 @@
 		padding-left: 6rem;
 		flex-direction: column;
 
-		.viceunf-timeline-step__bubble {
+		.vpinunf-timeline-step__bubble {
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -61,7 +61,7 @@
 		justify-content: center;
 		flex-shrink: 0;
 		z-index: 1;
-		box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 6px var(--viceunf-accent, var(--dt-pri-color));
+		box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 6px var(--vpinunf-accent, var(--dt-pri-color));
 
 		span,
 		i {
@@ -75,7 +75,7 @@
 	&__card {
 		background: var(--dt-whi-color);
 		border-radius: 0.8rem;
-		border-left: 4px solid var(--viceunf-accent, var(--dt-pri-color));
+		border-left: 4px solid var(--vpinunf-accent, var(--dt-pri-color));
 		padding: clamp(1.5rem, 3vw, 2rem) clamp(1.8rem, 4vw, 2.4rem);
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
 		flex: 1;

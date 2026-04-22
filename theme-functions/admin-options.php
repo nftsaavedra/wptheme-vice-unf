@@ -10,14 +10,12 @@ if (!defined('ABSPATH')) exit;
  */
 
 add_action('admin_menu', function () {
-  $hook_suffix = add_menu_page(
+  $hook_suffix = add_theme_page(
     'VPIN — Opciones del Tema',
-    'VPIN Opciones',
+    'Opciones VpinUnf',
     'manage_options',
-    'viceunf_theme_options',
-    'viceunf_render_options_page_react',
-    'dashicons-welcome-learn-more',
-    58
+    'vpinunf_theme_options',
+    'vpinunf_render_options_page_react'
   );
 
   // Encolar scripts solo en esta página
@@ -37,19 +35,19 @@ add_action('admin_menu', function () {
     wp_enqueue_media(); // Necesario para componentes que usan Media (Logo de socios)
 
     wp_enqueue_script(
-      'viceunf-admin-options-js',
+      'vpinunf-admin-options-js',
       get_stylesheet_directory_uri() . '/build/admin-options.js',
       $dependencies,
       $asset['version'],
       true
     );
 
-    wp_localize_script('viceunf-admin-options-js', 'viceunfAdminData', array(
+    wp_localize_script('vpinunf-admin-options-js', 'vpinunfAdminData', array(
       'themeUrl' => get_stylesheet_directory_uri()
     ));
 
     wp_enqueue_style(
-      'viceunf-admin-options-css',
+      'vpinunf-admin-options-css',
       get_stylesheet_directory_uri() . '/build/style-admin-options.css',
       array('wp-components'),
       $asset['version']
@@ -60,10 +58,10 @@ add_action('admin_menu', function () {
 /**
  * Renderiza el contenedor raíz para React.
  */
-function viceunf_render_options_page_react()
+function vpinunf_render_options_page_react()
 {
   if (!current_user_can('manage_options')) return;
-  echo '<div id="viceunf-settings-root">Cargando la interfaz moderna...</div>';
+  echo '<div id="vpinunf-settings-root">Cargando la interfaz moderna...</div>';
 }
 
 $theme_functions_path = get_stylesheet_directory() . '/theme-functions/';

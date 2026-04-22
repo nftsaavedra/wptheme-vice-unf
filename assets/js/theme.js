@@ -5,7 +5,7 @@
  * Gestiona sticky header, navegación mobile, búsqueda, sidebar y accesibilidad.
  * Migrado de jQuery a Vanilla JS.
  */
-const ViceUnfTheme = {
+const VpinUnfTheme = {
     eventID: 'DtThemeJs',
     body: document.body,
     classes: {
@@ -462,7 +462,7 @@ const ViceUnfTheme = {
     },
 };
 
-ViceUnfTheme.init();
+VpinUnfTheme.init();
 
 /**
  * @description Plugin Load More — muestra items progresivamente.

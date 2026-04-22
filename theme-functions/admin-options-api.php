@@ -12,20 +12,20 @@ if (! defined('ABSPATH')) {
  * para ser consumida por la SPA en React Guttemberg.
  */
 
-add_action('rest_api_init', 'viceunf_register_theme_options_endpoints');
+add_action('rest_api_init', 'vpinunf_register_theme_options_endpoints');
 
-function viceunf_register_theme_options_endpoints()
+function vpinunf_register_theme_options_endpoints()
 {
-    register_rest_route('viceunf/v1', '/options', array(
+    register_rest_route('vpinunf/v1', '/options', array(
         array(
             'methods'             => WP_REST_Server::READABLE,
-            'callback'            => 'viceunf_get_theme_options',
-            'permission_callback' => 'viceunf_theme_options_permissions_check',
+            'callback'            => 'vpinunf_get_theme_options',
+            'permission_callback' => 'vpinunf_theme_options_permissions_check',
         ),
         array(
             'methods'             => WP_REST_Server::CREATABLE,
-            'callback'            => 'viceunf_update_theme_options',
-            'permission_callback' => 'viceunf_theme_options_permissions_check',
+            'callback'            => 'vpinunf_update_theme_options',
+            'permission_callback' => 'vpinunf_theme_options_permissions_check',
         ),
     ));
 }
@@ -33,7 +33,7 @@ function viceunf_register_theme_options_endpoints()
 /**
  * Verifica permisos para leer y escribir las opciones del tema.
  */
-function viceunf_theme_options_permissions_check()
+function vpinunf_theme_options_permissions_check()
 {
     return current_user_can('manage_options');
 }
@@ -43,9 +43,9 @@ function viceunf_theme_options_permissions_check()
  * Se enriquece la respuesta resolviendo URLs de imágenes desde sus IDs
  * cuando el campo _url correspondiente no está guardado (datos legados).
  */
-function viceunf_get_theme_options()
+function vpinunf_get_theme_options()
 {
-    $options = get_option('viceunf_theme_options', array());
+    $options = get_option('vpinunf_theme_options', array());
 
     // ── Resolución automática de URLs de imágenes legadas ──────────────────
     // Mapa de campos: clave_id => clave_url
@@ -72,7 +72,7 @@ function viceunf_get_theme_options()
 /**
  * Callback POST: Sanitiza y guarda las nuevas opciones del tema.
  */
-function viceunf_update_theme_options(WP_REST_Request $request)
+function vpinunf_update_theme_options(WP_REST_Request $request)
 {
     $params = $request->get_json_params();
 
@@ -81,16 +81,16 @@ function viceunf_update_theme_options(WP_REST_Request $request)
     }
 
     // Usar la función de sanitización estricta existente 
-    // asumimos que admin-options-sanitize.php está cargado y la función viceunf_sanitize_all_options existe.
-    if (function_exists('viceunf_sanitize_all_options')) {
-        $sanitized_options = viceunf_sanitize_all_options($params);
+    // asumimos que admin-options-sanitize.php está cargado y la función vpinunf_sanitize_all_options existe.
+    if (function_exists('vpinunf_sanitize_all_options')) {
+        $sanitized_options = vpinunf_sanitize_all_options($params);
     } else {
         // Fallback por si acaso, aunque no debería ocurrir.
         $sanitized_options = $params;
     }
 
     // Guardar las opciones sanitizadas
-    $updated = update_option('viceunf_theme_options', $sanitized_options);
+    $updated = update_option('vpinunf_theme_options', $sanitized_options);
 
     if ($updated) {
         return rest_ensure_response(array(
@@ -105,6 +105,6 @@ function viceunf_update_theme_options(WP_REST_Request $request)
     return rest_ensure_response(array(
         'success' => true,
         'message' => 'No hubo cambios.',
-        'data'    => get_option('viceunf_theme_options', array())
+        'data'    => get_option('vpinunf_theme_options', array())
     ));
 }

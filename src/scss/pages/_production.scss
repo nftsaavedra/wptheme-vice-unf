@@ -1,16 +1,16 @@
 /* =================================================================
-   ViceUnf Pages: Home - Producción Científica
+   VpinUnf Pages: Home - Producción Científica
 ================================================================= */
 
-.viceunf-production-card {
+.vpinunf-production-card {
   height: 100%;
   padding: 0; /* Remove internal padding to stretch image */
   overflow: hidden;
   display: flex;
   flex-direction: column;
 
-  /* Overriding viceunf-card-soft padding and border */
-  &.viceunf-card-soft {
+  /* Overriding vpinunf-card-soft padding and border */
+  &.vpinunf-card-soft {
     padding: 0;
     border-color: transparent;
 
@@ -24,7 +24,7 @@
   &__image {
     width: 100%;
     position: relative;
-    border-bottom: 1px solid var(--viceunf-border-color, #eaeaea);
+    border-bottom: 1px solid var(--vpinunf-border-color, #eaeaea);
     background-color: #f1f5f9;
 
     a {
@@ -71,7 +71,7 @@
       bottom: 1.5rem;
       right: 1.5rem;
       background-color: var(--dt-pri-color);
-      color: var(--viceunf-surface, #ffffff);
+      color: var(--vpinunf-surface, #ffffff);
       margin-bottom: 0;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
       z-index: 5;
@@ -80,7 +80,7 @@
 
   &:hover &__icon:not(&__icon--overlay) {
     background-color: var(--dt-pri-color);
-    color: var(--viceunf-surface, #ffffff);
+    color: var(--vpinunf-surface, #ffffff);
     box-shadow: 0 8px 25px rgba(0, 121, 78, 0.25);
     transform: translateY(-3px);
   }

@@ -1,5 +1,5 @@
 @use "../../scss/base/mixins" as *;
-.viceunf-benefits-grid {
+.vpinunf-benefits-grid {
 	padding: 8rem 0;
 	background-color: var(--dt-gray-color);
 
@@ -25,7 +25,7 @@
 
 	&__grid {
 		display: grid;
-		grid-template-columns: repeat( var(--viceunf-grid-cols, 3), 1fr );
+		grid-template-columns: repeat( var(--vpinunf-grid-cols, 3), 1fr );
 		gap: 2.4rem;
 
 		@include mq(md) {

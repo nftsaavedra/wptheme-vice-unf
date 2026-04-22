@@ -1,5 +1,5 @@
 @use "../../scss/base/mixins" as *;
-.viceunf-visual-timeline {
+.vpinunf-visual-timeline {
 	padding: clamp(4rem, 10vw, 8rem) 0;
 
 	&__title {
@@ -24,7 +24,7 @@
 		bottom: 0;
 		width: 3px;
 		transform: translateX(-50%);
-		background-color: var(--viceunf-timeline-line, var(--dt-pri-color));
+		background-color: var(--vpinunf-timeline-line, var(--dt-pri-color));
 		border-radius: 2px;
 
 		@include mq(md) {

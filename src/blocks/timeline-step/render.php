@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/timeline-step.
+ * Render del bloque vpinunf/timeline-step.
  * Los pasos se alternan izquierda/derecha via CSS :nth-child selector.
  */
 if (! defined('ABSPATH')) {
@@ -14,16 +14,16 @@ $description  = $attributes['description'] ?? '';
 $icon         = preg_replace('/[^a-zA-Z0-9\s\-]/', '', $attributes['icon'] ?? '');
 $accent_color = $attributes['accentColor'] ?? '#ff4700';
 
-$css_vars = '--viceunf-accent: ' . esc_attr($accent_color) . ';';
+$css_vars = '--vpinunf-accent: ' . esc_attr($accent_color) . ';';
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-timeline-step')
+    array('class' => 'vpinunf-timeline-step')
 );
 ?>
 <div <?php echo $wrapper_attributes; ?> style="<?php echo esc_attr($css_vars); ?>">
 
     <div
-        class="viceunf-timeline-step__bubble"
+        class="vpinunf-timeline-step__bubble"
         style="background-color: <?php echo esc_attr($accent_color); ?>;"
         aria-hidden="true">
         <?php if ($icon) : ?>
@@ -34,15 +34,15 @@ $wrapper_attributes = get_block_wrapper_attributes(
     </div>
 
     <div
-        class="viceunf-timeline-step__card"
+        class="vpinunf-timeline-step__card"
         style="border-left-color: <?php echo esc_attr($accent_color); ?>;">
         <?php if ($title) : ?>
-            <h3 class="viceunf-timeline-step__title">
+            <h3 class="vpinunf-timeline-step__title">
                 <?php echo wp_kses_post($title); ?>
             </h3>
         <?php endif; ?>
         <?php if ($description) : ?>
-            <p class="viceunf-timeline-step__desc">
+            <p class="vpinunf-timeline-step__desc">
                 <?php echo wp_kses_post($description); ?>
             </p>
         <?php endif; ?>

@@ -53,34 +53,34 @@ function SemiCircleProgress( { percent, color, icon } ) {
 
 function Edit( { attributes, setAttributes } ) {
 	const { label, icon, progressPercent, bulletPointsHtml, cardColor } = attributes;
-	const progressColor = 'var(--viceunf-progress-color, #ff4700)';
+	const progressColor = 'var(--vpinunf-progress-color, #ff4700)';
 
 	const blockProps = useBlockProps( {
-		className: 'viceunf-module-card',
+		className: 'vpinunf-module-card',
 		style: { backgroundColor: cardColor },
 	} );
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Contenido del Módulo', 'viceunf' ) }>
+				<PanelBody title={ __( 'Contenido del Módulo', 'vpinunf' ) }>
 					<TextControl
-						label={ __( 'Clase de ícono FA', 'viceunf' ) }
+						label={ __( 'Clase de ícono FA', 'vpinunf' ) }
 						value={ icon }
 						onChange={ ( val ) => setAttributes( { icon: val } ) }
 					/>
 					<RangeControl
-						label={ __( '% de progreso visual', 'viceunf' ) }
+						label={ __( '% de progreso visual', 'vpinunf' ) }
 						value={ progressPercent }
 						onChange={ ( val ) => setAttributes( { progressPercent: val } ) }
 						min={ 0 }
 						max={ 100 }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Puntos Clave (Legacy)', 'viceunf' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Puntos Clave (Legacy)', 'vpinunf' ) } initialOpen={ false }>
 					<p style={{ fontSize: '12px', color: '#666' }}>Esta sección ha sido reemplazada por el editor directo en la tarjeta. Escriba los puntos clave directamente sobre la tarjeta a la izquierda.</p>
 				</PanelBody>
-				<PanelBody title={ __( 'Color de la Tarjeta', 'viceunf' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Color de la Tarjeta', 'vpinunf' ) } initialOpen={ false }>
 					<ColorPalette
 						value={ cardColor }
 						onChange={ ( val ) => setAttributes( { cardColor: val } ) }
@@ -92,17 +92,17 @@ function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				<RichText
 					tagName="p"
-					className="viceunf-module-card__label"
+					className="vpinunf-module-card__label"
 					value={ label }
 					onChange={ ( val ) => setAttributes( { label: val } ) }
-					placeholder={ __( 'Etiqueta (ej: 01 sesión)', 'viceunf' ) }
+					placeholder={ __( 'Etiqueta (ej: 01 sesión)', 'vpinunf' ) }
 				/>
 				<SemiCircleProgress percent={ progressPercent } color={ progressColor } icon={ icon } />
-				<div className="viceunf-module-card__body">
+				<div className="vpinunf-module-card__body">
 					<RichText
 						tagName="ul"
 						multiline="li"
-						className="viceunf-module-card__bullets"
+						className="vpinunf-module-card__bullets"
 						value={ bulletPointsHtml }
 						onChange={ ( val ) => setAttributes( { bulletPointsHtml: val } ) }
 						placeholder="<li>Escribe puntos clave...</li>"

@@ -1,10 +1,10 @@
 @use "../../scss/base/mixins" as *;
 /* =============================================
-   ViceUnf — Document List Block
+   VpinUnf — Document List Block
    Interactivity API + Modern UI Design
    ============================================= */
 
-.wp-block-viceunf-document-list {
+.wp-block-vpinunf-document-list {
 
   // ── Design Tokens ──────────────────────────────────────────────────────
   --doc-pri:        var(--dt-pri-color, #00794e);
@@ -17,7 +17,7 @@
   --doc-border:     rgba(0, 0, 0, 0.08);
 
   // ── Toolbar — búsqueda ARRIBA, filtros ABAJO ─────────────────────────────
-  .viceunf-doc-toolbar {
+  .vpinunf-doc-toolbar {
     display: flex;
     flex-direction: column;   // ← siempre columna: search encima, filters debajo
     gap: 1rem;
@@ -29,13 +29,13 @@
   }
 
   // ── Search ───────────────────────────────────────────────────────────────
-  .viceunf-doc-search {
+  .vpinunf-doc-search {
     position: relative;
     flex: 1;
     min-width: 0;
   }
 
-  .viceunf-doc-search__icon {
+  .vpinunf-doc-search__icon {
     position: absolute;
     left: 1.2rem;
     top: 50%;
@@ -47,7 +47,7 @@
     transition: opacity var(--doc-transition);
   }
 
-  .viceunf-doc-search__input {
+  .vpinunf-doc-search__input {
     width: 100%;
     padding: 0.9rem 3.6rem 0.9rem 3.6rem;
     border: 1.5px solid var(--doc-border);
@@ -63,7 +63,7 @@
       border-color: var(--doc-pri);
       box-shadow: 0 0 0 3px rgba(0, 121, 78, 0.12);
 
-      ~ .viceunf-doc-search__icon {
+      ~ .vpinunf-doc-search__icon {
         opacity: 0.9;
         color: var(--doc-pri);
       }
@@ -74,7 +74,7 @@
     }
   }
 
-  .viceunf-doc-search__clear {
+  .vpinunf-doc-search__clear {
     // Reset estricto para evitar herencia de estilos globales del tema
     appearance: none;
     -webkit-appearance: none;
@@ -119,14 +119,14 @@
   }
 
   // ── Filters ─────────────────────────────────────────────────────────────
-  .viceunf-doc-filters {
+  .vpinunf-doc-filters {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
   }
 
-  .viceunf-doc-filter-btn {
+  .vpinunf-doc-filter-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -157,13 +157,13 @@
     }
   }
 
-  .viceunf-doc-filter-btn--sub {
+  .vpinunf-doc-filter-btn--sub {
     font-size: 1.2rem;
     padding: 0.4rem 0.9rem;
   }
 
   // ── Accordion ───────────────────────────────────────────────────────────
-  .viceunf-doc-tree {
+  .vpinunf-doc-tree {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -173,7 +173,7 @@
     }
   }
 
-  .viceunf-accordion {
+  .vpinunf-accordion {
     background: var(--doc-surface);
     border: 1px solid var(--doc-border);
     border-radius: var(--doc-radius);
@@ -196,7 +196,7 @@
     }
   }
 
-  .viceunf-accordion__header {
+  .vpinunf-accordion__header {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -219,7 +219,7 @@
     }
   }
 
-  .viceunf-accordion__icon {
+  .vpinunf-accordion__icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -233,13 +233,13 @@
     transition: background var(--doc-transition);
   }
 
-  .viceunf-accordion--child .viceunf-accordion__icon {
+  .vpinunf-accordion--child .vpinunf-accordion__icon {
     width: 2.6rem;
     height: 2.6rem;
     font-size: 1.2rem;
   }
 
-  .viceunf-accordion__title {
+  .vpinunf-accordion__title {
     flex: 1;
     font-size: 1.55rem;
     font-weight: 600;
@@ -247,12 +247,12 @@
     line-height: 1.3;
   }
 
-  .viceunf-accordion--child .viceunf-accordion__title {
+  .vpinunf-accordion--child .vpinunf-accordion__title {
     font-size: 1.4rem;
     font-weight: 500;
   }
 
-  .viceunf-accordion__badge {
+  .vpinunf-accordion__badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -267,7 +267,7 @@
     flex-shrink: 0;
   }
 
-  .viceunf-accordion__chevron {
+  .vpinunf-accordion__chevron {
     color: var(--doc-sec);
     font-size: 1.2rem;
     opacity: 0.4;
@@ -275,40 +275,40 @@
     flex-shrink: 0;
   }
 
-  .viceunf-accordion.is-open > .viceunf-accordion__header {
-    .viceunf-accordion__chevron {
+  .vpinunf-accordion.is-open > .vpinunf-accordion__header {
+    .vpinunf-accordion__chevron {
       transform: rotate(180deg);
       opacity: 1;
       color: var(--doc-pri);
     }
-    .viceunf-accordion__badge {
+    .vpinunf-accordion__badge {
       background: var(--acc-color, var(--doc-pri));
       color: #fff;
     }
   }
 
   // Body con CSS Grid transition (smooth open/close)
-  .viceunf-accordion__body {
+  .vpinunf-accordion__body {
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.28s ease;
   }
 
-  .viceunf-accordion.is-open > .viceunf-accordion__body {
+  .vpinunf-accordion.is-open > .vpinunf-accordion__body {
     grid-template-rows: 1fr;
   }
 
-  .viceunf-accordion__body-inner {
+  .vpinunf-accordion__body-inner {
     overflow: hidden;
     padding: 0 1.4rem;
   }
 
-  .viceunf-accordion.is-open > .viceunf-accordion__body > .viceunf-accordion__body-inner {
+  .vpinunf-accordion.is-open > .vpinunf-accordion__body > .vpinunf-accordion__body-inner {
     padding-bottom: 1.2rem;
   }
 
   // ── Document Items ───────────────────────────────────────────────────────
-  .viceunf-accordion__list {
+  .vpinunf-accordion__list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -317,7 +317,7 @@
     gap: 0.4rem;
   }
 
-  .viceunf-accordion__item {
+  .vpinunf-accordion__item {
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -337,7 +337,7 @@
     }
   }
 
-  .viceunf-accordion__link {
+  .vpinunf-accordion__link {
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -346,19 +346,19 @@
     text-decoration: none;
     color: inherit;
 
-    &:hover .viceunf-accordion__link-text {
+    &:hover .vpinunf-accordion__link-text {
       color: var(--doc-pri);
       text-decoration: underline;
     }
   }
 
-  .viceunf-accordion__link-icon {
+  .vpinunf-accordion__link-icon {
     color: #e03131; // rojo PDF
     font-size: 1.6rem;
     flex-shrink: 0;
   }
 
-  .viceunf-accordion__link-text {
+  .vpinunf-accordion__link-text {
     font-size: 1.45rem;
     color: var(--doc-sec);
     line-height: 1.4;
@@ -368,7 +368,7 @@
     transition: color var(--doc-transition);
   }
 
-  .viceunf-accordion__download {
+  .vpinunf-accordion__download {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -395,8 +395,8 @@
   }
 
   // ── Empty / No Results States ────────────────────────────────────────────
-  .viceunf-doc-no-results,
-  .viceunf-doc-empty-state {
+  .vpinunf-doc-no-results,
+  .vpinunf-doc-empty-state {
     display: none; // visible cuando .is-visible (Interactivity API)
     flex-direction: column;
     align-items: center;
@@ -421,20 +421,20 @@
     }
   }
 
-  .viceunf-doc-no-results.is-visible,
-  .viceunf-doc-empty-state {
+  .vpinunf-doc-no-results.is-visible,
+  .vpinunf-doc-empty-state {
     display: flex;
   }
 
   // La empty state siempre visible (solo cuando no hay datos desde PHP)
-  .viceunf-doc-empty-state {
+  .vpinunf-doc-empty-state {
     display: flex;
   }
 
   // ── Flat list ───────────────────────────────────────────────────────────
-  .viceunf-accordion__list--flat {
+  .vpinunf-accordion__list--flat {
     gap: 0;
-    & .viceunf-accordion__item {
+    & .vpinunf-accordion__item {
       border-radius: 0;
       border-bottom: 1px solid var(--doc-border);
       background: var(--doc-surface);
@@ -447,17 +447,17 @@
 
   // ── Estado de visibilidad controlado por JS ──────────────────────────────
   // Accordeones sin resultados en una búsqueda
-  .viceunf-accordion.is-hidden {
+  .vpinunf-accordion.is-hidden {
     display: none;
   }
 
   // Documentos que no coinciden con la búsqueda
-  .viceunf-accordion__item.is-hidden {
+  .vpinunf-accordion__item.is-hidden {
     display: none !important;
   }
 
   // ── Accessibility ────────────────────────────────────────────────────────
-  .viceunf-sr-only {
+  .vpinunf-sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -471,16 +471,16 @@
 
   // ── Responsive ──────────────────────────────────────────────────────────
   @include mq(sm) {
-    .viceunf-accordion__item {
+    .vpinunf-accordion__item {
       flex-wrap: wrap;
     }
 
-    .viceunf-accordion__download {
+    .vpinunf-accordion__download {
       width: 100%;
       justify-content: center;
     }
 
-    .viceunf-accordion__link-text {
+    .vpinunf-accordion__link-text {
       white-space: normal;
     }
   }

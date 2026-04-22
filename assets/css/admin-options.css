@@ -1,26 +1,26 @@
-/* Estilos para la Página de Opciones del Tema ViceUnf */
-.viceunf-options-wrap .form-table {
+/* Estilos para la Página de Opciones del Tema VpinUnf */
+.vpinunf-options-wrap .form-table {
   margin-top: 1.5em;
   border-collapse: collapse;
 }
-.viceunf-options-wrap .form-table h2 {
+.vpinunf-options-wrap .form-table h2 {
   padding: 15px 0;
   font-size: 1.3em;
 }
-.viceunf-options-wrap .form-table th,
-.viceunf-options-wrap .form-table td {
+.vpinunf-options-wrap .form-table th,
+.vpinunf-options-wrap .form-table td {
   padding: 20px;
   border-bottom: 1px solid #f0f0f1;
 }
-.viceunf-options-wrap .form-table tr:last-child th,
-.viceunf-options-wrap .form-table tr:last-child td {
+.vpinunf-options-wrap .form-table tr:last-child th,
+.vpinunf-options-wrap .form-table tr:last-child td {
   border-bottom: none;
 }
-.viceunf-options-wrap .form-table th {
+.vpinunf-options-wrap .form-table th {
   width: 220px;
   padding-right: 20px;
 }
-.viceunf-options-card {
+.vpinunf-options-card {
   padding: 1.25rem;
   border: 1px solid #ccd0d4;
   background: #fff;
@@ -29,7 +29,7 @@
   max-width: 650px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
-.viceunf-options-card .viceunf-label {
+.vpinunf-options-card .vpinunf-label {
   display: block;
   font-weight: 600;
   margin-top: 15px;
@@ -61,11 +61,11 @@
   align-items: center;
   justify-content: space-between;
   background-color: #e9ecef;
-  border: 1px solid var(--viceunf-admin-border, #ccd0d4);
+  border: 1px solid var(--vpinunf-admin-border, #ccd0d4);
   padding: 6px 10px;
   border-radius: 3px;
   font-weight: 600;
-  color: var(--viceunf-priTwo-color, #2d4260);
+  color: var(--vpinunf-priTwo-color, #2d4260);
 }
 
 .selected-item-title {
@@ -95,7 +95,7 @@
   left: 0;
   right: 0;
   background: #fff;
-  border: 1px solid var(--viceunf-admin-border, #ccd0d4);
+  border: 1px solid var(--vpinunf-admin-border, #ccd0d4);
   border-top: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 100;
@@ -121,7 +121,7 @@
 }
 
 .ajax-search-results li:hover {
-  background-color: var(--viceunf-pri-color, #00794e);
+  background-color: var(--vpinunf-pri-color, #00794e);
   color: #fff;
 }
 
@@ -215,7 +215,7 @@
 }
 /* --- Estilos para la rejilla adaptable de items en Opciones del Tema --- */
 
-.viceunf-items-grid-container {
+.vpinunf-items-grid-container {
   display: grid;
   gap: 20px; /* Espacio entre las tarjetas */
   /* Por defecto, 4 columnas en pantallas grandes */
@@ -224,14 +224,14 @@
 }
 
 /* Estilos para las tarjetas individuales */
-.viceunf-item-card {
+.vpinunf-item-card {
   background: #fff;
   border: 1px solid #c3c4c7;
   padding: 15px 15px 20px 15px; /* Un poco más de padding inferior */
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
-.viceunf-item-card h4 {
+.vpinunf-item-card h4 {
   margin-top: 0;
   font-size: 1.2em;
   border-bottom: 1px solid #eee;
@@ -243,14 +243,14 @@
 
 /* Ajuste para pantallas medianas (ej. tablets y escritorios pequeños) */
 @media (max-width: 1400px) {
-  .viceunf-items-grid-container {
+  .vpinunf-items-grid-container {
     grid-template-columns: repeat(2, 1fr); /* 2 columnas */
   }
 }
 
 /* Ajuste para pantallas de WordPress más pequeñas y móviles */
 @media (max-width: 782px) {
-  .viceunf-items-grid-container {
+  .vpinunf-items-grid-container {
     grid-template-columns: 1fr; /* 1 columna */
   }
 }
@@ -260,7 +260,7 @@
 /* ================================================================ */
 
 /* --- Estilos para el Selector de Imágenes --- */
-.viceunf-image-uploader .image-preview {
+.vpinunf-image-uploader .image-preview {
   max-width: 200px;
   height: auto;
   border: 1px solid #ddd;
@@ -270,7 +270,7 @@
 }
 
 /* --- Estilos para el Repetidor Dinámico --- */
-.viceunf-repeater-container .repeater-items-wrapper {
+.vpinunf-repeater-container .repeater-items-wrapper {
   display: flex;
   flex-direction: column;
   gap: 15px;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/schedule-card.
+ * Render del bloque vpinunf/schedule-card.
  */
 if (! defined('ABSPATH')) {
     exit;
@@ -14,43 +14,43 @@ $location      = $attributes['location'] ?? '';
 $header_color  = $attributes['headerColor'] ?? '#ff4700';
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-schedule-card')
+    array('class' => 'vpinunf-schedule-card')
 );
 ?>
 <div <?php echo $wrapper_attributes; ?>>
 
-    <div class="viceunf-schedule-card__header" style="background-color: <?php echo esc_attr($header_color); ?>;">
-        <div class="viceunf-schedule-card__rings" aria-hidden="true">
-            <div class="viceunf-schedule-card__ring"></div>
-            <div class="viceunf-schedule-card__ring"></div>
-            <div class="viceunf-schedule-card__ring"></div>
-            <div class="viceunf-schedule-card__ring"></div>
-            <div class="viceunf-schedule-card__ring"></div>
+    <div class="vpinunf-schedule-card__header" style="background-color: <?php echo esc_attr($header_color); ?>;">
+        <div class="vpinunf-schedule-card__rings" aria-hidden="true">
+            <div class="vpinunf-schedule-card__ring"></div>
+            <div class="vpinunf-schedule-card__ring"></div>
+            <div class="vpinunf-schedule-card__ring"></div>
+            <div class="vpinunf-schedule-card__ring"></div>
+            <div class="vpinunf-schedule-card__ring"></div>
         </div>
     </div>
 
-    <div class="viceunf-schedule-card__body">
+    <div class="vpinunf-schedule-card__body">
         <?php if ($date) : ?>
-            <div class="viceunf-schedule-card__date">
+            <div class="vpinunf-schedule-card__date">
                 <?php echo wp_kses_post($date); ?>
             </div>
         <?php endif; ?>
 
         <?php if ($session_label) : ?>
-            <h4 class="viceunf-schedule-card__session">
+            <h4 class="vpinunf-schedule-card__session">
                 <?php echo wp_kses_post($session_label); ?>
             </h4>
         <?php endif; ?>
 
         <?php if ($time) : ?>
-            <p class="viceunf-schedule-card__time">
+            <p class="vpinunf-schedule-card__time">
                 <i class="fa-regular fa-clock" aria-hidden="true"></i>
                 <?php echo wp_kses_post($time); ?>
             </p>
         <?php endif; ?>
 
         <?php if ($location) : ?>
-            <p class="viceunf-schedule-card__location">
+            <p class="vpinunf-schedule-card__location">
                 <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                 <?php echo wp_kses_post($location); ?>
             </p>

@@ -1,4 +1,4 @@
-=== ViceUnf ===
+=== VpinUnf ===
 Colaboradores: @nftsaavedra
 Requiere al menos: 4.7
 Probado hasta: 6.8
@@ -10,15 +10,15 @@ Etiquetas: una-columna, dos-columnas, barra-lateral-derecha, cabecera-flexible, 
 
 == Descripción ==
 
-ViceUnf es un tema de WordPress ligero, profesional y flexible, personalizado y adaptado especialmente para la página de la Vicepresidencia de Investigación de la Universidad Nacional de Frontera. Este tema es ideal para portales institucionales, proyectos académicos, blogs y difusión científica, permitiendo crear sitios web modernos y funcionales con un diseño profesional y adaptable a las necesidades de la UNF.
+VpinUnf es un tema de WordPress ligero, profesional y flexible, personalizado y adaptado especialmente para la página de la Vicepresidencia de Investigación de la Universidad Nacional de Frontera. Este tema es ideal para portales institucionales, proyectos académicos, blogs y difusión científica, permitiendo crear sitios web modernos y funcionales con un diseño profesional y adaptable a las necesidades de la UNF.
 
 == Instalación ==
 	
 1. En el panel de administración, ve a Apariencia -> Temas y haz clic en el botón 'Añadir nuevo'.
-2. Escribe ViceUnf en el formulario de búsqueda y presiona 'Enter' en tu teclado.
+2. Escribe VpinUnf en el formulario de búsqueda y presiona 'Enter' en tu teclado.
 3. Haz clic en el botón 'Activar' para usar el nuevo tema de inmediato.
 
 == Derechos de autor ==
 
-Tema WordPress ViceUnf, Copyright 2025, Vice Unf
-ViceUnf se distribuye bajo los términos de la GNU GPL
+Tema WordPress VpinUnf, Copyright 2025, Vice Unf
+VpinUnf se distribuye bajo los términos de la GNU GPL

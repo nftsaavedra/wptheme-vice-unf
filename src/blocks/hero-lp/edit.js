@@ -16,7 +16,7 @@ import {
 } from '@wordpress/components';
 
 /**
- * Componente de edición para el bloque viceunf/hero-lp.
+ * Componente de edición para el bloque vpinunf/hero-lp.
  * Vista del editor: placeholder con configuración completa via InspectorControls.
  *
  * @param {Object} props               Propiedades del bloque.
@@ -48,7 +48,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				{/* ── Fondo ── */}
-				<PanelBody title={ __( 'Fondo', 'viceunf' ) } initialOpen={ true }>
+				<PanelBody title={ __( 'Fondo', 'vpinunf' ) } initialOpen={ true }>
 					<MediaUploadCheck>
 						<MediaUpload
 							onSelect={ ( media ) =>
@@ -63,7 +63,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							allowedTypes={ [ 'image' ] }
 							value={ backgroundImage?.id }
 							render={ ( { open } ) => (
-								<div className="viceunf-media-upload-wrap">
+								<div className="vpinunf-media-upload-wrap">
 									{ backgroundImage?.url ? (
 										<>
 											<img
@@ -77,14 +77,14 @@ export default function Edit( { attributes, setAttributes } ) {
 												onClick={ () => setAttributes( { backgroundImage: {} } ) }
 												style={ { marginBottom: '8px', display: 'block', width: '100%' } }
 											>
-												{ __( 'Quitar imagen', 'viceunf' ) }
+												{ __( 'Quitar imagen', 'vpinunf' ) }
 											</Button>
 										</>
 									) : null }
 									<Button variant="primary" onClick={ open } style={ { width: '100%' } }>
 										{ backgroundImage?.url
-											? __( 'Cambiar imagen de fondo', 'viceunf' )
-											: __( 'Seleccionar imagen de fondo', 'viceunf' ) }
+											? __( 'Cambiar imagen de fondo', 'vpinunf' )
+											: __( 'Seleccionar imagen de fondo', 'vpinunf' ) }
 									</Button>
 								</div>
 							) }
@@ -92,15 +92,15 @@ export default function Edit( { attributes, setAttributes } ) {
 					</MediaUploadCheck>
 
 					<TextControl
-						label={ __( 'URL de video de fondo (opcional)', 'viceunf' ) }
-						help={ __( 'Si se ingresa, el video tendrá prioridad sobre la imagen.', 'viceunf' ) }
+						label={ __( 'URL de video de fondo (opcional)', 'vpinunf' ) }
+						help={ __( 'Si se ingresa, el video tendrá prioridad sobre la imagen.', 'vpinunf' ) }
 						value={ backgroundVideo }
 						onChange={ ( val ) => setAttributes( { backgroundVideo: val } ) }
 						type="url"
 					/>
 
 					<RangeControl
-						label={ __( 'Opacidad del overlay oscuro', 'viceunf' ) }
+						label={ __( 'Opacidad del overlay oscuro', 'vpinunf' ) }
 						value={ overlayOpacity }
 						onChange={ ( val ) => setAttributes( { overlayOpacity: val } ) }
 						min={ 0 }
@@ -110,7 +110,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				{/* ── Logo del Programa ── */}
-				<PanelBody title={ __( 'Logo del Programa', 'viceunf' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Logo del Programa', 'vpinunf' ) } initialOpen={ false }>
 					<MediaUploadCheck>
 						<MediaUpload
 							onSelect={ ( media ) =>
@@ -135,14 +135,14 @@ export default function Edit( { attributes, setAttributes } ) {
 												onClick={ () => setAttributes( { programLogo: {} } ) }
 												style={ { marginBottom: '8px', display: 'block', width: '100%' } }
 											>
-												{ __( 'Quitar logo', 'viceunf' ) }
+												{ __( 'Quitar logo', 'vpinunf' ) }
 											</Button>
 										</>
 									) }
 									<Button variant="primary" onClick={ open } style={ { width: '100%' } }>
 										{ programLogo?.url
-											? __( 'Cambiar logo', 'viceunf' )
-											: __( 'Seleccionar logo', 'viceunf' ) }
+											? __( 'Cambiar logo', 'vpinunf' )
+											: __( 'Seleccionar logo', 'vpinunf' ) }
 									</Button>
 								</div>
 							) }
@@ -151,15 +151,15 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				{/* ── Contenido ── */}
-				<PanelBody title={ __( 'Enlaces de Botones', 'viceunf' ) } initialOpen={ true }>
+				<PanelBody title={ __( 'Enlaces de Botones', 'vpinunf' ) } initialOpen={ true }>
 					<TextControl
-						label={ __( 'URL botón primario', 'viceunf' ) }
+						label={ __( 'URL botón primario', 'vpinunf' ) }
 						value={ ctaPrimaryUrl }
 						onChange={ ( val ) => setAttributes( { ctaPrimaryUrl: val } ) }
 						type="url"
 					/>
 					<TextControl
-						label={ __( 'URL botón secundario (opcional)', 'viceunf' ) }
+						label={ __( 'URL botón secundario (opcional)', 'vpinunf' ) }
 						value={ ctaSecondaryUrl }
 						onChange={ ( val ) => setAttributes( { ctaSecondaryUrl: val } ) }
 						type="url"
@@ -168,33 +168,33 @@ export default function Edit( { attributes, setAttributes } ) {
 
 				{/* ── Colores Avanzados ── */}
 				<PanelColorSettings
-					title={ __( 'Colores de Elementos', 'viceunf' ) }
+					title={ __( 'Colores de Elementos', 'vpinunf' ) }
 					initialOpen={ false }
 					colorSettings={ [
 						{
 							value: subtitleColor,
 							onChange: ( val ) => setAttributes( { subtitleColor: val } ),
-							label: __( 'Color del Subtítulo', 'viceunf' ),
+							label: __( 'Color del Subtítulo', 'vpinunf' ),
 						},
 						{
 							value: ctaPrimaryBgColor,
 							onChange: ( val ) => setAttributes( { ctaPrimaryBgColor: val } ),
-							label: __( 'Fondo de Botón Primario', 'viceunf' ),
+							label: __( 'Fondo de Botón Primario', 'vpinunf' ),
 						},
 						{
 							value: ctaPrimaryTextColor,
 							onChange: ( val ) => setAttributes( { ctaPrimaryTextColor: val } ),
-							label: __( 'Texto de Botón Primario', 'viceunf' ),
+							label: __( 'Texto de Botón Primario', 'vpinunf' ),
 						},
 						{
 							value: ctaSecondaryBorderColor,
 							onChange: ( val ) => setAttributes( { ctaSecondaryBorderColor: val } ),
-							label: __( 'Borde de Botón Secundario', 'viceunf' ),
+							label: __( 'Borde de Botón Secundario', 'vpinunf' ),
 						},
 						{
 							value: ctaSecondaryTextColor,
 							onChange: ( val ) => setAttributes( { ctaSecondaryTextColor: val } ),
-							label: __( 'Texto de Botón Secundario', 'viceunf' ),
+							label: __( 'Texto de Botón Secundario', 'vpinunf' ),
 						},
 					] }
 				/>
@@ -202,7 +202,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			{/* ── Vista del editor ── */}
 			<div
-				className="viceunf-hero-lp-editor-preview"
+				className="vpinunf-hero-lp-editor-preview"
 				style={ {
 					position: 'relative',
 					minHeight: '320px',
@@ -238,14 +238,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						tagName="p"
 						value={ subtitle }
 						onChange={ ( val ) => setAttributes( { subtitle: val } ) }
-						placeholder={ __( 'Subtítulo del Hero...', 'viceunf' ) }
+						placeholder={ __( 'Subtítulo del Hero...', 'vpinunf' ) }
 						style={ { color: subtitleColor, fontWeight: 700, fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.8rem', outline: 'none' } }
 					/>
 					<RichText
 						tagName="h1"
 						value={ title }
 						onChange={ ( val ) => setAttributes( { title: val } ) }
-						placeholder={ __( '[ Título principal del programa ]', 'viceunf' ) }
+						placeholder={ __( '[ Título principal del programa ]', 'vpinunf' ) }
 						style={ { color: '#ffffff', fontSize: '3.6rem', fontWeight: 800, marginBottom: '1.6rem', margin: '0 0 1.6rem', outline: 'none' } }
 					/>
 					<div style={ { display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' } }>
@@ -253,14 +253,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							tagName="span"
 							value={ ctaPrimaryText }
 							onChange={ ( val ) => setAttributes( { ctaPrimaryText: val } ) }
-							placeholder={ __( 'Texto CTA Principal', 'viceunf' ) }
+							placeholder={ __( 'Texto CTA Principal', 'vpinunf' ) }
 							style={ { background: ctaPrimaryBgColor, color: ctaPrimaryTextColor, padding: '1.2rem 3rem', fontWeight: 700, fontSize: '1.5rem', borderRadius: '4px', outline: 'none', cursor: 'text' } }
 						/>
 						<RichText
 							tagName="span"
 							value={ ctaSecondaryText }
 							onChange={ ( val ) => setAttributes( { ctaSecondaryText: val } ) }
-							placeholder={ __( 'Texto CTA Secundario', 'viceunf' ) }
+							placeholder={ __( 'Texto CTA Secundario', 'vpinunf' ) }
 							style={ { border: `2px solid ${ctaSecondaryBorderColor}`, color: ctaSecondaryTextColor, padding: '1.2rem 3rem', fontWeight: 700, fontSize: '1.5rem', borderRadius: '4px', outline: 'none', cursor: 'text' } }
 						/>
 					</div>

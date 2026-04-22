@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/hero-lp.
+ * Render del bloque vpinunf/hero-lp.
  *
  * @param array    $attributes Atributos del bloque, sanitizados.
  * @param string   $content    Contenido de InnerBlocks (no aplica).
@@ -40,14 +40,14 @@ if ($background_image && ! empty($background_image['url'])) {
 }
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-hero-lp')
+    array('class' => 'vpinunf-hero-lp')
 );
 ?>
 <section <?php echo $wrapper_attributes; ?> style="<?php echo esc_attr($bg_style); ?>">
 
     <?php if ($background_video) : ?>
         <video
-            class="viceunf-hero-lp__bg-video"
+            class="vpinunf-hero-lp__bg-video"
             autoplay
             muted
             loop
@@ -58,14 +58,14 @@ $wrapper_attributes = get_block_wrapper_attributes(
     <?php endif; ?>
 
     <div
-        class="viceunf-hero-lp__overlay"
+        class="vpinunf-hero-lp__overlay"
         aria-hidden="true"
         style="background-color: rgba(14,20,34,<?php echo esc_attr($overlay_opacity); ?>);"></div>
 
-    <div class="viceunf-hero-lp__inner dt-container">
+    <div class="vpinunf-hero-lp__inner dt-container">
 
         <?php if (! empty($program_logo['url'])) : ?>
-            <div class="viceunf-hero-lp__logo">
+            <div class="vpinunf-hero-lp__logo">
                 <img
                     src="<?php echo esc_url($program_logo['url']); ?>"
                     alt="<?php echo esc_attr($program_logo['alt'] ?? ''); ?>"
@@ -74,19 +74,19 @@ $wrapper_attributes = get_block_wrapper_attributes(
         <?php endif; ?>
 
         <?php if ($subtitle) : ?>
-            <p class="viceunf-hero-lp__subtitle" style="color: <?php echo esc_attr($subtitle_color); ?>;">
+            <p class="vpinunf-hero-lp__subtitle" style="color: <?php echo esc_attr($subtitle_color); ?>;">
                 <?php echo wp_kses_post($subtitle); ?>
             </p>
         <?php endif; ?>
 
         <?php if ($title) : ?>
-            <h1 class="viceunf-hero-lp__title">
+            <h1 class="vpinunf-hero-lp__title">
                 <?php echo wp_kses_post($title); ?>
             </h1>
         <?php endif; ?>
 
         <?php if ($cta_primary_text || $cta_secondary_text) : ?>
-            <div class="viceunf-hero-lp__actions">
+            <div class="vpinunf-hero-lp__actions">
                 <?php if ($cta_primary_text && $cta_primary_url) : ?>
                     <a
                         href="<?php echo esc_url($cta_primary_url); ?>"

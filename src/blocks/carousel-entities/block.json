@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/carousel-entities",
+  "name": "vpinunf/carousel-entities",
   "version": "1.0.0",
   "title": "Carrusel de Entidades",
   "category": "theme",
@@ -47,7 +47,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

@@ -1,8 +1,8 @@
 @use "../../scss/base/mixins" as *;
 /* =================================================================
-   ViceUnf - Block: Carousel Entities
+   VpinUnf - Block: Carousel Entities
 ================================================================= */
-.viceunf-carousel-entities-block {
+.vpinunf-carousel-entities-block {
   .dt-partner-header-classic {
     display: flex;
     align-items: center;
@@ -21,7 +21,7 @@
     .dt-partner-line {
       flex-grow: 1;
       height: 1px;
-      background-color: var(--viceunf-border-color, #eaeaea);
+      background-color: var(--vpinunf-border-color, #eaeaea);
     }
 
     .dt-partner-btn-classic {
@@ -29,7 +29,7 @@
       margin: 0;
       width: clamp(40px, 5vw, 48px);
       height: clamp(40px, 5vw, 48px);
-      background-color: var(--viceunf-surface-alt, #f1f5f9);
+      background-color: var(--vpinunf-surface-alt, #f1f5f9);
       color: var(--dt-sec-color, #0b2346);
       border-radius: 50%;
       display: flex;
@@ -46,14 +46,14 @@
 
       &:hover {
         background-color: var(--dt-pri-color, #00794e);
-        color: var(--viceunf-surface, #ffffff);
+        color: var(--vpinunf-surface, #ffffff);
       }
 
       &.swiper-button-disabled {
         opacity: 0.5;
         cursor: not-allowed;
         &:hover {
-          background-color: var(--viceunf-surface-alt, #f1f5f9);
+          background-color: var(--vpinunf-surface-alt, #f1f5f9);
           color: var(--dt-sec-color, #0b2346);
         }
       }
@@ -69,7 +69,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--viceunf-border-color, #eaeaea);
+      border: 1px solid var(--vpinunf-border-color, #eaeaea);
       padding: 1rem; /* Padding más compacto */
 
       /* Responsive box height sizing */
@@ -79,7 +79,7 @@
       margin: 0; /* Delegado a spaceBetween de Swiper */
       overflow: hidden; /* Garantiza que ningún logo se desborde visualmente por los márgenes de imagen */
 
-      background: var(--viceunf-surface, #ffffff);
+      background: var(--vpinunf-surface, #ffffff);
       transition:
         border-color 0.3s ease,
         box-shadow 0.3s ease;

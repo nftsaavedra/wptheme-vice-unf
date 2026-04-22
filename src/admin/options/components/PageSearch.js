@@ -14,7 +14,7 @@ import apiFetch from '@wordpress/api-fetch';
  */
 export function PageSearch({ value, valueTitle, onChange, placeholder = 'Escribe para buscar una página...' }) {
     const [open, setOpen] = useState(false);
-    const { query, setQuery, results, loading } = useAjaxSearch('viceunf_search_pages_only');
+    const { query, setQuery, results, loading } = useAjaxSearch('vpinunf_search_pages_only');
     const inputRef = useRef(null);
     const fetchAttemptedFor = useRef(0);
 

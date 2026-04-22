@@ -1,5 +1,5 @@
 @use "../../scss/base/mixins" as *;
-.viceunf-benefit-card {
+.vpinunf-benefit-card {
 	position: relative;
 	border-radius: 1.2rem;
 	padding: clamp(2rem, 4vw, 3.2rem) clamp(1.5rem, 3vw, 2.4rem);
@@ -30,7 +30,7 @@
             border-color: rgba(255, 255, 255, 0.15); // Slightly stronger highlight
 
             // Icon hover micro-animation
-            .viceunf-benefit-card__icon-wrap i {
+            .vpinunf-benefit-card__icon-wrap i {
                 transform: scale(1.15) rotate(5deg);
                 color: var(--dt-whi-color);
             }

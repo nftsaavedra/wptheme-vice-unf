@@ -8,7 +8,7 @@ import metadata from './block.json';
 
 /* ─── Hook AJAX (portado desde admin/options) ─── */
 const AJAX_URL = window.ajaxurl || '/wp-admin/admin-ajax.php';
-const NONCE = window.viceunf_ajax_obj?.nonce || '';
+const NONCE = window.vpinunf_ajax_obj?.nonce || '';
 
 function useAjaxSearch(action, delay = 450) {
   const [query, setQuery] = useState("");
@@ -18,7 +18,7 @@ function useAjaxSearch(action, delay = 450) {
   const abortRef = useRef(null);
 
   useEffect(() => {
-    if (query.length < 2 && action !== "viceunf_search_icons") {
+    if (query.length < 2 && action !== "vpinunf_search_icons") {
       setResults([]);
       return;
     }
@@ -54,7 +54,7 @@ function useAjaxSearch(action, delay = 450) {
 /* ─── IconPicker ─── */
 function IconPicker({ value, onChange }) {
   const [open, setOpen] = useState(false);
-  const { query, setQuery, results, loading } = useAjaxSearch("viceunf_search_icons");
+  const { query, setQuery, results, loading } = useAjaxSearch("vpinunf_search_icons");
 
   const select = (iconClass) => {
     onChange(iconClass);
@@ -120,7 +120,7 @@ function Edit( { attributes, setAttributes } ) {
 	const { icon, iconColor, title, description, gradientStart, gradientEnd } = attributes;
 
 	const blockProps = useBlockProps( {
-		className: 'viceunf-benefit-card',
+		className: 'vpinunf-benefit-card',
 		style: {
 			background: `linear-gradient(135deg, ${ gradientStart } 0%, ${ gradientEnd } 100%)`,
 		},
@@ -129,26 +129,26 @@ function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Configuración Visual', 'viceunf' ) }>
-					<BaseControl label={ __( 'Selección de Ícono', 'viceunf' ) }>
+				<PanelBody title={ __( 'Configuración Visual', 'vpinunf' ) }>
+					<BaseControl label={ __( 'Selección de Ícono', 'vpinunf' ) }>
                         <IconPicker value={icon} onChange={ ( val ) => setAttributes( { icon: val } ) } />
                     </BaseControl>
-					<p style={ { fontSize: '12px', marginBottom: '8px', marginTop: '16px' } }>{ __( 'Color del Ícono', 'viceunf' ) }</p>
+					<p style={ { fontSize: '12px', marginBottom: '8px', marginTop: '16px' } }>{ __( 'Color del Ícono', 'vpinunf' ) }</p>
 					<ColorPalette
 						value={ iconColor }
 						onChange={ ( val ) => setAttributes( { iconColor: val } ) }
 					/>
 					<p style={ { fontSize: '13px', color: '#666', marginTop: '16px' } }>
-						{ __( 'Nota: Edita el Título y la Descripción haciendo clic directamente en la tarjeta (WYSIWYG).', 'viceunf' ) }
+						{ __( 'Nota: Edita el Título y la Descripción haciendo clic directamente en la tarjeta (WYSIWYG).', 'vpinunf' ) }
 					</p>
 				</PanelBody>
-				<PanelBody title={ __( 'Color de Fondo (Degradado)', 'viceunf' ) } initialOpen={ false }>
-					<p style={ { fontSize: '12px', marginBottom: '8px' } }>{ __( 'Color inicio', 'viceunf' ) }</p>
+				<PanelBody title={ __( 'Color de Fondo (Degradado)', 'vpinunf' ) } initialOpen={ false }>
+					<p style={ { fontSize: '12px', marginBottom: '8px' } }>{ __( 'Color inicio', 'vpinunf' ) }</p>
 					<ColorPalette
 						value={ gradientStart }
 						onChange={ ( val ) => setAttributes( { gradientStart: val } ) }
 					/>
-					<p style={ { fontSize: '12px', marginBottom: '8px', marginTop: '16px' } }>{ __( 'Color fin', 'viceunf' ) }</p>
+					<p style={ { fontSize: '12px', marginBottom: '8px', marginTop: '16px' } }>{ __( 'Color fin', 'vpinunf' ) }</p>
 					<ColorPalette
 						value={ gradientEnd }
 						onChange={ ( val ) => setAttributes( { gradientEnd: val } ) }
@@ -157,24 +157,24 @@ function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				<div className="viceunf-benefit-card__icon-wrap">
+				<div className="vpinunf-benefit-card__icon-wrap">
 					<i className={ icon } style={{ color: iconColor }} aria-hidden="true"></i>
 				</div>
 				<RichText
 					tagName="h3"
-					className="viceunf-benefit-card__title"
+					className="vpinunf-benefit-card__title"
 					value={ title }
 					allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
 					onChange={ ( val ) => setAttributes( { title: val } ) }
-					placeholder={ __( 'Título del beneficio', 'viceunf' ) }
+					placeholder={ __( 'Título del beneficio', 'vpinunf' ) }
 				/>
 				<RichText
 					tagName="p"
-					className="viceunf-benefit-card__desc"
+					className="vpinunf-benefit-card__desc"
 					value={ description }
 					allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
 					onChange={ ( val ) => setAttributes( { description: val } ) }
-					placeholder={ __( 'Descripción corta del beneficio.', 'viceunf' ) }
+					placeholder={ __( 'Descripción corta del beneficio.', 'vpinunf' ) }
 				/>
 			</div>
 		</>

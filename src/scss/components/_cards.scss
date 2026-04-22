@@ -1,15 +1,15 @@
 /* =================================================================
-   ViceUnf Form System: Card UI (Modern Surface System)
+   VpinUnf Form System: Card UI (Modern Surface System)
    Global Utilities for standardized aesthetic layouts
 ================================================================= */
 
-body.viceunf-bg-canvas,
-.viceunf-bg-canvas {
+body.vpinunf-bg-canvas,
+.vpinunf-bg-canvas {
   background-color: #f8fafc !important; /* Tailwind Slate-50 */
 }
 
 /* Base Card Structural Surface */
-.viceunf-card-surface {
+.vpinunf-card-surface {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
@@ -21,14 +21,14 @@ body.viceunf-bg-canvas,
 }
 
 @media (min-width: 992px) {
-  .viceunf-card-surface {
+  .vpinunf-card-surface {
     padding: 4.5rem 5rem;
   }
 }
 
 /* Card Visual Variants */
-.viceunf-card-surface:hover.viceunf-card-hoverable,
-.viceunf-card-surface:focus-within.viceunf-card-hoverable {
+.vpinunf-card-surface:hover.vpinunf-card-hoverable,
+.vpinunf-card-surface:focus-within.vpinunf-card-hoverable {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0, 121, 78, 0.08); /* Uso muy leve del Primary Color */
   transition:
@@ -37,7 +37,7 @@ body.viceunf-bg-canvas,
 }
 
 /* Interactive Soft Cards for Smaller items (like related posts) */
-.viceunf-card-soft {
+.vpinunf-card-soft {
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
@@ -49,13 +49,13 @@ body.viceunf-bg-canvas,
   word-break: break-word;
 }
 
-.viceunf-card-soft:hover {
+.vpinunf-card-soft:hover {
   border-color: #cbd5e1;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 /* Typography Inside Cards */
-.viceunf-card-title {
+.vpinunf-card-title {
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 800;
   color: var(--dt-sec-color);
@@ -63,14 +63,14 @@ body.viceunf-bg-canvas,
   margin-bottom: clamp(1rem, 3vw, 2rem);
 }
 
-.viceunf-card-header {
+.vpinunf-card-header {
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 2rem;
   margin-bottom: 2.5rem;
 }
 
 /* Meta Data Pills (Badges/Chips) */
-.viceunf-card-chip {
+.vpinunf-card-chip {
   display: inline-flex;
   background-color: rgba(0, 121, 78, 0.08);
   color: var(--dt-pri-color);
@@ -87,8 +87,8 @@ body.viceunf-bg-canvas,
     color 0.2s ease;
 }
 
-a.viceunf-card-chip:hover,
-a.viceunf-card-chip:focus {
+a.vpinunf-card-chip:hover,
+a.vpinunf-card-chip:focus {
   background-color: var(--dt-pri-color);
   color: var(--dt-whi-color);
   text-decoration: none;
@@ -124,11 +124,11 @@ a.viceunf-card-chip:focus {
    Blog Listing Card Image System
    Restored: Homogeneous card imagery using rigorous bounding box
 ================================================================= */
-.viceunf-card-soft .image,
+.vpinunf-card-soft .image,
 .dt_post_item:not(.single-post) .image {
   position: relative;
   overflow: hidden;
-  border-radius: var(--viceunf-radius-md, 8px) var(--viceunf-radius-md, 8px) 0 0;
+  border-radius: var(--vpinunf-radius-md, 8px) var(--vpinunf-radius-md, 8px) 0 0;
   height: clamp(180px, 18vw, 220px);
   width: 100%;
   max-width: 100%;
@@ -146,15 +146,15 @@ a.viceunf-card-chip:focus {
   }
 }
 
-.viceunf-card-soft .inner {
+.vpinunf-card-soft .inner {
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.viceunf-card-soft .title {
+.vpinunf-card-soft .title {
   margin-bottom: 1rem;
 }
 
-.viceunf-card-soft .title a {
+.vpinunf-card-soft .title a {
   color: var(--dt-sec-color);
   text-decoration: none;
   font-weight: 700;
@@ -166,17 +166,17 @@ a.viceunf-card-chip:focus {
   }
 }
 
-.viceunf-card-soft .content p {
+.vpinunf-card-soft .content p {
   color: #64748b;
   line-height: 1.7;
   margin-bottom: 1rem;
 }
 
-.viceunf-card-soft .more-link {
+.vpinunf-card-soft .more-link {
   color: var(--dt-pri-color);
   font-weight: 600;
   text-decoration: none;
-  font-size: var(--viceunf-font-sm, 1.4rem);
+  font-size: var(--vpinunf-font-sm, 1.4rem);
   transition: letter-spacing 0.2s ease;
 
   &:hover,

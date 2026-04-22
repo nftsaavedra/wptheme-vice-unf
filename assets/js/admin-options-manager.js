@@ -1,6 +1,6 @@
 /**
  * =================================================================
- * Gestor de la Página de Opciones del Tema ViceUnf (Vanilla JS)
+ * Gestor de la Página de Opciones del Tema VpinUnf (Vanilla JS)
  * =================================================================
  * Gestiona la funcionalidad del selector de imágenes y del campo
  * @version 1.1.0
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function initializeOptionsPage() {
     // Inicializa todos los selectores de imagen.
     document
-      .querySelectorAll(".viceunf-image-uploader")
+      .querySelectorAll(".vpinunf-image-uploader")
       .forEach(initImageUploader);
 
     // Inicializa el repetidor.

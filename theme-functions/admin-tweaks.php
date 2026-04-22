@@ -45,11 +45,11 @@ add_action('init', function () {
  * ENDPOINT AJAX PARA BÚSQUEDA DE ICONOS DESDE UN ARCHIVO JSON
  * =================================================================
  */
-add_action('wp_ajax_viceunf_search_icons', 'viceunf_ajax_search_icons_handler');
+add_action('wp_ajax_vpinunf_search_icons', 'vpinunf_ajax_search_icons_handler');
 
-function viceunf_ajax_search_icons_handler()
+function vpinunf_ajax_search_icons_handler()
 {
-    check_ajax_referer('viceunf_ajax_nonce_action', 'nonce');
+    check_ajax_referer('vpinunf_ajax_nonce_action', 'nonce');
 
     if (!current_user_can('edit_themes') && !current_user_can('edit_posts')) {
         wp_send_json_error('Privilegios insuficientes para ejecutar esta acción.', 403);
@@ -61,7 +61,7 @@ function viceunf_ajax_search_icons_handler()
         wp_send_json_success([]);
     }
 
-    $icons_list = get_transient('viceunf_icons_json');
+    $icons_list = get_transient('vpinunf_icons_json');
 
     if (false === $icons_list) {
         $icons_json_path = get_stylesheet_directory() . '/assets/data/fontawesome-icons.json';
@@ -84,7 +84,7 @@ function viceunf_ajax_search_icons_handler()
             wp_send_json_error('Formato de JSON de iconos inválido.');
         }
 
-        set_transient('viceunf_icons_json', $icons_list, WEEK_IN_SECONDS);
+        set_transient('vpinunf_icons_json', $icons_list, WEEK_IN_SECONDS);
     }
 
     $results = [];

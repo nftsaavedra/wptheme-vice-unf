@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/timeline-step",
+  "name": "vpinunf/timeline-step",
   "version": "1.0.0",
-  "title": "ViceUnf - Paso del Timeline",
-  "category": "viceunf-blocks",
+  "title": "VpinUnf - Paso del Timeline",
+  "category": "vpinunf-blocks",
   "icon": "marker",
   "description": "Paso individual del timeline con número, título, descripción e ícono opcional. Solo para usar dentro de Visual Timeline.",
   "attributes": {
@@ -52,7 +52,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vpinunf/home-slider",
+  "version": "1.0.0",
+  "title": "Portada — Hero Slider",
+  "category": "theme",
+  "icon": "slides",
+  "description": "Slider hero de la portada. Slides configurables con imagen, texto, botones y video. 100% FSE nativo.",
+  "attributes": {
+    "autoplayDelay":   { "type": "number",  "default": 5000 },
+    "effect":          { "type": "string",  "default": "fade" },
+    "loop":            { "type": "boolean", "default": true },
+    "showNavigation":  { "type": "boolean", "default": true },
+    "showPagination":  { "type": "boolean", "default": true }
+  },
+  "supports": {
+    "html": false,
+    "align": ["full"],
+    "spacing": { "margin": true }
+  },
+  "textdomain": "vpinunf",
+  "editorScript": "file:./index.js",
+  "viewScript":   "file:./view.js",
+  "style":        "file:./style-index.css",
+  "render":       "file:./render.php"
+}

@@ -3,7 +3,7 @@
    Recent Posts Block Styles (Theme Widget Style Restored)
    ============================================= */
 
-.wp-block-viceunf-recent-posts {
+.wp-block-vpinunf-recent-posts {
     /* El contenedor global (.widget) ya es proveído por el Sidebar de WordPress.
        Por lo tanto, el bloque en sí NO debe tener padding ni fondos, para evitar 
        el error de "caja dentro de caja". */
@@ -33,7 +33,7 @@
 
     .widget-title {
         margin-bottom: 1.5rem;
-        font-size: var(--viceunf-fs-lg, 1.8rem);
+        font-size: var(--vpinunf-fs-lg, 1.8rem);
         font-weight: 700;
         color: var(--dt-sec-color, #0b2346);
     }

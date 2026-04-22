@@ -1,5 +1,5 @@
 {
-  "name": "viceunf",
+  "name": "vpinunf",
   "version": "1.0.0",
   "description": "",
   "homepage": "https://github.com/nftsaavedra/wptheme-vice-unf#readme",
@@ -29,7 +29,7 @@
     "optimize:css": "postcss assets/css/*.css assets/vendors/css/*.css --dir build/assets/css --use autoprefixer --use cssnano",
     "optimize:js": "terser assets/js/*.js assets/vendors/js/*.js --compress --mangle --output build/assets/theme_bundle.js",
     "generate:sw": "node build/generate-sw.js",
-    "package": "cd build && cp -r ../assets ../theme-functions ../*.php . && zip -r ../viceunf-theme-v1.0.0-prod.zip .",
+    "package": "cd build && cp -r ../assets ../theme-functions ../*.php . && zip -r ../vpinunf-theme-v1.0.0-prod.zip .",
     "test:production": "php build/test-production.php"
   },
   "devDependencies": {

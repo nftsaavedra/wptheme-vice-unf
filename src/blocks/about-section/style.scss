@@ -1,9 +1,9 @@
 @use "../../scss/base/mixins" as *;
 /* =================================================================
-   ViceUnf - Block: About Section
+   VpinUnf - Block: About Section
    Ajustes aislados para alinear el borde circular con la imagen.
 ================================================================= */
-.wp-block-viceunf-about-section {
+.wp-block-vpinunf-about-section {
   .dt_image_block {
     position: relative;
   }
@@ -46,9 +46,9 @@
   }
 
   .about-block-video .dt-btn-play.dt-btn-primary {
-    background-color: var(--viceunf-play-accent) !important;
+    background-color: var(--vpinunf-play-accent) !important;
     border-color: transparent !important;
-    color: var(--viceunf-play-accent) !important;
+    color: var(--vpinunf-play-accent) !important;
 
     i {
       color: #ffffff !important;

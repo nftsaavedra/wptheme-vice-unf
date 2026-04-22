@@ -55,7 +55,7 @@ registerBlockType(metadata.name, {
                      onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(0,121,78,0.3)'}
                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}>
                     <ServerSideRender
-                        block="viceunf/organigrama"
+                        block="vpinunf/organigrama"
                         attributes={ attributes }
                         LoadingResponsePlaceholder={ () => (
                             <div style={{ textAlign: 'center', padding: '20px' }}>

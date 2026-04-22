@@ -10,32 +10,32 @@
       "custom": false,
       "palette": [
         {
-          "slug": "viceunf-primary",
+          "slug": "vpinunf-primary",
           "color": "#122a61",
           "name": "Azul Institucional"
         },
         {
-          "slug": "viceunf-secondary",
+          "slug": "vpinunf-secondary",
           "color": "#ea5a0b",
           "name": "Naranja Institucional"
         },
         {
-          "slug": "viceunf-tertiary",
+          "slug": "vpinunf-tertiary",
           "color": "#00794e",
           "name": "Verde Institucional"
         },
         {
-          "slug": "viceunf-legacy-pri2",
+          "slug": "vpinunf-legacy-pri2",
           "color": "#2d4260",
           "name": "Azul Obscuro"
         },
         {
-          "slug": "viceunf-legacy-sec",
+          "slug": "vpinunf-legacy-sec",
           "color": "#0b2346",
           "name": "Azul Medianoche"
         },
         {
-          "slug": "viceunf-light",
+          "slug": "vpinunf-light",
           "color": "#fefbfa",
           "name": "Fondo Claro"
         },
@@ -139,13 +139,13 @@
         "variations": {
           "outline": {
             "border": {
-              "color": "var(--wp--preset--color--viceunf-tertiary)",
+              "color": "var(--wp--preset--color--vpinunf-tertiary)",
               "style": "solid",
               "width": "2px"
             },
             "color": {
               "background": "transparent",
-              "text": "var(--wp--preset--color--viceunf-tertiary)"
+              "text": "var(--wp--preset--color--vpinunf-tertiary)"
             }
           }
         }
@@ -155,7 +155,7 @@
       "button": {
         ":hover": {
           "color": {
-            "background": "var(--wp--preset--color--viceunf-secondary)",
+            "background": "var(--wp--preset--color--vpinunf-secondary)",
             "text": "var(--wp--preset--color--white)"
           }
         }
@@ -175,6 +175,10 @@
     }
   ],
   "customTemplates": [
+    {
+      "name": "front-page",
+      "title": "Portada (Frontpage)"
+    },
     {
       "name": "index",
       "title": "Inicio (Fallback)"

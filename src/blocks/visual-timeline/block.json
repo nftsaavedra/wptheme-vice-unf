@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/visual-timeline",
+  "name": "vpinunf/visual-timeline",
   "version": "1.0.0",
-  "title": "ViceUnf - Timeline Visual",
-  "category": "viceunf-blocks",
+  "title": "VpinUnf - Timeline Visual",
+  "category": "vpinunf-blocks",
   "icon": "list-view",
   "description": "Timeline visual con línea central vertical y pasos alternados izquierda/derecha (desktop) o apilados (móvil). Cada paso es configurable con color de acento.",
   "attributes": {
@@ -43,7 +43,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/footer-cta.
+ * Render del bloque vpinunf/footer-cta.
  *
  * @param array    $attributes Atributos del bloque.
  * @param string   $content    N/A — Sin InnerBlocks.
@@ -38,30 +38,30 @@ if ($show_logos) {
 }
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-footer-cta')
+    array('class' => 'vpinunf-footer-cta')
 );
 ?>
 <section <?php echo $wrapper_attributes; ?> style="<?php echo esc_attr($section_style); ?>">
     <div class="dt-container">
-        <div class="viceunf-footer-cta__inner">
+        <div class="vpinunf-footer-cta__inner">
 
             <?php if ($title) : ?>
-                <h2 class="viceunf-footer-cta__title">
+                <h2 class="vpinunf-footer-cta__title">
                     <?php echo wp_kses_post($title); ?>
                 </h2>
             <?php endif; ?>
 
             <?php if ($subtitle) : ?>
-                <p class="viceunf-footer-cta__subtitle">
+                <p class="vpinunf-footer-cta__subtitle">
                     <?php echo wp_kses_post($subtitle); ?>
                 </p>
             <?php endif; ?>
 
             <?php if ($button_text && $button_url) : ?>
-                <div class="viceunf-footer-cta__btn-wrap">
+                <div class="vpinunf-footer-cta__btn-wrap">
                     <a
                         href="<?php echo esc_url($button_url); ?>"
-                        class="dt-btn dt-btn-primary viceunf-footer-cta__btn btn--effect-one"
+                        class="dt-btn dt-btn-primary vpinunf-footer-cta__btn btn--effect-one"
                         style="<?php echo esc_attr($btn_style); ?>">
                         <span class="dt-btn-text"><?php echo wp_kses_post($button_text); ?></span>
                     </a>
@@ -69,7 +69,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
             <?php endif; ?>
 
             <?php if ($show_logos && $site_logo_html) : ?>
-                <div class="viceunf-footer-cta__logos" aria-label="<?php esc_attr_e('Logos institucionales', 'viceunf'); ?>">
+                <div class="vpinunf-footer-cta__logos" aria-label="<?php esc_attr_e('Logos institucionales', 'vpinunf'); ?>">
                     <?php echo $site_logo_html; ?>
                 </div>
             <?php endif; ?>

@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/hero-lp",
+  "name": "vpinunf/hero-lp",
   "version": "1.0.0",
-  "title": "ViceUnf - Hero Landing Page",
-  "category": "viceunf-blocks",
+  "title": "VpinUnf - Hero Landing Page",
+  "category": "vpinunf-blocks",
   "icon": "cover-image",
   "description": "Cabecera de alto impacto para páginas de aterrizaje con imagen/video de fondo, logo del programa y botones CTA configurables.",
   "attributes": {
@@ -94,7 +94,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

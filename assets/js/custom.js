@@ -261,7 +261,7 @@ function initSwiperCarousels() {
                 swiperInstance.on('slideChange', () => updateSliderThumbnav(swiperInstance, el));
             }
         } catch (e) {
-            console.error('[ViceUnf] Error al inicializar Swiper:', e);
+            console.error('[VpinUnf] Error al inicializar Swiper:', e);
         }
     });
 }

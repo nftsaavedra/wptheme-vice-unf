@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Render del bloque viceunf/logo-partners.
+ * Render del bloque vpinunf/logo-partners.
  * Lee los logos desde el CPT 'socio' (plugin vpinunf-core).
+ * Obtiene las configuraciones (título y visibilidad) de las opciones de tema.
  *
  * Dependencia: Post Type 'socio' registrado en el plugin vpinunf-core.
  * Si el plugin no está activo, el bloque muestra un mensaje de fallback.
@@ -11,8 +12,12 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-$section_title    = $attributes['sectionTitle'] ?? '';
-$grayscale        = $attributes['grayscaleDefault'] ?? true;
+$theme_options = get_option( 'vpinunf_theme_options', [] );
+if ( empty( $theme_options['socios_section_enabled'] ) ) {
+    return;
+}
+
+$section_title = $theme_options['vpinunf_socios_titulo'] ?? '';
 
 // Verificar que el CPT 'socio' está registrado antes de consultar.
 if (! post_type_exists('socio')) {
@@ -30,22 +35,24 @@ if (! $socios->have_posts()) {
     return;
 }
 
-$grayscale_class = $grayscale ? 'viceunf-logo-partners--grayscale' : '';
+// Configuración visual extra si se requiere
+$grayscale        = true; // Por defecto dejamos grayscale
+$grayscale_class  = $grayscale ? 'vpinunf-logo-partners--grayscale' : '';
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-logo-partners ' . $grayscale_class)
+    array('class' => 'vpinunf-logo-partners ' . $grayscale_class)
 );
 ?>
 <section <?php echo $wrapper_attributes; ?>>
     <div class="dt-container">
 
         <?php if ($section_title) : ?>
-            <h2 class="viceunf-logo-partners__title">
+            <h2 class="vpinunf-logo-partners__title" style="text-align: center; margin-bottom: 2rem;">
                 <?php echo wp_kses_post($section_title); ?>
             </h2>
         <?php endif; ?>
 
-        <div class="viceunf-logo-partners__track">
+        <div class="vpinunf-logo-partners__track">
             <?php while ($socios->have_posts()) : $socios->the_post();
                 $post_id   = get_the_ID();
                 $logo_id   = get_post_thumbnail_id($post_id);
@@ -61,7 +68,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                     'medium',
                     false,
                     array(
-                        'class' => 'viceunf-logo-partners__img',
+                        'class' => 'vpinunf-logo-partners__img',
                         'alt'   => esc_attr($name),
                         'loading' => 'lazy',
                     )
@@ -70,7 +77,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
                 $tag      = $link ? 'a' : 'div';
                 $href_attr = $link ? ' href="' . esc_url($link) . '" target="_blank" rel="noopener noreferrer"' : '';
             ?>
-                <<?php echo $tag; ?> class="viceunf-logo-partners__item" <?php echo $href_attr; ?>>
+                <<?php echo $tag; ?> class="vpinunf-logo-partners__item" <?php echo $href_attr; ?>>
                     <?php echo $logo_img; ?>
                 </<?php echo $tag; ?>>
             <?php endwhile;

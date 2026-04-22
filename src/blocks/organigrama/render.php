@@ -15,13 +15,13 @@ $parent_id = isset($attributes['parentId']) ? (int) $attributes['parentId'] : 0;
 $service   = new \VpinUnf\Core\Service\DependenciaService();
 $tree      = $service->get_dependencia_tree($parent_id);
 
-$wrapper_attributes = get_block_wrapper_attributes(['class' => 'viceunf-organigrama']);
+$wrapper_attributes = get_block_wrapper_attributes(['class' => 'vpinunf-organigrama']);
 
 /**
  * Función recursiva para dibujar el HTML del árbol.
  */
-if (! function_exists('viceunf_render_org_node')) {
-    function viceunf_render_org_node(array $node) {
+if (! function_exists('vpinunf_render_org_node')) {
+    function vpinunf_render_org_node(array $node) {
         $html = '<li class="org-node-item">';
         
         $tag = (!empty($node['permalink']) && $node['id'] > 0) ? 'a' : 'div';
@@ -58,7 +58,7 @@ if (! function_exists('viceunf_render_org_node')) {
         if (!empty($node['children'])) {
             $html .= '<ul class="org-children">';
             foreach ($node['children'] as $child) {
-                $html .= viceunf_render_org_node($child);
+                $html .= vpinunf_render_org_node($child);
             }
             $html .= '</ul>';
         }
@@ -76,7 +76,7 @@ if (! function_exists('viceunf_render_org_node')) {
     <?php else : ?>
         <div class="org-chart-wrapper">
             <ul class="org-root">
-                <?php echo viceunf_render_org_node($tree); ?>
+                <?php echo vpinunf_render_org_node($tree); ?>
             </ul>
         </div>
     <?php endif; ?>

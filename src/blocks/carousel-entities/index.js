@@ -29,7 +29,7 @@ registerBlockType(metadata.name, {
             }));
 
         const blockProps = useBlockProps({
-            className: 'viceunf-carousel-entities-editor-preview'
+            className: 'vpinunf-carousel-entities-editor-preview'
         });
 
         // Buscamos el nombre del CPT seleccionado para mostrar en el preview

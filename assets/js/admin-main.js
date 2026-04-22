@@ -1,9 +1,9 @@
 // assets/js/admin-main.js
 
 /**
- * Módulo para gestionar la interactividad de los meta-boxes de ViceUnf.
+ * Módulo para gestionar la interactividad de los meta-boxes de VpinUnf.
  */
-function viceunfAdminMetaboxes() {
+function vpinunfAdminMetaboxes() {
   /**
    * Gestiona la lógica para el meta-box de Reglamentos.
    */
@@ -126,7 +126,7 @@ function viceunfAdminMetaboxes() {
    * Compatible con WP 7.0 / jQuery 4.0.
    */
   function initColorPicker() {
-    const colorInputs = document.querySelectorAll(".viceunf-color-picker");
+    const colorInputs = document.querySelectorAll(".vpinunf-color-picker");
     if (!colorInputs.length) return;
 
     colorInputs.forEach((input) => {
@@ -164,7 +164,7 @@ function viceunfAdminMetaboxes() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", viceunfAdminMetaboxes);
+  document.addEventListener("DOMContentLoaded", vpinunfAdminMetaboxes);
 } else {
-  viceunfAdminMetaboxes();
+  vpinunfAdminMetaboxes();
 }

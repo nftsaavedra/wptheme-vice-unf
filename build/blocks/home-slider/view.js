@@ -1,0 +1,1 @@
+(()=>{"use strict";document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelectorAll(".dt_slider .dt_swiper_carousel.slider");e.length&&e.forEach(e=>{let t={};try{t=JSON.parse(e.dataset.swiperOptions||"{}")}catch(e){}"undefined"!=typeof Swiper&&new Swiper(e,t)})})})();

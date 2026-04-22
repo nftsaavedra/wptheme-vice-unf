@@ -1,15 +1,15 @@
 @charset "UTF-8";
 /*
-Theme Name: 	   ViceUnf
-Text Domain: 	   viceunf
+Theme Name: 	   VpinUnf
+Text Domain: 	   vpinunf
 Version:            1.1.0
 Tested up to:       7.0
 Requires at least:  4.7
 Requires PHP:       7.4
 Author:             @nftsaavedra
 Author URI:         https://viceinvestigacion.unf.edu.pe/
-Theme URI:          https://viceinvestigacion.unf.edu.pe/themes/viceunf/
-Description:        ViceUnf es un tema de WordPress ligero, profesional, flexible y visualmente atractivo. ViceUnf es ideal para portales institucionales, soluciones tecnológicas, agencias, marketing, consultoría y empresas de servicios. Basado en un análisis profundo de las necesidades de la Vicepresidencia de Investigación de la Universidad Nacional de Frontera, permite crear sitios web modernos y funcionales con un diseño profesional y adaptable.
+Theme URI:          https://viceinvestigacion.unf.edu.pe/themes/vpinunf/
+Description:        VpinUnf es un tema de WordPress ligero, profesional, flexible y visualmente atractivo. VpinUnf es ideal para portales institucionales, soluciones tecnológicas, agencias, marketing, consultoría y empresas de servicios. Basado en un análisis profundo de las necesidades de la Vicepresidencia de Investigación de la Universidad Nacional de Frontera, permite crear sitios web modernos y funcionales con un diseño profesional y adaptable.
 Tags:               full-site-editing, block-patterns, custom-colors, custom-typography, block-styles, editor-style, responsive-layout, translation-ready
 License:            GPLv3 o posterior
 License URI:        https://www.gnu.org/licenses/gpl-3.0.html
@@ -26,66 +26,66 @@ con otros.
   /* ==========================================================================
      Colors (Mapped to theme.json palette)
      ========================================================================== */
-  --viceunf-primary: var(--wp--preset--color--viceunf-primary); /* Azul Institucional */
-  --viceunf-secondary: var(--wp--preset--color--viceunf-secondary); /* Naranja Institucional */
-  --viceunf-tertiary: var(--wp--preset--color--viceunf-tertiary); /* Verde Institucional */
-  --viceunf-legacy-sec: var(--wp--preset--color--viceunf-legacy-sec); /* Azul Medianoche */
-  --viceunf-legacy-pri2: var(--wp--preset--color--viceunf-legacy-pri2); /* Azul Oscuro */
-  --viceunf-surface: var(--wp--preset--color--white); /* Blanco */
-  --viceunf-surface-alt: var(--wp--preset--color--viceunf-light); /* Fondo Claro */
-  --viceunf-black: var(--wp--preset--color--black); /* Negro */
-  --viceunf-border: #eaeaea; /* Arbitrary unmapped color preserved */
-  --viceunf-play-accent: #e00000; /* Arbitrary unmapped color preserved */
+  --vpinunf-primary: var(--wp--preset--color--vpinunf-primary); /* Azul Institucional */
+  --vpinunf-secondary: var(--wp--preset--color--vpinunf-secondary); /* Naranja Institucional */
+  --vpinunf-tertiary: var(--wp--preset--color--vpinunf-tertiary); /* Verde Institucional */
+  --vpinunf-legacy-sec: var(--wp--preset--color--vpinunf-legacy-sec); /* Azul Medianoche */
+  --vpinunf-legacy-pri2: var(--wp--preset--color--vpinunf-legacy-pri2); /* Azul Oscuro */
+  --vpinunf-surface: var(--wp--preset--color--white); /* Blanco */
+  --vpinunf-surface-alt: var(--wp--preset--color--vpinunf-light); /* Fondo Claro */
+  --vpinunf-black: var(--wp--preset--color--black); /* Negro */
+  --vpinunf-border: #eaeaea; /* Arbitrary unmapped color preserved */
+  --vpinunf-play-accent: #e00000; /* Arbitrary unmapped color preserved */
   /* Legacy System Mappings to preserve existing classes without breaking them */
-  --dt-pri-color: var(--viceunf-primary);
-  --dt-priTwo-color: var(--viceunf-legacy-pri2);
-  --dt-sec-color: var(--viceunf-legacy-sec);
-  --dt-whi-color: var(--viceunf-surface);
-  --dt-text-color: var(--viceunf-legacy-pri2);
-  --dt-bg-color: var(--viceunf-surface-alt);
+  --dt-pri-color: var(--vpinunf-primary);
+  --dt-priTwo-color: var(--vpinunf-legacy-pri2);
+  --dt-sec-color: var(--vpinunf-legacy-sec);
+  --dt-whi-color: var(--vpinunf-surface);
+  --dt-text-color: var(--vpinunf-legacy-pri2);
+  --dt-bg-color: var(--vpinunf-surface-alt);
   /* ==========================================================================
      Typography Elements (Fluid Clamp Scale)
      ========================================================================== */
-  --viceunf-font-xs: var(--wp--preset--font-size--xs);
-  --viceunf-font-sm: var(--wp--preset--font-size--sm);
-  --viceunf-font-base: var(--wp--preset--font-size--base);
-  --viceunf-font-base-alt: var(--wp--preset--font-size--base-alt);
-  --viceunf-font-md: var(--wp--preset--font-size--md);
-  --viceunf-font-lg: var(--wp--preset--font-size--lg);
-  --viceunf-font-xl: var(--wp--preset--font-size--xl);
+  --vpinunf-font-xs: var(--wp--preset--font-size--xs);
+  --vpinunf-font-sm: var(--wp--preset--font-size--sm);
+  --vpinunf-font-base: var(--wp--preset--font-size--base);
+  --vpinunf-font-base-alt: var(--wp--preset--font-size--base-alt);
+  --vpinunf-font-md: var(--wp--preset--font-size--md);
+  --vpinunf-font-lg: var(--wp--preset--font-size--lg);
+  --vpinunf-font-xl: var(--wp--preset--font-size--xl);
   /* ==========================================================================
      Spacing Tokens (Mapped from theme.json spacingScale)
      WP genera: --wp--preset--spacing--10 ... --wp--preset--spacing--70
      ========================================================================== */
-  --viceunf-space-xs: var(--wp--preset--spacing--10); /* ~0.44rem  */
-  --viceunf-space-sm: var(--wp--preset--spacing--20); /* ~0.67rem  */
-  --viceunf-space-md: var(--wp--preset--spacing--30); /* ~1rem      */
-  --viceunf-space-lg: var(--wp--preset--spacing--40); /* ~1.5rem    */
-  --viceunf-space-xl: var(--wp--preset--spacing--50); /* ~2.25rem   */
-  --viceunf-space-2xl: var(--wp--preset--spacing--60); /* ~3.38rem   */
-  --viceunf-space-3xl: var(--wp--preset--spacing--70); /* ~5.06rem   */
+  --vpinunf-space-xs: var(--wp--preset--spacing--10); /* ~0.44rem  */
+  --vpinunf-space-sm: var(--wp--preset--spacing--20); /* ~0.67rem  */
+  --vpinunf-space-md: var(--wp--preset--spacing--30); /* ~1rem      */
+  --vpinunf-space-lg: var(--wp--preset--spacing--40); /* ~1.5rem    */
+  --vpinunf-space-xl: var(--wp--preset--spacing--50); /* ~2.25rem   */
+  --vpinunf-space-2xl: var(--wp--preset--spacing--60); /* ~3.38rem   */
+  --vpinunf-space-3xl: var(--wp--preset--spacing--70); /* ~5.06rem   */
   /* ==========================================================================
      Border Radius Tokens (Mapped from theme.json border.radiusSizes)
      ========================================================================== */
-  --viceunf-radius-sm: 4px;
-  --viceunf-radius-md: 8px;
-  --viceunf-radius-lg: 16px;
+  --vpinunf-radius-sm: 4px;
+  --vpinunf-radius-md: 8px;
+  --vpinunf-radius-lg: 16px;
 }
 
 /* =================================================================
    src/scss/base/_mixins.scss
 ================================================================= */
 /* =================================================================
-   ViceUnf Form System: Card UI (Modern Surface System)
+   VpinUnf Form System: Card UI (Modern Surface System)
    Global Utilities for standardized aesthetic layouts
 ================================================================= */
-body.viceunf-bg-canvas,
-.viceunf-bg-canvas {
+body.vpinunf-bg-canvas,
+.vpinunf-bg-canvas {
   background-color: #f8fafc !important; /* Tailwind Slate-50 */
 }
 
 /* Base Card Structural Surface */
-.viceunf-card-surface {
+.vpinunf-card-surface {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
@@ -97,20 +97,20 @@ body.viceunf-bg-canvas,
 }
 
 @media (min-width: 992px) {
-  .viceunf-card-surface {
+  .vpinunf-card-surface {
     padding: 4.5rem 5rem;
   }
 }
 /* Card Visual Variants */
-.viceunf-card-surface:hover.viceunf-card-hoverable,
-.viceunf-card-surface:focus-within.viceunf-card-hoverable {
+.vpinunf-card-surface:hover.vpinunf-card-hoverable,
+.vpinunf-card-surface:focus-within.vpinunf-card-hoverable {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0, 121, 78, 0.08); /* Uso muy leve del Primary Color */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Interactive Soft Cards for Smaller items (like related posts) */
-.viceunf-card-soft {
+.vpinunf-card-soft {
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
@@ -122,13 +122,13 @@ body.viceunf-bg-canvas,
   word-break: break-word;
 }
 
-.viceunf-card-soft:hover {
+.vpinunf-card-soft:hover {
   border-color: #cbd5e1;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 /* Typography Inside Cards */
-.viceunf-card-title {
+.vpinunf-card-title {
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 800;
   color: var(--dt-sec-color);
@@ -136,14 +136,14 @@ body.viceunf-bg-canvas,
   margin-bottom: clamp(1rem, 3vw, 2rem);
 }
 
-.viceunf-card-header {
+.vpinunf-card-header {
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 2rem;
   margin-bottom: 2.5rem;
 }
 
 /* Meta Data Pills (Badges/Chips) */
-.viceunf-card-chip {
+.vpinunf-card-chip {
   display: inline-flex;
   background-color: rgba(0, 121, 78, 0.08);
   color: var(--dt-pri-color);
@@ -158,8 +158,8 @@ body.viceunf-bg-canvas,
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-a.viceunf-card-chip:hover,
-a.viceunf-card-chip:focus {
+a.vpinunf-card-chip:hover,
+a.vpinunf-card-chip:focus {
   background-color: var(--dt-pri-color);
   color: var(--dt-whi-color);
   text-decoration: none;
@@ -195,16 +195,16 @@ a.viceunf-card-chip:focus {
    Blog Listing Card Image System
    Restored: Homogeneous card imagery using rigorous bounding box
 ================================================================= */
-.viceunf-card-soft .image,
+.vpinunf-card-soft .image,
 .dt_post_item:not(.single-post) .image {
   position: relative;
   overflow: hidden;
-  border-radius: var(--viceunf-radius-md, 8px) var(--viceunf-radius-md, 8px) 0 0;
+  border-radius: var(--vpinunf-radius-md, 8px) var(--vpinunf-radius-md, 8px) 0 0;
   height: clamp(180px, 18vw, 220px);
   width: 100%;
   max-width: 100%;
 }
-.viceunf-card-soft .image img,
+.vpinunf-card-soft .image img,
 .dt_post_item:not(.single-post) .image img {
   width: 100%;
   height: 100%;
@@ -212,43 +212,43 @@ a.viceunf-card-chip:focus {
   display: block;
   transition: transform 0.4s ease, opacity 0.3s ease;
 }
-.viceunf-card-soft .image:hover img,
+.vpinunf-card-soft .image:hover img,
 .dt_post_item:not(.single-post) .image:hover img {
   transform: scale(1.05);
 }
 
-.viceunf-card-soft .inner {
+.vpinunf-card-soft .inner {
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.viceunf-card-soft .title {
+.vpinunf-card-soft .title {
   margin-bottom: 1rem;
 }
 
-.viceunf-card-soft .title a {
+.vpinunf-card-soft .title a {
   color: var(--dt-sec-color);
   text-decoration: none;
   font-weight: 700;
   transition: color 0.2s ease;
 }
-.viceunf-card-soft .title a:hover, .viceunf-card-soft .title a:focus {
+.vpinunf-card-soft .title a:hover, .vpinunf-card-soft .title a:focus {
   color: var(--dt-pri-color);
 }
 
-.viceunf-card-soft .content p {
+.vpinunf-card-soft .content p {
   color: #64748b;
   line-height: 1.7;
   margin-bottom: 1rem;
 }
 
-.viceunf-card-soft .more-link {
+.vpinunf-card-soft .more-link {
   color: var(--dt-pri-color);
   font-weight: 600;
   text-decoration: none;
-  font-size: var(--viceunf-font-sm, 1.4rem);
+  font-size: var(--vpinunf-font-sm, 1.4rem);
   transition: letter-spacing 0.2s ease;
 }
-.viceunf-card-soft .more-link:hover, .viceunf-card-soft .more-link:focus {
+.vpinunf-card-soft .more-link:hover, .vpinunf-card-soft .more-link:focus {
   letter-spacing: 0.05rem;
 }
 
@@ -541,13 +541,13 @@ body.overlay--enabled .off--layer {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-.viceunf-entry-content {
-  font-size: var(--viceunf-font-base);
+.vpinunf-entry-content {
+  font-size: var(--vpinunf-font-base);
   line-height: 1.8;
   color: #334155;
 }
 
-.viceunf-post-meta {
+.vpinunf-post-meta {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -555,12 +555,12 @@ body.overlay--enabled .off--layer {
   color: #64748b;
   font-size: clamp(1.4rem, 1.8vw, 1.6rem);
 }
-.viceunf-post-meta i {
+.vpinunf-post-meta i {
   color: var(--dt-pri-color);
   margin-right: 0.5rem;
 }
 
-.viceunf-post-footer {
+.vpinunf-post-footer {
   margin-top: clamp(1.5rem, 2vw, 3rem);
   padding-top: clamp(1rem, 1.5vw, 2rem);
   border-top: 1px solid #e2e8f0;
@@ -571,27 +571,27 @@ body.overlay--enabled .off--layer {
   gap: 1rem;
 }
 
-.viceunf-tag-list {
+.vpinunf-tag-list {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   align-items: center;
 }
-.viceunf-tag-list i {
+.vpinunf-tag-list i {
   color: var(--dt-pri-color);
 }
 
-.viceunf-comments-link {
+.vpinunf-comments-link {
   color: var(--dt-sec-color);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
 }
-.viceunf-comments-link:hover, .viceunf-comments-link:focus {
+.vpinunf-comments-link:hover, .vpinunf-comments-link:focus {
   color: var(--dt-pri-color);
   text-decoration: none;
 }
-.viceunf-comments-link i {
+.vpinunf-comments-link i {
   color: var(--dt-pri-color);
   margin-right: 0.4rem;
 }
@@ -610,7 +610,7 @@ body.overlay--enabled .off--layer {
    Entry Content Heading Hierarchy (Single Post)
    Ensures proper spacing and sizing inside the_content() output
 ================================================================= */
-.viceunf-entry-content h2 {
+.vpinunf-entry-content h2 {
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 700;
   color: var(--dt-sec-color);
@@ -618,7 +618,7 @@ body.overlay--enabled .off--layer {
   margin-bottom: 1.2rem;
   line-height: 1.3;
 }
-.viceunf-entry-content h3 {
+.vpinunf-entry-content h3 {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 700;
   color: var(--dt-sec-color);
@@ -626,29 +626,29 @@ body.overlay--enabled .off--layer {
   margin-bottom: 1rem;
   line-height: 1.35;
 }
-.viceunf-entry-content p {
+.vpinunf-entry-content p {
   margin-bottom: 1.5rem;
 }
-.viceunf-entry-content img {
+.vpinunf-entry-content img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--viceunf-radius-md, 8px);
+  border-radius: var(--vpinunf-radius-md, 8px);
   margin: 1.5rem 0;
 }
-.viceunf-entry-content blockquote {
+.vpinunf-entry-content blockquote {
   border-left: 4px solid var(--dt-pri-color);
   padding: 1.5rem 2rem;
   margin: 2rem 0;
   background: rgba(0, 121, 78, 0.04);
-  border-radius: 0 var(--viceunf-radius-md, 8px) var(--viceunf-radius-md, 8px) 0;
+  border-radius: 0 var(--vpinunf-radius-md, 8px) var(--vpinunf-radius-md, 8px) 0;
   font-style: italic;
   color: #475569;
 }
-.viceunf-entry-content ul, .viceunf-entry-content ol {
+.vpinunf-entry-content ul, .vpinunf-entry-content ol {
   padding-left: 2rem;
   margin-bottom: 1.5rem;
 }
-.viceunf-entry-content li {
+.vpinunf-entry-content li {
   margin-bottom: 0.5rem;
   line-height: 1.7;
 }
@@ -672,7 +672,7 @@ body.overlay--enabled .off--layer {
   min-width: 4rem;
   height: 4rem;
   padding: 0 1.2rem;
-  border-radius: var(--viceunf-radius-md, 8px);
+  border-radius: var(--vpinunf-radius-md, 8px);
   background: #ffffff;
   color: var(--dt-sec-color);
   font-weight: 600;
@@ -698,7 +698,7 @@ body.overlay--enabled .off--layer {
    Single Post Entry Title (H2)
    Estilos fluidos para jerarquizar por debajo del Hero Breadcrumb (H1)
 ================================================================= */
-.viceunf-card-header .entry-title {
+.vpinunf-card-header .entry-title {
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 700;
   color: var(--dt-pri-color);
@@ -707,52 +707,52 @@ body.overlay--enabled .off--layer {
 }
 
 /* =================================================================
-   ViceUnf Pages: Home - Producción Científica
+   VpinUnf Pages: Home - Producción Científica
 ================================================================= */
-.viceunf-production-card {
+.vpinunf-production-card {
   height: 100%;
   padding: 0; /* Remove internal padding to stretch image */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* Overriding viceunf-card-soft padding and border */
+  /* Overriding vpinunf-card-soft padding and border */
 }
-.viceunf-production-card.viceunf-card-soft {
+.vpinunf-production-card.vpinunf-card-soft {
   padding: 0;
   border-color: transparent;
 }
-.viceunf-production-card.viceunf-card-soft:hover, .viceunf-production-card.viceunf-card-soft:focus-within {
+.vpinunf-production-card.vpinunf-card-soft:hover, .vpinunf-production-card.vpinunf-card-soft:focus-within {
   border-color: #e2e8f0;
   background: #ffffff;
 }
-.viceunf-production-card__image {
+.vpinunf-production-card__image {
   width: 100%;
   position: relative;
-  border-bottom: 1px solid var(--viceunf-border-color, #eaeaea);
+  border-bottom: 1px solid var(--vpinunf-border-color, #eaeaea);
   background-color: #f1f5f9;
 }
-.viceunf-production-card__image a {
+.vpinunf-production-card__image a {
   display: block;
   overflow: hidden;
 }
-.viceunf-production-card__image img {
+.vpinunf-production-card__image img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   display: block;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.viceunf-production-card:hover .viceunf-production-card__image img {
+.vpinunf-production-card:hover .vpinunf-production-card__image img {
   transform: scale(1.08);
 }
-.viceunf-production-card__body {
+.vpinunf-production-card__body {
   padding: 2.2rem 2.2rem 2.2rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   position: relative;
 }
-.viceunf-production-card__icon {
+.vpinunf-production-card__icon {
   width: 52px;
   height: 52px;
   background-color: rgba(0, 121, 78, 0.08);
@@ -765,56 +765,56 @@ body.overlay--enabled .off--layer {
   margin-bottom: 1.4rem;
   transition: all 0.3s ease;
 }
-.viceunf-production-card__icon--overlay {
+.vpinunf-production-card__icon--overlay {
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
   background-color: var(--dt-pri-color);
-  color: var(--viceunf-surface, #ffffff);
+  color: var(--vpinunf-surface, #ffffff);
   margin-bottom: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   z-index: 5;
 }
-.viceunf-production-card:hover .viceunf-production-card__icon:not(.viceunf-production-card__icon--overlay) {
+.vpinunf-production-card:hover .vpinunf-production-card__icon:not(.vpinunf-production-card__icon--overlay) {
   background-color: var(--dt-pri-color);
-  color: var(--viceunf-surface, #ffffff);
+  color: var(--vpinunf-surface, #ffffff);
   box-shadow: 0 8px 25px rgba(0, 121, 78, 0.25);
   transform: translateY(-3px);
 }
-.viceunf-production-card:hover .viceunf-production-card__icon--overlay {
+.vpinunf-production-card:hover .vpinunf-production-card__icon--overlay {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 8px 25px rgba(0, 121, 78, 0.35);
 }
-.viceunf-production-card__title {
+.vpinunf-production-card__title {
   font-size: 2.1rem;
   font-weight: 800;
   color: var(--dt-sec-color);
   margin-bottom: 0.6rem;
   line-height: 1.35;
 }
-.viceunf-production-card__title a {
+.vpinunf-production-card__title a {
   color: inherit;
   text-decoration: none;
   transition: color 0.2s ease;
 }
-.viceunf-production-card__title a:hover, .viceunf-production-card__title a:focus {
+.vpinunf-production-card__title a:hover, .vpinunf-production-card__title a:focus {
   color: var(--dt-pri-color);
 }
-.viceunf-production-card__text {
+.vpinunf-production-card__text {
   font-size: 1.5rem;
   color: #475569;
   line-height: 1.6;
   margin-bottom: 1rem;
   flex-grow: 1;
 }
-.viceunf-production-card__footer {
+.vpinunf-production-card__footer {
   border-top: 1px dashed rgba(0, 0, 0, 0.08);
   padding-top: 1.4rem;
   margin-top: auto;
   display: flex;
   align-items: center;
 }
-.viceunf-production-card__link {
+.vpinunf-production-card__link {
   display: inline-flex;
   align-items: center;
   font-weight: 700;
@@ -825,16 +825,16 @@ body.overlay--enabled .off--layer {
   text-decoration: none;
   transition: color 0.25s ease;
 }
-.viceunf-production-card__link i {
+.vpinunf-production-card__link i {
   margin-left: 0.8rem;
   font-size: 1.4rem;
   transition: transform 0.3s ease;
 }
-.viceunf-production-card__link:hover, .viceunf-production-card__link:focus {
+.vpinunf-production-card__link:hover, .vpinunf-production-card__link:focus {
   color: var(--dt-sec-color);
   text-decoration: none;
 }
-.viceunf-production-card__link:hover i, .viceunf-production-card__link:focus i {
+.vpinunf-production-card__link:hover i, .vpinunf-production-card__link:focus i {
   transform: translateX(4px);
 }
 
@@ -1608,9 +1608,9 @@ body.overlay--enabled .off--layer {
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary {
-  background-color: var(--viceunf-play-accent); /* Rojo Institucional o dinámico */
+  background-color: var(--vpinunf-play-accent); /* Rojo Institucional o dinámico */
   border-color: transparent;
-  color: var(--viceunf-play-accent);
+  color: var(--vpinunf-play-accent);
 }
 
 .dt_protect--one .dt_image_block .dt_image_box.image-2 .dt-btn-play.dt-btn-primary i {
@@ -1687,7 +1687,7 @@ body.overlay--enabled .off--layer {
 }
 
 .dt_protect--one .dt_item_inner .dt_item_holder .dt_item_title {
-  font-size: var(--viceunf-font-base-alt);
+  font-size: var(--vpinunf-font-base-alt);
   line-height: 1.3;
   font-weight: 700;
   letter-spacing: 0.05rem;
@@ -2974,24 +2974,24 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
  * Estilos para el Widget Minimalista de Entradas Recientes
  * ===================================================================
  */
-.viceunf-recent-posts-list {
+.vpinunf-recent-posts-list {
   display: flex;
   flex-direction: column;
   gap: 2rem; /* Aumentamos un poco el espacio entre items */
 }
 
-.viceunf-recent-post-item {
+.vpinunf-recent-post-item {
   display: flex;
   align-items: center;
   gap: 1.5rem; /* Espacio entre imagen y título */
 }
 
 /* --- NUEVO: Estilos para los items pares (alternados) --- */
-.viceunf-recent-post-item.item-par {
+.vpinunf-recent-post-item.item-par {
   flex-direction: row-reverse; /* <-- La magia sucede aquí */
 }
 
-.viceunf-recent-post-thumbnail {
+.vpinunf-recent-post-thumbnail {
   flex-shrink: 0;
   width: 65px;
   height: 65px;
@@ -3001,39 +3001,39 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para la imagen */
 }
 
-.viceunf-recent-post-thumbnail img {
+.vpinunf-recent-post-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.viceunf-recent-post-thumbnail:hover img {
+.vpinunf-recent-post-thumbnail:hover img {
   transform: scale(1.1);
 }
 
-.viceunf-recent-post-content {
+.vpinunf-recent-post-content {
   flex-grow: 1;
 }
 
 /* --- NUEVO: Alineación de texto para los items pares --- */
-.viceunf-recent-post-item.item-par .viceunf-recent-post-content {
+.vpinunf-recent-post-item.item-par .vpinunf-recent-post-content {
   text-align: right; /* Alineamos el texto a la derecha */
 }
 
-.viceunf-recent-post-title {
+.vpinunf-recent-post-title {
   margin: 0;
   font-size: 1.5rem;
   line-height: 1.4;
   font-weight: 600;
 }
 
-.viceunf-recent-post-title a {
+.vpinunf-recent-post-title a {
   text-decoration: none;
   color: var(--dt-sec-color);
 }
 
-.viceunf-recent-post-title a:hover {
+.vpinunf-recent-post-title a:hover {
   color: var(--dt-pri-color);
 }
 
@@ -3099,7 +3099,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
 /* =================================================================
    Post Navigation (Anterior / Siguiente)
 ================================================================= */
-.viceunf-post-nav__card {
+.vpinunf-post-nav__card {
   display: flex;
   align-items: center;
   padding: 1.5rem;
@@ -3111,15 +3111,15 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   height: 100%;
 }
 
-.viceunf-post-nav__card:hover,
-.viceunf-post-nav__card:focus {
+.vpinunf-post-nav__card:hover,
+.vpinunf-post-nav__card:focus {
   background-color: rgba(0, 121, 78, 0.03); /* var(--dt-pri-color) tint */
   border-color: rgba(0, 121, 78, 0.15);
   box-shadow: 0 4px 15px rgba(0, 121, 78, 0.08);
   transform: translateY(-2px);
 }
 
-.viceunf-post-nav__img {
+.vpinunf-post-nav__img {
   width: 80px;
   height: 80px;
   flex-shrink: 0;
@@ -3128,36 +3128,36 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   margin-right: 1.5rem;
 }
 
-.viceunf-post-nav__card--next .viceunf-post-nav__img {
+.vpinunf-post-nav__card--next .vpinunf-post-nav__img {
   margin-right: 0;
   margin-left: 1.5rem;
   order: 2; /* Mueve la imagen a la derecha para la tarjeta "Siguiente" */
 }
 
-.viceunf-post-nav__card--next .viceunf-post-nav__content {
+.vpinunf-post-nav__card--next .vpinunf-post-nav__content {
   text-align: right;
   order: 1;
 }
 
-.viceunf-post-nav__img img {
+.vpinunf-post-nav__img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.viceunf-post-nav__card:hover .viceunf-post-nav__img img {
+.vpinunf-post-nav__card:hover .vpinunf-post-nav__img img {
   transform: scale(1.05);
 }
 
-.viceunf-post-nav__content {
+.vpinunf-post-nav__content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.viceunf-post-nav__label {
-  font-size: var(--viceunf-fs-xs, 1.2rem);
+.vpinunf-post-nav__label {
+  font-size: var(--vpinunf-fs-xs, 1.2rem);
   font-weight: 600;
   color: #888;
   text-transform: uppercase;
@@ -3166,26 +3166,26 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   align-items: center;
 }
 
-.viceunf-post-nav__card--next .viceunf-post-nav__label {
+.vpinunf-post-nav__card--next .vpinunf-post-nav__label {
   justify-content: flex-end;
 }
 
-.viceunf-post-nav__title {
-  font-size: var(--viceunf-fs-base, 1.6rem);
+.vpinunf-post-nav__title {
+  font-size: var(--vpinunf-fs-base, 1.6rem);
   font-weight: 700;
   color: var(--dt-sec-color);
   line-height: 1.3;
   transition: color 0.3s ease;
 }
 
-.viceunf-post-nav__card:hover .viceunf-post-nav__title {
+.vpinunf-post-nav__card:hover .vpinunf-post-nav__title {
   color: var(--dt-pri-color);
 }
 
 /* =================================================================
    Entradas Relacionadas (Related Posts)
 ================================================================= */
-.viceunf-related-card {
+.vpinunf-related-card {
   display: flex;
   background-color: #fff;
   border-radius: 8px;
@@ -3196,15 +3196,15 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   align-items: flex-start;
 }
 
-.viceunf-related-card:hover,
-.viceunf-related-card:focus-within {
+.vpinunf-related-card:hover,
+.vpinunf-related-card:focus-within {
   background-color: rgba(0, 121, 78, 0.03);
   border-color: rgba(0, 121, 78, 0.15);
   box-shadow: 0 4px 15px rgba(0, 121, 78, 0.08);
   transform: translateY(-2px);
 }
 
-.viceunf-related-card__thumb {
+.vpinunf-related-card__thumb {
   width: 100px;
   height: 100px;
   flex-shrink: 0;
@@ -3213,25 +3213,25 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   margin-right: 1.5rem;
 }
 
-.viceunf-related-card__thumb img {
+.vpinunf-related-card__thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.viceunf-related-card:hover .viceunf-related-card__thumb img {
+.vpinunf-related-card:hover .vpinunf-related-card__thumb img {
   transform: scale(1.05);
 }
 
-.viceunf-related-card__info {
+.vpinunf-related-card__info {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.viceunf-related-card__meta {
-  font-size: var(--viceunf-fs-xs, 1.2rem);
+.vpinunf-related-card__meta {
+  font-size: var(--vpinunf-fs-xs, 1.2rem);
   color: #888;
   font-weight: 500;
   margin-bottom: 0.8rem;
@@ -3240,42 +3240,42 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   flex-wrap: wrap;
 }
 
-.viceunf-related-card__title {
-  font-size: var(--viceunf-fs-base, 1.6rem);
+.vpinunf-related-card__title {
+  font-size: var(--vpinunf-fs-base, 1.6rem);
   font-weight: 700;
   margin-bottom: 0.8rem;
   line-height: 1.4;
 }
 
-.viceunf-related-card__title a {
+.vpinunf-related-card__title a {
   color: var(--dt-sec-color);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.viceunf-related-card__title a:hover,
-.viceunf-related-card__title a:focus {
+.vpinunf-related-card__title a:hover,
+.vpinunf-related-card__title a:focus {
   color: var(--dt-pri-color);
 }
 
-.viceunf-related-card__excerpt {
-  font-size: var(--viceunf-fs-sm, 1.4rem);
+.vpinunf-related-card__excerpt {
+  font-size: var(--vpinunf-fs-sm, 1.4rem);
   color: #666;
   line-height: 1.5;
 }
 
-.viceunf-related-card__excerpt p {
+.vpinunf-related-card__excerpt p {
   margin: 0;
 }
 
 @media (max-width: 575px) {
-  .viceunf-post-nav__img {
+  .vpinunf-post-nav__img {
     display: none; /* Ocultar imagen en móviles muy pequeños para dar espacio al texto */
   }
-  .viceunf-related-card {
+  .vpinunf-related-card {
     flex-direction: column;
   }
-  .viceunf-related-card__thumb {
+  .vpinunf-related-card__thumb {
     width: 100%;
     height: 180px;
     margin-right: 0;
@@ -3285,11 +3285,11 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
 /* =================================================================
    Single Reglamento: Rediseño Moderno UI/UX
 ================================================================= */
-.viceunf-single-doc-section {
+.vpinunf-single-doc-section {
   background-color: #f8fafc; /* fondo muy claro para contraste */
 }
 
-.viceunf-single-doc__article {
+.vpinunf-single-doc__article {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
@@ -3298,20 +3298,20 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-.viceunf-single-doc__header {
+.vpinunf-single-doc__header {
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 2.5rem;
   margin-bottom: 3rem;
 }
 
-.viceunf-single-doc__tags {
+.vpinunf-single-doc__tags {
   display: flex;
   gap: 0.8rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 
-.viceunf-single-doc__tag {
+.vpinunf-single-doc__tag {
   background-color: rgba(0, 121, 78, 0.1); /* var(--dt-pri-color) alpha aproximado */
   color: var(--dt-pri-color);
   font-size: 1.25rem;
@@ -3322,7 +3322,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   letter-spacing: 0.5px;
 }
 
-.viceunf-single-doc__title {
+.vpinunf-single-doc__title {
   font-size: 3.4rem !important;
   font-weight: 800;
   color: var(--dt-sec-color);
@@ -3330,7 +3330,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   margin-bottom: 1.5rem;
 }
 
-.viceunf-single-doc__meta {
+.vpinunf-single-doc__meta {
   display: flex;
   gap: 2.5rem;
   color: #64748b;
@@ -3338,26 +3338,26 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   font-weight: 500;
 }
 
-.viceunf-single-doc__meta i {
+.vpinunf-single-doc__meta i {
   margin-right: 0.6rem;
   color: var(--dt-pri-color);
 }
 
-.viceunf-single-doc__content {
+.vpinunf-single-doc__content {
   font-size: 1.6rem;
   line-height: 1.8;
   color: #334155;
   margin-bottom: 4rem;
 }
 
-.viceunf-single-doc__media {
+.vpinunf-single-doc__media {
   display: flex;
   flex-direction: column;
   gap: 3rem;
   margin-top: 3rem;
 }
 
-.viceunf-single-doc__preview {
+.vpinunf-single-doc__preview {
   position: relative;
   width: 100%;
   padding-top: 75%; /* Aspect ratio 4:3 para docs */
@@ -3368,7 +3368,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   background: #f1f5f9;
 }
 
-.viceunf-single-doc__preview iframe {
+.vpinunf-single-doc__preview iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -3377,7 +3377,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   border: none;
 }
 
-.viceunf-single-doc__download-card {
+.vpinunf-single-doc__download-card {
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
@@ -3389,13 +3389,13 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   gap: 2.5rem;
 }
 
-.viceunf-single-doc__download-card:hover {
+.vpinunf-single-doc__download-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0, 121, 78, 0.1);
   border-color: var(--dt-pri-color);
 }
 
-.viceunf-single-doc__download-card .card-icon {
+.vpinunf-single-doc__download-card .card-icon {
   flex-shrink: 0;
   width: 75px;
   height: 75px;
@@ -3408,36 +3408,36 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   font-size: 3.2rem;
 }
 
-.viceunf-single-doc__download-card .card-info {
+.vpinunf-single-doc__download-card .card-info {
   flex-grow: 1;
 }
 
-.viceunf-single-doc__download-card .card-title {
+.vpinunf-single-doc__download-card .card-title {
   margin: 0 0 0.5rem 0;
   font-size: 2.2rem;
   font-weight: 700;
   color: var(--dt-sec-color);
 }
 
-.viceunf-single-doc__download-card .card-desc {
+.vpinunf-single-doc__download-card .card-desc {
   margin: 0;
   color: #64748b;
   font-size: 1.5rem;
   line-height: 1.6;
 }
 
-.viceunf-single-doc__download-card .card-action {
+.vpinunf-single-doc__download-card .card-action {
   flex-shrink: 0;
 }
 
 /* Modificador extra para que el botón interno respire mejor */
-.viceunf-single-doc__download-card .card-action .dt-btn {
+.vpinunf-single-doc__download-card .card-action .dt-btn {
   padding: 1.5rem 2.5rem;
   border-radius: 8px;
   font-size: 1.5rem;
 }
 
-.viceunf-single-doc__empty {
+.vpinunf-single-doc__empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3451,37 +3451,37 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   margin-top: 3rem;
 }
 
-.viceunf-single-doc__empty i {
+.vpinunf-single-doc__empty i {
   font-size: 4.5rem;
   color: #94a3b8;
   margin-bottom: 2rem;
 }
 
 /* Navegación y Volver */
-.viceunf-single-doc__nav-wrap {
+.vpinunf-single-doc__nav-wrap {
   display: flex;
   justify-content: flex-start;
 }
 
-.viceunf-single-doc__nav-wrap .dt-btn-outline {
+.vpinunf-single-doc__nav-wrap .dt-btn-outline {
   border-color: #cbd5e1;
   color: #475569;
 }
 
-.viceunf-single-doc__nav-wrap .dt-btn-outline:hover {
+.vpinunf-single-doc__nav-wrap .dt-btn-outline:hover {
   background-color: #f1f5f9;
   border-color: #94a3b8;
   color: #0f172a;
 }
 
 /* Sección de Documentos Relacionados */
-.viceunf-single-doc__related {
+.vpinunf-single-doc__related {
   margin-top: 5rem;
   padding-top: 4rem;
   border-top: 1px solid #e2e8f0;
 }
 
-.viceunf-single-doc__related-title {
+.vpinunf-single-doc__related-title {
   font-size: 2.2rem;
   font-weight: 700;
   color: var(--dt-sec-color);
@@ -3489,13 +3489,13 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
 }
 
 /* Tarjetas de Docs Relacionados */
-.viceunf-related-doc-card {
+.vpinunf-related-doc-card {
   align-items: center !important;
   gap: 1.5rem;
   text-decoration: none !important;
 }
 
-.viceunf-related-doc-card__icon {
+.vpinunf-related-doc-card__icon {
   width: 48px;
   height: 48px;
   border-radius: 8px;
@@ -3508,13 +3508,13 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   flex-shrink: 0;
 }
 
-.viceunf-related-doc-card__info {
+.vpinunf-related-doc-card__info {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-.viceunf-related-doc-card__date {
+.vpinunf-related-doc-card__date {
   font-size: 1.2rem;
   color: #64748b;
   text-transform: uppercase;
@@ -3522,7 +3522,7 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   letter-spacing: 0.5px;
 }
 
-.viceunf-related-doc-card__title {
+.vpinunf-related-doc-card__title {
   font-size: 1.45rem !important;
   font-weight: 600 !important;
   line-height: 1.4 !important;
@@ -3531,38 +3531,38 @@ table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantit
   transition: color 0.3s ease;
 }
 
-.viceunf-related-doc-card:hover .viceunf-related-doc-card__title {
+.vpinunf-related-doc-card:hover .vpinunf-related-doc-card__title {
   color: var(--dt-pri-color) !important;
 }
 
 /* Responsive Ajustes */
 @media (max-width: 991px) {
-  .viceunf-single-doc__article {
+  .vpinunf-single-doc__article {
     padding: 3rem;
   }
 }
 @media (max-width: 767px) {
-  .viceunf-single-doc__article {
+  .vpinunf-single-doc__article {
     padding: 2.5rem 2rem;
   }
-  .viceunf-single-doc__title {
+  .vpinunf-single-doc__title {
     font-size: 2.6rem !important;
   }
-  .viceunf-single-doc__meta {
+  .vpinunf-single-doc__meta {
     flex-direction: column;
     gap: 0.8rem;
   }
-  .viceunf-single-doc__download-card {
+  .vpinunf-single-doc__download-card {
     flex-direction: column;
     text-align: center;
     padding: 2.5rem 2rem;
     gap: 1.5rem;
   }
-  .viceunf-single-doc__download-card .card-action {
+  .vpinunf-single-doc__download-card .card-action {
     width: 100%;
     margin-top: 1rem;
   }
-  .viceunf-single-doc__download-card .card-action .dt-btn {
+  .vpinunf-single-doc__download-card .card-action .dt-btn {
     width: 100%;
     justify-content: center;
   }

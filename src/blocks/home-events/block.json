@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vpinunf/home-events",
+  "version": "1.0.0",
+  "title": "Portada — Eventos",
+  "category": "theme",
+  "icon": "calendar-alt",
+  "description": "Sección de eventos de la portada. Textos desde Theme Options, datos de eventos desde el plugin core.",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": { "margin": true, "padding": true }
+  },
+  "textdomain": "vpinunf",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

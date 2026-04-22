@@ -7,52 +7,52 @@
   /* ==========================================================================
      Colors (Mapped to theme.json palette)
      ========================================================================== */
-  --viceunf-primary: var(--wp--preset--color--viceunf-primary); /* Azul Institucional */
-  --viceunf-secondary: var(--wp--preset--color--viceunf-secondary); /* Naranja Institucional */
-  --viceunf-tertiary: var(--wp--preset--color--viceunf-tertiary); /* Verde Institucional */
-  --viceunf-legacy-sec: var(--wp--preset--color--viceunf-legacy-sec); /* Azul Medianoche */
-  --viceunf-legacy-pri2: var(--wp--preset--color--viceunf-legacy-pri2); /* Azul Oscuro */
-  --viceunf-surface: var(--wp--preset--color--white); /* Blanco */
-  --viceunf-surface-alt: var(--wp--preset--color--viceunf-light); /* Fondo Claro */
-  --viceunf-black: var(--wp--preset--color--black); /* Negro */
-  --viceunf-border: #eaeaea; /* Arbitrary unmapped color preserved */
-  --viceunf-play-accent: #e00000; /* Arbitrary unmapped color preserved */
+  --vpinunf-primary: var(--wp--preset--color--vpinunf-primary); /* Azul Institucional */
+  --vpinunf-secondary: var(--wp--preset--color--vpinunf-secondary); /* Naranja Institucional */
+  --vpinunf-tertiary: var(--wp--preset--color--vpinunf-tertiary); /* Verde Institucional */
+  --vpinunf-legacy-sec: var(--wp--preset--color--vpinunf-legacy-sec); /* Azul Medianoche */
+  --vpinunf-legacy-pri2: var(--wp--preset--color--vpinunf-legacy-pri2); /* Azul Oscuro */
+  --vpinunf-surface: var(--wp--preset--color--white); /* Blanco */
+  --vpinunf-surface-alt: var(--wp--preset--color--vpinunf-light); /* Fondo Claro */
+  --vpinunf-black: var(--wp--preset--color--black); /* Negro */
+  --vpinunf-border: #eaeaea; /* Arbitrary unmapped color preserved */
+  --vpinunf-play-accent: #e00000; /* Arbitrary unmapped color preserved */
 
   /* Legacy System Mappings to preserve existing classes without breaking them */
-  --dt-pri-color: var(--viceunf-primary);
-  --dt-priTwo-color: var(--viceunf-legacy-pri2);
-  --dt-sec-color: var(--viceunf-legacy-sec);
-  --dt-whi-color: var(--viceunf-surface);
-  --dt-text-color: var(--viceunf-legacy-pri2);
-  --dt-bg-color: var(--viceunf-surface-alt);
+  --dt-pri-color: var(--vpinunf-primary);
+  --dt-priTwo-color: var(--vpinunf-legacy-pri2);
+  --dt-sec-color: var(--vpinunf-legacy-sec);
+  --dt-whi-color: var(--vpinunf-surface);
+  --dt-text-color: var(--vpinunf-legacy-pri2);
+  --dt-bg-color: var(--vpinunf-surface-alt);
 
   /* ==========================================================================
      Typography Elements (Fluid Clamp Scale)
      ========================================================================== */
-  --viceunf-font-xs: var(--wp--preset--font-size--xs);
-  --viceunf-font-sm: var(--wp--preset--font-size--sm);
-  --viceunf-font-base: var(--wp--preset--font-size--base);
-  --viceunf-font-base-alt: var(--wp--preset--font-size--base-alt);
-  --viceunf-font-md: var(--wp--preset--font-size--md);
-  --viceunf-font-lg: var(--wp--preset--font-size--lg);
-  --viceunf-font-xl: var(--wp--preset--font-size--xl);
+  --vpinunf-font-xs: var(--wp--preset--font-size--xs);
+  --vpinunf-font-sm: var(--wp--preset--font-size--sm);
+  --vpinunf-font-base: var(--wp--preset--font-size--base);
+  --vpinunf-font-base-alt: var(--wp--preset--font-size--base-alt);
+  --vpinunf-font-md: var(--wp--preset--font-size--md);
+  --vpinunf-font-lg: var(--wp--preset--font-size--lg);
+  --vpinunf-font-xl: var(--wp--preset--font-size--xl);
 
   /* ==========================================================================
      Spacing Tokens (Mapped from theme.json spacingScale)
      WP genera: --wp--preset--spacing--10 ... --wp--preset--spacing--70
      ========================================================================== */
-  --viceunf-space-xs:  var(--wp--preset--spacing--10); /* ~0.44rem  */
-  --viceunf-space-sm:  var(--wp--preset--spacing--20); /* ~0.67rem  */
-  --viceunf-space-md:  var(--wp--preset--spacing--30); /* ~1rem      */
-  --viceunf-space-lg:  var(--wp--preset--spacing--40); /* ~1.5rem    */
-  --viceunf-space-xl:  var(--wp--preset--spacing--50); /* ~2.25rem   */
-  --viceunf-space-2xl: var(--wp--preset--spacing--60); /* ~3.38rem   */
-  --viceunf-space-3xl: var(--wp--preset--spacing--70); /* ~5.06rem   */
+  --vpinunf-space-xs:  var(--wp--preset--spacing--10); /* ~0.44rem  */
+  --vpinunf-space-sm:  var(--wp--preset--spacing--20); /* ~0.67rem  */
+  --vpinunf-space-md:  var(--wp--preset--spacing--30); /* ~1rem      */
+  --vpinunf-space-lg:  var(--wp--preset--spacing--40); /* ~1.5rem    */
+  --vpinunf-space-xl:  var(--wp--preset--spacing--50); /* ~2.25rem   */
+  --vpinunf-space-2xl: var(--wp--preset--spacing--60); /* ~3.38rem   */
+  --vpinunf-space-3xl: var(--wp--preset--spacing--70); /* ~5.06rem   */
 
   /* ==========================================================================
      Border Radius Tokens (Mapped from theme.json border.radiusSizes)
      ========================================================================== */
-  --viceunf-radius-sm: 4px;
-  --viceunf-radius-md: 8px;
-  --viceunf-radius-lg: 16px;
+  --vpinunf-radius-sm: 4px;
+  --vpinunf-radius-md: 8px;
+  --vpinunf-radius-lg: 16px;
 }

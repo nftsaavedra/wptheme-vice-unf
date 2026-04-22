@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ViceUnf\Theme;
+namespace VpinUnf\Theme;
 
 class Setup
 {
@@ -20,7 +20,7 @@ class Setup
 
     public function init(): void
     {
-        load_theme_textdomain('viceunf', get_template_directory() . '/languages');
+        load_theme_textdomain('vpinunf', get_template_directory() . '/languages');
 
         add_theme_support('automatic-feed-links');
         add_theme_support('title-tag');
@@ -52,20 +52,33 @@ class Setup
         add_theme_support('block-template-parts');
 
         register_nav_menus([
-            'primary_menu' => __('Menú Principal', 'viceunf'),
+            'primary_menu' => __('Menú Principal', 'vpinunf'),
         ]);
 
         // Tamaños de imagen optimizados para el tema
-        add_image_size('viceunf-blog-thumb', 720, 480, true);
-        add_image_size('viceunf-hero', 1920, 1080, true);
-        add_image_size('viceunf-card', 400, 300, true);
-        add_image_size('viceunf-thumbnail', 150, 150, true);
-        add_image_size('viceunf-large', 1200, 800, false);
+        add_image_size('vpinunf-blog-thumb', 720, 480, true);
+        add_image_size('vpinunf-hero', 1920, 1080, true);
+        add_image_size('vpinunf-card', 400, 300, true);
+        add_image_size('vpinunf-thumbnail', 150, 150, true);
+        add_image_size('vpinunf-large', 1200, 800, false);
     }
 
     public function content_width(): void
     {
-        $GLOBALS['content_width'] = apply_filters('viceunf_content_width', 1200);
+        $GLOBALS['content_width'] = apply_filters('vpinunf_content_width', 1200);
+    }
+
+    public function register_block_category(array $categories): array
+    {
+        return array_merge(
+            $categories,
+            [
+                [
+                    'slug'  => 'theme',
+                    'title' => __('VpinUnf Bloques', 'vpinunf'),
+                ],
+            ]
+        );
     }
 
     public function register_blocks(): void

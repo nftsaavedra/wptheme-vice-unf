@@ -1,5 +1,5 @@
 /**
- * Script Unificado para Componentes de Búsqueda AJAX en el Panel de Administración de ViceUnf.
+ * Script Unificado para Componentes de Búsqueda AJAX en el Panel de Administración de VpinUnf.
  * @version 1.4.0
  */
 
@@ -38,7 +38,7 @@ window.initializeAjaxSearch = function (wrapper) {
     if (abortController) {
       abortController.abort();
     }
-    if (this.value.length < 2 && ajaxAction !== "viceunf_search_icons") {
+    if (this.value.length < 2 && ajaxAction !== "vpinunf_search_icons") {
       resultsContainer.style.display = "none";
       return;
     }
@@ -52,10 +52,10 @@ window.initializeAjaxSearch = function (wrapper) {
       const signal = abortController.signal;
       const formData = new FormData();
       formData.append("action", ajaxAction);
-      formData.append("nonce", viceunf_ajax_obj.nonce);
+      formData.append("nonce", vpinunf_ajax_obj.nonce);
       formData.append("search", this.value);
 
-      fetch(viceunf_ajax_obj.ajax_url, {
+      fetch(vpinunf_ajax_obj.ajax_url, {
         method: "POST",
         body: formData,
         signal,
@@ -71,7 +71,7 @@ window.initializeAjaxSearch = function (wrapper) {
               li.dataset.id = item.id;
               li.dataset.title = item.title;
               let iconHTML =
-                ajaxAction === "viceunf_search_icons"
+                ajaxAction === "vpinunf_search_icons"
                   ? `<i class="result-icon ${item.id}"></i>`
                   : "";
               let typeHTML = item.type ? `<small>(${item.type})</small>` : "";

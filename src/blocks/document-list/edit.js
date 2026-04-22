@@ -43,11 +43,11 @@ export default function Edit({ attributes, setAttributes }) {
   return (
     <>
       <InspectorControls>
-        <PanelBody title={__('Configuración del Listado', 'viceunf')}>
+        <PanelBody title={__('Configuración del Listado', 'vpinunf')}>
           {!postTypes && <Spinner />}
           {postTypes && (
             <SelectControl
-              label={__('Tipo de Contenido (Post Type)', 'viceunf')}
+              label={__('Tipo de Contenido (Post Type)', 'vpinunf')}
               value={postType}
               options={postTypeOptions}
               onChange={(value) => setAttributes({ postType: value, selectedCategories: [] })}
@@ -57,7 +57,7 @@ export default function Edit({ attributes, setAttributes }) {
           {!taxonomies && postType && <Spinner />}
           {taxonomies && taxonomies.length > 0 && (
             <SelectControl
-              label={__('Taxonomía de Categorización', 'viceunf')}
+              label={__('Taxonomía de Categorización', 'vpinunf')}
               value={taxonomy}
               options={taxonomyOptions}
               onChange={(value) => setAttributes({ taxonomy: value, selectedCategories: [] })}
@@ -65,16 +65,16 @@ export default function Edit({ attributes, setAttributes }) {
           )}
         </PanelBody>
 
-        <PanelBody title={__('Filtro de Categorías', 'viceunf')} initialOpen={false}>
+        <PanelBody title={__('Filtro de Categorías', 'vpinunf')} initialOpen={false}>
           {!categories && taxonomy && <Spinner />}
           
           {categories && categories.length === 0 && (
-            <p>{__('No se encontraron categorías. Por favor, cree algunas primero.', 'viceunf')}</p>
+            <p>{__('No se encontraron categorías. Por favor, cree algunas primero.', 'vpinunf')}</p>
           )}
 
           {categories && categories.length > 0 && (
             <>
-              <p>{__('Muestra documentos de las categorías seleccionadas. Si no se selecciona ninguna, se mostrará el árbol completo.', 'viceunf')}</p>
+              <p>{__('Muestra documentos de las categorías seleccionadas. Si no se selecciona ninguna, se mostrará el árbol completo.', 'vpinunf')}</p>
               {categories.map((category) => (
                 <CheckboxControl
                   key={category.id}
@@ -88,17 +88,17 @@ export default function Edit({ attributes, setAttributes }) {
         </PanelBody>
       </InspectorControls>
 
-      <div className="viceunf-block-placeholder" style={{ padding: '20px', border: '1px dashed #ccc', backgroundColor: '#f9f9f9', textAlign: 'center' }}>
-        <h3>{__('Lista de Documentos', 'viceunf')}</h3>
+      <div className="vpinunf-block-placeholder" style={{ padding: '20px', border: '1px dashed #ccc', backgroundColor: '#f9f9f9', textAlign: 'center' }}>
+        <h3>{__('Lista de Documentos', 'vpinunf')}</h3>
         <p>
-          {__('Tipo:', 'viceunf')} <strong>{postType}</strong> | __('Taxonomía:', 'viceunf')} <strong>{taxonomy}</strong>
+          {__('Tipo:', 'vpinunf')} <strong>{postType}</strong> | __('Taxonomía:', 'vpinunf')} <strong>{taxonomy}</strong>
         </p>
         <p>
           {selectedCategories.length > 0
-            ? __(`Mostrando ${selectedCategories.length} categoría(s) específica(s). Se renderizará en formato tabla/lista.`, 'viceunf')
-            : __('Mostrando todo el árbol jerárquico de categorías.', 'viceunf')}
+            ? __(`Mostrando ${selectedCategories.length} categoría(s) específica(s). Se renderizará en formato tabla/lista.`, 'vpinunf')
+            : __('Mostrando todo el árbol jerárquico de categorías.', 'vpinunf')}
         </p>
-        <p style={{ fontSize: '12px', color: '#666' }}>{__('El renderizado final con estilos y documentos se verá en la página publicada.', 'viceunf')}</p>
+        <p style={{ fontSize: '12px', color: '#666' }}>{__('El renderizado final con estilos y documentos se verá en la página publicada.', 'vpinunf')}</p>
       </div>
     </>
   );

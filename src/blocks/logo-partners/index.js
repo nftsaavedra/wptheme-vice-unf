@@ -1,70 +1,26 @@
-import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+import ServerSideRender from '@wordpress/server-side-render';
 import metadata from './block.json';
 
-function Edit( { attributes, setAttributes } ) {
-	const { sectionTitle, displayMode, grayscaleDefault, source } = attributes;
-	const blockProps = useBlockProps( { className: 'viceunf-logo-partners-editor' } );
+registerBlockType(metadata.name, {
+    edit: (props) => {
+        const { attributes } = props;
+        const blockProps = useBlockProps();
 
-	return (
-		<>
-			<InspectorControls>
-				<PanelBody title={ __( 'Configuración', 'viceunf' ) }>
-					<SelectControl
-						label={ __( 'Fuente de logos', 'viceunf' ) }
-						value={ source }
-						options={ [
-							{ label: __( 'CPT Socio (automático)', 'viceunf' ), value: 'cpt' },
-						] }
-						onChange={ ( val ) => setAttributes( { source: val } ) }
-						help={ __( 'Los logos se obtienen desde el CPT "Socio" del plugin viceunf-core.', 'viceunf' ) }
-					/>
-					<SelectControl
-						label={ __( 'Modo de visualización', 'viceunf' ) }
-						value={ displayMode }
-						options={ [
-							{ label: __( 'Estático', 'viceunf' ), value: 'static' },
-						] }
-						onChange={ ( val ) => setAttributes( { displayMode: val } ) }
-					/>
-					<ToggleControl
-						label={ __( 'Logos en gris por defecto', 'viceunf' ) }
-						help={ __( 'Los logos pasan a color al hacer hover.', 'viceunf' ) }
-						checked={ grayscaleDefault }
-						onChange={ ( val ) => setAttributes( { grayscaleDefault: val } ) }
-					/>
-				</PanelBody>
-			</InspectorControls>
-
-			<div { ...blockProps }>
-				<RichText
-					tagName="h2"
-					value={ sectionTitle }
-					onChange={ ( val ) => setAttributes( { sectionTitle: val } ) }
-					placeholder={ __( 'Título de sección (opcional)...', 'viceunf' ) }
-					allowedFormats={ [ 'core/bold', 'core/italic', 'core/link' ] }
-					style={ { textAlign: 'center', marginBottom: '3.2rem', color: '#0e1422' } }
-				/>
-				<div style={ { textAlign: 'center', padding: '4rem', border: '1px dashed #ccc', borderRadius: '8px', color: '#999' } }>
-					<i className="fa-solid fa-handshake" style={ { fontSize: '3rem', marginBottom: '1.2rem', display: 'block' } }></i>
-					<p style={ { margin: 0 } }>
-						{ __( 'Los logos de socios (CPT "Socio") se renderizarán aquí en el frontend.', 'viceunf' ) }
-					</p>
-					<p style={ { margin: '0.4rem 0 0', fontSize: '1.2rem' } }>
-						{ grayscaleDefault
-							? __( 'Modo: gris por defecto → color al hover', 'viceunf' )
-							: __( 'Modo: color siempre', 'viceunf' ) }
-					</p>
-				</div>
-			</div>
-		</>
-	);
-}
-
-registerBlockType( metadata.name, {
-	edit: Edit,
-	save: () => null,
-} );
+        return (
+            <div {...blockProps}>
+                <ServerSideRender
+                    block={metadata.name}
+                    attributes={attributes}
+                    EmptyResponsePlaceholder={() => (
+                        <div style={{ padding: '60px', textAlign: 'center', border: '2px dashed #007cba', borderRadius: '8px', color: '#007cba' }}>
+                            Agrega textos para la sección Socios desde Opciones VpinUnf en el menú de administración, y los logos desde el menú Socios.
+                        </div>
+                    )}
+                />
+            </div>
+        );
+    },
+    save: () => null,
+});

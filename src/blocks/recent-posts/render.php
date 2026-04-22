@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Render for ViceUnf Recent Posts Block
+ * Render for VpinUnf Recent Posts Block
  *
- * @package ViceUnf
+ * @package VpinUnf
  */
 
 $title          = isset($attributes['title']) ? $attributes['title'] : 'Lo último...';
@@ -11,7 +11,7 @@ $number_of_posts = isset($attributes['numberOfPosts']) ? absint($attributes['num
 $char_limit     = isset($attributes['charLimit']) ? absint($attributes['charLimit']) : 55;
 $categories     = isset($attributes['categories']) ? $attributes['categories'] : array();
 
-$wrapper_attributes = get_block_wrapper_attributes(array('class' => 'viceunf-recent-posts-block'));
+$wrapper_attributes = get_block_wrapper_attributes(array('class' => 'vpinunf-recent-posts-block'));
 
 // Consumir el Servicio del Plugin (Clean Architecture / DRY)
 if (class_exists('\VpinUnf\Core\Service\PostService')) {
@@ -65,6 +65,6 @@ if (class_exists('\VpinUnf\Core\Service\PostService')) {
             <?php wp_reset_postdata(); ?>
         </ul>
     <?php else : ?>
-        <p><?php esc_html_e('No se encontraron entradas recientes.', 'viceunf'); ?></p>
+        <p><?php esc_html_e('No se encontraron entradas recientes.', 'vpinunf'); ?></p>
     <?php endif; ?>
 </div>

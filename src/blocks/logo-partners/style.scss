@@ -1,5 +1,5 @@
 @use "../../scss/base/mixins" as *;
-.viceunf-logo-partners {
+.vpinunf-logo-partners {
 	padding: 6rem 0;
 	background-color: var(--dt-whi-color);
 
@@ -38,12 +38,12 @@
 
 	// Modo gris por defecto → color en hover.
 	&--grayscale {
-		.viceunf-logo-partners__img {
+		.vpinunf-logo-partners__img {
 			filter: grayscale(100%) opacity(0.55);
 		}
 
-		.viceunf-logo-partners__item:hover .viceunf-logo-partners__img,
-		.viceunf-logo-partners__item:focus .viceunf-logo-partners__img {
+		.vpinunf-logo-partners__item:hover .vpinunf-logo-partners__img,
+		.vpinunf-logo-partners__item:focus .vpinunf-logo-partners__img {
 			filter: grayscale(0%) opacity(1);
 		}
 	}

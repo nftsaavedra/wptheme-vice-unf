@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) exit;
  * de los datos enviados desde la página de opciones.
  */
 
-function viceunf_sanitize_all_options($input)
+function vpinunf_sanitize_all_options($input)
 {
-  $current_options = get_option('viceunf_theme_options', []);
+  $current_options = get_option('vpinunf_theme_options', []);
   $sanitized_input = [];
 
   // Lista de todos los campos que son checkboxes.
@@ -20,7 +20,7 @@ function viceunf_sanitize_all_options($input)
     'investigacion_section_enabled',
     'about_section_enabled',
     'eventos_section_enabled',
-    'viceunf_noticias_section_enabled',
+    'vpinunf_noticias_section_enabled',
     'socios_section_enabled',
     'production_section_enabled',
   ];
@@ -47,12 +47,12 @@ function viceunf_sanitize_all_options($input)
     'eventos_descripcion'  => 'sanitize_textarea_field',
     'eventos_cantidad'     => 'absint',
     // Campos de "Noticias"
-    'viceunf_noticias_subtitulo'   => 'sanitize_text_field',
-    'viceunf_noticias_titulo'      => 'wp_kses_post',
-    'viceunf_noticias_descripcion' => 'sanitize_textarea_field',
+    'vpinunf_noticias_subtitulo'   => 'sanitize_text_field',
+    'vpinunf_noticias_titulo'      => 'wp_kses_post',
+    'vpinunf_noticias_descripcion' => 'sanitize_textarea_field',
     'noticias_cantidad'            => 'absint',
     // Campos de "Socios"
-    'viceunf_socios_titulo' => 'sanitize_text_field',
+    'vpinunf_socios_titulo' => 'sanitize_text_field',
     'socios_post_type'      => 'sanitize_text_field',
     // Campos de "Producción Científica"
     'production_subtitle'    => 'sanitize_text_field',

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/benefit-card.
+ * Render del bloque vpinunf/benefit-card.
  *
  * @param array    $attributes Atributos del bloque.
  * @param string   $content    N/A.
@@ -29,24 +29,24 @@ $card_style = sprintf(
 );
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => 'viceunf-benefit-card')
+    array('class' => 'vpinunf-benefit-card')
 );
 ?>
 <div <?php echo $wrapper_attributes; ?> style="<?php echo esc_attr($card_style); ?>">
     <?php if ( $icon ) : ?>
-        <div class="viceunf-benefit-card__icon-wrap">
+        <div class="vpinunf-benefit-card__icon-wrap">
             <i class="<?php echo esc_attr( $icon_class ); ?>" style="color: <?php echo esc_attr( $icon_color ); ?>;" aria-hidden="true"></i>
         </div>
     <?php endif; ?>
 
     <?php if ($title) : ?>
-        <h3 class="viceunf-benefit-card__title">
+        <h3 class="vpinunf-benefit-card__title">
             <?php echo wp_kses_post($title); ?>
         </h3>
     <?php endif; ?>
 
     <?php if ($description) : ?>
-        <p class="viceunf-benefit-card__desc">
+        <p class="vpinunf-benefit-card__desc">
             <?php echo wp_kses_post($description); ?>
         </p>
     <?php endif; ?>

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from '@wordpress/element';
 
 const AJAX_URL = window.ajaxurl || '/wp-admin/admin-ajax.php';
-const NONCE    = window.viceunf_ajax_obj?.nonce || '';
+const NONCE    = window.vpinunf_ajax_obj?.nonce || '';
 
 /**
  * Hook: búsqueda AJAX con debounce.
@@ -16,7 +16,7 @@ export function useAjaxSearch( action, delay = 450 ) {
     const abortRef              = useRef(null);
 
     useEffect(() => {
-        if (query.length < 2 && action !== 'viceunf_search_icons') {
+        if (query.length < 2 && action !== 'vpinunf_search_icons') {
             setResults([]);
             return;
         }

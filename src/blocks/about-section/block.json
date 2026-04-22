@@ -1,81 +1,18 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/about-section",
+  "name": "vpinunf/about-section",
   "version": "1.0.0",
-  "title": "Sección Nosotros",
+  "title": "Portada — Sobre Nosotros",
   "category": "theme",
-  "icon": "admin-users",
-  "description": "Sección 'Sobre Nosotros' reutilizable con imagen, video, texto descriptivo e items con iconos.",
-  "attributes": {
-    "subtitle": {
-      "type": "string",
-      "default": "Sobre Nosotros"
-    },
-    "title": {
-      "type": "string",
-      "default": ""
-    },
-    "personName": {
-      "type": "string",
-      "default": ""
-    },
-    "description": {
-      "type": "string",
-      "default": ""
-    },
-    "mainImageId": {
-      "type": "number",
-      "default": 0
-    },
-    "mainImageUrl": {
-      "type": "string",
-      "default": ""
-    },
-    "mainImageAlt": {
-      "type": "string",
-      "default": ""
-    },
-    "videoUrl": {
-      "type": "string",
-      "default": ""
-    },
-    "autoridadId": {
-      "type": "number",
-      "default": 0
-    },
-    "items": {
-      "type": "array",
-      "default": []
-    }
-  },
+  "icon": "id",
+  "description": "Sección sobre nosotros en la portada. Lee desde Theme Options.",
   "supports": {
     "html": false,
-    "align": [
-      "wide",
-      "full"
-    ],
-    "color": {
-      "text": true,
-      "background": true,
-      "gradients": true
-    },
-    "typography": {
-      "fontSize": true,
-      "lineHeight": true,
-      "__experimentalFontFamily": true,
-      "__experimentalFontWeight": true,
-      "__experimentalDefaultControls": {
-        "fontSize": true
-      }
-    },
-    "spacing": {
-      "margin": true,
-      "padding": true,
-      "blockGap": true
-    }
+    "align": ["full"],
+    "spacing": { "margin": true }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
   "render": "file:./render.php"

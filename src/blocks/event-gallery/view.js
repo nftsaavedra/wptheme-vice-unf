@@ -3,11 +3,11 @@
  */
 document.addEventListener('DOMContentLoaded', () => {
     // Buscamos todas las galerías del tema
-    const galleryContainers = document.querySelectorAll('.viceunf-event-gallery');
+    const galleryContainers = document.querySelectorAll('.vpinunf-event-gallery');
 
     galleryContainers.forEach(container => {
-        const mainSwiperEl = container.querySelector('.viceunf-event-gallery__main');
-        const thumbsSwiperEl = container.querySelector('.viceunf-event-gallery__thumbs');
+        const mainSwiperEl = container.querySelector('.vpinunf-event-gallery__main');
+        const thumbsSwiperEl = container.querySelector('.vpinunf-event-gallery__thumbs');
 
         if (!mainSwiperEl || !thumbsSwiperEl || typeof Swiper === 'undefined') {
             return;

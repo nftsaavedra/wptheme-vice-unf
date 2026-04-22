@@ -5,14 +5,14 @@ declare(strict_types=1);
 /**
  * Theme functions and definitions (Standalone)
  *
- * @package ViceUnf
+ * @package VpinUnf
  */
 
 // Constantes de versión centralizadas para mantenimiento
-define('VICEUNF_FONTAWESOME_VERSION', '6.7.2');
-define('VICEUNF_SWIPER_VERSION', '11.0.0');
-define('VICEUNF_GLIGHTBOX_VERSION', '3.3.0');
-define('VICEUNF_ANIMATE_VERSION', '4.1.1');
+define('VPINUNF_FONTAWESOME_VERSION', '6.7.2');
+define('VPINUNF_SWIPER_VERSION', '11.0.0');
+define('VPINUNF_GLIGHTBOX_VERSION', '3.3.0');
+define('VPINUNF_ANIMATE_VERSION', '4.1.1');
 
 add_action('admin_notices', function (): void {
     if (!defined('VPINUNF_CORE_VERSION')) {
@@ -22,27 +22,30 @@ add_action('admin_notices', function (): void {
 
 
 
-$viceunf_functions_path = get_stylesheet_directory() . '/theme-functions/';
+$vpinunf_functions_path = get_stylesheet_directory() . '/theme-functions/';
 
 // Carga Manual de Namespaces Estructurales Principales
-require_once $viceunf_functions_path . 'setup.php';
-require_once $viceunf_functions_path . 'enqueue.php';
-require_once $viceunf_functions_path . 'class-image-optimizer.php';
-require_once $viceunf_functions_path . 'class-image-optimizer-admin.php';
+require_once $vpinunf_functions_path . 'setup.php';
+require_once $vpinunf_functions_path . 'enqueue.php';
+require_once $vpinunf_functions_path . 'class-image-optimizer.php';
+require_once $vpinunf_functions_path . 'class-image-optimizer-admin.php';
 
-new \ViceUnf\Theme\Setup();
-new \ViceUnf\Theme\Assets();
-new \ViceUnf\ImageOptimizer();
-new \ViceUnf\ImageOptimizerAdmin();
+new \VpinUnf\Theme\Setup();
+new \VpinUnf\Theme\Assets();
+new \VpinUnf\ImageOptimizer();
+new \VpinUnf\ImageOptimizerAdmin();
 
 // Carga del resto de utilidades Legacy y Procedimentales
-$viceunf_files = [
+$vpinunf_files = [
     'template-tags.php',
     'meta-boxes.php',
     'admin-tweaks.php',
     'helpers.php',
+    'admin-options-sanitize.php',
+    'admin-options-api.php',
+    'admin-options.php',
 ];
 
-foreach ($viceunf_files as $viceunf_file) {
-    require_once $viceunf_functions_path . $viceunf_file;
+foreach ($vpinunf_files as $vpinunf_file) {
+    require_once $vpinunf_functions_path . $vpinunf_file;
 }

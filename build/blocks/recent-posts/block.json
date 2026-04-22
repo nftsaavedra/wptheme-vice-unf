@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "viceunf/recent-posts",
+  "name": "vpinunf/recent-posts",
   "version": "1.0.0",
-  "title": "ViceUnf - Entradas Recientes",
-  "category": "viceunf-blocks",
+  "title": "VpinUnf - Entradas Recientes",
+  "category": "vpinunf-blocks",
   "icon": "welcome-widgets-menus",
   "description": "Muestra una lista de entradas recientes con miniatura, permitiendo filtrar por categoría. (Reemplazo del widget clásico).",
   "attributes": {
@@ -51,7 +51,7 @@
       "blockGap": true
     }
   },
-  "textdomain": "viceunf",
+  "textdomain": "vpinunf",
   "style": "file:./style-index.css",
   "editorScript": "file:./index.js",
   "render": "file:./render.php"

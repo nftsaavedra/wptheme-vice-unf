@@ -24,13 +24,13 @@ export default {
           'widget', 'wp-caption', 'woocommerce', 'woocommerce-page',
           'product', 'aligncenter', 'alignleft', 'alignright', 'alignwide', 'alignfull',
           'wp-block-button__link', 'nav-links', 'page-numbers', 'current', 'dots', 'navigation',
-          'viceunf-post-nav__card', 'viceunf-post-nav__card--prev', 'viceunf-post-nav__img', 'viceunf-post-nav__content', 'viceunf-post-nav__label', 'viceunf-post-nav__title', 'viceunf-post-nav__card--next',
-          'viceunf-related-card', 'viceunf-related-card__thumb', 'viceunf-related-card__info', 'viceunf-related-card__meta', 'viceunf-related-card__title', 'viceunf-related-card__excerpt'
+          'vpinunf-post-nav__card', 'vpinunf-post-nav__card--prev', 'vpinunf-post-nav__img', 'vpinunf-post-nav__content', 'vpinunf-post-nav__label', 'vpinunf-post-nav__title', 'vpinunf-post-nav__card--next',
+          'vpinunf-related-card', 'vpinunf-related-card__thumb', 'vpinunf-related-card__info', 'vpinunf-related-card__meta', 'vpinunf-related-card__title', 'vpinunf-related-card__excerpt'
         ],
         deep: [
           /^(wp-block-)/, /^(has-)/, /^(is-)/, /^(search-)/,
-          /^(wc-)/, /^(swiper-)/, /^(viceunf-single-doc)/,
-          /^(viceunf-card-)/, /^(viceunf-bg-)/, /^(dt-text-)/,
+          /^(wc-)/, /^(swiper-)/, /^(vpinunf-single-doc)/,
+          /^(vpinunf-card-)/, /^(vpinunf-bg-)/, /^(dt-text-)/,
           /^(dt_mobilenav)/, /^(overlay--enabled)/, /^(active)/,
         ],
         greedy: [

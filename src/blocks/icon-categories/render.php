@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Render del bloque viceunf/icon-categories.
+ * Render del bloque vpinunf/icon-categories.
  *
  * @param array    $attributes Atributos.
  * @param string   $content    N/A.
@@ -17,14 +17,14 @@ $icon_bg      = $attributes['iconBgColor'] ?? '#ff4700';
 $layout       = $attributes['layout'] ?? 'row';
 $columns      = isset($attributes['columns']) ? (int) $attributes['columns'] : 6;
 
-$layout_class = 'row' === $layout ? 'viceunf-icon-categories--row' : 'viceunf-icon-categories--grid';
+$layout_class = 'row' === $layout ? 'vpinunf-icon-categories--row' : 'vpinunf-icon-categories--grid';
 
 $wrapper_attributes = get_block_wrapper_attributes(
-    array('class' => "viceunf-icon-categories $layout_class")
+    array('class' => "vpinunf-icon-categories $layout_class")
 );
 
 $css_vars = sprintf(
-    '--viceunf-icon-bg: %s; --viceunf-icon-cols: %d;',
+    '--vpinunf-icon-bg: %s; --vpinunf-icon-cols: %d;',
     esc_attr($icon_bg),
     $columns
 );
@@ -37,14 +37,14 @@ $css_vars = sprintf(
         $tag        = $url ? 'a' : 'div';
         $href_attr  = $url ? ' href="' . esc_url($url) . '"' : '';
     ?>
-        <<?php echo $tag; ?> class="viceunf-icon-categories__item" <?php echo $href_attr; ?>>
+        <<?php echo $tag; ?> class="vpinunf-icon-categories__item" <?php echo $href_attr; ?>>
             <div
-                class="viceunf-icon-categories__circle"
+                class="vpinunf-icon-categories__circle"
                 style="background-color: <?php echo esc_attr($icon_bg); ?>;">
                 <i class="<?php echo esc_attr($icon_class); ?>" aria-hidden="true"></i>
             </div>
             <?php if ($label) : ?>
-                <span class="viceunf-icon-categories__label">
+                <span class="vpinunf-icon-categories__label">
                     <?php echo wp_kses_post($label); ?>
                 </span>
             <?php endif; ?>
